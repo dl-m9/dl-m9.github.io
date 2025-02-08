@@ -32,7 +32,7 @@ jobs:
         with:
           hugo-version: '0.119.0'
           extended: true
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: /home/runner/.cache/hugo_cache # Cache path for Hugo v0.116.0+
           key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
@@ -42,7 +42,7 @@ jobs:
         env:
           HUGO_ENVIRONMENT: production
         run: |
-          hugo --minify
+          hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
