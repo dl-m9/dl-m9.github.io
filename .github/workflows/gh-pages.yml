@@ -57,20 +57,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      # - name: Deploy to GitHub Pages
-      #   id: deployment
-      #   uses: actions/deploy-pages@v2
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          artifact_name: github-pages
+        uses: actions/deploy-pages@v4
+        # with:
+        #   token: ${{ secrets.GITHUB_TOKEN }}
+        #   artifact_name: github-pages
+        #   publish_dir: ./public
+      
