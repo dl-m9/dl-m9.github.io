@@ -45,7 +45,7 @@ social:
 interests:
   - Collaborative Perception for Autonomous Driving
   - Security for Collaborative Perception
-  - Foundation Models (LLM, VLM, Agent)
+  - Foundation Models (LLM Post-Training, Agent)
 
 # TODO:这块是自己的教育经历
 education:
