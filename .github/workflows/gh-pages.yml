@@ -52,7 +52,6 @@ jobs:
         with:
           path: ./public
           name: github-pages
-          overwrite: true
 
   # Deploy website to GitHub Pages hosting
   deploy:
