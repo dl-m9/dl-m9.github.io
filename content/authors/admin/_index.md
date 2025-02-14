@@ -43,9 +43,10 @@ social:
 
 # TODO:这块是自己的研究兴趣
 interests:
+  - LLM Post-Training
+  - Multi-Agent Systems
   - Collaborative Perception for Autonomous Driving
   - Security for Collaborative Perception
-  - Foundation Models (LLM Post-Training, Agent)
 
 # TODO:这块是自己的教育经历
 education:
