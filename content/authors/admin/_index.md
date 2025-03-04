@@ -69,4 +69,4 @@ highlight_name: true
 
 **Senkang "Forest" Hu** is currently advancing his academic pursuits as a Ph.D. student at the <a href="https://www.cityu.edu.hk/">Department of Computer Science, City University of Hong Kong<a>, under the supervision of <a href="https://www.cs.cityu.edu.hk/~yugufang/">Chair Professor of Internet of Things, Fellow of ACM & IEEE & AAAS, <b>Prof. Yuguang "Michael" Fang.</b></a> Previously, he received his BEng degree from the School of Information and Electronics, <a href='https://bit.edu.cn/'>Beijing Institute of Technology </a> in 2022.
 
-★ <b>*Collaboration makes a WIN-WIN situation!! Feel free to reach out via email or WeChat. Let's make something great together!*</b> 🦾🦾
+★ <b>*Collaboration makes a WIN-WIN situation!! Feel free to reach out via [email](mailto:senkang.forest@gmail.com) or [WeChat](uploads/wechat.jpg). Let's make something great together!*</b> 🦾🦾
