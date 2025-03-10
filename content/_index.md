@@ -17,13 +17,12 @@ sections:
       title: 🎯 **Research**
       text: |-
         ## **Foundation Models (LLM Post-Training, Multi-Agent Systems)**
-        - **Multi-Agent LLM/VLM Systems for Autonomous Driving**: Similar as CP, not only multi-agent perception but also multi-agent collaborative decision-making is important for next-generation autonomous driving. Here, LLM/VLM is leveraged as a powerful tool to build the multi-agent collaborative decision-making systems.
+        - **Multi-Agent Systems for Autonomous Driving**: Similar as CP, not only multi-agent perception but also multi-agent collaborative decision-making is important for next-generation autonomous driving. Here, LLM/VLM is leveraged as a powerful tool to build the multi-agent collaborative decision-making systems. 
         - **Large Pre-trained Models Task Adaptation**: Adapting pre-trained LMs to specific tasks, such as autonomous driving and collaborative decision-making, better and more efficiently.
 
         ## **Autonomous Driving and Security**
         - **Collaborative Perception (CP) for Autonomous Driving**: CP can overcome the limitations of single-agent perception systems, such as occlusion and sensing range, by leveraging the information from multiple vehicles.
-        - **Autonomous Driving Security**: As CP needs to leverage the information from other vehicles, it expands the system's attack surface. Therefore, designing defense method is curial for secure CP.
-  
+        - **Autonomous Driving Security**: As CP needs to leverage the information from other vehicles, it expands the system's attack surface. Therefore, designing defense method is curial for secure CP. 
 
         
   - block: markdown
@@ -67,7 +66,6 @@ sections:
         6. **[Preprint]** Zihan Fang, Zheng Lin, **<u>Senkang "Forest" Hu</u>**, Hangcheng Cao, Xianhao Chen, and Yuguang Fang. "[IC3M: In-Car Multimodal Multi-object Monitoring for Abnormal Status of Both Driver and Passengers](https://arxiv.org/abs/2410.02592)."
 
         ## **Accepted Papers in 2025**
-
         7. **[ICRA'25]** Yihang Tao, **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Yuguang Fang. "[Direct-CP: Directed Collaborative Perception for Connected and Autonomous Vehicles via Proactive Attention](https://arxiv.org/abs/2409.08840)." *The 2025 IEEE International Conference on Robotics & Automation*, 19–23 May, Atlanta, USA.
 
         ## **Accepted Papers in 2024** 
