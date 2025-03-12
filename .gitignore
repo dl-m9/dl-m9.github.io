@@ -10,3 +10,6 @@ go.sum
 .hugo_build.lock
 
 .DS_Store
+
+
+layouts/partials/custom_head.html
