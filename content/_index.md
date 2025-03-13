@@ -250,6 +250,8 @@ sections:
         - The 13th International Conference on Learning Representations (ICLR'25)
         - The 39th Annual AAAI Conference on Artificial Intelligence (AAAI'25)
         ## **Reviewer**
+        - ACM Computing Surveys 
+        - IEEE Transactions on Mobile Computing (TMC)
         - IEEE/ACM Transactions on Networking (ToN)
         - IEEE Transactions on Intelligent Transportation Systems (TITS)
         - ACM SIGCHI Conference on Computer-Supported Cooperative Work & Social Computing (CSCW'25)
