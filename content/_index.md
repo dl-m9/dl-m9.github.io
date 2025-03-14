@@ -245,27 +245,27 @@ sections:
     content:
       title: 💻 **Services**  
       text: |-
-        ## **Technical Program Committee**
+        ## **Conference Technical Program Committee & Reviewer**
+        - The 33rd ACM International Conference on Multimedia (ACM MM'25)
         - The 42nd International Conference on Machine Learning (ICML'25)
         - The 13th International Conference on Learning Representations (ICLR'25)
         - The 39th Annual AAAI Conference on Artificial Intelligence (AAAI'25)
-        ## **Reviewer**
+        - ACM SIGCHI Conference on Computer-Supported Cooperative Work & Social Computing (CSCW'25)
+        - IEEE International Conference on Robotics and Automation (ICRA'25)
+        - 2024 IEEE/CIC International Conference on Communications in China (ICCC'24)
+        - IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS'24)
+        ## **Journal Reviewer**
         - ACM Computing Surveys 
         - IEEE Transactions on Mobile Computing (TMC)
         - IEEE/ACM Transactions on Networking (ToN)
         - IEEE Transactions on Intelligent Transportation Systems (TITS)
-        - ACM SIGCHI Conference on Computer-Supported Cooperative Work & Social Computing (CSCW'25)
-        - IEEE International Conference on Robotics and Automation (ICRA'25)
         - IET Information Security
         - IEEE Transactions on Network and Service Management (TNSM)
         - ACM Transactions on Autonomous and Adaptive Systems (TAAS)
         - Information Fusion
         - Pattern Recognition (PR)
-        - 2024 IEEE/CIC International Conference on Communications in China (ICCC'24)
-        - IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS'24)
         - IEEE Robotics and Automation Letters (RA-L)
         - Proceedings of the IEEE
-        - etc......
         ## **Teaching Assistant**
         - Cloud Computing, 2025 Spring
         - Computer Networks, 2024 Fall
