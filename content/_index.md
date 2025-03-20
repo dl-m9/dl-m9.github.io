@@ -29,24 +29,49 @@ sections:
     id: news
     content:
       title: 🔥 **Latest News**
-      # - **[Dec. 2023]** The paper <a href='publication/dg-coperception-magazine'>Collaborative Perception for Autonomous Driving: Challenges, Countermeasures and Opportunities</a> was submitted to *IEEE Communications Magazine (**COMMAG**)*.
       text: |-
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Feb. 2025</span> Senkang passed the PhD Qualifying Examination (QE)! He is now a PhD candidate! 🎉🎉🎉
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Jan. 2025</span> One paper was accepted by **The 2025 IEEE International Conference on Robotics and Automation (ICRA'25)**! 
-        <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">[PDF](https://arxiv.org/abs/2409.08840)</span>
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Jan. 2025</span> Our paper accepted by AAAI'25 was selected for **Oral Presentation**! Congratulations again 🎉!
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Dec. 2024</span> One paper was accepted by **IEEE/ACM Transactions on Networking (ToN)**! <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">[PDF](https://ieeexplore.ieee.org/document/10845862)</span> <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">[Code](https://github.com/fangzr/PIB-Prioritized-Information-Bottleneck-Framework)</span>
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Dec. 2024</span> Congratulations 🎉! One paper was accepted by **The 39th Annual AAAI Conference on Artificial Intelligence (AAAI'25)**, see you in Philadelphia, Pennsylvania, USA 🇺🇸! <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">[PDF](https://arxiv.org/abs/2412.12000)</span>
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Nov. 2024</span> One paper was accepted by **IEEE Transactions on Intelligent Transportation Systems (TITS)**, congratulations 🎉!!! <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">[PDF](https://ieeexplore.ieee.org/abstract/document/10779389)</span>
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Nov. 2024</span> Senkang was awarded the **IEEE ComSoc Student Grant** to support his conference travel.
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Sep. 2024</span> Senkang was nominated as a **Program Committee Member** of AAAI'25 and ICLR'25!
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Aug. 2024</span> One paper was accepted by **IEEE Transactions on Mobile Computing (TMC)**!
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Jul. 2024</span> Two papers were accepted by **GLOBECOM'24**, see you in Cape Town, South Africa 🇿🇦!
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Sep. 2023</span> Senkang was awarded the <b>Institutional Research Tuition Grant</b>, nearly HK$170,000.
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Jul. 2023</span> Congratulations to Senkang 🎉, finally moved to <b>Hong Kong</b> 🇭🇰🇭🇰🇭🇰 to start his new career!
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Jun. 2023</span> Thanks to [**Prof. Fang**](https://www.cs.cityu.edu.hk/~yugufang/)'s strong support, Senkang received the <a href='https://www.innohk.gov.hk/en/about-us/'><b>InnoHK Award Funding</b></a>, around HK$900,000 from the Government of the Hong Kong Special Administrative Region to support his research and PhD career. 
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Jun. 2022</span> Senkang **graduated** from Beijing Institute of Technology. Thanks to all the professors, senior students and friends who helped him in the past four years.
-        - <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0; width: 100px; text-align: center;">Dec. 2021</span> Senkang was awarded the **National Scholarship** for his top 1% academic performance in the whole department, which is the highest honor for Chinese university students.
+        <style>
+        .date-label {
+          display: inline-block;
+          background-color: #cce5ff;
+          padding: 0 5px;
+          border-radius: 6px;
+          margin: 2px 0;
+          width: 100px;
+          text-align: center;
+        }
+        .tag-label {
+          display: inline-block;
+          background-color: #cce5ff;
+          padding: 0 5px;
+          border-radius: 6px;
+          margin: 2px 0;
+        }
+        .highlight-label {
+          display: inline-block;
+          background-color: #F7C6C1;
+          padding: 0 5px;
+          border-radius: 6px;
+          margin: 2px 0;
+        }
+        </style>
+        
+        - <span class="date-label">Feb. 2025</span> Senkang passed the PhD Qualifying Examination (QE)! He is now a PhD candidate! 🎉🎉🎉
+        - <span class="date-label">Jan. 2025</span> One paper was accepted by **The 2025 IEEE International Conference on Robotics and Automation (ICRA'25)**! 
+        <span class="tag-label">[PDF](https://arxiv.org/abs/2409.08840)</span>
+        - <span class="date-label">Jan. 2025</span> Our paper accepted by AAAI'25 was selected for **Oral Presentation**! Congratulations again 🎉!
+        - <span class="date-label">Dec. 2024</span> One paper was accepted by **IEEE/ACM Transactions on Networking (ToN)**! <span class="tag-label">[PDF](https://ieeexplore.ieee.org/document/10845862)</span> <span class="tag-label">[Code](https://github.com/fangzr/PIB-Prioritized-Information-Bottleneck-Framework)</span>
+        - <span class="date-label">Dec. 2024</span> Congratulations 🎉! One paper was accepted by **The 39th Annual AAAI Conference on Artificial Intelligence (AAAI'25)**, see you in Philadelphia, Pennsylvania, USA 🇺🇸! <span class="tag-label">[PDF](https://arxiv.org/abs/2412.12000)</span>
+        - <span class="date-label">Nov. 2024</span> One paper was accepted by **IEEE Transactions on Intelligent Transportation Systems (TITS)**, congratulations 🎉!!! <span class="tag-label">[PDF](https://ieeexplore.ieee.org/abstract/document/10779389)</span>
+        - <span class="date-label">Nov. 2024</span> Senkang was awarded the **IEEE ComSoc Student Grant** to support his conference travel.
+        - <span class="date-label">Sep. 2024</span> Senkang was nominated as a **Program Committee Member** of AAAI'25 and ICLR'25!
+        - <span class="date-label">Aug. 2024</span> One paper was accepted by **IEEE Transactions on Mobile Computing (TMC)**!
+        - <span class="date-label">Jul. 2024</span> Two papers were accepted by **GLOBECOM'24**, see you in Cape Town, South Africa 🇿🇦!
+        - <span class="date-label">Sep. 2023</span> Senkang was awarded the <b>Institutional Research Tuition Grant</b>, nearly HK$170,000.
+        - <span class="date-label">Jul. 2023</span> Congratulations to Senkang 🎉, finally moved to <b>Hong Kong</b> 🇭🇰🇭🇰🇭🇰 to start his new career!
+        - <span class="date-label">Jun. 2023</span> Thanks to [**Prof. Fang**](https://www.cs.cityu.edu.hk/~yugufang/)'s strong support, Senkang received the <a href='https://www.innohk.gov.hk/en/about-us/'><b>InnoHK Award Funding</b></a>, around HK$900,000 from the Government of the Hong Kong Special Administrative Region to support his research and PhD career. 
+        - <span class="date-label">Jun. 2022</span> Senkang **graduated** from Beijing Institute of Technology. Thanks to all the professors, senior students and friends who helped him in the past four years.
+        - <span class="date-label">Dec. 2021</span> Senkang was awarded the **National Scholarship** for his top 1% academic performance in the whole department, which is the highest honor for Chinese university students.
     design:
       columns: '1'
   
@@ -55,56 +80,64 @@ sections:
     content:
       title: 🎓 **Publications**
       text: |-       
+        <style>
+        .date-label {
+          display: inline-block;
+          background-color: #cce5ff;
+          padding: 0 5px;
+          border-radius: 6px;
+          margin: 2px 0;
+          width: 100px;
+          text-align: center;
+        }
+        .tag-label {
+          display: inline-block;
+          background-color: #cce5ff;
+          padding: 0 5px;
+          border-radius: 6px;
+          margin: 2px 0;
+        }
+        .highlight-label {
+          display: inline-block;
+          background-color: #F7C6C1;
+          padding: 0 5px;
+          border-radius: 6px;
+          margin: 2px 0;
+        }
+        </style>
+        
         <sup>#</sup>equal contribution, *corresponding author.
         
         
         ## **Preprints**
         
-        1. <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Yihang Tao, Zihang Fang, Guowen Xu, Yiqin Deng, Sam Kwong, Yuguang Fang. "[CP-Guard+: A New Paradigm for Malicious Agent Detection and Defense in Collaborative Perception](https://arxiv.org/abs/2502.07807v1)."
-        2. <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Zihan Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong. "[AgentsCoMerge: Large Language Model Empowered Collaborative Decision Making for Multi-Lane Merging](https://arxiv.org/abs/2408.03624)."
-        3. <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Zihan Fang, Xianhao Chen, Yuguang Fang. "[AgentsCoDriver: Large Language Model Empowered Collaborative Driving with Lifelong Learning](https://arxiv.org/abs/2404.06345)." [[Blog](https://mp.weixin.qq.com/s/HVfs4-PT58WujCvEZZboug)]
-        4. <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang. "[Collaborative Perception for Autonomous Driving: Challenges, Possible Solutions and Opportunities](https://arxiv.org/abs/2401.01544)."
-        5. <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">Preprint</span> Yihang Tao<sup>#</sup>, **<u>Senkang "Forest" Hu</u>**<sup>#</sup>, Yue Hu, Haonan An, Hangcheng Cao, Yuguang Fang. "[GCP: Guarded Collaborative Perception with Spatial-Temporal Aware Malicious Agent Detection](https://arxiv.org/abs/2501.02450)."
-        6. <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">Preprint</span> Zihan Fang, Zheng Lin, **<u>Senkang "Forest" Hu</u>**, Hangcheng Cao, Xianhao Chen, and Yuguang Fang. "[IC3M: In-Car Multimodal Multi-object Monitoring for Abnormal Status of Both Driver and Passengers](https://arxiv.org/abs/2410.02592)."
+        1. <span class="tag-label">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Yihang Tao, Zihang Fang, Guowen Xu, Yiqin Deng, Sam Kwong, Yuguang Fang. "[CP-Guard+: A New Paradigm for Malicious Agent Detection and Defense in Collaborative Perception](https://arxiv.org/abs/2502.07807v1)."
+        2. <span class="tag-label">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Zihan Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong. "[AgentsCoMerge: Large Language Model Empowered Collaborative Decision Making for Multi-Lane Merging](https://arxiv.org/abs/2408.03624)."
+        3. <span class="tag-label">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Zihan Fang, Xianhao Chen, Yuguang Fang. "[AgentsCoDriver: Large Language Model Empowered Collaborative Driving with Lifelong Learning](https://arxiv.org/abs/2404.06345)." [[Blog](https://mp.weixin.qq.com/s/HVfs4-PT58WujCvEZZboug)]
+        4. <span class="tag-label">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang. "[Collaborative Perception for Autonomous Driving: Challenges, Possible Solutions and Opportunities](https://arxiv.org/abs/2401.01544)."
+        5. <span class="tag-label">Preprint</span> Yihang Tao<sup>#</sup>, **<u>Senkang "Forest" Hu</u>**<sup>#</sup>, Yue Hu, Haonan An, Hangcheng Cao, Yuguang Fang. "[GCP: Guarded Collaborative Perception with Spatial-Temporal Aware Malicious Agent Detection](https://arxiv.org/abs/2501.02450)."
+        6. <span class="tag-label">Preprint</span> Zihan Fang, Zheng Lin, **<u>Senkang "Forest" Hu</u>**, Hangcheng Cao, Xianhao Chen, and Yuguang Fang. "[IC3M: In-Car Multimodal Multi-object Monitoring for Abnormal Status of Both Driver and Passengers](https://arxiv.org/abs/2410.02592)."
 
         ## **Accepted Papers in 2025**
-        7. <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">ICRA'25</span> **<u>Senkang "Forest" Hu</u>**, Yihang Tao, Zhengru Fang, Yuguang Fang. "[Direct-CP: Directed Collaborative Perception for Connected and Autonomous Vehicles via Proactive Attention](https://arxiv.org/abs/2409.08840)." *The 2025 IEEE International Conference on Robotics & Automation*, 19–23 May, Atlanta, USA.
-            <span style="display: inline-block; background-color: #F7C6C1; padding: 0 5px; border-radius: 6px; margin: 2px 0;">
-            CCF-B
-            </span>
+        7. <span class="tag-label">ICRA'25</span> **<u>Senkang "Forest" Hu</u>**, Yihang Tao, Zhengru Fang, Yuguang Fang. "[Direct-CP: Directed Collaborative Perception for Connected and Autonomous Vehicles via Proactive Attention](https://arxiv.org/abs/2409.08840)." *The 2025 IEEE International Conference on Robotics & Automation*, 19–23 May, Atlanta, USA.
+            <span class="highlight-label">CCF-B</span>
 
         ## **Accepted Papers in 2024** 
 
-        9. <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">AAAI'25 Oral</span> **<u>Senkang "Forest" Hu</u>**<sup>#</sup>, Yihang Tao<sup>#</sup>, Guowen Xu, Yiqin Deng, Xianhao Chen,  Yuguang Fang, Sam Kwong. "[CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception](https://arxiv.org/abs/2412.12000)." *The 39th Annual AAAI Conference on Artificial Intelligence*, Philadelphia, Pennsylvania, USA, February 2025. 
-            <span style="display: inline-block; background-color: #F7C6C1; padding: 0 5px; border-radius: 6px; margin: 2px 0;">
-            Oral
-            </span>
-            <span style="display: inline-block; background-color: #F7C6C1; padding: 0 5px; border-radius: 6px; margin: 2px 0;">
-            CCF-A
-            </span>
-        10. <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">TITS'24</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang, and Sam Kwong. "[Toward Full-scene Domain Generalization in Multi-agent Collaborative Bird's Eye View Segmentation for Connected and Autonomous Driving](https://ieeexplore.ieee.org/abstract/document/10779389)." *IEEE Transactions on Intelligent Transportation Systems.*
-            <span style="display: inline-block; background-color: #F7C6C1; padding: 0 5px; border-radius: 6px; margin: 2px 0;">
-            CCF-B
-            </span>
-            <span style="display: inline-block; background-color: #F7C6C1; padding: 0 5px; border-radius: 6px; margin: 2px 0;">
-            Q1 Top
-            </span>
-        11. <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">GLOBECOM'24</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Haonan An, Guowen Xu, Yuan Zhou, Xianhao Chen, and Yuguang Fang. "[Adaptive Communications in Collaborative Perception with Domain Alignment for Autonomous Driving](https://ieeexplore.ieee.org/document/10901656)", *IEEE Global Communications Conference*, Cape Town, South Africa, December 2024.
-        12. <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">ToN'24</span> Zhengru Fang, **<u>Senkang "Forest" Hu</u>**, Jingjing Wang, Yiqin Deng, Xianhao Chen, Yuguang Fang. "[Prioritized Information Bottleneck Theoretic Framework with Distributed Online Learning for Edge Video Analytics](https://ieeexplore.ieee.org/document/10845862)." *IEEE/ACM Transactions on Networking.*
-           <span style="display: inline-block; background-color: #F7C6C1; padding: 0 5px; border-radius: 6px; margin: 2px 0;">
-            [Code](https://github.com/fangzr/PIB-Prioritized-Information-Bottleneck-Framework)
-            </span>
-            <span style="display: inline-block; background-color: #F7C6C1; padding: 0 5px; border-radius: 6px; margin: 2px 0;">
-            CCF-A
-            </span>
-        13. <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">TMC'24</span> Zhengru Fang, **<u>Senkang "Forest" Hu</u>**, Haonan An, Yuang Zhang, Jingjing Wang, Hangcheng Cao, Xianhao Chen, Yuguang Fang. "[PACP: Priority-Aware Collaborative Perception for Connected and Autonomous Vehicles](https://arxiv.org/abs/2404.06891)." *IEEE Transactions on Moblie Computing.*
-            <span style="display: inline-block; background-color: #F7C6C1; padding: 0 5px; border-radius: 6px; margin: 2px 0;">
-            CCF-A
-            </span>
-        14. <span style="display: inline-block; background-color: #cce5ff; padding: 0 5px; border-radius: 6px; margin: 2px 0;">GLOBECOM'24</span> Zhengru Fang, **<u>Senkang "Forest" Hu</u>**, Yuguang Fang, et al. "[PIB: Prioritized Information Bottleneck Framework for Collaborative Edge Video Analytics](https://ieeexplore.ieee.org/document/10900993)." *IEEE Global Communications Conference*, Cape Town, South Africa, December 2024. 
-            <span style="display: inline-block; background-color: #F7C6C1; padding: 0 5px; border-radius: 6px; margin: 2px 0;">
-            [Code](https://github.com/fangzr/PIB-Prioritized-Information-Bottleneck-Framework)
-            </span>
+        9. <span class="tag-label">AAAI'25 Oral</span> **<u>Senkang "Forest" Hu</u>**<sup>#</sup>, Yihang Tao<sup>#</sup>, Guowen Xu, Yiqin Deng, Xianhao Chen,  Yuguang Fang, Sam Kwong. "[CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception](https://arxiv.org/abs/2412.12000)." *The 39th Annual AAAI Conference on Artificial Intelligence*, Philadelphia, Pennsylvania, USA, February 2025. 
+            <span class="highlight-label">Oral</span>
+            <span class="highlight-label">CCF-A</span>
+        10. <span class="tag-label">TITS'24</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang, and Sam Kwong. "[Toward Full-scene Domain Generalization in Multi-agent Collaborative Bird's Eye View Segmentation for Connected and Autonomous Driving](https://ieeexplore.ieee.org/abstract/document/10779389)." *IEEE Transactions on Intelligent Transportation Systems.*
+            <span class="highlight-label">CCF-B</span>
+            <span class="highlight-label">Q1 Top</span>
+        11. <span class="tag-label">GLOBECOM'24</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Haonan An, Guowen Xu, Yuan Zhou, Xianhao Chen, and Yuguang Fang. "[Adaptive Communications in Collaborative Perception with Domain Alignment for Autonomous Driving](https://ieeexplore.ieee.org/document/10901656)", *IEEE Global Communications Conference*, Cape Town, South Africa, December 2024.
+        12. <span class="tag-label">ToN'24</span> Zhengru Fang, **<u>Senkang "Forest" Hu</u>**, Jingjing Wang, Yiqin Deng, Xianhao Chen, Yuguang Fang. "[Prioritized Information Bottleneck Theoretic Framework with Distributed Online Learning for Edge Video Analytics](https://ieeexplore.ieee.org/document/10845862)." *IEEE/ACM Transactions on Networking.*
+           <span class="highlight-label">[Code](https://github.com/fangzr/PIB-Prioritized-Information-Bottleneck-Framework)</span>
+            <span class="highlight-label">CCF-A</span>
+        13. <span class="tag-label">TMC'24</span> Zhengru Fang, **<u>Senkang "Forest" Hu</u>**, Haonan An, Yuang Zhang, Jingjing Wang, Hangcheng Cao, Xianhao Chen, Yuguang Fang. "[PACP: Priority-Aware Collaborative Perception for Connected and Autonomous Vehicles](https://arxiv.org/abs/2404.06891)." *IEEE Transactions on Moblie Computing.*
+            <span class="highlight-label">CCF-A</span>
+        14. <span class="tag-label">GLOBECOM'24</span> Zhengru Fang, **<u>Senkang "Forest" Hu</u>**, Yuguang Fang, et al. "[PIB: Prioritized Information Bottleneck Framework for Collaborative Edge Video Analytics](https://ieeexplore.ieee.org/document/10900993)." *IEEE Global Communications Conference*, Cape Town, South Africa, December 2024. 
+            <span class="highlight-label">[Code](https://github.com/fangzr/PIB-Prioritized-Information-Bottleneck-Framework)</span>
         
 
         
@@ -128,12 +161,7 @@ sections:
   #     #   Leave `date_end` empty if it's your current employer.
   #     #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
   #     items:
-  #       - title: <span style="color:#000000">Co-Founder & CTO</span>
-  #         company: Pivot Biomedical Engineering Ltd.
-  #         company_logo: PivotBME
-  #         company_url: 'https://pivotbme.com/'
-  #         location: Hong Kong
-  #         date_start: '2024-06-01'
+  #       
   #       - title: <span style="color:#000000">Research Assistant</span>
   #         company:  City University of Hong Kong
   #         company_url: 'https://www.cityu.edu.hk/'
@@ -142,15 +170,6 @@ sections:
   #         date_start: '2023-07-01'
   #         date_end: '2023-12-31'
   #         description: 
-  #       # - title: Founder & CEO
-  #       #   # company: <b><span style="color:#0096FF">BeyondFuture.AI</span></b>
-  #       #   company:  Beyond Future.AI
-  #       #   company_url: ''
-  #       #   company_logo: bf
-  #       #   location: Beijing
-  #       #   date_start: '2023-03-01'
-  #       #   date_end: ''
-  #       #   description: 
   #       - title: <span style="color:#000000">Quantitative Strategy Intern</span>
   #         company: Prism Private Equity Fund Management Co. LTD
   #         company_url: 'https://lengjing.fund/'
