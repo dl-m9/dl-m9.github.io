@@ -102,7 +102,7 @@ sections:
         
         ## **Preprints**
 
-        1. <span class='tag-label'>Preprint</span> **<u>Senkang "Forest" Hu</u>**, Yanan Ma, Yihang Tao, Zhengru Fang, Zihan Fang, Yiqin Deng, Sam Kwong, Yuguang Fang. "[Task-Aware Parameter-Efficient Fine-Tuning of Large Pre-Trained Models at the Edge](https://www.researchgate.net/publication/390057227_Task-Aware_Parameter-Efficient_Fine-Tuning_of_Large_Pre-Trained_Models_at_the_Edge)."
+        1. <span class='tag-label'>Preprint</span> **<u>Senkang "Forest" Hu</u>**, Yanan Ma, Yihang Tao, Zhengru Fang, Zihan Fang, Yiqin Deng, Sam Kwong, Yuguang Fang. "[Task-Aware Parameter-Efficient Fine-Tuning of Large Pre-Trained Models at the Edge](https://www.researchgate.net/publication/390057227)."
         2. <span class="tag-label">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Yihang Tao, Zihang Fang, Guowen Xu, Yiqin Deng, Sam Kwong, Yuguang Fang. "[CP-Guard+: A New Paradigm for Malicious Agent Detection and Defense in Collaborative Perception](https://arxiv.org/abs/2502.07807v1)."
         3. <span class="tag-label">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Zihan Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong. "[AgentsCoMerge: Large Language Model Empowered Collaborative Decision Making for Multi-Lane Merging](https://arxiv.org/abs/2408.03624)."
         4. <span class="tag-label">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Zihan Fang, Xianhao Chen, Yuguang Fang. "[AgentsCoDriver: Large Language Model Empowered Collaborative Driving with Lifelong Learning](https://arxiv.org/abs/2404.06345)."  <span class="tag-label">[Blog](https://mp.weixin.qq.com/s/HVfs4-PT58WujCvEZZboug)</span>
