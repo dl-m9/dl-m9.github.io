@@ -37,7 +37,7 @@ sections:
           padding: 0 5px;
           border-radius: 6px;
           margin: 2px 0;
-          width: 100px;
+          width: 95px;
           text-align: center;
         }
         .tag-label {
@@ -84,14 +84,14 @@ sections:
         .tag-label {
           display: inline-block;
           background-color: #cce5ff;
-          padding: 0 5px;
+          padding: 0 8px;
           border-radius: 6px;
           margin: 2px 0;
         }
         .red-label {
           display: inline-block;
           background-color: #F7C6C1;
-          padding: 0 5px;
+          padding: 0 8px;
           border-radius: 6px;
           margin: 2px 0;
         }
