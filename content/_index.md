@@ -111,7 +111,7 @@ sections:
         7. <span class="tag-label">Preprint</span> Zihan Fang, Zheng Lin, **<u>Senkang "Forest" Hu</u>**, Hangcheng Cao, Xianhao Chen, and Yuguang Fang. "[IC3M: In-Car Multimodal Multi-object Monitoring for Abnormal Status of Both Driver and Passengers](https://arxiv.org/abs/2410.02592)."
 
         ## **Accepted Papers in 2025**
-        8. <span class="tag-label">ICRA'25</span> **<u>Senkang "Forest" Hu</u>**, Yihang Tao, Zhengru Fang, Yuguang Fang. "[Direct-CP: Directed Collaborative Perception for Connected and Autonomous Vehicles via Proactive Attention](https://arxiv.org/abs/2409.08840)." *The 2025 IEEE International Conference on Robotics & Automation*, 19–23 May, Atlanta, USA.
+        8. <span class="tag-label">ICRA'25</span> Yihang Tao, **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Yuguang Fang. "[Direct-CP: Directed Collaborative Perception for Connected and Autonomous Vehicles via Proactive Attention](https://arxiv.org/abs/2409.08840)." *The 2025 IEEE International Conference on Robotics & Automation*, 19–23 May, Atlanta, USA.
             <span class="red-label">CCF-B</span>
 
         ## **Accepted Papers in 2024** 
