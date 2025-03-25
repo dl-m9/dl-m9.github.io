@@ -39,7 +39,7 @@ sections:
           margin: 2px 0;
           width: 95px;
           text-align: center;
-        }
+      
         .tag-label {
           display: inline-block;
           background-color: #cce5ff;
@@ -47,7 +47,7 @@ sections:
           border-radius: 6px;
           margin: 2px 0;
         }
-        .highlight-label {
+        .red-label {
           display: inline-block;
           background-color: #F7C6C1;
           padding: 0 5px;
@@ -56,6 +56,7 @@ sections:
         }
         </style>
         
+        - <span class="date-label">Mar. 2025</span> 🔥🔥🔥 We launched a new project about [**Multi-Agent Autonomous Driving**](https://github.com/dl-m9/Multi-Agent-Autonomous-Driving)! This project will continuously collect papers from recent years in the field of multi-agent autonomous driving and is the most comprehensive repo in this field! Welcome to Star ⭐️ & Contribute! <span class="red-label">[Repo](https://github.com/dl-m9/Multi-Agent-Autonomous-Driving)</span>
         - <span class="date-label">Feb. 2025</span> Senkang passed the PhD Qualifying Examination (QE)! He is now a PhD candidate! 🎉🎉🎉
         - <span class="date-label">Jan. 2025</span> One paper was accepted by **The 2025 IEEE International Conference on Robotics and Automation (ICRA'25)**! 
         <span class="tag-label">[PDF](https://arxiv.org/abs/2409.08840)</span>
