@@ -20,8 +20,8 @@ sections:
         - **Multi-Agent Systems for Autonomous Driving**: Similar as CP, not only multi-agent perception but also multi-agent collaborative decision-making is important for next-generation autonomous driving. Here, LLM/VLM is leveraged as a powerful tool to build the multi-agent collaborative decision-making systems. 
         - **Large Pre-trained Models Task Adaptation**: Adapting pre-trained LMs to specific tasks, such as autonomous driving and collaborative decision-making, better and more efficiently.
 
-        ## **Autonomous Driving and Security**
-        - **Collaborative Perception (CP) for Autonomous Driving**: CP can overcome the limitations of single-agent perception systems, such as occlusion and sensing range, by leveraging the information from multiple vehicles.
+        ## **Multi-Agent Autonomous Driving**
+        - **Multi-Agent Collaborative Perception (CP)**: CP can overcome the limitations of single-agent perception systems, such as occlusion and sensing range, by leveraging the information from multiple vehicles.
         - **Autonomous Driving Security**: As CP needs to leverage the information from other vehicles, it expands the system's attack surface. Therefore, designing defense method is curial for secure CP. 
 
         
