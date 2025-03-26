@@ -56,7 +56,7 @@ sections:
         }
         </style>
         
-        - <span class="date-label">Mar. 2025</span> 🔥🔥🔥 We launched a new project about [**Multi-Agent Autonomous Driving**](https://github.com/dl-m9/Multi-Agent-Autonomous-Driving)! This project will continuously collect papers from recent years in the field of multi-agent autonomous driving and is the most comprehensive repo in this field! Welcome to Star ⭐️ & Contribute! <span class="red-label">[Repo](https://github.com/dl-m9/Multi-Agent-Autonomous-Driving)</span>
+        - <span class="date-label">Mar. 2025</span> 🔥🔥🔥 We launched a new project about [**Multi-Agent Autonomous Driving**](https://github.com/dl-m9/Multi-Agent-Autonomous-Driving)! This project will continuously collect papers from recent years in the field of multi-agent autonomous driving and is the most comprehensive repo in this field! Welcome to Star ⭐️ & Contribute! <span class="red-label">[Github Repository](https://github.com/dl-m9/Multi-Agent-Autonomous-Driving)</span>
         - <span class="date-label">Feb. 2025</span> Senkang passed the PhD Qualifying Examination (QE)! He is now a PhD candidate! 🎉🎉🎉
         - <span class="date-label">Jan. 2025</span> One paper was accepted by **The 2025 IEEE International Conference on Robotics and Automation (ICRA'25)**! 
         <span class="tag-label">[PDF](https://arxiv.org/abs/2409.08840)</span>
@@ -99,28 +99,30 @@ sections:
         </style>
         
         <sup>#</sup>equal contribution, *corresponding author.
-        
-        
-        ## **Preprints**
+         
+        ### **Preprints**
 
         1. <span class='tag-label'>Preprint</span> **<u>Senkang "Forest" Hu</u>**, Yanan Ma, Yihang Tao, Zhengru Fang, Zihan Fang, Yiqin Deng, Sam Kwong, Yuguang Fang. "[Task-Aware Parameter-Efficient Fine-Tuning of Large Pre-Trained Models at the Edge](https://www.researchgate.net/publication/390057227)."
         2. <span class="tag-label">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Yihang Tao, Zihang Fang, Guowen Xu, Yiqin Deng, Sam Kwong, Yuguang Fang. "[CP-Guard+: A New Paradigm for Malicious Agent Detection and Defense in Collaborative Perception](https://arxiv.org/abs/2502.07807v1)."
         3. <span class="tag-label">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Zihan Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong. "[AgentsCoMerge: Large Language Model Empowered Collaborative Decision Making for Multi-Lane Merging](https://arxiv.org/abs/2408.03624)."
         4. <span class="tag-label">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Zihan Fang, Xianhao Chen, Yuguang Fang. "[AgentsCoDriver: Large Language Model Empowered Collaborative Driving with Lifelong Learning](https://arxiv.org/abs/2404.06345)."  <span class="tag-label">[Blog](https://mp.weixin.qq.com/s/HVfs4-PT58WujCvEZZboug)</span>
         5. <span class="tag-label">Preprint</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang. "[Collaborative Perception for Autonomous Driving: Challenges, Possible Solutions and Opportunities](https://arxiv.org/abs/2401.01544)."
-        6. <span class="tag-label">Preprint</span> Yanan Ma, **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Yun Ji, Yiqin Deng, Yuguang Fang. "[Sense4FL: Vehicular Crowdsensing Enhanced Federated Learning for Autonomous Driving]()."
+        6. <span class="tag-label">Preprint</span> Yanan Ma, **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Yun Ji, Yiqin Deng, Yuguang Fang. "[Sense4FL: Vehicular Crowdsensing Enhanced Federated Learning for Autonomous Driving](https://arxiv.org/abs/2503.17697)."
         7. <span class="tag-label">Preprint</span> Yihang Tao<sup>#</sup>, **<u>Senkang "Forest" Hu</u>**<sup>#</sup>, Yue Hu, Haonan An, Hangcheng Cao, Yuguang Fang. "[GCP: Guarded Collaborative Perception with Spatial-Temporal Aware Malicious Agent Detection](https://arxiv.org/abs/2501.02450)."
         8. <span class="tag-label">Preprint</span> Zihan Fang, Zheng Lin, **<u>Senkang "Forest" Hu</u>**, Hangcheng Cao, Xianhao Chen, and Yuguang Fang. "[IC3M: In-Car Multimodal Multi-object Monitoring for Abnormal Status of Both Driver and Passengers](https://arxiv.org/abs/2410.02592)."
 
-        ## **Accepted Papers in 2025**
+        ### **Accepted Papers in 2025**
+        <!-- 
+        9. <span class="tag-label">TIFS'25</span> **<u>Senkang "Forest" Hu</u>**, Yihang Tao, Zihang Fang, Guowen Xu, Yiqin Deng, Sam Kwong, Yuguang Fang. "[CP-Guard+: A New Paradigm for Malicious Agent Detection and Defense in Collaborative Perception](https://arxiv.org/abs/2502.07807v1)."
+        <span class="red-label">CCF-A</span> <span class="red-label">Q1 Top</span> 
+        10. <span class="tag-label">TMC'25</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Zihan Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong. "[AgentsCoMerge: Large Language Model Empowered Collaborative Decision Making for Multi-Lane Merging](https://arxiv.org/abs/2408.03624)." <span class="red-label">CCF-A</span> <span class="red-label">Q1 Top</span>
+        -->
         9. <span class="tag-label">ICRA'25</span> Yihang Tao, **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Yuguang Fang. "[Direct-CP: Directed Collaborative Perception for Connected and Autonomous Vehicles via Proactive Attention](https://arxiv.org/abs/2409.08840)." *The 2025 IEEE International Conference on Robotics & Automation*, 19–23 May, Atlanta, USA.
             <span class="red-label">CCF-B</span>
 
-        ## **Accepted Papers in 2024** 
+        ### **Accepted Papers in 2024** 
 
-        10. <span class="tag-label">AAAI'25</span> **<u>Senkang "Forest" Hu</u>**<sup>#</sup>, Yihang Tao<sup>#</sup>, Guowen Xu, Yiqin Deng, Xianhao Chen,  Yuguang Fang, Sam Kwong. "[CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception](https://arxiv.org/abs/2412.12000)." *The 39th Annual AAAI Conference on Artificial Intelligence*, Philadelphia, Pennsylvania, USA, February 2025. 
-            <span class="red-label">Oral</span>
-            <span class="red-label">CCF-A</span>
+        10. <span class="tag-label">AAAI'25</span> **<u>Senkang "Forest" Hu</u>**<sup>#</sup>, Yihang Tao<sup>#</sup>, Guowen Xu, Yiqin Deng, Xianhao Chen,  Yuguang Fang, Sam Kwong. "[CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception](https://arxiv.org/abs/2412.12000)." *The 39th Annual AAAI Conference on Artificial Intelligence*, Philadelphia, Pennsylvania, USA, February 2025. <span class="red-label">Oral</span> <span class="red-label">CCF-A</span>
         11. <span class="tag-label">TITS'24</span> **<u>Senkang "Forest" Hu</u>**, Zhengru Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang, and Sam Kwong. "[Toward Full-scene Domain Generalization in Multi-agent Collaborative Bird's Eye View Segmentation for Connected and Autonomous Driving](https://ieeexplore.ieee.org/abstract/document/10779389)." *IEEE Transactions on Intelligent Transportation Systems.*
             <span class="red-label">CCF-B</span>
             <span class="red-label">Q1 Top</span>
@@ -286,7 +288,7 @@ sections:
     content:
       title: 💻 **Services**  
       text: |-
-        ## **Conference Technical Program Committee & Reviewer**
+        ### **Conference Technical Program Committee & Reviewer**
         - The 33rd ACM International Conference on Multimedia (ACM MM'25)
         - The 42nd International Conference on Machine Learning (ICML'25)
         - The 13th International Conference on Learning Representations (ICLR'25)
@@ -295,7 +297,7 @@ sections:
         - IEEE International Conference on Robotics and Automation (ICRA'25)
         - 2024 IEEE/CIC International Conference on Communications in China (ICCC'24)
         - IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS'24)
-        ## **Journal Reviewer**
+        ### **Journal Reviewer**
         - ACM Computing Surveys 
         - IEEE Transactions on Mobile Computing (TMC)
         - IEEE/ACM Transactions on Networking (ToN)
@@ -307,7 +309,7 @@ sections:
         - Pattern Recognition (PR)
         - IEEE Robotics and Automation Letters (RA-L)
         - Proceedings of the IEEE
-        ## **Teaching Assistant**
+        ### **Teaching Assistant**
         - Cloud Computing, 2025 Spring
         - Computer Networks, 2024 Fall
         - Cloud Computing: Theory and Practice, 2024 Spring
