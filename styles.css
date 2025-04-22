@@ -6,7 +6,7 @@
     --black-color: #000;
     --light-text: #757575;
     --border-color: #e0e0e0;
-    --section-spacing: 5rem;
+    --section-spacing: 4rem;
     --timeline-color: #f0f0f0;
     --background-color: rgba(0, 102, 204, 0.15);
     --subsection-font-size: 1.3rem;
@@ -513,7 +513,7 @@ nav {
 
 .section-title {
     font-size: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     position: relative;
     display: inline-block;
 }
@@ -535,14 +535,14 @@ nav {
 
 /* News Section */
 .news-container, .news-list {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
 
 .news-item {
     display: flex;
-    margin-bottom: 1.5rem;
-    padding: 0.75rem;
-    padding-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    padding-bottom: 1rem;
     border-bottom: 1px solid var(--border-color);
     transition: all 0.2s ease;
     border-radius: 4px;
@@ -707,7 +707,7 @@ nav {
 /* Education Timeline */
 .timeline {
     position: relative;
-    margin: 2rem 0;
+    margin: 1.5rem 0;
     padding-left: 30px;
 }
 
@@ -724,10 +724,10 @@ nav {
 
 .timeline-item {
     position: relative;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 8px;
-    padding: 20px;
+    padding: 15px;
     background-color: transparent;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
@@ -756,7 +756,7 @@ nav {
 .edu-content-wrapper {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .edu-text {
@@ -823,7 +823,7 @@ nav {
 .publications-list {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0.8rem;
 }
 
 .publication {
@@ -832,6 +832,7 @@ nav {
     border-radius: 4px;
     overflow: hidden;
     transition: transform 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 /* Subtle left border for first-author papers */
@@ -852,69 +853,99 @@ nav {
     background-color: rgba(0, 102, 204, 0.1);
     color: var(--primary-color);
     text-align: center;
-    padding: 1rem 0.5rem;
+    padding: 0.8rem 0.5rem;
     border-radius: 4px;
 }
 
 .pub-number {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 800;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 .venue-text {
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1.2;
-    font-weight: 800;
-    /* text-transform: uppercase; */
+    font-weight: 700;
     word-break: break-word;
     hyphens: auto;
-    text-align: right;
+    text-align: center;
 }
 
 .pub-content {
-    padding: 1.5rem;
+    padding: 1rem 1.2rem;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pub-content-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.pub-content-text {
+    flex: 1;
+    min-width: 0; /* 防止文本溢出 */
 }
 
 .pub-content h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
 }
 
 .authors {
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
 }
 
 .venue {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-style: italic;
     color: var(--light-text);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0;
 }
 
 .pub-tags {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: flex-end;
+    flex-shrink: 0;
+    margin-top: 0;
+    min-width: 120px; /* 设置最小宽度 */
+}
+
+.tag {
+    display: inline-block;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-style: normal;
+    text-align: center;
+    min-width: 80px; /* 设置标签最小宽度 */
+    white-space: nowrap; /* 防止文字换行 */
 }
 
 /* Responsive adjustments for publications */
 @media (max-width: 768px) {
+    .publications-list {
+        gap: 0.6rem;
+    }
+
     .pub-venue-label {
-        width: 100px;
-        padding: 0.8rem 0.3rem;
+        width: 150px;
+        padding: 0.6rem 0.4rem;
     }
-    
-    .pub-number {
-        font-size: 1rem;
-        margin-bottom: 0.3rem;
-    }
-    
-    .venue-text {
-        font-size: 0.7rem;
+
+    .pub-content-main {
+        gap: 0.8rem;
     }
 }
 
@@ -926,42 +957,26 @@ nav {
     .pub-venue-label {
         width: 100%;
         flex-direction: row;
-        padding: 0.5rem;
+        padding: 0.4rem 0.8rem;
         justify-content: space-between;
     }
     
-    .pub-number {
-        margin-bottom: 0;
-        margin-right: 0.5rem;
+    .pub-content-main {
+        flex-direction: column;
+        gap: 0.5rem;
     }
-    
-    .venue-text {
-        text-align: right;
+
+    .pub-tags {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        min-width: auto; /* 移动端取消最小宽度限制 */
     }
-}
 
-/* Publication section titles */
-.publication-section-title {
-    margin-top: 2rem;
-    margin-bottom: 0rem;
-    font-size: var(--subsection-font-size);
-    /* color: var(--black-color); */
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-/* No top margin for the first section title */
-.publication-section-title:first-child {
-    margin-top: 0;
-}
-
-.tag {
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    font-style: normal;
+    .tag {
+        min-width: auto; /* 移动端取消最小宽度限制 */
+    }
 }
 
 /* Gray color for preprint tags */
@@ -1031,14 +1046,14 @@ footer {
 
 /* Honors Section */
 .honors-list {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
 
 .honor-item {
     display: flex;
-    margin-bottom: 1.5rem;
-    padding: 0.75rem;
-    padding-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
+    padding: 0.5rem;
+    padding-bottom: 1rem;
     border-bottom: 1px solid var(--border-color);
     transition: all 0.2s ease;
     border-radius: 4px;
@@ -1073,14 +1088,14 @@ footer {
 
 .honor-content h3 {
     font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
     color: var(--text-color);
 }
 
 .honor-content p {
     color: var(--light-text);
     font-size: 0.9rem;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
 }
 
 .year-highlight {
@@ -1529,4 +1544,18 @@ footer {
 
 .visitors-section .section-title {
     margin: 0 auto 2rem;
+}
+
+/* Publication section titles */
+.publication-section-title {
+    margin-top: 2rem;
+    margin-bottom: 0rem;
+    font-size: var(--subsection-font-size);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* No top margin for the first section title */
+.publication-section-title:first-child {
+    margin-top: 0;
 }

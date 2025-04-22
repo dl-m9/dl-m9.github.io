@@ -361,24 +361,32 @@ function renderPublicationGroup(publications, container, startCounter) {
         // Create publication content container
         const contentElement = document.createElement('div');
         contentElement.className = 'pub-content';
+
+        // Create main content wrapper
+        const contentMainElement = document.createElement('div');
+        contentMainElement.className = 'pub-content-main';
+
+        // Create text content wrapper
+        const contentTextElement = document.createElement('div');
+        contentTextElement.className = 'pub-content-text';
         
         // Add title
         const titleElement = document.createElement('h3');
         titleElement.textContent = pub.title;
-        contentElement.appendChild(titleElement);
+        contentTextElement.appendChild(titleElement);
         
         // Add authors
         const authorsElement = document.createElement('p');
         authorsElement.className = 'authors';
         authorsElement.innerHTML = pub.authors;
-        contentElement.appendChild(authorsElement);
+        contentTextElement.appendChild(authorsElement);
         
         // Add full venue if it exists (for accepted papers)
         if (pub.venue) {
             const fullVenueElement = document.createElement('p');
             fullVenueElement.className = 'venue';
             fullVenueElement.textContent = pub.venue;
-            contentElement.appendChild(fullVenueElement);
+            contentTextElement.appendChild(fullVenueElement);
         }
         
         // Add tags
@@ -404,8 +412,13 @@ function renderPublicationGroup(publications, container, startCounter) {
                 tagsContainer.appendChild(tagSpan);
             }
         });
+
+        // Add text content and tags to main content wrapper
+        contentMainElement.appendChild(contentTextElement);
+        contentMainElement.appendChild(tagsContainer);
         
-        contentElement.appendChild(tagsContainer);
+        // Add main content wrapper to content element
+        contentElement.appendChild(contentMainElement);
         
         // Combine elements and add to publications list
         pubElement.appendChild(venueElement);

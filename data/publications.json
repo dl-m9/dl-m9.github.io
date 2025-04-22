@@ -6,10 +6,6 @@
     "isFirstAuthor": true,
     "tags": [
       {
-        "text": "Preprint",
-        "class": "preprint-tag"
-      },
-      {
         "text": "PDF",
         "class": "code-tag",
         "link": "https://arxiv.org/abs/2504.03718"
@@ -23,10 +19,6 @@
     "isFirstAuthor": true,
     "tags": [
       {
-        "text": "Preprint",
-        "class": "preprint-tag"
-      },
-      {
         "text": "PDF",
         "class": "code-tag",
         "link": "https://arxiv.org/abs/2502.07807v1"
@@ -39,10 +31,6 @@
     "type": "preprint",
     "isFirstAuthor": true,
     "tags": [
-      {
-        "text": "Preprint",
-        "class": "preprint-tag"
-      },
       {
         "text": "PDF",
         "class": "code-tag",
@@ -61,10 +49,7 @@
     "type": "preprint",
     "isFirstAuthor": true,
     "tags": [
-      {
-        "text": "Preprint",
-        "class": "preprint-tag"
-      },
+      
       {
         "text": "PDF",
         "class": "code-tag",
@@ -78,10 +63,7 @@
     "type": "preprint",
     "isFirstAuthor": false,
     "tags": [
-      {
-        "text": "Preprint",
-        "class": "preprint-tag"
-      },
+      
       {
         "text": "PDF",
         "class": "code-tag",
@@ -96,10 +78,6 @@
     "type": "preprint",
     "isFirstAuthor": false,
     "tags": [
-      {
-        "text": "Preprint",
-        "class": "preprint-tag"
-      },
       {
         "text": "PDF",
         "class": "code-tag",
