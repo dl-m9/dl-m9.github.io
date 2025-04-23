@@ -1,0 +1,29 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Personal Academic Website Project Overview
+
+The project is a personal academic website for Senkang "Forest" Hu, PhD student at City University of Hong Kong. The website structure follows a modern, responsive design with JSON-powered dynamic content.
+
+## Key Files
+
+- [index.html](mdc:index.html): Main homepage with all sections (Biography, Education, Research, Publications, etc.)
+- [script.js](mdc:script.js): JavaScript functionality for dynamic content loading and interactions
+- [styles.css](mdc:styles.css): CSS styling for the entire website
+- [profile-info.json](mdc:data/profile-info.json): Personal information and social links
+- [publications.json](mdc:data/publications.json): Academic publications data
+- [news.json](mdc:data/news.json): News and updates in chronological order
+
+## Main Sections
+
+The website is organized into several main sections:
+1. Biography/About
+2. Education
+3. Research Interests
+4. Latest News
+5. Publications 
+6. Honors & Awards
+7. Services
+8. Contact

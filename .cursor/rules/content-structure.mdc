@@ -1,0 +1,38 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Content Structure and Organization
+
+This project uses a combination of static HTML content and dynamic JSON-powered sections to create a maintainable and easily updatable academic website.
+
+## JSON Data Files
+
+The project uses three main JSON files in the [data](mdc:data) directory:
+
+- [profile-info.json](mdc:data/profile-info.json): Contains personal information, name, subtitle, and social media links
+- [publications.json](mdc:data/publications.json): Stores all publications with metadata for filtering
+- [news.json](mdc:data/news.json): Contains news and updates in chronological order
+
+## How Content Is Loaded
+
+The [script.js](mdc:script.js) file contains functions that load data from these JSON files:
+
+1. `loadProfileInfo()`: Loads profile information from profile-info.json
+2. `loadPublications()`: Loads and renders publications from publications.json 
+3. `renderNewsItems()`: Renders news items from news.json
+
+## Page Structure
+
+- The homepage [index.html](mdc:index.html) contains all main sections.
+- Additional pages in the [pages](mdc:pages) directory include:
+  - [all-news.html](mdc:pages/all-news.html): Displays the complete list of news items
+
+## Assets Organization
+
+The [assets](mdc:assets) directory contains:
+- Profile photos
+- University logos
+- Social media icons
+- Additional images

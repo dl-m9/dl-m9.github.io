@@ -1104,6 +1104,10 @@ footer {
     padding: 5px 10px;
     border-radius: 4px;
     font-size: 0.9rem;
+    width: 95px;
+    text-align: center;
+    min-width: 95px;
+    box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
