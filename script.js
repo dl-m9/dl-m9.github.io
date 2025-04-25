@@ -29,6 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Show all publications and section titles
                 pubElements.forEach(pub => {
                     pub.style.display = 'flex';
+                    // Reset to original number when showing all
+                    const numberElement = pub.querySelector('.pub-number');
+                    if (numberElement) {
+                        numberElement.textContent = pub.dataset.originalNumber;
+                    }
                 });
                 sectionTitles.forEach(title => {
                     title.style.display = 'block';
@@ -49,6 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         title.style.display = 'none';
                     }
                 });
+                
+                // Update publication numbers for visible publications
+                updatePublicationNumbers();
             } else if (filterValue === 'accepted') {
                 // Show only accepted papers and hide preprints section
                 pubElements.forEach(pub => {
@@ -65,6 +73,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         title.style.display = 'none';
                     }
                 });
+                
+                // Update publication numbers for visible publications
+                updatePublicationNumbers();
             } else if (filterValue === 'first-author') {
                 // Show only first-author papers across all sections
                 pubElements.forEach(pub => {
@@ -94,6 +105,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     title.style.display = hasVisiblePub ? 'block' : 'none';
                 });
+                
+                // Update publication numbers for visible publications
+                updatePublicationNumbers();
             }
         });
     });
@@ -331,6 +345,9 @@ function renderPublicationGroup(publications, container, startCounter) {
         if (pub.isFirstAuthor) classes.push('first-author');
         pubElement.className = classes.join(' ');
         
+        // Store the original number as a data attribute for reference
+        pubElement.dataset.originalNumber = counter;
+        
         // Create venue/type label for left side
         const venueElement = document.createElement('div');
         venueElement.className = 'pub-venue-label';
@@ -345,7 +362,7 @@ function renderPublicationGroup(publications, container, startCounter) {
             venueText = venueTag ? venueTag.text : pub.venue.split(',')[0].split(' ').pop();
         }
         
-        // Create publication number - display in ascending order
+        // Create publication number with a specific class for easy updates
         const numberElement = document.createElement('span');
         numberElement.className = 'pub-number';
         numberElement.textContent = counter++;
@@ -425,6 +442,53 @@ function renderPublicationGroup(publications, container, startCounter) {
         pubElement.appendChild(contentElement);
         container.appendChild(pubElement);
     });
+}
+
+// Function to update publication numbers based on visible publications
+function updatePublicationNumbers() {
+    // Get all visible publications
+    const visiblePubs = document.querySelectorAll('.publication[style="display: flex;"]');
+    
+    // If no publications are visible, hide all section titles
+    if (visiblePubs.length === 0) {
+        const sectionTitles = document.querySelectorAll('.publication-section-title');
+        sectionTitles.forEach(title => {
+            title.style.display = 'none';
+        });
+        return;
+    }
+    
+    // Get all visible section titles
+    const visibleSectionTitles = document.querySelectorAll('.publication-section-title[style="display: block;"]');
+    
+    // If we have section titles visible, number publications within each section
+    if (visibleSectionTitles.length > 0) {
+        visibleSectionTitles.forEach(title => {
+            let sectionCounter = 1;
+            let currentEl = title.nextElementSibling;
+            
+            // Process all elements until next section title
+            while (currentEl && !currentEl.classList.contains('publication-section-title')) {
+                if (currentEl.classList.contains('publication') && 
+                    currentEl.style.display === 'flex') {
+                    const numberElement = currentEl.querySelector('.pub-number');
+                    if (numberElement) {
+                        numberElement.textContent = sectionCounter++;
+                    }
+                }
+                currentEl = currentEl.nextElementSibling;
+            }
+        });
+    } else {
+        // If no section titles are visible, number all visible publications sequentially
+        let counter = 1;
+        visiblePubs.forEach(pub => {
+            const numberElement = pub.querySelector('.pub-number');
+            if (numberElement) {
+                numberElement.textContent = counter++;
+            }
+        });
+    }
 }
 
 // Function to render news items
