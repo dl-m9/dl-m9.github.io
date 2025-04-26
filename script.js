@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const pubElements = document.querySelectorAll('.publication');
             const sectionTitles = document.querySelectorAll('.publication-section-title');
             
-            // Handle different filter scenarios
             if (filterValue === 'all') {
                 // Show all publications and section titles
                 pubElements.forEach(pub => {
@@ -38,76 +37,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 sectionTitles.forEach(title => {
                     title.style.display = 'block';
                 });
-            } else if (filterValue === 'preprint') {
-                // Show only preprints and hide accepted papers sections
+            } else {
+                // 1. Hide all publications by default
                 pubElements.forEach(pub => {
-                    if (pub.classList.contains('preprint')) {
-                        pub.style.display = 'flex';
-                    } else {
-                        pub.style.display = 'none';
-                    }
+                    pub.style.display = 'none';
                 });
-                sectionTitles.forEach(title => {
-                    if (title.textContent === 'Preprints') {
-                        title.style.display = 'block';
-                    } else {
-                        title.style.display = 'none';
-                    }
-                });
-                
-                // Update publication numbers for visible publications
-                updatePublicationNumbers();
-            } else if (filterValue === 'accepted') {
-                // Show only accepted papers and hide preprints section
+                // 2. Show only publications matching the filter
                 pubElements.forEach(pub => {
-                    if (pub.classList.contains('accepted')) {
-                        pub.style.display = 'flex';
-                    } else {
-                        pub.style.display = 'none';
-                    }
+                    let show = false;
+                    if (filterValue === 'preprint' && pub.classList.contains('preprint')) show = true;
+                    if (filterValue === 'accepted' && pub.classList.contains('accepted')) show = true;
+                    if (filterValue === 'first-author' && pub.classList.contains('first-author')) show = true;
+                    pub.style.display = show ? 'flex' : 'none';
                 });
+                // 3. For each section title, check if it has visible publications below it
                 sectionTitles.forEach(title => {
-                    if (title.textContent.includes('Accepted')) {
-                        title.style.display = 'block';
-                    } else {
-                        title.style.display = 'none';
-                    }
-                });
-                
-                // Update publication numbers for visible publications
-                updatePublicationNumbers();
-            } else if (filterValue === 'first-author') {
-                // Show only first-author papers across all sections
-                pubElements.forEach(pub => {
-                    if (pub.classList.contains('first-author')) {
-                        pub.style.display = 'flex';
-                    } else {
-                        pub.style.display = 'none';
-                    }
-                });
-                
-                // Special handling for section titles: only show if there are visible publications in that section
-                sectionTitles.forEach(title => {
-                    const nextEl = title.nextElementSibling;
                     let hasVisiblePub = false;
-                    let currentEl = nextEl;
-                    
-                    // Check all elements until next section title or end
+                    let currentEl = title.nextElementSibling;
                     while (currentEl && !currentEl.classList.contains('publication-section-title')) {
-                        if (currentEl.classList.contains('publication') && 
-                            currentEl.classList.contains('first-author') &&
-                            currentEl.style.display !== 'none') {
+                        if (currentEl.classList.contains('publication') && currentEl.style.display === 'flex') {
                             hasVisiblePub = true;
                             break;
                         }
                         currentEl = currentEl.nextElementSibling;
                     }
-                    
                     title.style.display = hasVisiblePub ? 'block' : 'none';
                 });
-                
-                // Update publication numbers for visible publications
-                updatePublicationNumbers();
+                // 4. Update publication numbers for all visible publications (global numbering)
+                updatePublicationNumbers(true);
             }
         });
     });
@@ -445,7 +402,7 @@ function renderPublicationGroup(publications, container, startCounter) {
 }
 
 // Function to update publication numbers based on visible publications
-function updatePublicationNumbers() {
+function updatePublicationNumbers(flat = false) {
     // Get all visible publications
     const visiblePubs = document.querySelectorAll('.publication[style="display: flex;"]');
     
@@ -458,29 +415,8 @@ function updatePublicationNumbers() {
         return;
     }
     
-    // Get all visible section titles
-    const visibleSectionTitles = document.querySelectorAll('.publication-section-title[style="display: block;"]');
-    
-    // If we have section titles visible, number publications within each section
-    if (visibleSectionTitles.length > 0) {
-        visibleSectionTitles.forEach(title => {
-            let sectionCounter = 1;
-            let currentEl = title.nextElementSibling;
-            
-            // Process all elements until next section title
-            while (currentEl && !currentEl.classList.contains('publication-section-title')) {
-                if (currentEl.classList.contains('publication') && 
-                    currentEl.style.display === 'flex') {
-                    const numberElement = currentEl.querySelector('.pub-number');
-                    if (numberElement) {
-                        numberElement.textContent = sectionCounter++;
-                    }
-                }
-                currentEl = currentEl.nextElementSibling;
-            }
-        });
-    } else {
-        // If no section titles are visible, number all visible publications sequentially
+    if (flat) {
+        // Flat mode: all visible publications are numbered 1,2,3...
         let counter = 1;
         visiblePubs.forEach(pub => {
             const numberElement = pub.querySelector('.pub-number');
@@ -488,6 +424,35 @@ function updatePublicationNumbers() {
                 numberElement.textContent = counter++;
             }
         });
+    } else {
+        // Section mode: number within each section
+        const visibleSectionTitles = document.querySelectorAll('.publication-section-title[style="display: block;"]');
+        if (visibleSectionTitles.length > 0) {
+            visibleSectionTitles.forEach(title => {
+                let sectionCounter = 1;
+                let currentEl = title.nextElementSibling;
+                // Process all elements until next section title
+                while (currentEl && !currentEl.classList.contains('publication-section-title')) {
+                    if (currentEl.classList.contains('publication') && 
+                        currentEl.style.display === 'flex') {
+                        const numberElement = currentEl.querySelector('.pub-number');
+                        if (numberElement) {
+                            numberElement.textContent = sectionCounter++;
+                        }
+                    }
+                    currentEl = currentEl.nextElementSibling;
+                }
+            });
+        } else {
+            // If no section titles are visible, number all visible publications sequentially
+            let counter = 1;
+            visiblePubs.forEach(pub => {
+                const numberElement = pub.querySelector('.pub-number');
+                if (numberElement) {
+                    numberElement.textContent = counter++;
+                }
+            });
+        }
     }
 }
 
