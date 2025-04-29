@@ -161,7 +161,7 @@ h1 {
 
 /* Navigation Styles */
 nav {
-    background-color: #fff;
+    background: linear-gradient(135deg, #BD384B, #3a7bd5);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;
@@ -185,10 +185,12 @@ nav {
     line-height: 60px;
     font-weight: 500;
     position: relative;
+    color: #fff;
 }
 
 .nav-links a.active {
-    color: var(--primary-color);
+    color: #fff;
+    font-weight: 600;
 }
 
 .nav-links a::after {
@@ -198,7 +200,7 @@ nav {
     left: 0;
     width: 0;
     height: 3px;
-    background-color: var(--primary-color);
+    background-color: #fff;
     transition: width 0.3s ease;
 }
 
@@ -226,13 +228,13 @@ nav {
         left: 0;
         width: 100%;
         z-index: 1000;
-        background-color: #fff;
+        background: linear-gradient(135deg, #BD384B, #3a7bd5);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         overflow: hidden;
     }
     
     body {
-        padding-top: 60px;
+        padding-top: 0;
     }
     
     .nav-links {
@@ -279,6 +281,7 @@ nav {
         padding: 0.5rem 0;
         font-size: 0.95rem;
         white-space: nowrap;
+        color: #fff;
     }
     
     /* Add gradient indicators to show there's more content */
@@ -297,12 +300,12 @@ nav {
     
     nav .container::before {
         left: 0;
-        background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
+        background: linear-gradient(to right, rgba(189, 56, 75, 0.9), rgba(189, 56, 75, 0));
     }
     
     nav .container::after {
         right: 0;
-        background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
+        background: linear-gradient(to left, rgba(58, 123, 213, 0.9), rgba(58, 123, 213, 0));
     }
     
     /* Only show gradients if has-scroll class is present */
@@ -403,6 +406,10 @@ nav {
     .address-description {
         font-size: 0.9rem !important;
     }
+    
+    header {
+        padding-top: 80px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -433,6 +440,7 @@ nav {
     .nav-links a {
         font-size: 0.9rem;
         padding: 0.4rem 0;
+        color: #fff;
     }
     
     .container nav::before,
@@ -502,6 +510,10 @@ nav {
     .profile-image::after {
         width: 140px;
         height: 140px;
+    }
+    
+    header {
+        padding-top: 70px;
     }
 }
 
@@ -1403,6 +1415,10 @@ footer {
     .profile-image::after {
         width: 140px;
         height: 140px;
+    }
+    
+    header {
+        padding-top: 70px;
     }
 }
 

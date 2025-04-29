@@ -82,8 +82,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 const targetSection = document.querySelector(targetId);
                 
                 if (targetSection) {
+                    // Adjust the offset to account for the fixed navigation bar
+                    const navHeight = document.querySelector('nav').offsetHeight;
                     window.scrollTo({
-                        top: targetSection.offsetTop - 100,
+                        top: targetSection.offsetTop - navHeight - 20,
                         behavior: 'smooth'
                     });
                     
@@ -99,12 +101,13 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', function() {
         let current = '';
         const sections = document.querySelectorAll('section');
+        const navHeight = document.querySelector('nav').offsetHeight;
         
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
             
-            if (pageYOffset >= sectionTop - 200) {
+            if (pageYOffset >= sectionTop - navHeight - 100) {
                 current = section.getAttribute('id');
             }
         });
