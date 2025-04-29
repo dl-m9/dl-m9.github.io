@@ -85,6 +85,46 @@
       }
     ]
   },
+  
+  {
+    "title": "UAV-enabled Computing Power Networks: Task Completion Probability Analysis",
+    "authors": "Yiqin Deng, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Haixia Zhang, and Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": false,
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
+  {
+    "title": "UAV-enabled Computing Power Networks: Design and Performance Analysis under Energy Constraints",
+    "authors": "Yiqin Deng, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Xiaoyu Guo, Haixia Zhang, and Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": false,
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
+  {
+    "title": "Task-Oriented Communications for Visual Navigation with Edge-Aerial Collaboration",
+    "authors": "Zhengru Fang, Zhenghao Liu, Jingjing Wang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yu Guo, Yiqin Deng, and Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": false,
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
   {
     "title": "AgentsCoMerge: Large Language Model Empowered Collaborative Decision Making for Multi-Lane Merging",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Zhengru Fang, Zihan Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong",
