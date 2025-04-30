@@ -32,6 +32,10 @@ body {
     padding: 0 15px;
 }
 
+.kai-font {
+    font-family: KaiTi, STKaiti, "楷体", serif;
+}
+
 a {
     color: var(--primary-color);
     text-decoration: none;

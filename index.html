@@ -59,7 +59,7 @@
                         <div class="timeline-content">
                             <div class="edu-content-wrapper">
                                 <div class="edu-text">
-                                    <h3>PhD @ City University of Hong Kong (CITYUHK)</h3>
+                                    <h3>PhD @ City University of Hong Kong</h3>
                                     <p class="timeline-date">Aug. 2023 - Now</p>
                                     <p>Computer Science</p>
                                     <p>Supervisor: <a href="https://www.cs.cityu.edu.hk/~yugufang/">Prof. Yuguang "Michael" Fang</a> (Chair Professor of Internet of Things and Fellow of ACM & IEEE & AAAS)</p>
@@ -75,7 +75,7 @@
                         <div class="timeline-content">
                             <div class="edu-content-wrapper">
                                 <div class="edu-text">
-                                    <h3>BEng @ Beijing Institute of Technology (BIT)</h3>
+                                    <h3>BEng @ Beijing Institute of Technology</h3>
                                     <p class="timeline-date">Sep. 2018 - Jul. 2022</p>
                                     <p>Electronic Information Engineering</p>
                                     <p>National Scholarship</p>
@@ -338,6 +338,68 @@
                     }
                 }
             }
+
+            // Apply KaiTi font to all Chinese characters that are not already wrapped in .kai-font
+            function applyKaiFont() {
+                const textNodes = [];
+                const chineseRegex = /[\u4e00-\u9fff]+/;
+                
+                // Recursive function to get all text nodes
+                function getTextNodes(node) {
+                    if (node.nodeType === 3) { // Text node
+                        if (chineseRegex.test(node.nodeValue)) {
+                            textNodes.push(node);
+                        }
+                    } else if (node.nodeType === 1 && node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') { // Element node
+                        // Skip if the node already has the kai-font class or is a parent of one
+                        if (!node.classList || !node.classList.contains('kai-font')) {
+                            for (let i = 0; i < node.childNodes.length; i++) {
+                                getTextNodes(node.childNodes[i]);
+                            }
+                        }
+                    }
+                }
+                
+                getTextNodes(document.body);
+                
+                // Process text nodes containing Chinese characters
+                textNodes.forEach(textNode => {
+                    const text = textNode.nodeValue;
+                    const parts = [];
+                    let lastIndex = 0;
+                    
+                    // Find all Chinese character sequences
+                    text.replace(/([\u4e00-\u9fff]+)/g, (match, p1, offset) => {
+                        // Add text before the match
+                        if (offset > lastIndex) {
+                            parts.push(document.createTextNode(text.substring(lastIndex, offset)));
+                        }
+                        
+                        // Create span for Chinese characters
+                        const span = document.createElement('span');
+                        span.className = 'kai-font';
+                        span.textContent = p1;
+                        parts.push(span);
+                        
+                        lastIndex = offset + match.length;
+                    });
+                    
+                    // Add remaining text
+                    if (lastIndex < text.length) {
+                        parts.push(document.createTextNode(text.substring(lastIndex)));
+                    }
+                    
+                    // Replace original text node with processed parts
+                    if (parts.length > 0) {
+                        const fragment = document.createDocumentFragment();
+                        parts.forEach(part => fragment.appendChild(part));
+                        textNode.parentNode.replaceChild(fragment, textNode);
+                    }
+                });
+            }
+            
+            // Run the function to apply KaiTi font to Chinese characters
+            applyKaiFont();
         });
     </script>
 </body>

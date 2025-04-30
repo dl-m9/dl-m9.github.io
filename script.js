@@ -150,6 +150,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 });
 
+// Helper function to wrap Chinese characters with kai-font span
+function wrapChineseWithKaiFont(text) {
+    if (!text) return '';
+    return text.replace(/([\u4e00-\u9fff]+)/g, '<span class="kai-font">$1</span>');
+}
+
 // Function to load profile information
 function loadProfileInfo() {
     let profileJsonPath = 'data/profile-info.json';
@@ -176,7 +182,7 @@ function loadProfileInfo() {
             // Add subtitle
             const subtitleElement = document.createElement('p');
             subtitleElement.className = 'subtitle';
-            subtitleElement.innerHTML = data.subtitle;
+            subtitleElement.innerHTML = wrapChineseWithKaiFont(data.subtitle);
             profileInfoContainer.appendChild(subtitleElement);
             
             // Add social links container
@@ -332,7 +338,7 @@ function renderPublicationGroup(publications, container, startCounter) {
         // Add venue text below the number
         const venueTextElement = document.createElement('span');
         venueTextElement.className = 'venue-text';
-        venueTextElement.textContent = venueText;
+        venueTextElement.innerHTML = wrapChineseWithKaiFont(venueText);
         venueElement.appendChild(venueTextElement);
         
         // Create publication content container
@@ -349,20 +355,20 @@ function renderPublicationGroup(publications, container, startCounter) {
         
         // Add title
         const titleElement = document.createElement('h3');
-        titleElement.textContent = pub.title;
+        titleElement.innerHTML = wrapChineseWithKaiFont(pub.title);
         contentTextElement.appendChild(titleElement);
         
         // Add authors
         const authorsElement = document.createElement('p');
         authorsElement.className = 'authors';
-        authorsElement.innerHTML = pub.authors;
+        authorsElement.innerHTML = wrapChineseWithKaiFont(pub.authors);
         contentTextElement.appendChild(authorsElement);
         
         // Add full venue if it exists (for accepted papers)
         if (pub.venue) {
             const fullVenueElement = document.createElement('p');
             fullVenueElement.className = 'venue';
-            fullVenueElement.textContent = pub.venue;
+            fullVenueElement.innerHTML = wrapChineseWithKaiFont(pub.venue);
             contentTextElement.appendChild(fullVenueElement);
         }
         
@@ -378,14 +384,14 @@ function renderPublicationGroup(publications, container, startCounter) {
                 const tagLink = document.createElement('a');
                 tagLink.href = tag.link;
                 tagLink.className = `tag ${tag.class}`;
-                tagLink.textContent = tag.text;
+                tagLink.innerHTML = wrapChineseWithKaiFont(tag.text);
                 tagLink.target = "_blank";
                 tagLink.rel = "noopener noreferrer";
                 tagsContainer.appendChild(tagLink);
             } else {
                 const tagSpan = document.createElement('span');
                 tagSpan.className = `tag ${tag.class}`;
-                tagSpan.textContent = tag.text;
+                tagSpan.innerHTML = wrapChineseWithKaiFont(tag.text);
                 tagsContainer.appendChild(tagSpan);
             }
         });
@@ -478,7 +484,7 @@ function renderNewsItems(newsData, containerId) {
         
         const dateHighlight = document.createElement('span');
         dateHighlight.className = 'year-highlight';
-        dateHighlight.textContent = newsItem.date;
+        dateHighlight.innerHTML = wrapChineseWithKaiFont(newsItem.date);
         dateElement.appendChild(dateHighlight);
         
         // Create the content element
@@ -490,17 +496,17 @@ function renderNewsItems(newsData, containerId) {
         
         // Check if title contains HTML (like '<a href=')
         if (newsItem.title && newsItem.title.includes('<a href=')) {
-            // Parse HTML in title
-            titleElement.innerHTML = newsItem.title;
+            // Parse HTML in title with Chinese characters wrapped
+            titleElement.innerHTML = wrapChineseWithKaiFont(newsItem.title);
         } else {
-            titleElement.textContent = newsItem.title;
+            titleElement.innerHTML = wrapChineseWithKaiFont(newsItem.title);
         }
         
         contentElement.appendChild(titleElement);
         
         // Create the paragraph for content
         const paragraphElement = document.createElement('p');
-        paragraphElement.innerHTML = newsItem.content;
+        paragraphElement.innerHTML = wrapChineseWithKaiFont(newsItem.content);
         
         // Add links if provided in the links array format
         if (newsItem.links && newsItem.links.length > 0) {
@@ -512,7 +518,7 @@ function renderNewsItems(newsData, containerId) {
                 // Create link
                 const linkElement = document.createElement('a');
                 linkElement.href = link.url;
-                linkElement.textContent = link.text;
+                linkElement.innerHTML = wrapChineseWithKaiFont(link.text);
                 linkElement.target = "_blank";
                 linkElement.rel = "noopener noreferrer";
                 paragraphElement.appendChild(linkElement);
@@ -526,7 +532,7 @@ function renderNewsItems(newsData, containerId) {
             
             const linkElement = document.createElement('a');
             linkElement.href = newsItem.link;
-            linkElement.textContent = newsItem.linkText;
+            linkElement.innerHTML = wrapChineseWithKaiFont(newsItem.linkText);
             linkElement.target = "_blank";
             linkElement.rel = "noopener noreferrer";
             paragraphElement.appendChild(linkElement);
