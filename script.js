@@ -176,7 +176,7 @@ function loadProfileInfo() {
             
             // Add name
             const nameElement = document.createElement('h1');
-            nameElement.textContent = data.name;
+            nameElement.innerHTML = data.name;
             profileInfoContainer.appendChild(nameElement);
             
             // Add subtitle
