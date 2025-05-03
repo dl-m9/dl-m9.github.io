@@ -36,12 +36,6 @@
       "url": "https://dblp.org/pid/358/4477",
       "icon": "<img src=\"assets/dblp.svg\" alt=\"DBLP\" class=\"icon-svg\">",
       "target": "_blank"
-    },
-    {
-      "type": "researchgate",
-      "url": "https://www.researchgate.net/profile/Senkang-Hu?ev=hdr_xprf&_sg=RudTlDaZrI-AyeiJ3fg5vDRTScMNiZSqci0c4CBvR8grICMQO9xjMhw9hl5gfCqJl_fkZ61i-pRUkz73RKrQnajN",
-      "icon": "<i class=\"fab fa-researchgate\"></i>",
-      "target": "_blank"
     }
   ],
   "profileImage": "assets/profile.jpg"
