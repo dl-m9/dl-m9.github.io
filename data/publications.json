@@ -242,6 +242,11 @@
         "text": "PDF",
         "class": "code-tag",
         "link": "https://ojs.aaai.org/index.php/AAAI/article/view/34486"
+      },
+      {
+        "text": "Code",
+        "class": "code-tag",
+        "link": "https://github.com/CP-Security/CP-Guard"
       }
     ]
   },

@@ -76,6 +76,10 @@
       {
         "text": "PDF",
         "url": "https://arxiv.org/abs/2412.12000"
+      },
+      {
+        "text": "Code",
+        "url": "https://github.com/CP-Security/CP-Guard"
       }
     ]
   },
