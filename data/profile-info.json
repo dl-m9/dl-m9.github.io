@@ -32,9 +32,9 @@
       "target": "_blank"
     },
     {
-      "type": "dblp",
-      "url": "https://dblp.org/pid/358/4477",
-      "icon": "<img src=\"assets/dblp.svg\" alt=\"DBLP\" class=\"icon-svg\">",
+      "type": "xiaohongshu",
+      "url": "https://www.xiaohongshu.com/user/profile/65336628000000002a02b33a?xsec_token=YBLo7AE3tI12YNLfcdBnUYEbiZwc2yOVG3Vte9s-gV33I=&xsec_source=app_share&xhsshare=CopyLink&appuid=65336628000000002a02b33a&apptime=1749484135&share_id=887e6c294e544fa4a0f106552afe6107",
+      "icon": "<img src=\"assets/xiaohongshu.svg\" alt=\"Xiaohongshu\" class=\"icon-svg\">",
       "target": "_blank"
     }
   ],
