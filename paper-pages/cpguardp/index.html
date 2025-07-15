@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: #1a1a1a;
+            background: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem 2rem 2rem;
+        }
+
+        .tab-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1.2rem 0;
+            margin: 0 0 3rem 0;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .tab-list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .tab-item {
+            position: relative;
+        }
+
+        .tab-link {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 5px;
+            background-color: #fff;
+            min-width: 220px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            z-index: 1000;
+            border: 1px solid #e9ecef;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            border-bottom: 1px solid #f1f1f1;
+            transition: background-color 0.2s ease;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f8f9fa;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:first-child {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 2rem;
+        }
+
+        .title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .conference-badge {
+            background: #dc3545;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            margin-bottom: 1rem;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .authors {
+            font-size: 1.1em;
+            margin-bottom: 0.5rem;
+            color: #495057;
+        }
+
+        .affiliations {
+            font-size: 0.9em;
+            color: #6c757d;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        .button-group {
+            margin: 1.5rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 0 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            border: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .abstract {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 2rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 1em;
+            line-height: 1.8;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fff3cd 0%, #fff9e6 100%);
+            padding: 1.2rem 1.5rem;
+            border-left: 4px solid #ffc107;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+            font-weight: 500;
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .image-container img {
+            max-width: 80%;
+            height: auto;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.25);
+        }
+
+        .equal-contrib {
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 0.8em;
+            margin-left: 2px;
+        }
+
+        .contribution-list {
+            list-style: disc;
+            padding-left: 2rem;
+        }
+
+        .contribution-list li {
+            margin: 0.5rem 0;
+        }
+
+        .footer {
+            border-top: 1px solid #e9ecef;
+            padding: 2rem 0;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            margin: 2rem -2rem 0 -2rem;
+            border-radius: 15px 15px 0 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .title {
+                font-size: 1.8em;
+            }
+            
+            .nav {
+                position: static;
+                margin-bottom: 1rem;
+            }
+            
+            .dropdown {
+                text-align: right;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="tab-bar">
+        <ul class="tab-list">
+            <li class="tab-item dropdown">
+                <button class="dropdown-btn">
+                    <i class="fas fa-network-wired"></i> Related Works <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#"><i class="fas fa-shield-alt"></i> Adversarial Attacks on Multi-Agent Systems</a>
+                    <a href="#"><i class="fas fa-users-cog"></i> Robust Collaborative Perception</a>
+                    <a href="#"><i class="fas fa-search"></i> Malicious Agent Detection</a>
+                    <a href="#"><i class="fas fa-bug"></i> Data Fabrication Attacks</a>
+                    <a href="#"><i class="fas fa-cube"></i> Collaborative 3D Object Detection</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="header">
+
+        <h1 class="title">CP-Guard+: Robust Malicious Agent Detection via Mixed Contrastive Training in Collaborative Perception</h1>
+        
+        <div class="button-group">
+            <a href="#" class="btn" target="_blank">
+                <i class="fas fa-file-pdf"></i> Paper PDF
+            </a>
+            <a href="https://github.com/CP-Security/CP-GuardPlus" class="btn" target="_blank">
+                <i class="fas fa-code"></i> Code
+            </a>
+            <a href="https://huggingface.co/datasets/CP-Security/CP-GuardBench" class="btn" target="_blank">
+                <i class="fas fa-database"></i> CP-GuardBench Dataset
+            </a>
+        </div>
+        
+        <div class="authors">
+            <strong>Senkang Hu</strong><sup>1</sup>*, 
+            <strong>Yihang Tao</strong><sup>1</sup>*, 
+            <strong>Zihan Fang</strong><sup>1</sup>, 
+            <strong>Guowen Xu</strong><sup>2</sup>, 
+            <strong>Yiqin Deng</strong><sup>1</sup>, 
+            <strong>Sam Kwong</strong><sup>3</sup>, 
+            <strong>Yuguang Fang</strong><sup>1</sup>
+        </div>
+        <div class="affiliations">
+            <sup>1</sup>Department of Computer Science, City University of Hong Kong<br>
+            <sup>2</sup>School of Computer Science and Engineering, University of Electronic Science and Technology of China<br>
+            <sup>3</sup>Department of Computing and Decision Sciences, Lingnan University<br>
+            <br>
+            <em>* Equal contribution</em><br>
+            <em>Corresponding author: Yuguang Fang</em>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Abstract</h2>
+        <div class="abstract">
+            Collaborative perception (CP) is a promising method for safe connected and autonomous driving, which enables multiple connected and autonomous vehicles (CAVs) to share sensing information with each other to enhance perception performance. For example, occluded objects can be detected, and the sensing range can be extended. However, compared with single-agent perception, the openness of a CP system makes it more vulnerable to malicious agents and attackers, who can inject malicious information to mislead the perception of an ego CAV, resulting in severe risks for the safety of autonomous driving systems.
+            <br><br>
+            To mitigate the vulnerability of CP systems, we first propose a new paradigm for malicious agent detection that effectively identifies malicious agents at the feature level without requiring verification of final perception results, significantly reducing computational overhead. Building on this paradigm, we introduce <strong>CP-GuardBench</strong>, the first comprehensive dataset provided to train and evaluate various malicious agent detection methods for CP systems. Furthermore, we develop a robust defense method called <strong>CP-Guard+</strong>, which enhances the margin between the representations of benign and malicious features through a carefully designed mixed contrastive training strategy. Finally, we conduct extensive experiments on both CP-GuardBench and V2X-Sim, and the results demonstrate the superiority of CP-Guard+.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Problem Illustration</h2>
+        <div style="display: flex; flex-direction: row; gap: 20px; justify-content: center; align-items: flex-start; flex-wrap: wrap; margin: 20px 0;">
+            <div style="flex: 1; min-width: 300px; text-align: center;">
+                <img src="Security_threats_v2.png" alt="Threats in Collaborative Perception" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 4px;">
+                <p style="margin-top: 10px; font-size: 0.9em; color: #6c757d;"><em>(a) Illustration of the threats of malicious agent in collaborative perception. Malicious CAVs could send intricately crafted adversarial messages to an ego CAV, which will mislead it to generate false positive perception outputs.</em></p>
+            </div>
+            <div style="flex: 1; min-width: 300px; text-align: center;">
+                <img src="comparison.png" alt="Paradigm Comparison" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 4px;">
+                <p style="margin-top: 10px; font-size: 0.9em; color: #6c757d;"><em>(b) Comparison between the proposed CP-Guard+ with the traditional hypothesize-and-verify malicious agent detection methods. CP-Guard+ directly outputs robust CP results with intermediate feature-level detection, significantly reducing computational overhead.</em></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Our Approach</h2>
+        
+        <div class="highlight">
+            <strong>Key Innovation:</strong> Feature-level malicious agent detection paradigm that eliminates the need for final perception result verification, significantly reducing computational overhead.
+        </div>
+
+        <p><strong>CP-GuardBench Dataset:</strong> The first comprehensive dataset specifically designed for training and evaluating malicious agent detection methods in collaborative perception systems, containing diverse attack scenarios and perturbation levels.</p>
+
+        <div class="image-container">
+            <img src="ContTraining.png" alt="Continuous training process" style="max-width: 100%; height: auto;">
+            <p><em>Figure: Continuous training process for CP-Guard+ with mixed contrastive learning strategy.</em></p>
+        </div>
+
+        <p><strong>Mixed Contrastive Training:</strong> A carefully designed training strategy that enhances the margin between benign and malicious feature representations, enabling robust detection of adversarial agents.</p>
+
+        <p><strong>Feature-Level Detection:</strong> Direct identification of malicious agents at the feature level before final perception results are computed, achieving superior detection accuracy with minimal computational overhead.</p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Key Contributions</h2>
+        <ul class="contribution-list">
+            <li>We propose a new paradigm for malicious agent detection that identifies malicious agents at the feature level without requiring verification of final perception results, significantly reducing computational overhead.</li>
+            <li>We introduce <strong>CP-GuardBench</strong>, the first comprehensive dataset for training and evaluating malicious agent detection methods in collaborative perception systems.</li>
+            <li>We develop <strong>CP-Guard+</strong>, a robust defense method that enhances the margin between benign and malicious feature representations through mixed contrastive training.</li>
+            <li>We demonstrate through extensive experiments that CP-Guard+ achieves over 98% accuracy across multiple attack types and shows strong generalization to unseen attacks.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Experimental Results</h2>
+        
+        <div class="highlight">
+            <strong>Key Performance:</strong> CP-Guard+ achieves over 98% accuracy across multiple attack types including PGD, BIM, and C&W attacks.
+        </div>
+        
+        <p><strong>CP-GuardBench Performance:</strong> At perturbation budget Δ = 0.25, CP-Guard+ achieves over 98% accuracy for PGD, BIM, and C&W attacks. FGSM and GN attacks show accuracy around 91.64% and 90.95% respectively. With Δ = 0.5, the model maintains an average accuracy of 98.08%.</p>
+        
+        <p><strong>Generalization Study:</strong> Using leave-one-out evaluation, CP-Guard+ demonstrates strong generalization to unseen attacks with an average accuracy of 98.23% across all attack types.</p>
+        
+        <p><strong>Comparison with Baselines:</strong> On V2X-Sim dataset, CP-Guard+ outperforms MADE and ROBOSAC by significant margins. For Δ=0.25 and 1 malicious agent, CP-Guard+ achieves 71.88% AP@0.5 and 69.92% AP@0.7, outperforming the no-defense case by over 186% and 196% respectively.</p>
+        
+        <p><strong>Computational Efficiency:</strong> CP-Guard+ achieves 70.36 FPS, representing a 23.74% improvement over MADE and 238.92% improvement over ROBOSAC.</p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Experimental Data Tables</h2>
+        
+        <h3>Table 1: CP-GuardBench Performance Results</h3>
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <thead>
+                <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                    <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Attack Type</th>
+                    <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">Accuracy (%)</th>
+                    <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">TPR (%)</th>
+                    <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">FPR (%)</th>
+                    <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">F1 Score (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">PGD (Δ=0.25)</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">98.92</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">99.15</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">0.31</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">98.53</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">BIM (Δ=0.25)</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">98.76</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">98.94</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">0.44</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">98.65</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">C&W (Δ=0.25)</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">98.83</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">99.02</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">0.37</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">98.73</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">FGSM (Δ=0.25)</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">91.64</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">87.32</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">4.04</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">90.11</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">GN (Δ=0.25)</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">90.95</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">85.67</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">3.77</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">89.84</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Table 2: Generalization Results (Leave-One-Out)</h3>
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <thead>
+                <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                    <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Held-out Attack</th>
+                    <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">Accuracy (%)</th>
+                    <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">TPR (%)</th>
+                    <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">FPR (%)</th>
+                    <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">F1 Score (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">PGD</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">99.93</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">100.00</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">0.09</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">99.83</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">BIM</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">99.52</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">100.00</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">0.60</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">98.82</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">C&W</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">99.86</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">100.00</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">0.17</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">99.66</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">FGSM</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">95.82</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">79.66</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">0.09</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">88.51</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">GN</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">96.02</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">81.02</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">0.17</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">89.18</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #dee2e6; background-color: #f8f9fa;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6; font-weight: bold;">Average</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6; font-weight: bold;">98.23</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6; font-weight: bold;">92.94</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6; font-weight: bold;">0.22</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6; font-weight: bold;">95.20</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Table 3: Performance Comparison on V2X-Sim (Δ=0.25, N_mal=1)</h3>
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <thead>
+                <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                    <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Method</th>
+                    <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">AP@0.5 (%)</th>
+                    <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">AP@0.7 (%)</th>
+                    <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">Improvement over No Defense</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">No Defense</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">25.13</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">23.64</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">-</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">MADE</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">65.42</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">62.81</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">+160.3% / +165.7%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">ROBOSAC</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">58.91</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">56.23</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">+134.4% / +137.9%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #dee2e6; background-color: #f8f9fa;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6; font-weight: bold;">CP-Guard+</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6; font-weight: bold;">71.88</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6; font-weight: bold;">69.92</td>
+                    <td style="padding: 12px; text-align: center; border: 1px solid #dee2e6; font-weight: bold;">+186.0% / +196.0%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Additional Visualizations</h2>
+        
+        <div class="image-container">
+            <img src="data_statistics.png" alt="Dataset statistics showing attack distributions" style="max-width: 100%; height: auto;">
+            <p><em>Figure: CP-GuardBench dataset statistics showing distribution of attack types and perturbation levels.</em></p>
+        </div>
+        
+        <div class="image-container">
+            <img src="DCCLoss_ablation.png" alt="Effectiveness of DCCLoss and contrastive training" style="max-width: 100%; height: auto;">
+            <p><em>Figure: Ablation study results showing the effectiveness of DCCLoss and mixed contrastive training strategy.</em></p>
+        </div>
+        
+        <div class="image-container">
+            <img src="cont_ablation.png" alt="FPS performance comparison" style="max-width: 100%; height: auto;">
+            <p><em>Figure: Computational efficiency comparison showing FPS performance across different defense methods.</em></p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="contact-info">
+            <strong>Contact:</strong> senkang.forest@my.cityu.edu.hk<br>
+            <strong>Paper:</strong> Research Project
+        </div>
+    </div>
+
+</body>
+</html>

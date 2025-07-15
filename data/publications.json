@@ -48,6 +48,11 @@
         "text": "PDF",
         "class": "code-tag",
         "link": "https://arxiv.org/abs/2502.07807v1"
+      },
+      {
+        "text": "Webpage",
+        "class": "code-tag",
+        "link": "paper-pages/cpguard/index.html"
       }
     ]
   },
