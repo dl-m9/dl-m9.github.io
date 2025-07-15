@@ -19,21 +19,53 @@
             background: #fff;
             max-width: 800px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 2rem 2rem 2rem;
         }
 
-        .header {
-            text-align: center;
-            padding: 2rem 0;
-            border-bottom: 1px solid #e9ecef;
-            margin-bottom: 2rem;
+        .tab-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 0.6rem 0;
+            margin: 0 0 2rem 0;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .tab-list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .tab-item {
             position: relative;
         }
 
-        .nav {
-            position: absolute;
-            top: 0;
-            right: 0;
+        .tab-link {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .dropdown {
@@ -42,49 +74,95 @@
         }
 
         .dropdown-btn {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            padding: 8px 16px;
+            background: transparent;
+            border: none;
+            padding: 10px 20px;
             cursor: pointer;
-            border-radius: 4px;
             font-size: 14px;
-            color: #495057;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            user-select: none;
+        }
+
+        .dropdown-btn:hover {
+            color: white;
+        }
+
+        .dropdown-btn:focus {
+            outline: none;
         }
 
         .dropdown-content {
             display: none;
             position: absolute;
-            right: 0;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 5px;
             background-color: #fff;
             min-width: 220px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-radius: 4px;
-            z-index: 1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            z-index: 1000;
+            border: 1px solid #e9ecef;
         }
 
         .dropdown-content a {
             color: #333;
             padding: 12px 16px;
             text-decoration: none;
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 14px;
             border-bottom: 1px solid #f1f1f1;
+            transition: background-color 0.2s ease;
+            text-align: left;
         }
 
         .dropdown-content a:hover {
             background-color: #f8f9fa;
         }
 
-        .dropdown:hover .dropdown-content {
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:first-child {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .dropdown.active .dropdown-content {
             display: block;
         }
 
+        .header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 2rem;
+        }
+
         .title {
-            font-size: 2.2em;
+            font-size: 2.5em;
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            line-height: 1.2;
+            margin-bottom: 1rem;
+            line-height: 1.3;
             color: #1a1a1a;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .conference-badge {
@@ -117,18 +195,22 @@
 
         .btn {
             display: inline-block;
-            background: #007bff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 8px 20px;
+            padding: 12px 24px;
             text-decoration: none;
-            border-radius: 4px;
-            margin: 0 5px;
+            border-radius: 25px;
+            margin: 0 8px;
             font-size: 14px;
-            transition: background 0.3s ease;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            border: none;
         }
 
         .btn:hover {
-            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
 
         .section {
@@ -136,26 +218,45 @@
         }
 
         .section-title {
-            font-size: 1.5em;
+            font-size: 1.8em;
             color: #1a1a1a;
-            margin-bottom: 1rem;
-            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
         }
 
         .abstract {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border: 1px solid #e9ecef;
-            border-radius: 4px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 2rem;
+            border: none;
+            border-radius: 15px;
             font-size: 1em;
-            line-height: 1.7;
+            line-height: 1.8;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.1);
         }
 
         .highlight {
-            background: #fff3cd;
-            padding: 1rem;
-            border-left: 3px solid #ffc107;
-            margin: 1rem 0;
+            background: linear-gradient(135deg, #fff3cd 0%, #fff9e6 100%);
+            padding: 1.2rem 1.5rem;
+            border-left: 4px solid #ffc107;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+            font-weight: 500;
         }
 
         .image-container {
@@ -164,10 +265,17 @@
         }
 
         .image-container img {
-            max-width: 50%;
+            max-width: 80%;
             height: auto;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.25);
         }
 
         .equal-contrib {
@@ -192,6 +300,9 @@
             text-align: center;
             color: #6c757d;
             font-size: 0.9em;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            margin: 2rem -2rem 0 -2rem;
+            border-radius: 15px 15px 0 0;
         }
 
         @media (max-width: 768px) {
@@ -215,21 +326,24 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="nav">
-            <div class="dropdown">
+    <nav class="tab-bar">
+        <ul class="tab-list">
+            <li class="tab-item dropdown">
                 <button class="dropdown-btn">
-                    <i class="fas fa-bars"></i> Related Works
+                    <i class="fas fa-network-wired"></i> Related Works <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="dropdown-content">
-                    <a href="#">Adversarial Attacks on Multi-Agent Systems</a>
-                    <a href="#">Robust Collaborative Perception</a>
-                    <a href="#">Malicious Agent Detection</a>
-                    <a href="#">Data Fabrication Attacks</a>
-                    <a href="#">Collaborative 3D Object Detection</a>
+                    <a href="#"><i class="fas fa-shield-alt"></i> Adversarial Attacks on Multi-Agent Systems</a>
+                    <a href="#"><i class="fas fa-users-cog"></i> Robust Collaborative Perception</a>
+                    <a href="#"><i class="fas fa-search"></i> Malicious Agent Detection</a>
+                    <a href="#"><i class="fas fa-bug"></i> Data Fabrication Attacks</a>
+                    <a href="#"><i class="fas fa-cube"></i> Collaborative 3D Object Detection</a>
                 </div>
-            </div>
-        </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="header">
 
         <div class="conference-badge">🏆 AAAI 2025 Oral Presentation</div>
         <h1 class="title">CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception</h1>
@@ -311,6 +425,36 @@
             <strong>Paper:</strong> AAAI 2025 Oral Presentation
         </div>
     </div>
+
+
+    <script>
+        // Click-based dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownBtn = document.querySelector('.dropdown-btn');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            
+            // Toggle dropdown on button click
+            dropdownBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+            
+            // Close dropdown when clicking on dropdown items
+            dropdownContent.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    dropdown.classList.remove('active');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

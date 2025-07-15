@@ -24,9 +24,9 @@
 
         .tab-bar {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 1.2rem 0;
-            margin: 0 0 3rem 0;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+            padding: 0.6rem 0;
+            margin: 0 0 2rem 0;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
             width: 100vw;
             position: relative;
             left: 50%;
@@ -74,11 +74,10 @@
         }
 
         .dropdown-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            border: none;
             padding: 10px 20px;
             cursor: pointer;
-            border-radius: 25px;
             font-size: 14px;
             color: rgba(255, 255, 255, 0.9);
             font-weight: 500;
@@ -86,14 +85,15 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            backdrop-filter: blur(10px);
+            user-select: none;
         }
 
         .dropdown-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown-btn:focus {
+            outline: none;
         }
 
         .dropdown-content {
@@ -142,7 +142,7 @@
             border-bottom-right-radius: 8px;
         }
 
-        .dropdown:hover .dropdown-content {
+        .dropdown.active .dropdown-content {
             display: block;
         }
 
@@ -620,6 +620,36 @@
             <strong>Paper:</strong> Research Project
         </div>
     </div>
+
+    
+    <script>
+        // Click-based dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownBtn = document.querySelector('.dropdown-btn');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            
+            // Toggle dropdown on button click
+            dropdownBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+            
+            // Close dropdown when clicking on dropdown items
+            dropdownContent.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    dropdown.classList.remove('active');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
