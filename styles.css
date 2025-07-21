@@ -816,7 +816,11 @@ nav {
 }
 
 .collaborator-logo[alt="City University of Hong Kong"] {
-    height: 80px;
+    height: 60px;
+}
+
+.collaborator-logo[alt="X-Humanoid"] {
+    height: 45px;
 }
 
 .collaborator-logo:hover {
