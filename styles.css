@@ -794,6 +794,36 @@ nav {
     object-fit: contain;
 }
 
+/* Collaborator Styles */
+.collaborator-content {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.collaborator-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.collaborator-logo[alt="City University of Hong Kong"] {
+    height: 80px;
+}
+
+.collaborator-logo:hover {
+    transform: scale(1.05);
+    opacity: 0.8;
+}
+
 .timeline-content h3 {
     margin-bottom: 0.5rem;
     color: var(--text-color);
