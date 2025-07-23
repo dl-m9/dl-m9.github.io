@@ -16,7 +16,7 @@
         "link": "paper-pages/cp-uniguard/index.html"
       }
     ]
-  }
+  },
   {
     "title": "LLM Task Adaptation with Task-Aware Parameter-Efficient Fine-Tuning",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Zihan Fang, Yuguang Fang, et al.",
