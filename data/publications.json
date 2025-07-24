@@ -120,6 +120,20 @@
       }
     ]
   },
+
+  {
+    "title": "Dynamic Uncertainty-aware Multimodal Fusion for Outdoor Health Monitoring",
+    "authors": "Zihan Fang, Zheng Lin, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Yiqin Deng, Xianhao Chen, and Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": false,
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
   
   {
     "title": "IC3M: In-Car Multimodal Multi-object Monitoring for Abnormal Status of Both Driver and Passengers",
