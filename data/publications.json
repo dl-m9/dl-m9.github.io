@@ -33,9 +33,15 @@
   {
     "title": "Task-Aware Parameter-Efficient Fine-Tuning of Large Pre-Trained Models at the Edge",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Yihang Tao, Zhengru Fang, Zihan Fang, Yiqin Deng, Sam Kwong, Yuguang Fang",
-    "type": "preprint",
+    "type": "accepted",
+    "venue": "IEEE Global Communications Conference, Taipei, Taiwan, December 2025.",
+    "year": "2025",
     "isFirstAuthor": true,
     "tags": [
+      {
+        "text": "GLOBECOM'25",
+        "class": "venue-tag"
+      },
       {
         "text": "PDF",
         "class": "code-tag",
@@ -149,50 +155,7 @@
     ]
   },
   
-  {
-    "title": "UAV-enabled Computing Power Networks: Task Completion Probability Analysis",
-    "authors": "Yiqin Deng, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Haixia Zhang, and Yuguang Fang",
-    "type": "preprint",
-    "isFirstAuthor": false,
-    "tags": [
-      {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "#"
-      }
-    ]
-  },
-  {
-    "title": "UAV-enabled Computing Power Networks: Design and Performance Analysis under Energy Constraints",
-    "authors": "Yiqin Deng, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Xiaoyu Guo, Haixia Zhang, and Yuguang Fang",
-    "type": "preprint",
-    "isFirstAuthor": false,
-    "tags": [
-      {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "#"
-      }
-    ]
-  },
-  {
-    "title": "Task-Oriented Communications for Visual Navigation with Edge-Aerial Collaboration",
-    "authors": "Zhengru Fang, Zhenghao Liu, Jingjing Wang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yu Guo, Yiqin Deng, and Yuguang Fang",
-    "type": "preprint",
-    "isFirstAuthor": false,
-    "tags": [
-      {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "https://arxiv.org/abs/2504.18317"
-      },
-      {
-        "text": "Code",
-        "class": "code-tag",
-        "link": "https://github.com/fangzr/TOC-Edge-Aerial"
-      }
-    ]
-  },
+ 
   {
     "title": "AgentsCoMerge: Large Language Model Empowered Collaborative Decision Making for Multi-Lane Merging",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Zhengru Fang, Zihan Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong",
@@ -250,6 +213,51 @@
       }
     ]
   },
+  {
+    "title": "UAV-enabled Computing Power Networks: Task Completion Probability Analysis",
+    "authors": "Yiqin Deng, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Haixia Zhang, and Yuguang Fang",
+    "type": "accepted",
+    "isFirstAuthor": false,
+    "venue": "IEEE Global Communications Conference, Taipei, Taiwan, December 2025.",
+    "year": "2025",
+    "tags": [
+      {
+        "text": "GLOBECOM'25",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
+  
+  {
+    "title": "Task-Oriented Communications for Visual Navigation with Edge-Aerial Collaboration",
+    "authors": "Zhengru Fang, Zhenghao Liu, Jingjing Wang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yu Guo, Yiqin Deng, and Yuguang Fang",
+    "type": "accepted",
+    "isFirstAuthor": false,
+    "venue": "IEEE Global Communications Conference, Taipei, Taiwan, December 2025.",
+    "year": "2025",
+    "tags": [
+      {
+        "text": "GLOBECOM'25",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2504.18317"
+      },
+      {
+        "text": "Code",
+        "class": "code-tag",
+        "link": "https://github.com/fangzr/TOC-Edge-Aerial"
+      }
+    ]
+  },
+  
   {
     "title": "CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>*, Yihang Tao*, Guowen Xu, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong",
