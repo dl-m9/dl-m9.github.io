@@ -1,5 +1,18 @@
 [
   {
+    "title": "DSP-Reg: Domain-Sensitive Parameter Regularization for Robust Domain Generalization",
+    "authors": "Xudong Han*, <strong><u>Senkang \"Forest\" Hu</u></strong>*, Yihang Tao, Yu Guo, Philip Birch, Sam Tak Wu Kwong, Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": true,
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
+  {
     "title": "CP-uniGuard: A Unified, Probability-Agnostic, and Adaptive Framework for Malicious Agent Detection and Defense in Multi-Agent Embodied Perception Systems",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Guowen Xu, Xinyuan Qian, Yiqin Deng, Xianhao Chen, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "preprint",
@@ -30,25 +43,7 @@
       }
     ]
   },
-  {
-    "title": "Task-Aware Parameter-Efficient Fine-Tuning of Large Pre-Trained Models at the Edge",
-    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Yihang Tao, Zhengru Fang, Zihan Fang, Yiqin Deng, Sam Kwong, Yuguang Fang",
-    "type": "accepted",
-    "venue": "IEEE Global Communications Conference, Taipei, Taiwan, December 2025.",
-    "year": "2025",
-    "isFirstAuthor": true,
-    "tags": [
-      {
-        "text": "GLOBECOM'25",
-        "class": "venue-tag"
-      },
-      {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "https://arxiv.org/abs/2504.03718"
-      }
-    ]
-  },
+  
   {
     "title": "CP-Guard+: A New Paradigm for Malicious Agent Detection and Defense in Collaborative Perception",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Zihang Fang, Guowen Xu, Yiqin Deng, Sam Kwong, Yuguang Fang",
@@ -155,7 +150,25 @@
     ]
   },
   
- 
+  {
+    "title": "Task-Aware Parameter-Efficient Fine-Tuning of Large Pre-Trained Models at the Edge",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Yihang Tao, Zhengru Fang, Zihan Fang, Yiqin Deng, Sam Kwong, Yuguang Fang",
+    "type": "accepted",
+    "venue": "IEEE Global Communications Conference, Taipei, Taiwan, December 2025.",
+    "year": "2025",
+    "isFirstAuthor": true,
+    "tags": [
+      {
+        "text": "GLOBECOM'25",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2504.03718"
+      }
+    ]
+  },
   {
     "title": "AgentsCoMerge: Large Language Model Empowered Collaborative Decision Making for Multi-Lane Merging",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Zhengru Fang, Zihan Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong",
