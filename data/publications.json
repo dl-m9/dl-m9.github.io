@@ -105,12 +105,31 @@
     ]
   },
 
+  {
+    "title": "Distribution-Aligned Decoding for Efficient LLM Task Adaptation",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Xudong Han, Jinqi Jiang, Yihang Tao, Zihan Fang, Yong Dai, Sam Kwong, Yuguang Fang",
+    "type": "accepted",
+    "venue": "The 39th Annual Conference on Neural Information Processing Systems, San Diego, USA, December 2025.",
+    "year": "2025",
+    "isFirstAuthor": true,
+    "tags": [
+      {
+        "text": "NeurIPS'25",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2504.03718"
+      }
+    ]
+  },
   
   {
     "title": "Task-Aware Parameter-Efficient Fine-Tuning of Large Pre-Trained Models at the Edge",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Yihang Tao, Zhengru Fang, Zihan Fang, Yiqin Deng, Sam Kwong, Yuguang Fang",
     "type": "accepted",
-    "venue": "IEEE Global Communications Conference, Taipei, Taiwan, December 2025.",
+    "venue": "The 2025 IEEE Global Communications Conference, Taipei, Taiwan, December 2025.",
     "year": "2025",
     "isFirstAuthor": true,
     "tags": [
