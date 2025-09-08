@@ -820,6 +820,7 @@ nav {
 .publication-filter {
     margin-bottom: 2rem;
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
 }
 
@@ -839,6 +840,15 @@ nav {
     font-family: inherit;
     font-weight: 600;
     transition: all 0.3s ease;
+}
+
+/* Black text for specific filter buttons in default state */
+.filter-btn[data-filter="llm-agent"],
+.filter-btn[data-filter="llm-peft"],
+.filter-btn[data-filter="multi-agent-security"],
+.filter-btn[data-filter="multi-agent-perception"],
+.filter-btn[data-filter="others"] {
+    color: #000000;
 }
 
 .filter-btn.active, .filter-btn:hover {

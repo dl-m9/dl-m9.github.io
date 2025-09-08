@@ -48,6 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (filterValue === 'preprint' && pub.classList.contains('preprint')) show = true;
                     if (filterValue === 'accepted' && pub.classList.contains('accepted')) show = true;
                     if (filterValue === 'first-author' && pub.classList.contains('first-author')) show = true;
+                    if (filterValue === 'llm-agent' && pub.classList.contains('llm-agent')) show = true;
+                    if (filterValue === 'llm-peft' && pub.classList.contains('llm-peft')) show = true;
+                    if (filterValue === 'multi-agent-security' && pub.classList.contains('multi-agent-security')) show = true;
+                    if (filterValue === 'multi-agent-perception' && pub.classList.contains('multi-agent-perception')) show = true;
+                    if (filterValue === 'others' && pub.classList.contains('others')) show = true;
                     pub.style.display = show ? 'flex' : 'none';
                 });
                 // 3. For each section title, check if it has visible publications below it
@@ -309,6 +314,14 @@ function renderPublicationGroup(publications, container, startCounter) {
         const pubElement = document.createElement('div');
         const classes = ['publication', pub.type];
         if (pub.isFirstAuthor) classes.push('first-author');
+        if (pub.categories && pub.categories.length > 0) {
+            pub.categories.forEach(category => {
+                classes.push(category);
+            });
+        } else {
+            // If no categories field or empty categories, add to others
+            classes.push('others');
+        }
         pubElement.className = classes.join(' ');
         
         // Store the original number as a data attribute for reference
