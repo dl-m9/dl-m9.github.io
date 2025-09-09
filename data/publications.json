@@ -82,6 +82,20 @@
     ]
   },
   {
+    "title": "AgentsCoDriver: Large Language Model Empowered Collaborative Driving with Lifelong Learning",
+    "authors": "Senkang Hu, Zhengru Fang, Zihan Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": true,
+    "categories": ["llm-agent"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2404.06345"
+      }
+    ]
+  },
+  {
     "title": "Adaptive Attack on Multi-Agent Collaborative Perception",
     "authors": "Yihang Tao, <strong><u>Senkang \"Forest\" Hu</u></strong>, Haonan An, Zhengru Fang, Hangcheng Cao, Yuguang Fang",
     "type": "preprint",
