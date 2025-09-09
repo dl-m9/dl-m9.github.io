@@ -83,7 +83,7 @@
   },
   {
     "title": "AgentsCoDriver: Large Language Model Empowered Collaborative Driving with Lifelong Learning",
-    "authors": "Senkang Hu, Zhengru Fang, Zihan Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Zhengru Fang, Zihan Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang",
     "type": "preprint",
     "isFirstAuthor": true,
     "categories": ["llm-agent"],
