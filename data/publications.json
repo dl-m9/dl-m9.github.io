@@ -32,20 +32,7 @@
       }
     ]
   },
-  {
-    "title": "LLM Task Adaptation with Task-Aware Parameter-Efficient Fine-Tuning",
-    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Xudong Han, Jinqi Jiang, Yihang Tao, Zihan Fang, Yong Dai, Sam Tak Wu Kwong, Yuguang Fang",
-    "type": "preprint",
-    "isFirstAuthor": true,
-    "categories": ["llm-peft"],
-    "tags": [
-      {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "#"
-      }
-    ]
-  },
+  
   
   {
     "title": "CP-Guard+: A New Paradigm for Malicious Agent Detection and Defense in Collaborative Perception",
@@ -125,7 +112,26 @@
     ]
   },
 
-  
+  {
+    "title": "Distribution-Aligned Decoding for Efficient LLM Task Adaptation",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Xudong Han, Jinqi Jiang, Yihang Tao, Zihan Fang, Yong Dai, Sam Tak Wu Kwong, Yuguang Fang",
+    "type": "accepted",
+    "venue": "The 39th Annual Conference on Neural Information Processing Systems, San Diego, USA, December 2025.",
+    "year": "2025",
+    "isFirstAuthor": true,
+    "categories": ["llm-peft"],
+    "tags": [
+      {
+        "text": "NeurIPS'25",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
   
   {
     "title": "Task-Aware Parameter-Efficient Fine-Tuning of Large Pre-Trained Models at the Edge",
