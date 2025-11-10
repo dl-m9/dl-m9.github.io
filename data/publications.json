@@ -194,6 +194,21 @@
     ]
   },
   {
+    "title": "MartDE: A Privacy-Preserving and Cost-Efficient Evaluation Framework for Data Marketplaces",
+    "authors": "Xinyuan Qian, Haoyong Wang, Hangcheng Cao, Shuai Yuan, <strong><u>Senkang \"Forest\" Hu</u></strong>, Qingchuan Zhao, Hongwei Li, Guowen Xu",
+    "type": "accepted",
+    "venue": "The 40th Annual AAAI Conference on Artificial Intelligence, Singapore, January 2026.",
+    "isFirstAuthor": false,
+    "year": "2025",
+    "categories": ["others"],
+    "tags": [
+      {
+        "text": "AAAI'26",
+        "class": "venue-tag"
+      }
+    ]
+  },
+  {
     "title": "Direct-CP: Directed Collaborative Perception for Connected and Autonomous Vehicles via Proactive Attention",
     "authors": "Yihang Tao, <strong><u>Senkang \"Forest\" Hu</u></strong>, Zhengru Fang, Yuguang Fang",
     "type": "accepted",
