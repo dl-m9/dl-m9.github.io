@@ -154,6 +154,10 @@
         "text": "PDF",
         "class": "code-tag",
         "link": "https://arxiv.org/abs/2504.03718"
+      },
+      {
+        "text": "CCF-C",
+        "class": "ccf-tag"
       }
     ]
   },
@@ -198,6 +202,14 @@
         "text": "PDF",
         "class": "code-tag",
         "link": "https://ieeexplore.ieee.org/document/11020620"
+      },
+      {
+        "text": "JCR Q1",
+        "class": "ccf-tag"
+      },
+      {
+        "text": "IF 11.5",
+        "class": "ccf-tag"
       }
     ]
   },
@@ -213,6 +225,10 @@
       {
         "text": "AAAI'26",
         "class": "venue-tag"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
       }
     ]
   },
@@ -233,6 +249,10 @@
         "text": "PDF",
         "class": "code-tag",
         "link": "https://arxiv.org/abs/2409.08840"
+      },
+      {
+        "text": "CCF-B",
+        "class": "ccf-tag"
       }
     ]
   },
@@ -252,6 +272,10 @@
         "text": "PDF",
         "class": "code-tag",
         "link": "#"
+      },
+      {
+        "text": "CCF-C",
+        "class": "ccf-tag"
       }
     ]
   },
@@ -277,6 +301,10 @@
         "text": "Code",
         "class": "code-tag",
         "link": "https://github.com/fangzr/TOC-Edge-Aerial"
+      },
+      {
+        "text": "CCF-C",
+        "class": "ccf-tag"
       }
     ]
   },
@@ -356,6 +384,10 @@
         "text": "PDF",
         "class": "code-tag",
         "link": "https://ieeexplore.ieee.org/document/10901656"
+      },
+      {
+        "text": "CCF-C",
+        "class": "ccf-tag"
       }
     ]
   },
@@ -432,6 +464,10 @@
         "text": "Code",
         "class": "code-tag",
         "link": "https://github.com/fangzr/PIB-Prioritized-Information-Bottleneck-Framework"
+      },
+      {
+        "text": "CCF-C",
+        "class": "ccf-tag"
       }
     ]
   }
