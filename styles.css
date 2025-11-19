@@ -977,6 +977,7 @@ nav {
     .pub-venue-label {
         width: 150px;
         padding: 0.6rem 0.4rem;
+        border-radius: 20px;
     }
 
     .pub-content-main {
@@ -994,6 +995,7 @@ nav {
         flex-direction: row;
         padding: 0.4rem 0.8rem;
         justify-content: space-between;
+        border-radius: 20px;
     }
     
     .pub-content-main {
