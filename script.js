@@ -11,68 +11,107 @@ document.addEventListener('DOMContentLoaded', function() {
     
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-            // Remove active class from all buttons
-            filterBtns.forEach(b => b.classList.remove('active'));
-            
-            // Add active class to clicked button
-            this.classList.add('active');
-            
-            // Get filter value
             const filterValue = this.getAttribute('data-filter');
             
-            // Filter publications and section titles
-            const pubElements = document.querySelectorAll('.publication');
-            const sectionTitles = document.querySelectorAll('.publication-section-title');
-            
             if (filterValue === 'all') {
-                // Show all publications and section titles
-                pubElements.forEach(pub => {
-                    pub.style.display = 'flex';
-                    // Reset to original number when showing all
-                    const numberElement = pub.querySelector('.pub-number');
-                    if (numberElement) {
-                        numberElement.textContent = pub.dataset.originalNumber;
-                    }
-                });
-                sectionTitles.forEach(title => {
-                    title.style.display = 'block';
-                });
+                // If "All" is clicked, clear all other active classes and set "All" to active
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
             } else {
-                // 1. Hide all publications by default
-                pubElements.forEach(pub => {
-                    pub.style.display = 'none';
-                });
-                // 2. Show only publications matching the filter
-                pubElements.forEach(pub => {
-                    let show = false;
-                    if (filterValue === 'preprint' && pub.classList.contains('preprint')) show = true;
-                    if (filterValue === 'accepted' && pub.classList.contains('accepted')) show = true;
-                    if (filterValue === 'first-author' && pub.classList.contains('first-author')) show = true;
-                    if (filterValue === 'llm-agent' && pub.classList.contains('llm-agent')) show = true;
-                    if (filterValue === 'llm-peft' && pub.classList.contains('llm-peft')) show = true;
-                    if (filterValue === 'multi-agent-security' && pub.classList.contains('multi-agent-security')) show = true;
-                    if (filterValue === 'multi-agent-perception' && pub.classList.contains('multi-agent-perception')) show = true;
-                    if (filterValue === 'others' && pub.classList.contains('others')) show = true;
-                    pub.style.display = show ? 'flex' : 'none';
-                });
-                // 3. For each section title, check if it has visible publications below it
-                sectionTitles.forEach(title => {
-                    let hasVisiblePub = false;
-                    let currentEl = title.nextElementSibling;
-                    while (currentEl && !currentEl.classList.contains('publication-section-title')) {
-                        if (currentEl.classList.contains('publication') && currentEl.style.display === 'flex') {
-                            hasVisiblePub = true;
-                            break;
-                        }
-                        currentEl = currentEl.nextElementSibling;
-                    }
-                    title.style.display = hasVisiblePub ? 'block' : 'none';
-                });
-                // 4. Update publication numbers for all visible publications (global numbering)
-                updatePublicationNumbers(true);
+                // If any other button is clicked
+                // 1. Remove "active" from "All" button
+                const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+                if (allBtn) allBtn.classList.remove('active');
+                
+                // 2. Toggle "active" on the clicked button
+                this.classList.toggle('active');
+                
+                // 3. Check if no buttons are active, if so, activate "All"
+                const activeBtns = document.querySelectorAll('.filter-btn.active');
+                if (activeBtns.length === 0) {
+                    if (allBtn) allBtn.classList.add('active');
+                }
             }
+            
+            // Apply filters based on current active buttons
+            applyFilters();
         });
     });
+
+    function applyFilters() {
+        const activeBtns = document.querySelectorAll('.filter-btn.active');
+        const activeFilters = Array.from(activeBtns).map(btn => btn.getAttribute('data-filter'));
+        
+        const pubElements = document.querySelectorAll('.publication');
+        const sectionTitles = document.querySelectorAll('.publication-section-title');
+        
+        // Check if "all" is among the active filters (it should be the only one if it is active)
+        if (activeFilters.includes('all')) {
+            // Show all publications and section titles
+            pubElements.forEach(pub => {
+                pub.style.display = 'flex';
+                // Reset to original number when showing all
+                const numberElement = pub.querySelector('.pub-number');
+                if (numberElement) {
+                    numberElement.textContent = pub.dataset.originalNumber;
+                }
+            });
+            sectionTitles.forEach(title => {
+                title.style.display = 'block';
+            });
+        } else {
+            // Filter logic: AND (Intersection)
+            // A publication must match ALL active filters
+            
+            // 1. Hide all publications by default
+            pubElements.forEach(pub => {
+                pub.style.display = 'none';
+            });
+            
+            // 2. Show only publications matching ALL active filters
+            pubElements.forEach(pub => {
+                let matchAll = true;
+                
+                for (const filter of activeFilters) {
+                    let matchThis = false;
+                    if (filter === 'preprint' && pub.classList.contains('preprint')) matchThis = true;
+                    else if (filter === 'accepted' && pub.classList.contains('accepted')) matchThis = true;
+                    else if (filter === 'first-author' && pub.classList.contains('first-author')) matchThis = true;
+                    else if (filter === 'llm-agent' && pub.classList.contains('llm-agent')) matchThis = true;
+                    else if (filter === 'llm-peft' && pub.classList.contains('llm-peft')) matchThis = true;
+                    else if (filter === 'multi-agent-security' && pub.classList.contains('multi-agent-security')) matchThis = true;
+                    else if (filter === 'multi-agent-perception' && pub.classList.contains('multi-agent-perception')) matchThis = true;
+                    else if (filter === 'others' && pub.classList.contains('others')) matchThis = true;
+                    
+                    if (!matchThis) {
+                        matchAll = false;
+                        break;
+                    }
+                }
+                
+                if (matchAll) {
+                    pub.style.display = 'flex';
+                }
+            });
+            
+            // 3. For each section title, check if it has visible publications below it
+            sectionTitles.forEach(title => {
+                let hasVisiblePub = false;
+                let currentEl = title.nextElementSibling;
+                while (currentEl && !currentEl.classList.contains('publication-section-title')) {
+                    if (currentEl.classList.contains('publication') && currentEl.style.display === 'flex') {
+                        hasVisiblePub = true;
+                        break;
+                    }
+                    currentEl = currentEl.nextElementSibling;
+                }
+                title.style.display = hasVisiblePub ? 'block' : 'none';
+            });
+            
+            // 4. Update publication numbers for all visible publications (global numbering)
+            updatePublicationNumbers(true);
+        }
+    }
     
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('.nav-links a');
