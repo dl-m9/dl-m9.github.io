@@ -119,15 +119,17 @@ h1 {
 }
 
 .contact-info a {
-    padding: 8px;
+    padding: 8px 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
+    border-radius: 25px;
     transition: all 0.3s ease;
     background-color: var(--background-color);
-    width: 50px;
+    width: auto;
+    min-width: 60px;
     height: 50px;
+    white-space: nowrap;
 }
 
 .contact-info a:hover {
@@ -435,9 +437,12 @@ nav {
     }
     
     .contact-info a {
-        width: 38px;
+        width: auto;
+        min-width: 45px;
         height: 38px;
-        padding: 6px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        white-space: nowrap;
     }
     
     .contact-info i {
@@ -564,10 +569,15 @@ nav {
 
 .date-highlight, .year-highlight {
     background-color: var(--background-color);
-    padding: 2px 8px;
-    border-radius: 4px;
+    padding: 6px 16px;
+    border-radius: 20px;
     display: inline-block;
     font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    min-width: 110px;
+    max-width: 140px;
+    line-height: 1.2;
 }
 
 .news-content {
@@ -649,7 +659,7 @@ nav {
     min-width: 250px;
     padding: 2rem;
     background-color: var(--secondary-color);
-    border-radius: 4px;
+    border-radius: 20px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -717,7 +727,7 @@ nav {
     position: relative;
     margin-bottom: 2rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 8px;
+    border-radius: 20px;
     padding: 15px;
     background-color: transparent;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -857,16 +867,13 @@ nav {
 .publication {
     display: flex;
     background-color: var(--secondary-color);
-    border-radius: 4px;
+    border-radius: 20px;
     overflow: hidden;
     transition: transform 0.3s ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-/* Subtle left border for first-author papers */
-.publication.first-author {
-    border-left: 3px solid var(--primary-color);
-}
+/* Removed left border for first-author papers */
 
 .publication:hover {
     transform: translateX(5px);
@@ -882,7 +889,7 @@ nav {
     color: var(--primary-color);
     text-align: center;
     padding: 0.8rem 0.5rem;
-    border-radius: 4px;
+    border-radius: 20px 0 0 20px;
 }
 
 .pub-number {
@@ -952,10 +959,10 @@ nav {
 
 .tag {
     display: inline-block;
-    padding: 0.1rem 0.4rem;
-    border-radius: 3px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
     text-align: center;
     min-width: 80px; /* 设置标签最小宽度 */
@@ -1013,18 +1020,39 @@ nav {
 .preprint-tag {
     background-color: #f0f0f0;
     color: #666;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 0.75rem;
 }
 
 /* Light blue color for venue tags (accepted papers) */
 .venue-tag {
     background-color: var(--background-color);
     color: var(--primary-color);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 0.75rem;
 }
 
 /* Zone/ranking tag (e.g., CCF-A) */
 .ccf-tag {
     background-color: #f1e8eb;
     color: #81578b; /* rgb(129,87,139) */
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 0.75rem;
 }
 
 /* Light purple color for highlight tags, rating tags, and code/blog tags */
@@ -1033,6 +1061,13 @@ nav {
     color: var(--primary-color);
     text-decoration: none;
     transition: all 0.3s ease;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .code-tag:hover, .blog-tag:hover {
@@ -1049,22 +1084,30 @@ nav {
 .status {
     background-color: var(--background-color);
     color: var(--primary-color);
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
     font-style: normal;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 0.75rem;
 }
 
 .code-link, .blog-link {
     display: inline-block;
     margin-left: 0.5rem;
-    padding: 0.2rem 0.5rem;
+    padding: 0.2rem 0.6rem;
     background-color: var(--background-color);
     color: var(--primary-color);
-    border-radius: 4px;
+    border-radius: 12px;
     font-style: normal;
     text-decoration: none;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 600;
     transition: all 0.3s ease;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .code-link:hover, .blog-link:hover {
@@ -1137,12 +1180,14 @@ footer {
 .year-highlight {
     display: inline-block;
     background-color: var(--background-color);
-    padding: 5px 10px;
-    border-radius: 4px;
+    padding: 6px 16px;
+    border-radius: 20px;
     font-size: 0.9rem;
-    width: 95px;
+    font-weight: 600;
     text-align: center;
-    min-width: 95px;
+    min-width: 110px;
+    max-width: 140px;
+    line-height: 1.2;
     box-sizing: border-box;
 }
 
@@ -1364,9 +1409,12 @@ footer {
     }
     
     .contact-info a {
-        width: 38px;
+        width: auto;
+        min-width: 45px;
         height: 38px;
-        padding: 6px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        white-space: nowrap;
     }
     
     .contact-info i {
@@ -1444,9 +1492,14 @@ footer {
 .date-highlight, .year-highlight {
     display: inline-block;
     background-color: rgba(0, 102, 204, 0.15);
-    padding: 2px 8px;
-    border-radius: 4px;
+    padding: 6px 16px;
+    border-radius: 20px;
     font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    min-width: 110px;
+    max-width: 140px;
+    line-height: 1.2;
 }
 
 /* Services Section */
