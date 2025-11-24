@@ -247,6 +247,11 @@
         "link": "https://arxiv.org/abs/2409.08840"
       },
       {
+        "text": "Code",
+        "class": "code-tag",
+        "link": "https://github.com/yihangtao/Directed-CP"
+      },
+      {
         "text": "CCF-B",
         "class": "ccf-tag"
       }
