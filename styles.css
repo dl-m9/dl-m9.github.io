@@ -410,8 +410,9 @@ h1 {
 
 /* Navigation Styles */
 nav {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);  /* 更现代的紫色渐变 */
-    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+    background: rgba(10, 14, 39, 0.95); /* 深色半透明背景，与header匹配 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);  /* 毛玻璃效果 */
     position: sticky;
     top: 0;
@@ -478,8 +479,9 @@ nav {
         left: 0;
         width: 100%;
         z-index: 1000;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        background: rgba(10, 14, 39, 0.98); /* 移动端深色背景 */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         overflow: hidden;
     }
     
