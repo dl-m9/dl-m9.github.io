@@ -131,6 +131,11 @@
         "link": "https://arxiv.org/abs/2509.15888"
       },
       {
+        "text": "Project",
+        "class": "code-tag",
+        "link": "paper-pages/SVDecode/index.html"
+      },
+      {
         "text": "CCF-A",
         "class": "ccf-tag"
       }
