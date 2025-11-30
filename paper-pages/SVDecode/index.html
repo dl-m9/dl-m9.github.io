@@ -213,23 +213,16 @@
         .paper-table td {
             padding: 8px 6px;
             text-align: center;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid #ddd;
             font-size: 0.85em;
         }
         
         .paper-table th {
-            background: var(--secondary-color);
             font-weight: 600;
-            white-space: nowrap;
         }
         
-        .paper-table td:first-child,
-        .paper-table td:nth-child(2) {
-            text-align: left;
-        }
-        
-        .paper-table tr:hover {
-            background: var(--secondary-color);
+        .paper-table tbody td {
+            text-align: center;
         }
 
         .bibtex {
@@ -392,7 +385,19 @@
 
             <div class="table-container">
                 <div style="margin-bottom: 10px; font-weight: bold; color: var(--text-color);">Table 1: Experimental results on 1) multiple-choice task in TruthfulQA and 2) open-ended generation task in TruthfulQA. %T*I stands for %Truth*Info in TruthfulQA.</div>
-                <table class="paper-table" style="font-size: 0.85em;">
+                <table class="paper-table" style="font-size: 0.85em; text-align: center;">
+                    <colgroup>
+                        <col style="text-align: left;">
+                        <col style="text-align: left;">
+                        <col style="text-align: center;">
+                        <col style="text-align: center;">
+                        <col style="text-align: center;">
+                        <col style="text-align: center;">
+                        <col style="text-align: center;">
+                        <col style="text-align: center;">
+                        <col style="text-align: center;">
+                        <col style="text-align: center;">
+                    </colgroup>
                     <thead>
                         <tr>
                             <th rowspan="2">Model</th>
