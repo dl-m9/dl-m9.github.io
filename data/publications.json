@@ -1,10 +1,24 @@
 [
   {
+    "title": "Optimizing Agentic Reasoning with Retrieval via Information Gain Reward",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Yu Guo, Sam Tak Wu Kwong, Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": true,
+    "categories": ["llm-agent"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
+  {
     "title": "DSP-Reg: Domain-Sensitive Parameter Regularization for Robust Domain Generalization",
     "authors": "Xudong Han*, <strong><u>Senkang \"Forest\" Hu</u>*<sup>, project leader</sup></strong>, Yihang Tao, Yu Guo, Philip Birch, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "preprint",
     "isFirstAuthor": true,
-    "categories": ["llm-peft"],
+    "categories": ["llm-peft", "multi-agent-perception"],
     "tags": [
       {
         "text": "PDF",
