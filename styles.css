@@ -536,34 +536,10 @@ nav {
         color: #fff;
     }
     
-    /* Add gradient indicators to show there's more content */
+    /* Removed gradient indicators on mobile nav to avoid flickering */
     nav .container::before,
     nav .container::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 20px;
-        z-index: 10;
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    
-    nav .container::before {
-        left: 0;
-        background: linear-gradient(to right, rgba(102, 126, 234, 0.9), rgba(102, 126, 234, 0));
-    }
-    
-    nav .container::after {
-        right: 0;
-        background: linear-gradient(to left, rgba(118, 75, 162, 0.9), rgba(118, 75, 162, 0));
-    }
-    
-    /* Only show gradients if has-scroll class is present */
-    nav .container.has-scroll::before,
-    nav .container.has-scroll::after {
-        opacity: 1;
+        display: none;
     }
     
     .section {
@@ -799,14 +775,13 @@ nav {
 
 /* News Section */
 .news-container, .news-list {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
 }
 
 .news-item {
     display: flex;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    padding-bottom: 1rem;
+    margin-bottom: 0.6rem;
+    padding: 0.4rem 0.5rem 0.6rem;
     border-bottom: 1px solid var(--border-color);
     transition: all 0.2s ease;
     border-radius: 4px;
@@ -826,12 +801,12 @@ nav {
 
 
 .news-date {
-    min-width: 130px;
-    width: 130px;
-    font-size: 1.2rem;
+    min-width: 115px;
+    width: 115px;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--primary-color);
-    margin-right: 25px;
+    margin-right: 18px;
     flex-shrink: 0;
     display: flex;
     align-items: flex-start;
@@ -858,15 +833,16 @@ nav {
 }
 
 .news-content h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.0rem;
+    margin-bottom: 0.35rem;
     color: var(--text-color);
 }
 
 .news-content p {
     color: var(--light-text);
-    font-size: 0.9rem;
-    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.15rem;
+    line-height: 1.6;
 }
 
 .news-content a {
@@ -981,79 +957,127 @@ nav {
     color: var(--text-color);
 }
 
-/* Education Timeline */
-.timeline {
-    position: relative;
-    margin: 1.5rem 0;
-    padding-left: 30px;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 9px;
-    top: 0;
-    height: 100%;
-    width: 2px;
-    background-color: #d0d0d0;
-    z-index: 0;
-}
-
-.timeline-item {
-    position: relative;
-    margin-bottom: 2rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 16px;
-    padding: 2rem;
-    background: white;
-    box-shadow: var(--shadow-md);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.timeline-item:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
-}
-
-.timeline-marker {
-    position: absolute;
-    top: 20px;
-    left: -29.5px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    z-index: 2;
-    box-shadow: 0 0 0 4px white, 0 0 0 6px var(--primary-color);
-}
-
-.timeline-content {
-    flex: 1;
-}
-
-.edu-content-wrapper {
+/* Education Section - resume-style two-column layout */
+/* Education Section - resume-style two-column layout */
+.edu-list {
+    margin-top: 1.5rem;
     display: flex;
-    align-items: center;
-    gap: 1.5rem;
+    flex-direction: column;
+    gap: 0.9rem;
 }
 
-.edu-text {
+.edu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    border-radius: 14px;
+    background: white; /* Pure white background */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
+}
+
+.edu-item-left {
     flex: 1;
     padding-right: 1rem;
 }
 
-.school-logo {
+.edu-item-right {
     flex-shrink: 0;
+    width: 340px; /* Increased width for long school names */
     display: flex;
+    justify-content: flex-start;
+}
+
+.edu-degree {
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.3rem;
+    font-size: 1.05rem;
+}
+
+.edu-period {
+    font-size: 0.85rem;
+    color: var(--light-text);
+    font-weight: 400;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+    line-height: 1.5;
+}
+
+.edu-extra {
+    font-size: 0.85rem;
+    color: var(--light-text);
+    line-height: 1.6;
+    margin-top: 0.3rem;
+    margin-bottom: 0.15rem;
+}
+
+.edu-school-col {
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    gap: 0.6rem; /* Tighter gap */
+    justify-content: flex-start;
+}
+
+.edu-school-name {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    white-space: normal; /* Allow wrapping for long names */
+    line-height: 1.3;
+    text-align: left;
 }
 
 .edu-logo {
-    width: 100px;
-    height: auto;
-    border-radius: 30px;
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
     object-fit: contain;
+    background-color: #fff;
+    padding: 4px;
+    /* Removed border */
+}
+
+@media (max-width: 768px) {
+    .edu-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.2rem;
+        gap: 1rem;
+    }
+
+    .edu-item-left {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .edu-item-right {
+        width: 100%;
+        padding-top: 0.8rem;
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .edu-school-col {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.8rem;
+        width: 100%;
+        text-align: left;
+    }
+
+    .edu-school-name {
+        text-align: left;
+        max-width: none;
+    }
+    
+    .edu-logo {
+        order: 0; /* Default order */
+        width: 60px;
+        height: 60px;
+    }
 }
 
 /* Collaborator Styles */
@@ -1328,8 +1352,8 @@ nav {
 
 /* Zone/ranking tag (e.g., CCF-A) */
 .ccf-tag {
-    background-color: #f1e8eb;
-    color: #BD384B; /* Research Internship color */
+    background: linear-gradient(135deg, var(--primary-color) 0%, #667eea 100%);
+    color: white;
     padding: 0.2rem 0.6rem;
     border-radius: 12px;
     font-weight: 600;
@@ -1411,14 +1435,13 @@ footer {
 
 /* Honors Section */
 .honors-list {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
 }
 
 .honor-item {
     display: flex;
-    margin-bottom: 0.75rem;
-    padding: 0.5rem;
-    padding-bottom: 1rem;
+    margin-bottom: 0.4rem;
+    padding: 0.4rem 0.5rem 0.6rem;
     border-bottom: 1px solid var(--border-color);
     transition: all 0.2s ease;
     border-radius: 4px;
@@ -1437,12 +1460,12 @@ footer {
 }
 
 .honor-year {
-    min-width: 130px;
-    width: 130px;
-    font-size: 1.2rem;
+    min-width: 110px;
+    width: 110px;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--primary-color);
-    margin-right: 25px;
+    margin-right: 18px;
     flex-shrink: 0;
     display: flex;
     align-items: flex-start;
@@ -1454,15 +1477,15 @@ footer {
 }
 
 .honor-content h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
+    font-size: 1.05rem;
+    margin-bottom: 0.2rem;
     color: var(--text-color);
 }
 
 .honor-content p {
     color: var(--light-text);
-    font-size: 0.9rem;
-    margin-bottom: 0.2rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.1rem;
 }
 
 .year-highlight {
@@ -1952,11 +1975,21 @@ footer {
 .publication-section-title {
     font-family: 'Prata', serif;
     margin-top: 2rem;
-    margin-bottom: 0rem;
+    margin-bottom: 1.2rem;
     font-size: var(--subsection-font-size);
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border-color);
     font-weight: 400;
+    position: relative;
+    display: inline-block;
+}
+
+.publication-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--primary-color);
 }
 
 /* No top margin for the first section title */
