@@ -593,7 +593,8 @@ nav {
     }
     
     .edu-logo {
-        width: 80px;
+        width: 100px;
+        height: 100px;
     }
     
     .honor-item {
@@ -963,36 +964,48 @@ nav {
     margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 0.6rem;
 }
 
 .edu-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.2rem 1.5rem;
+    padding: 0.8rem 1rem;
     border-radius: 14px;
     background: white; /* Pure white background */
     border: 1px solid rgba(0, 0, 0, 0.05);
     box-shadow: var(--shadow-sm);
+    transition: transform .3s ease;
+}
+
+.edu-item:hover {
+    transform: translateX(12px);
 }
 
 .edu-item-left {
     flex: 1;
-    padding-right: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.6rem;
 }
 
 .edu-item-right {
     flex-shrink: 0;
-    width: 340px; /* Increased width for long school names */
+    width: 450px; /* Increased width for long school names */
     display: flex;
     justify-content: flex-start;
+    padding: 0px 0px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0px;
+    transition: all 0.3s ease;
 }
+
 
 .edu-degree {
     font-weight: 600;
     color: var(--text-color);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem;
     font-size: 1.05rem;
 }
 
@@ -1000,8 +1013,8 @@ nav {
     font-size: 0.85rem;
     color: var(--light-text);
     font-weight: 400;
-    margin-top: 0.3rem;
-    margin-bottom: 0.3rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
     line-height: 1.5;
 }
 
@@ -1009,35 +1022,42 @@ nav {
     font-size: 0.85rem;
     color: var(--light-text);
     line-height: 1.6;
-    margin-top: 0.3rem;
-    margin-bottom: 0.15rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.1rem;
 }
 
 .edu-school-col {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.6rem; /* Tighter gap */
+    gap: 0.8rem;
     justify-content: flex-start;
+    width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .edu-school-name {
-    font-weight: 600;
+    font-family: 'Prata', serif;
+    font-weight: 400;
     color: var(--text-color);
-    font-size: 0.95rem;
+    font-size: var(--subsection-font-size);
     white-space: normal; /* Allow wrapping for long names */
     line-height: 1.3;
     text-align: left;
 }
 
 .edu-logo {
-    width: 70px;
-    height: 70px;
-    border-radius: 12px;
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
     object-fit: contain;
     background-color: #fff;
     padding: 4px;
-    /* Removed border */
+    flex-shrink: 0;
+    margin-left: 0;
+    position: relative;
+    z-index: 2;
 }
 
 @media (max-width: 768px) {
@@ -1057,26 +1077,32 @@ nav {
         width: 100%;
         padding-top: 0.8rem;
         border-top: 1px solid rgba(0,0,0,0.05);
+        display: flex;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
     }
 
     .edu-school-col {
         flex-direction: row;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
         gap: 0.8rem;
         width: 100%;
-        text-align: left;
+        text-align: center;
     }
 
     .edu-school-name {
-        text-align: left;
+        text-align: center;
         max-width: none;
     }
     
     .edu-logo {
         order: 0; /* Default order */
-        width: 60px;
-        height: 60px;
+        width: 80px;
+        height: 80px;
+        margin-left: 0;
     }
 }
 
@@ -1700,7 +1726,8 @@ footer {
     }
     
     .edu-logo {
-        width: 80px;
+        width: 100px;
+        height: 100px;
     }
     
     .honor-item {
