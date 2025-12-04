@@ -285,7 +285,7 @@
     "year": "2025",
     "tags": [
       {
-        "text": "GLOBECOM'25",
+        "text": "GLOBECOM'25 <br><span style=\"color: #d32f2f;\">Best Paper Award</span>",
         "class": "venue-tag"
       },
       {
@@ -339,7 +339,7 @@
     "year": "2024",
     "tags": [
       {
-        "text": "AAAI'25 Oral",
+        "text": "AAAI'25 <br><span style=\"color: #d32f2f;\">Oral Presentation</span>",
         "class": "venue-tag"
       },
       {
