@@ -1050,7 +1050,7 @@ nav {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.8rem;
+    gap: 1.5rem;
     justify-content: flex-start;
     width: 100%;
     position: relative;
@@ -1093,9 +1093,9 @@ nav {
 }
 
 .edu-logo {
-    width: 120px;
-    height: 120px;
-    border-radius: 16px;
+    width: 100px;
+    height: 100px;
+    border-radius: 0;
     object-fit: contain;
     background-color: #fff;
     padding: 4px;

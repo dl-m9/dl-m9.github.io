@@ -1,5 +1,19 @@
 [
   {
+    "title": "Incentivizing Robust Self-Supervised Reinforcement Learning for Large Language Models via Adversarial Self-Play",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yuguang Fang, et al.",
+    "type": "preprint",
+    "isFirstAuthor": true,
+    "categories": ["llm-agent"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
+  {
     "title": "Optimizing Agentic Reasoning with Retrieval via Information Gain Reward",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Yu Guo, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "preprint",
