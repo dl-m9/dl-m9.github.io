@@ -494,17 +494,45 @@ nav {
         justify-content: flex-start;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; /* Firefox */
+        scrollbar-width: thin; /* Firefox - 显示细滚动条 */
+        scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
         -ms-overflow-style: none;  /* IE and Edge */
         white-space: nowrap;
         padding: 0.5rem 0;
         height: auto;
         width: 100%;
         margin: 0;
+        position: relative;
     }
     
     .nav-links::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
+        height: 3px; /* Chrome, Safari, Opera - 显示细滚动条 */
+    }
+    
+    .nav-links::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    
+    .nav-links::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 2px;
+    }
+    
+    .nav-links::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* 添加渐变提示，表示可以滚动 */
+    nav .container::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 30px;
+        background: linear-gradient(to right, transparent, rgba(10, 14, 39, 0.98));
+        pointer-events: none;
+        z-index: 1;
     }
     
     nav .container {
@@ -536,10 +564,20 @@ nav {
         color: #fff;
     }
     
-    /* Removed gradient indicators on mobile nav to avoid flickering */
-    nav .container::before,
-    nav .container::after {
+    /* 保留渐变提示，但只在需要时显示 */
+    nav .container::before {
         display: none;
+    }
+    
+    /* 渐变提示会在滚动时动态显示/隐藏 */
+    nav .container::after {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    /* 当导航可以滚动时显示渐变提示 */
+    nav .container.has-scroll::after {
+        opacity: 1;
     }
     
     .section {
@@ -748,6 +786,11 @@ nav {
     animation: fadeInUp 0.6s ease-out;
 }
 
+/* 优化section间距，最后一部分不需要下边框 */
+.section:last-of-type {
+    border-bottom: none;
+}
+
 .section-title {
     font-family: 'Prata', serif;
     font-size: 2.5rem;
@@ -756,6 +799,14 @@ nav {
     display: inline-block;
     font-weight: 400;
     color: var(--text-color);
+}
+
+/* 移动端优化section标题 */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
 }
 
 .section-title::after {
@@ -914,6 +965,19 @@ nav {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: var(--shadow-md);
     border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* 移动端优化：Research区域全宽显示 */
+@media (max-width: 768px) {
+    .research-areas {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .research-area {
+        min-width: 100%;
+        padding: 1.5rem;
+    }
 }
 
 .research-area:hover {
@@ -1208,6 +1272,38 @@ nav {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    position: relative;
+}
+
+/* 移动端优化：过滤按钮区域添加滚动提示 */
+@media (max-width: 768px) {
+    .publication-filter {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .publication-filter::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .publication-filter::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 2px;
+    }
+    
+    .publication-filter::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 2px;
+    }
+    
+    .filter-btn {
+        flex-shrink: 0;  /* 防止按钮被压缩 */
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
 }
 
 .section-description {
@@ -1364,6 +1460,11 @@ nav {
 
     .pub-content-main {
         gap: 0.8rem;
+    }
+    
+    /* 优化移动端publication卡片的内边距 */
+    .pub-content {
+        padding: 0.8rem 1rem;
     }
 }
 
@@ -1587,6 +1688,16 @@ footer {
     .honor-year {
         margin-bottom: 0.75rem;
         margin-right: 0;
+    }
+    
+    /* 优化Education section在移动端的间距 */
+    .edu-item {
+        margin-bottom: 0.5rem;
+    }
+    
+    /* 优化Services section在移动端的显示 */
+    .service-category {
+        margin-bottom: 2rem;
     }
 }
 
@@ -1978,6 +2089,11 @@ footer {
 /* Location Section */
 .location-content {
     margin-top: 2rem;
+}
+
+/* 优化Contact section的间距 */
+#location.section {
+    padding-bottom: 2rem;
 }
 
 .address-container {
