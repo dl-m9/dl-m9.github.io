@@ -61,6 +61,271 @@ header {
     overflow: hidden;
 }
 
+/* ============================================
+   渐变流动风格 (Gradient Flow Style) v2
+   液体/云雾般的“能量幕布”
+   使用：<header class="header-gradient-flow">
+   移除 class 恢复星空风格
+   ============================================ */
+
+/* 深色基底，明显流动 */
+header.header-gradient-flow {
+    background:
+        radial-gradient(ellipse at 20% 25%, rgba(12, 18, 35, 0.95) 0%, transparent 45%),
+        radial-gradient(ellipse at 80% 75%, rgba(20, 30, 55, 0.95) 0%, transparent 45%),
+        linear-gradient(140deg,
+            #0b1224 0%,
+            #111c32 25%,
+            #152a55 50%,
+            #1f2562 75%,
+            #0f1438 100%);
+    background-size: 250% 250%, 250% 250%, 400% 400%;
+    background-position: 0% 0%, 100% 100%, 40% 60%;
+    animation: gf-base 18s ease-in-out infinite;
+}
+
+/* 液体主流动层：丝绸/烟雾，高光与暗纹交织 - 增强流动 */
+header.header-gradient-flow::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: -30%;
+    width: 160%;
+    height: 160%;
+    background:
+        /* 深蓝-电光紫丝带 - 更大范围 */
+        conic-gradient(from 20deg at 35% 35%,
+            transparent 0deg,
+            rgba(33, 74, 186, 0.5) 45deg,
+            rgba(92, 74, 255, 0.6) 90deg,
+            rgba(154, 110, 255, 0.55) 135deg,
+            transparent 180deg),
+        /* 青绿-玫红丝带 - 更大范围 */
+        conic-gradient(from 200deg at 70% 65%,
+            transparent 0deg,
+            rgba(16, 200, 204, 0.5) 40deg,
+            rgba(24, 211, 135, 0.45) 80deg,
+            rgba(240, 92, 170, 0.55) 120deg,
+            transparent 180deg),
+        /* 丝绸高光 - 更明显 */
+        radial-gradient(ellipse 1000px 750px at 42% 32%, rgba(160, 120, 255, 0.35) 0%, transparent 55%),
+        radial-gradient(ellipse 800px 1000px at 60% 70%, rgba(20, 210, 200, 0.28) 0%, transparent 55%);
+    background-size: 120% 120%;
+    background-position: 0% 0%;
+    filter: blur(45px);
+    mix-blend-mode: screen;
+    opacity: 0.88;
+    animation: gf-liquid 15s ease-in-out infinite, gf-rotate 25s linear infinite;
+}
+
+/* 纹理/漩涡层：流线、褶皱、光斑 - 增强流动 */
+header.header-gradient-flow::after {
+    content: '';
+    position: absolute;
+    top: -35%;
+    left: -35%;
+    width: 170%;
+    height: 170%;
+    background:
+        /* 流线型褶皱轨迹 - 更明显 */
+        radial-gradient(ellipse 1400px 380px at 20% 55%, rgba(150, 120, 255, 0.4) 0%, transparent 42%),
+        radial-gradient(ellipse 1100px 480px at 78% 28%, rgba(30, 200, 210, 0.35) 0%, transparent 48%),
+        /* 漩涡 - 旋转更明显 */
+        conic-gradient(from 60deg at 50% 50%,
+            transparent 0deg,
+            rgba(110, 120, 255, 0.25) 120deg,
+            transparent 180deg,
+            rgba(240, 92, 170, 0.25) 300deg,
+            transparent 360deg),
+        /* 柔和光斑/氛围灯 - 更亮 */
+        radial-gradient(circle 480px at 18% 18%, rgba(154, 110, 255, 0.5) 0%, transparent 62%),
+        radial-gradient(circle 580px at 82% 82%, rgba(16, 200, 204, 0.42) 0%, transparent 65%),
+        radial-gradient(circle 400px at 52% 12%, rgba(240, 92, 170, 0.38) 0%, transparent 58%),
+        /* 烟雾暗部 */
+        radial-gradient(ellipse 1400px 1000px at 52% 50%, rgba(12, 18, 35, 0.65) 0%, transparent 72%);
+    background-size: 110% 110%;
+    background-position: 0% 0%;
+    filter: blur(70px);
+    mix-blend-mode: overlay;
+    opacity: 0.75;
+    animation: gf-waves 20s ease-in-out infinite, gf-rotate-reverse 30s linear infinite;
+}
+
+/* header 内纹理：细腻的丝绸波纹，轻微流动 */
+header.header-gradient-flow .header-content::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: -60%;
+    width: 220%;
+    height: 220%;
+    background:
+        repeating-linear-gradient(42deg,
+            transparent 0px,
+            rgba(140, 110, 255, 0.04) 1px,
+            transparent 3px,
+            transparent 14px),
+        repeating-linear-gradient(-38deg,
+            transparent 0px,
+            rgba(24, 200, 190, 0.035) 1px,
+            transparent 3px,
+            transparent 16px);
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 0;
+    animation: gf-texture 36s linear infinite;
+}
+
+/* 确保内容在纹理之上 */
+header.header-gradient-flow .header-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* 隐藏原星空流星层 */
+header.header-gradient-flow .header-bg-overlay {
+    display: none;
+}
+
+/* 流动动画 - 增强幅度和速度 */
+@keyframes gf-base {
+    0%, 100% { 
+        background-position: 0% 0%, 100% 100%, 40% 60%; 
+    }
+    33% { 
+        background-position: 50% 25%, 50% 75%, 60% 40%; 
+    }
+    66% { 
+        background-position: 100% 50%, 0% 50%, 20% 80%; 
+    }
+}
+
+@keyframes gf-liquid {
+    0%, 100% { 
+        transform: translate(0, 0) rotate(0deg) scale(1); 
+        opacity: 0.88; 
+    }
+    20% { 
+        transform: translate(6%, -5%) rotate(3deg) scale(1.06); 
+        opacity: 0.95; 
+    }
+    40% { 
+        transform: translate(-4%, 5%) rotate(-2deg) scale(0.94); 
+        opacity: 0.82; 
+    }
+    60% { 
+        transform: translate(5%, 4%) rotate(2deg) scale(1.04); 
+        opacity: 0.9; 
+    }
+    80% { 
+        transform: translate(-3%, -3%) rotate(-1deg) scale(0.97); 
+        opacity: 0.85; 
+    }
+}
+
+@keyframes gf-waves {
+    0%, 100% { 
+        transform: translate(0, 0) rotate(0deg) scale(1); 
+        filter: blur(70px); 
+    }
+    20% { 
+        transform: translate(-6%, 4%) rotate(8deg) scale(1.08); 
+        filter: blur(75px); 
+    }
+    40% { 
+        transform: translate(5%, -5%) rotate(-6deg) scale(0.92); 
+        filter: blur(65px); 
+    }
+    60% { 
+        transform: translate(-4%, 6%) rotate(7deg) scale(1.06); 
+        filter: blur(78px); 
+    }
+    80% { 
+        transform: translate(6%, -4%) rotate(-5deg) scale(0.95); 
+        filter: blur(68px); 
+    }
+}
+
+@keyframes gf-texture {
+    0% { 
+        transform: translate(0, 0) rotate(0deg); 
+    }
+    50% { 
+        transform: translate(80px, 80px) rotate(180deg); 
+    }
+    100% { 
+        transform: translate(160px, 160px) rotate(360deg); 
+    }
+}
+
+/* 旋转动画 - 让背景真正流动起来 */
+@keyframes gf-rotate {
+    0% { 
+        transform: translate(0, 0) rotate(0deg); 
+        background-position: 0% 0%;
+    }
+    50% { 
+        transform: translate(5%, 5%) rotate(180deg); 
+        background-position: 50% 50%;
+    }
+    100% { 
+        transform: translate(0, 0) rotate(360deg); 
+        background-position: 100% 100%;
+    }
+}
+
+@keyframes gf-rotate-reverse {
+    0% { 
+        transform: translate(0, 0) rotate(0deg); 
+        background-position: 0% 0%;
+    }
+    50% { 
+        transform: translate(-5%, -5%) rotate(-180deg); 
+        background-position: 50% 50%;
+    }
+    100% { 
+        transform: translate(0, 0) rotate(-360deg); 
+        background-position: 100% 100%;
+    }
+}
+
+/* 渐变流动风格下的头像效果调整 - 能量光晕 */
+header.header-gradient-flow #profile-img {
+    box-shadow: 
+        0 0 0 4px rgba(255, 255, 255, 0.2),
+        /* 电光紫光晕 */
+        0 0 20px rgba(139, 92, 246, 0.5),
+        0 0 40px rgba(99, 102, 241, 0.4),
+        /* 青绿色光晕 */
+        0 0 60px rgba(6, 182, 212, 0.35),
+        /* 玫红色光晕 */
+        0 0 80px rgba(236, 72, 153, 0.3),
+        /* 丝绸质感高光 */
+        inset 0 0 30px rgba(255, 255, 255, 0.1),
+        /* 柔和阴影 */
+        inset 0 0 60px rgba(139, 92, 246, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header.header-gradient-flow #profile-img:hover {
+    transform: scale(1.05) rotate(5deg);
+    box-shadow: 
+        0 0 0 4px rgba(255, 255, 255, 0.3),
+        /* 增强的电光紫光晕 */
+        0 0 30px rgba(139, 92, 246, 0.7),
+        0 0 60px rgba(99, 102, 241, 0.6),
+        /* 增强的青绿色光晕 */
+        0 0 90px rgba(6, 182, 212, 0.5),
+        /* 增强的玫红色光晕 */
+        0 0 120px rgba(236, 72, 153, 0.4),
+        /* 更亮的丝绸高光 */
+        inset 0 0 40px rgba(255, 255, 255, 0.2),
+        /* 更强的内发光 */
+        inset 0 0 80px rgba(139, 92, 246, 0.25);
+    border-color: rgba(255, 255, 255, 0.95);
+}
+
 /* 星云效果 - 增强版 */
 header::before {
     content: '';
