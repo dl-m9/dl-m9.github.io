@@ -345,7 +345,7 @@ function loadPublications() {
             if (patents.length > 0) {
                 const patentTitle = document.createElement('h3');
                 patentTitle.className = 'publication-section-title';
-                patentTitle.textContent = 'Patent';
+                patentTitle.textContent = 'Patents';
                 publicationsList.appendChild(patentTitle);
                 
                 // Add patents (start counting from 1)
