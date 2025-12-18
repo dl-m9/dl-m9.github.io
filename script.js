@@ -294,6 +294,7 @@ function loadPublications() {
             const preprints = publications.filter(pub => pub.type === 'preprint');
             const accepted2025 = publications.filter(pub => pub.type === 'accepted' && pub.year === '2025');
             const accepted2024 = publications.filter(pub => pub.type === 'accepted' && pub.year === '2024');
+            const patents = publications.filter(pub => pub.type === 'patent');
             
             // Debug - log the counts to console
             console.log('Preprints:', preprints.length);
@@ -339,6 +340,17 @@ function loadPublications() {
                 // Add 2024 papers
                 renderPublicationGroup(accepted2024, publicationsList, counter);
             }
+            
+            // Add Patent section
+            if (patents.length > 0) {
+                const patentTitle = document.createElement('h3');
+                patentTitle.className = 'publication-section-title';
+                patentTitle.textContent = 'Patent';
+                publicationsList.appendChild(patentTitle);
+                
+                // Add patents (start counting from 1)
+                renderPublicationGroup(patents, publicationsList, 1);
+            }
         })
         .catch(error => {
             console.error('Error loading publications data:', error);
@@ -374,6 +386,10 @@ function renderPublicationGroup(publications, container, startCounter) {
         let venueText = '';
         if (pub.type === 'preprint') {
             venueText = 'Preprint';
+        } else if (pub.type === 'patent') {
+            // Check for venue-tag first, otherwise default to 'Patent'
+            const venueTag = pub.tags ? pub.tags.find(tag => tag.class === 'venue-tag') : null;
+            venueText = venueTag ? venueTag.text : 'Patent';
         } else if (pub.venue) {
             // Extract short venue name from the venue string or tags
             const venueTag = pub.tags.find(tag => tag.class === 'venue-tag');
@@ -384,7 +400,6 @@ function renderPublicationGroup(publications, container, startCounter) {
         const numberElement = document.createElement('span');
         numberElement.className = 'pub-number';
         numberElement.textContent = counter++;
-        
         venueElement.appendChild(numberElement);
         
         // Add venue text below the number

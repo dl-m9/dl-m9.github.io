@@ -504,5 +504,22 @@
         "class": "ccf-tag"
       }
     ]
+  },
+  {
+    "title": "Malicious Agent Detection For Multi-Agent Systems",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Yuguang Fang",
+    "type": "patent",
+    "isFirstAuthor": true,
+    "tags": [
+      {
+        "text": "US Patent",
+        "class": "venue-tag"
+      },
+      {
+        "text": "Link",
+        "class": "code-tag",
+        "link": "https://scholars.cityu.edu.hk/en/publications/malicious-agent-detection-for-multi-agent-systems/"
+      }
+    ]
   }
 ] 
