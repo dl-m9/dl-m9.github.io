@@ -31,6 +31,214 @@ body {
     background-color: #fff;
 }
 
+/* =====================================================
+   Liquid Glass Theme (Apple-like)
+   Enable by adding: <body class="theme-liquid-glass">
+   ===================================================== */
+
+body.theme-liquid-glass {
+    /* Softer foreground + glass-friendly background */
+    color: #0f172a;
+    background: radial-gradient(900px 600px at 15% 15%, rgba(99, 102, 241, 0.18) 0%, transparent 60%),
+                radial-gradient(900px 600px at 85% 25%, rgba(56, 189, 248, 0.20) 0%, transparent 55%),
+                radial-gradient(900px 600px at 65% 85%, rgba(236, 72, 153, 0.12) 0%, transparent 60%),
+                linear-gradient(180deg, #f7f9ff 0%, #f3f6ff 40%, #ffffff 100%);
+}
+
+/* floating “liquid” blobs behind everything */
+body.theme-liquid-glass::before {
+    content: '';
+    position: fixed;
+    inset: -25%;
+    background:
+        radial-gradient(closest-side at 25% 30%, rgba(99, 102, 241, 0.35), transparent 62%),
+        radial-gradient(closest-side at 70% 20%, rgba(56, 189, 248, 0.38), transparent 60%),
+        radial-gradient(closest-side at 55% 75%, rgba(236, 72, 153, 0.26), transparent 62%);
+    filter: blur(70px) saturate(140%);
+    opacity: 0.9;
+    z-index: -2;
+    animation: lg-float 18s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes lg-float {
+    0% { transform: translate3d(-1.2%, -0.8%, 0) scale(1); }
+    100% { transform: translate3d(1.2%, 0.9%, 0) scale(1.03); }
+}
+
+/* subtle grain (cheap, no assets) */
+body.theme-liquid-glass::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(0deg, rgba(15, 23, 42, 0.02) 0 1px, transparent 1px 3px),
+        repeating-linear-gradient(90deg, rgba(15, 23, 42, 0.018) 0 1px, transparent 1px 4px);
+    mix-blend-mode: soft-light;
+    opacity: 0.25;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Shared glass surface helpers (applied via overrides below) */
+body.theme-liquid-glass {
+    --lg-glass-bg: rgba(255, 255, 255, 0.58);
+    --lg-glass-bg-strong: rgba(255, 255, 255, 0.68);
+    --lg-glass-border: rgba(255, 255, 255, 0.62);
+    --lg-glass-border-soft: rgba(15, 23, 42, 0.08);
+    --lg-shadow: 0 18px 55px rgba(15, 23, 42, 0.10);
+    --lg-shadow-sm: 0 10px 28px rgba(15, 23, 42, 0.08);
+    --lg-blur: 18px;
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    body.theme-liquid-glass .lg-blur,
+    body.theme-liquid-glass nav,
+    body.theme-liquid-glass header .header-content,
+    body.theme-liquid-glass .publication,
+    body.theme-liquid-glass .edu-item,
+    body.theme-liquid-glass .research-area,
+    body.theme-liquid-glass .news-item,
+    body.theme-liquid-glass .honor-item,
+    body.theme-liquid-glass .address-container,
+    body.theme-liquid-glass .contact-info-card {
+        -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(180%);
+        backdrop-filter: blur(var(--lg-blur)) saturate(180%);
+    }
+}
+
+/* NAV: light glass */
+body.theme-liquid-glass nav {
+    background: rgba(255, 255, 255, 0.55);
+    border-bottom: 1px solid var(--lg-glass-border);
+    box-shadow: 0 12px 34px rgba(15, 23, 42, 0.10);
+}
+
+body.theme-liquid-glass .nav-links a {
+    color: rgba(15, 23, 42, 0.88);
+}
+
+body.theme-liquid-glass .nav-links a::after {
+    background-color: rgba(0, 102, 204, 0.85);
+}
+
+/* HEADER: remove star overlay; use a glass hero card */
+body.theme-liquid-glass header {
+    background: transparent;
+    border-bottom: none;
+}
+
+body.theme-liquid-glass header .header-bg-overlay {
+    display: none;
+}
+
+body.theme-liquid-glass header .profile-info,
+body.theme-liquid-glass header h1,
+body.theme-liquid-glass header .subtitle,
+body.theme-liquid-glass header .subtitle span,
+body.theme-liquid-glass header .subtitle a {
+    color: rgba(15, 23, 42, 0.92);
+    text-shadow: none;
+}
+
+body.theme-liquid-glass header .header-content {
+    border-radius: 28px;
+    padding: 2.2rem 2.2rem;
+    background: linear-gradient(180deg, var(--lg-glass-bg-strong), var(--lg-glass-bg));
+    border: 1px solid var(--lg-glass-border);
+    box-shadow: var(--lg-shadow);
+}
+
+body.theme-liquid-glass header .header-content::before {
+    /* glossy highlight */
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(800px 240px at 30% 0%, rgba(255, 255, 255, 0.75), transparent 55%);
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+body.theme-liquid-glass header .contact-info a {
+    background-color: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+}
+
+body.theme-liquid-glass header .contact-info a:hover {
+    background-color: rgba(255, 255, 255, 0.75);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: var(--lg-shadow-sm);
+    transform: translateY(-2px);
+}
+
+body.theme-liquid-glass #profile-img {
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    box-shadow: 0 16px 44px rgba(15, 23, 42, 0.14);
+}
+
+body.theme-liquid-glass #profile-img:hover {
+    transform: scale(1.03);
+}
+
+/* Sections: remove hard separators; keep spacing */
+body.theme-liquid-glass .section {
+    border-bottom: none;
+}
+
+/* Cards: convert main content blocks to glass */
+body.theme-liquid-glass .publication,
+body.theme-liquid-glass .edu-item,
+body.theme-liquid-glass .research-area,
+body.theme-liquid-glass .address-container,
+body.theme-liquid-glass .contact-info-card {
+    background: linear-gradient(180deg, var(--lg-glass-bg-strong), var(--lg-glass-bg));
+    border: 1px solid var(--lg-glass-border);
+    box-shadow: var(--lg-shadow-sm);
+}
+
+body.theme-liquid-glass .publication:hover,
+body.theme-liquid-glass .research-area:hover {
+    box-shadow: var(--lg-shadow);
+    border-color: rgba(255, 255, 255, 0.78);
+}
+
+body.theme-liquid-glass .edu-item:hover {
+    transform: translateX(8px);
+}
+
+/* News / Honors: make list items glass cards instead of dividers */
+body.theme-liquid-glass .news-item,
+body.theme-liquid-glass .honor-item {
+    border-bottom: none;
+    background: rgba(255, 255, 255, 0.48);
+    border: 1px solid rgba(255, 255, 255, 0.60);
+    border-radius: 16px;
+    padding: 0.9rem 1rem;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+}
+
+body.theme-liquid-glass .news-item:hover,
+body.theme-liquid-glass .honor-item:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.62);
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.10);
+}
+
+/* Services pills: slightly translucent */
+body.theme-liquid-glass .service-list li {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.70);
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
+}
+
+body.theme-liquid-glass footer {
+    background: rgba(255, 255, 255, 0.40);
+    color: rgba(15, 23, 42, 0.70);
+    border-top: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 -12px 32px rgba(15, 23, 42, 0.06);
+}
+
 .container {
     width: 90%;
     max-width: 1200px;
