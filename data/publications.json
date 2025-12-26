@@ -44,10 +44,16 @@
   {
     "title": "CP-uniGuard: A Unified, Probability-Agnostic, and Adaptive Framework for Malicious Agent Detection and Defense in Multi-Agent Embodied Perception Systems",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Guowen Xu, Xinyuan Qian, Yiqin Deng, Xianhao Chen, Sam Tak Wu Kwong, Yuguang Fang",
-    "type": "preprint",
+    "type": "accepted",
+    "venue": "IEEE Transactions on Mobile Computing.",
+    "year": "2025",
     "isFirstAuthor": true,
     "categories": ["multi-agent-security"],
     "tags": [
+      {
+        "text": "TMC'25",
+        "class": "venue-tag"
+      },
       {
         "text": "PDF",
         "class": "code-tag",
@@ -57,6 +63,10 @@
         "text": "Project",
         "class": "code-tag",
         "link": "paper-pages/cp-uniguard/index.html"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
       }
     ]
   },
@@ -299,7 +309,7 @@
     "year": "2025",
     "tags": [
       {
-        "text": "GLOBECOM'25 <br><span style=\"color: #d32f2f;\">Best Paper Award</span>",
+        "text": "GLOBECOM'25<br><span style=\"color: #d32f2f;\">Best Paper Award</span>",
         "class": "venue-tag"
       },
       {

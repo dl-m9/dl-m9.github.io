@@ -1,5 +1,20 @@
 [
   {
+    "date": "Dec. 26, 2025",
+    "title": "Paper Accepted by TMC",
+    "content": "One first-author paper entitled <strong>CP-uniGuard: A Unified, Probability-Agnostic, and Adaptive Framework for Malicious Agent Detection and Defense in Multi-Agent Embodied Perception Systems</strong> was accepted by IEEE Transactions on Mobile Computing (TMC)! Congratulations! 🎉",
+    "links": [
+      {
+        "text": "PDF",
+        "url": "https://arxiv.org/abs/2506.22890"
+      },
+      {
+        "text": "Project",
+        "url": "paper-pages/cp-uniguard/index.html"
+      }
+    ]
+  },
+  {
     "date": "Dec. 2025",
     "title": "Talk at NJU",
     "content": "Senkang will give a talk at the School of Intelligence Science and Technology, Nanjing University (NJU)."

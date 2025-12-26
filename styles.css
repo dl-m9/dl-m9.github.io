@@ -1118,8 +1118,8 @@ nav {
 
 
 .news-date {
-    min-width: 115px;
-    width: 115px;
+    min-width: 140px;
+    width: 140px;
     font-size: 1.05rem;
     font-weight: 700;
     color: var(--primary-color);
@@ -1128,6 +1128,22 @@ nav {
     display: flex;
     align-items: flex-start;
     padding-top: 2px;
+}
+
+/* News日期样式：primary color粗体，无背景 */
+.news-date .year-highlight {
+    background: none;
+    color: var(--primary-color);
+    padding: 0;
+    border-radius: 0;
+    display: inline-block;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-align: left;
+    min-width: auto;
+    max-width: none;
+    line-height: 1.2;
+    box-shadow: none;
 }
 
 .date-highlight, .year-highlight {
@@ -1627,17 +1643,18 @@ nav {
     align-items: center;
     justify-content: center;
     width: 150px;
-    background-color: rgba(0, 102, 204, 0.1);
+    background-color: transparent;
     color: var(--primary-color);
     text-align: center;
     padding: 0.8rem 0.5rem;
-    border-radius: 20px;
+    border-radius: 0;
 }
 
 .pub-number {
     font-size: 1.3rem;
-    font-weight: 800;
+    font-weight: 700;
     margin-bottom: 0.3rem;
+    color: var(--primary-color);
 }
 
 .venue-text {
@@ -1647,6 +1664,7 @@ nav {
     word-break: break-word;
     hyphens: auto;
     text-align: center;
+    color: var(--primary-color);
 }
 
 .pub-content {
@@ -1720,7 +1738,7 @@ nav {
     .pub-venue-label {
         width: 150px;
         padding: 0.6rem 0.4rem;
-        border-radius: 20px;
+        border-radius: 0;
     }
 
     .pub-content-main {
@@ -1743,7 +1761,7 @@ nav {
         flex-direction: row;
         padding: 0.4rem 0.8rem;
         justify-content: space-between;
-        border-radius: 20px;
+        border-radius: 0;
     }
     
     .pub-content-main {
