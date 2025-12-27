@@ -1919,9 +1919,9 @@ footer {
 }
 
 .honor-year {
-    min-width: 110px;
-    width: 110px;
-    font-size: 1.1rem;
+    min-width: 140px;
+    width: 140px;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--primary-color);
     margin-right: 18px;
@@ -1929,6 +1929,22 @@ footer {
     display: flex;
     align-items: flex-start;
     padding-top: 2px;
+}
+
+/* Honor日期样式：primary color粗体，无背景，与news一致 */
+.honor-year .year-highlight {
+    background: none;
+    color: var(--primary-color);
+    padding: 0;
+    border-radius: 0;
+    display: inline-block;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-align: left;
+    min-width: auto;
+    max-width: none;
+    line-height: 1.2;
+    box-shadow: none;
 }
 
 .honor-content {
