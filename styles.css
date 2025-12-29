@@ -1305,9 +1305,9 @@ nav {
 
 /* Education Section - resume-style two-column layout */
 /* Education Section - resume-style two-column layout */
-/* Education Section - Timeline-inspired layout */
+/* Education Section */
 .edu-list {
-    margin-top: 2rem;
+    margin-top: 1.2rem;
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -1315,41 +1315,46 @@ nav {
     padding-left: 0;
 }
 
-/* The vertical line */
-.edu-list::before {
-    content: '';
-    position: absolute;
-    left: 50px; /* Center of 100px logo */
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, 
-        rgba(0, 102, 204, 0.4) 0%, 
-        rgba(0, 102, 204, 0.1) 100%);
-    z-index: 0;
-}
-
 .edu-item {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 2rem 0;
+    padding: 1.2rem 0;
     position: relative;
-    z-index: 1;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background-color 0.2s ease;
 }
 
 .edu-item:last-child {
     padding-bottom: 0;
+    border-bottom: none;
 }
 
 .edu-item:first-child {
-    padding-top: 0;
+    padding-top: 1.2rem;
+}
+
+.edu-item:hover {
+    background-color: rgba(0, 102, 204, 0.02);
 }
 
 .edu-item:hover .edu-logo {
     transform: scale(1.08);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-    border-color: var(--primary-color);
+}
+
+.edu-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 0;
+    object-fit: contain;
+    background-color: transparent;
+    padding: 0;
+    flex-shrink: 0;
+    border: none;
+    box-shadow: none;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .edu-watermark {
@@ -1358,7 +1363,7 @@ nav {
     right: 0;
     transform: translateY(-50%);
     font-family: 'Prata', serif;
-    font-size: 8rem;
+    font-size: 6rem;
     font-weight: 1000;
     color: rgba(0, 0, 0, 0.03); /* Extremely subtle */
     letter-spacing: 0.05em;
@@ -1374,38 +1379,23 @@ nav {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 2.5rem;
+    gap: 1.5rem;
     width: 100%;
     position: relative;
-}
-
-.edu-logo {
-    width: 100px;
-    height: 100px;
-    border-radius: 16px; /* Changed from 50% to prevent clipping */
-    object-fit: contain;
-    background-color: #fff;
-    padding: 8px; /* Slightly reduced padding to allow logo more space */
-    flex-shrink: 0;
-    border: 3px solid #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 2;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .edu-content-right {
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding-top: 0.5rem;
+    padding-top: 0;
 }
 
 .edu-school-name {
     font-family: 'Prata', serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--text-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
     line-height: 1.2;
 }
 
@@ -1420,20 +1410,16 @@ nav {
 }
 
 @media (max-width: 768px) {
-    .edu-list::before {
-        left: 30px;
-    }
     .edu-item {
-        padding: 1.5rem 0;
+        padding: 1rem 0;
     }
     .edu-content-wrapper {
-        gap: 1.5rem;
+        gap: 1rem;
     }
     .edu-logo {
         width: 60px;
         height: 60px;
-        padding: 6px;
-        border-width: 2px;
+        padding: 0;
     }
     .edu-school-name {
         font-size: 1.2rem;
@@ -1634,7 +1620,7 @@ nav {
 .pub-content-main {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end; /* Align tags with the last line of text (venue/author) */
     gap: 1.5rem;
 }
 
@@ -1671,21 +1657,25 @@ nav {
     margin-bottom: 0.2rem;
 }
 
+.pub-content-text > p:last-child {
+    margin-bottom: 0;
+}
+
 .pub-tags {
     display: flex;
     flex-direction: row; /* Back to horizontal */
     flex-wrap: wrap;
     gap: 0.8rem;
     align-items: center;
-    justify-content: flex-start; /* Align left under the text */
+    justify-content: flex-end; /* Right align under the text */
     flex-shrink: 0;
-    margin-top: 0.2rem; /* Space below venue */
+    margin-top: 0;
 }
 
 .pub-tags > * {
     display: inline-flex !important;
-    justify-content: flex-start !important;
-    text-align: left !important;
+    justify-content: flex-end !important;
+    text-align: right !important;
     width: auto !important; /* Back to auto width */
     padding: 0 !important;
     margin: 0 !important;
@@ -1747,7 +1737,8 @@ nav {
 
     .pub-tags {
         gap: 0.6rem;
-        margin-top: 0.0rem;
+        margin-top: 0.4rem;
+        justify-content: flex-start;
     }
 }
 

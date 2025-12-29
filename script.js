@@ -464,12 +464,12 @@ function renderPublicationGroup(publications, container, startCounter) {
             }
         });
 
-        // Add text content to main content wrapper
+        // Add text content and tags to main content wrapper
         contentMainElement.appendChild(contentTextElement);
+        contentMainElement.appendChild(tagsContainer);
         
-        // Add main content wrapper and tags container to content element
+        // Add main content wrapper to content element
         contentElement.appendChild(contentMainElement);
-        contentElement.appendChild(tagsContainer);
         
         // Combine elements and add to publications list
         pubElement.appendChild(venueElement);
