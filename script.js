@@ -294,13 +294,15 @@ function loadPublications() {
             const preprints = publications.filter(pub => pub.type === 'preprint');
             const accepted2025 = publications.filter(pub => pub.type === 'accepted' && pub.year === '2025');
             const accepted2024 = publications.filter(pub => pub.type === 'accepted' && pub.year === '2024');
+            const patents = publications.filter(pub => pub.type === 'patent');
             
             // Debug - log the counts to console
             console.log('Preprints:', preprints.length);
             console.log('2025 Papers:', accepted2025.length);
             console.log('2024 Papers:', accepted2024.length);
+            console.log('Patents:', patents.length);
             console.log('Total:', publications.length);
-            console.log('Sum of groups:', preprints.length + accepted2025.length + accepted2024.length);
+            console.log('Sum of groups:', preprints.length + accepted2025.length + accepted2024.length + patents.length);
             
             // Counters for auto-numbering publications
             let counter = 1;
@@ -339,6 +341,17 @@ function loadPublications() {
                 // Add 2024 papers
                 renderPublicationGroup(accepted2024, publicationsList, counter);
             }
+
+            // Add section title for Patents
+            if (patents.length > 0) {
+                const patentsTitle = document.createElement('h3');
+                patentsTitle.className = 'publication-section-title';
+                patentsTitle.textContent = 'Patents';
+                publicationsList.appendChild(patentsTitle);
+                
+                // Add patents (restart numbering from 1)
+                renderPublicationGroup(patents, publicationsList, 1);
+            }
         })
         .catch(error => {
             console.error('Error loading publications data:', error);
@@ -374,6 +387,9 @@ function renderPublicationGroup(publications, container, startCounter) {
         let venueText = '';
         if (pub.type === 'preprint') {
             venueText = 'Preprint';
+        } else if (pub.type === 'patent') {
+            const venueTag = pub.tags.find(tag => tag.class === 'venue-tag');
+            venueText = venueTag ? venueTag.text : 'Patent';
         } else if (pub.venue) {
             // Extract short venue name from the venue string or tags
             const venueTag = pub.tags.find(tag => tag.class === 'venue-tag');
@@ -448,12 +464,12 @@ function renderPublicationGroup(publications, container, startCounter) {
             }
         });
 
-        // Add text content and tags to main content wrapper
+        // Add text content to main content wrapper
         contentMainElement.appendChild(contentTextElement);
-        contentMainElement.appendChild(tagsContainer);
         
-        // Add main content wrapper to content element
+        // Add main content wrapper and tags container to content element
         contentElement.appendChild(contentMainElement);
+        contentElement.appendChild(tagsContainer);
         
         // Combine elements and add to publications list
         pubElement.appendChild(venueElement);
