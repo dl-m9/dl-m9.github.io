@@ -32,7 +32,7 @@
     "authors": "Xudong Han*, <strong><u>Senkang \"Forest\" Hu</u>*<sup>, project leader</sup></strong>, Yihang Tao, Yu Guo, Philip Birch, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "preprint",
     "isFirstAuthor": true,
-    "categories": ["llm-peft", "multi-agent-perception"],
+    "categories": ["llm-peft"],
     "tags": [
       {
         "text": "PDF",
@@ -449,6 +449,7 @@
     "type": "accepted",
     "isFirstAuthor": false,
     "venue": "IEEE/ACM Transactions on Networking.",
+    "categories": ["multi-agent-perception"],
     "year": "2024",
     "tags": [
       {
@@ -476,7 +477,7 @@
     "authors": "Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Haonan An, Yuang Zhang, Jingjing Wang, Hangcheng Cao, Xianhao Chen, Yuguang Fang",
     "type": "accepted",
     "isFirstAuthor": false,
-    "venue": "IEEE Transactions on Moblie Computing.",
+    "venue": "IEEE Transactions on Mobile Computing.",
     "year": "2024",
     "categories": ["multi-agent-perception"],
     "tags": [
@@ -502,6 +503,7 @@
     "isFirstAuthor": false,
     "venue": "IEEE Global Communications Conference, Cape Town, South Africa, December 2024.",
     "year": "2024",
+    "categories": ["multi-agent-perception"],
     "tags": [
       {
         "text": "GLOBECOM'24",
@@ -528,6 +530,7 @@
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Yuguang Fang",
     "type": "patent",
     "isFirstAuthor": true,
+    "categories": ["multi-agent-security"],
     "tags": [
       {
         "text": "US Patent",

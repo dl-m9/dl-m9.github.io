@@ -11,29 +11,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-            const filterValue = this.getAttribute('data-filter');
+            // Remove active class from ALL buttons
+            filterBtns.forEach(b => b.classList.remove('active'));
             
-            if (filterValue === 'all') {
-                // If "All" is clicked, clear all other active classes and set "All" to active
-                filterBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-            } else {
-                // If any other button is clicked
-                // 1. Remove "active" from "All" button
-                const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
-                if (allBtn) allBtn.classList.remove('active');
-                
-                // 2. Toggle "active" on the clicked button
-                this.classList.toggle('active');
-                
-                // 3. Check if no buttons are active, if so, activate "All"
-                const activeBtns = document.querySelectorAll('.filter-btn.active');
-                if (activeBtns.length === 0) {
-                    if (allBtn) allBtn.classList.add('active');
-                }
-            }
+            // Add active class to the clicked button
+            this.classList.add('active');
             
-            // Apply filters based on current active buttons
+            // Apply filters based on the single active button
             applyFilters();
         });
     });
@@ -60,36 +44,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 title.style.display = 'block';
             });
         } else {
-            // Filter logic: AND (Intersection)
-            // A publication must match ALL active filters
+            // Filter logic: OR (Union)
+            // A publication shows up if it matches ANY of the active filters
             
             // 1. Hide all publications by default
             pubElements.forEach(pub => {
                 pub.style.display = 'none';
             });
             
-            // 2. Show only publications matching ALL active filters
+            // 2. Show publications matching ANY active filter
             pubElements.forEach(pub => {
-                let matchAll = true;
+                let matchAny = false;
                 
                 for (const filter of activeFilters) {
-                    let matchThis = false;
-                    if (filter === 'preprint' && pub.classList.contains('preprint')) matchThis = true;
-                    else if (filter === 'accepted' && pub.classList.contains('accepted')) matchThis = true;
-                    else if (filter === 'first-author' && pub.classList.contains('first-author')) matchThis = true;
-                    else if (filter === 'llm-agent' && pub.classList.contains('llm-agent')) matchThis = true;
-                    else if (filter === 'llm-peft' && pub.classList.contains('llm-peft')) matchThis = true;
-                    else if (filter === 'multi-agent-security' && pub.classList.contains('multi-agent-security')) matchThis = true;
-                    else if (filter === 'multi-agent-perception' && pub.classList.contains('multi-agent-perception')) matchThis = true;
-                    else if (filter === 'others' && pub.classList.contains('others')) matchThis = true;
+                    if (filter === 'preprint' && pub.classList.contains('preprint')) matchAny = true;
+                    else if (filter === 'accepted' && pub.classList.contains('accepted')) matchAny = true;
+                    else if (filter === 'first-author' && pub.classList.contains('first-author')) matchAny = true;
+                    else if (filter === 'llm-agent' && pub.classList.contains('llm-agent')) matchAny = true;
+                    else if (filter === 'llm-peft' && pub.classList.contains('llm-peft')) matchAny = true;
+                    else if (filter === 'multi-agent-security' && pub.classList.contains('multi-agent-security')) matchAny = true;
+                    else if (filter === 'multi-agent-perception' && pub.classList.contains('multi-agent-perception')) matchAny = true;
+                    else if (filter === 'others' && pub.classList.contains('others')) matchAny = true;
                     
-                    if (!matchThis) {
-                        matchAll = false;
-                        break;
-                    }
+                    if (matchAny) break;
                 }
                 
-                if (matchAll) {
+                if (matchAny) {
                     pub.style.display = 'flex';
                 }
             });
