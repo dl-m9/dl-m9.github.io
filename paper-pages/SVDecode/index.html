@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVDecode: Distribution-Aligned Decoding for Efficient LLM Task Adaptation</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☯️</text></svg>">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        .paper-nav {
+            background: linear-gradient(135deg, #b71c1c, #3a7bd5);
+            padding: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+        
+        .paper-nav .nav-links {
+            display: flex;
+            list-style: none;
+            height: 60px;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        
+        .paper-nav .nav-links li {
+            margin-right: 2rem;
+        }
+        
+        .paper-nav .nav-links a {
+            display: inline-block;
+            height: 60px;
+            line-height: 60px;
+            font-weight: 500;
+            position: relative;
+            color: #fff;
+            padding: 0;
+            text-decoration: none;
+            font-size: 1rem;
+            background: none;
+            border: none;
+            border-radius: 0;
+        }
+        
+        .paper-nav .nav-links a:hover {
+            background: none;
+            transform: none;
+        }
+        
+        .paper-nav .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+        
+        .paper-nav .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .paper-header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .paper-title {
+            font-family: 'Prata', serif;
+            font-size: 2.8em;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            color: var(--text-color);
+        }
+        
+        .paper-buttons {
+            margin: 1.5rem 0;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .paper-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+        }
+        
+        .paper-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
+            background: #0052a3;
+        }
+        
+        .authors {
+            font-size: 1.1em;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        
+        .authors strong {
+            color: var(--primary-color);
+        }
+        
+        .affiliations {
+            font-size: 0.9em;
+            color: var(--light-text);
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+        
+        .paper-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .paper-section h2 {
+            font-family: 'Prata', serif;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+        
+        .paper-section h3 {
+            font-family: 'Inter', sans-serif;
+            color: #444;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .paper-abstract {
+            background: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 10px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: justify;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #fff9e6 100%);
+            padding: 1.5rem;
+            border-left: 4px solid #ffc107;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        
+        .image-caption {
+            margin-top: 1rem;
+            font-size: 0.9em;
+            color: var(--light-text);
+            font-style: italic;
+        }
+        
+        .math-block {
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+        
+        .paper-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        
+        .paper-table th,
+        .paper-table td {
+            padding: 8px 6px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            font-size: 0.85em;
+        }
+        
+        .paper-table th {
+            font-weight: 600;
+        }
+        
+        .paper-table tbody td {
+            text-align: center;
+        }
+
+        .bibtex {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            white-space: pre;
+            border: 1px solid #ccc;
+        }
+        
+        @media (max-width: 768px) {
+            .paper-nav .nav-links {
+                gap: 1rem;
+            }
+            
+            .paper-nav .nav-links a {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .paper-title {
+                font-size: 1.8em;
+            }
+            
+            .paper-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="paper-nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#" style="font-weight: 600;">NeurIPS'25</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="paper-header">
+            <h1 class="paper-title">Distribution-Aligned Decoding for Efficient LLM Task Adaptation</h1>
+
+            <div class="paper-buttons">
+                <a href="https://arxiv.org/abs/2509.15888" class="paper-btn" target="_blank">
+                    <i class="fas fa-file-pdf"></i> Paper PDF
+                </a>
+                <a href="#bibtex" class="paper-btn">
+                    <i class="fas fa-quote-right"></i> BibTeX
+                </a>
+            </div>
+            
+            <div class="authors">
+                <strong>Senkang Hu</strong><sup>1,2,*</sup>, 
+                <strong>Xudong Han</strong><sup>3,*</sup>, 
+                <strong>Jinqi Jiang</strong><sup>4</sup>, 
+                <strong>Yihang Tao</strong><sup>1,2</sup>, 
+                <strong>Zihan Fang</strong><sup>1,2</sup>, 
+                <strong>Yong Dai</strong><sup>5</sup>, 
+                <strong>Sam Tak Wu Kwong</strong><sup>6</sup>, 
+                <strong>Yuguang Fang</strong><sup>1,2</sup>
+            </div>
+
+            <div class="affiliations">
+                <span><sup>1</sup>Hong Kong JC STEM Lab of Smart City</span>, 
+                <span><sup>2</sup>City University of Hong Kong</span><br>
+                <span><sup>3</sup>University of Sussex</span>, 
+                <span><sup>4</sup>Huazhong University of Science and Technology</span>, 
+                <span><sup>5</sup>Fudan University</span>, 
+                <span><sup>6</sup>Lingnan University</span><br>
+                <span style="font-size: 0.8rem; color: #888;">* Equal Contribution</span>
+            </div>
+        </div>
+
+        <section id="abstract" class="paper-section">
+            <h2>Abstract</h2>
+            <div class="paper-abstract">
+                <p>
+                    Adapting billion-parameter language models to a downstream task is still costly, even with parameter-efficient fine-tuning (PEFT). We re-cast task adaptation as <strong>output-distribution alignment</strong>: the objective is to steer the output distribution toward the task distribution directly during decoding rather than indirectly through weight updates. 
+                </p>
+                <p>
+                    Building on this view, we introduce <strong>Steering Vector Decoding (SVDecode)</strong>, a lightweight, PEFT-compatible, and theoretically grounded method. We start with a short warm-start fine-tune and extract a task-aware steering vector from the Kullback-Leibler (KL) divergence gradient between the output distribution of the warm-started and pre-trained models. This steering vector is then used to guide the decoding process. Across three tasks and nine benchmarks, SVDecode paired with standard PEFT methods improves multiple-choice accuracy by up to <strong>5 percentage points</strong> and open-ended truthfulness by <strong>2 percentage points</strong> without adding trainable parameters beyond the PEFT adapter.
+                </p>
+            </div>
+        </section>
+
+        <section id="introduction" class="paper-section">
+            <h2>Introduction: Why Chase the Weights?</h2>
+            <p>
+                Current adaptation methods (like LoRA or Prompt Tuning) adjust model weights in the hope that the output logits will follow the desired task distribution. However, this indirect approach has limitations:
+            </p>
+            <div class="highlight-box">
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>Training scales linearly with model size and data epochs.</li>
+                    <li>Weight updates can have unpredictable, non-local effects.</li>
+                    <li>Fixed hyperparameters often fail to transfer across domains.</li>
+                </ul>
+            </div>
+            <p>
+                <strong>Our Solution:</strong> We propose a shift in perspective. Instead of modifying weights, we align the model's output distribution directly during the decoding phase.
+            </p>
+        </section>
+
+        <section id="methodology" class="paper-section">
+            <h2>Methodology: Steering Vector Decoding (SVDecode)</h2>
+            
+            <div class="image-container">
+                <img src="idea-illustration.png" alt="SVDecode Framework">
+                <div class="image-caption">
+                    <strong>Figure 1:</strong> (a) Steering Vector Construction: We extract a task-specific direction from the distributional shift between pre-trained and warm-started models. (b) Steering Vector Decoding (SVD): We apply the steering vector during decoding to align outputs with the task distribution.
+                </div>
+            </div>
+
+            <h3>Step 1: Steering Vector Construction</h3>
+            <p>
+                We capture the "task-specific direction" by computing the gradient of the KL divergence between the warm-started model (\(P_\phi\)) and the pre-trained model (\(P_\theta\)). We project this into logit space to create a task-aware steering vector \(\delta_{logits}\):
+            </p>
+            
+            <div class="math-block">
+                $$ \delta_{logits} = (diag(P_{\phi}) - P_{\phi}P_{\phi}^{\top}) \cdot (- \log \frac{P_{\phi}}{P_{\theta}} - 1) $$
+            </div>
+
+            <p>
+                To ensure stability, we apply a <strong>confidence-aware constraint</strong>, filtering out low-confidence tokens that might introduce noise.
+            </p>
+
+            <h3>Step 2: Theoretically Optimal Steering Strength</h3>
+            <p>
+                Unlike heuristics, we derive a globally optimal steering strength \(\mu^*\) using a Newton-step approximation. We prove that SVDecode is first-order equivalent to a gradient step of full fine-tuning:
+            </p>
+
+            <div class="math-block">
+                $$ \mu^* = \frac{\langle e_{y^*} - p_{\phi}, \delta_{z} \rangle}{||\delta_{z}||_2^2 + \epsilon} $$
+            </div>
+            
+            <p>This allows us to analytically solve for the best steering intensity for a given task.</p>
+        </section>
+
+        <section id="results" class="paper-section">
+            <h2>Experimental Results</h2>
+            <p>
+                We evaluated SVDecode on <strong>TruthfulQA</strong> (Multiple Choice & Generation) and 8 <strong>Commonsense Reasoning</strong> datasets (BoolQ, PIQA, etc.) using Qwen2.5 and LLaMA-3 models.
+            </p>
+
+            <div class="highlight-box">
+                <strong>Key Findings:</strong>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Consistent Gains:</strong> SVDecode improves performance across all tested PEFT methods (LoRA, IA3, Prompt Tuning, P-Tuning v2).</li>
+                    <li><strong>High Impact:</strong> On Qwen2.5-7B, adding SVDecode to Prompt Tuning increases TruthfulQA MC2 accuracy from <strong>45.49% to 50.29%</strong>.</li>
+                    <li><strong>Better Generation:</strong> Improves open-ended truthfulness and informativeness scores significantly.</li>
+                </ul>
+            </div>
+
+            <div class="table-container">
+                <div style="margin-bottom: 10px; font-weight: bold; color: var(--text-color);">Table 1: Experimental results on 1) multiple-choice task in TruthfulQA and 2) open-ended generation task in TruthfulQA. %T*I stands for %Truth*Info in TruthfulQA.</div>
+                <table class="paper-table" style="font-size: 0.85em; text-align: center;">
+                    <colgroup>
+                        <col style="text-align: left;">
+                        <col style="text-align: left;">
+                        <col style="text-align: center;">
+                        <col style="text-align: center;">
+                        <col style="text-align: center;">
+                        <col style="text-align: center;">
+                        <col style="text-align: center;">
+                        <col style="text-align: center;">
+                        <col style="text-align: center;">
+                        <col style="text-align: center;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Model</th>
+                            <th rowspan="2">Method</th>
+                            <th colspan="4" style="text-align: center;">Multiple-Choice (%)</th>
+                            <th colspan="4" style="text-align: center;">Open-Ended Generation (%)</th>
+                        </tr>
+                        <tr>
+                            <th>MC1 ↑</th>
+                            <th>MC2 ↑</th>
+                            <th>MC3 ↑</th>
+                            <th>Avg. ↑</th>
+                            <th>%Truth ↑</th>
+                            <th>%Info ↑</th>
+                            <th>%T*I ↑</th>
+                            <th>Avg. ↑</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Qwen2.5-1.5B -->
+                        <tr>
+                            <td rowspan="8" style="vertical-align: middle;">Qwen2.5-1.5B</td>
+                            <td>Prompt Tuning</td>
+                            <td><strong>29.88</strong></td>
+                            <td>43.02</td>
+                            <td>19.22</td>
+                            <td>30.71</td>
+                            <td>28.04</td>
+                            <td>32.32</td>
+                            <td>24.39</td>
+                            <td>28.25</td>
+                        </tr>
+                        <tr style="background-color: #e8f5e9;">
+                            <td>+ SVDecode</td>
+                            <td>28.66</td>
+                            <td><strong>44.47</strong></td>
+                            <td><strong>21.79</strong></td>
+                            <td><strong>31.64</strong></td>
+                            <td><strong>28.66</strong></td>
+                            <td><strong>33.70</strong></td>
+                            <td><strong>25.34</strong></td>
+                            <td><strong>29.23</strong></td>
+                        </tr>
+                        <tr>
+                            <td>IA3</td>
+                            <td>40.85</td>
+                            <td>47.28</td>
+                            <td>27.51</td>
+                            <td>38.55</td>
+                            <td>32.31</td>
+                            <td>32.93</td>
+                            <td>28.65</td>
+                            <td>31.30</td>
+                        </tr>
+                        <tr style="background-color: #e8f5e9;">
+                            <td>+ SVDecode</td>
+                            <td><strong>42.19</strong></td>
+                            <td><strong>55.67</strong></td>
+                            <td><strong>34.04</strong></td>
+                            <td><strong>43.97</strong></td>
+                            <td><strong>34.15</strong></td>
+                            <td><strong>33.87</strong></td>
+                            <td><strong>29.87</strong></td>
+                            <td><strong>32.63</strong></td>
+                        </tr>
+                        <tr>
+                            <td>P-Tuning v2</td>
+                            <td>33.54</td>
+                            <td>45.28</td>
+                            <td>23.45</td>
+                            <td>34.09</td>
+                            <td>31.70</td>
+                            <td><strong>33.53</strong></td>
+                            <td>27.44</td>
+                            <td>30.89</td>
+                        </tr>
+                        <tr style="background-color: #e8f5e9;">
+                            <td>+ SVDecode</td>
+                            <td>33.54</td>
+                            <td><strong>48.41</strong></td>
+                            <td><strong>25.96</strong></td>
+                            <td><strong>35.97</strong></td>
+                            <td><strong>32.32</strong></td>
+                            <td>32.32</td>
+                            <td><strong>28.05</strong></td>
+                            <td><strong>30.90</strong></td>
+                        </tr>
+                        <tr>
+                            <td>LoRA</td>
+                            <td>50.61</td>
+                            <td>55.55</td>
+                            <td>34.81</td>
+                            <td>46.99</td>
+                            <td>49.39</td>
+                            <td>43.90</td>
+                            <td>40.85</td>
+                            <td>44.71</td>
+                        </tr>
+                        <tr style="background-color: #e8f5e9;">
+                            <td>+ SVDecode</td>
+                            <td><strong>52.94</strong></td>
+                            <td><strong>61.41</strong></td>
+                            <td><strong>34.95</strong></td>
+                            <td><strong>49.77</strong></td>
+                            <td><strong>50.00</strong></td>
+                            <td><strong>44.52</strong></td>
+                            <td><strong>42.68</strong></td>
+                            <td><strong>45.73</strong></td>
+                        </tr>
+                        <!-- Qwen2.5-7B -->
+                        <tr>
+                            <td rowspan="8" style="vertical-align: middle;">Qwen2.5-7B</td>
+                            <td>Prompt Tuning</td>
+                            <td>51.95</td>
+                            <td>49.34</td>
+                            <td>35.17</td>
+                            <td>45.49</td>
+                            <td>64.02</td>
+                            <td>62.19</td>
+                            <td>56.10</td>
+                            <td>60.77</td>
+                        </tr>
+                        <tr style="background-color: #e8f5e9;">
+                            <td>+ SVDecode</td>
+                            <td><strong>53.25</strong></td>
+                            <td><strong>62.16</strong></td>
+                            <td><strong>35.45</strong></td>
+                            <td><strong>50.29</strong></td>
+                            <td><strong>65.24</strong></td>
+                            <td><strong>62.80</strong></td>
+                            <td><strong>57.92</strong></td>
+                            <td><strong>61.99</strong></td>
+                        </tr>
+                        <tr>
+                            <td>IA3</td>
+                            <td><strong>47.56</strong></td>
+                            <td>50.36</td>
+                            <td>31.89</td>
+                            <td>43.27</td>
+                            <td>52.44</td>
+                            <td>55.48</td>
+                            <td>48.78</td>
+                            <td>52.23</td>
+                        </tr>
+                        <tr style="background-color: #e8f5e9;">
+                            <td>+ SVDecode</td>
+                            <td>46.07</td>
+                            <td><strong>57.04</strong></td>
+                            <td><strong>31.99</strong></td>
+                            <td><strong>45.03</strong></td>
+                            <td><strong>54.26</strong></td>
+                            <td>55.48</td>
+                            <td><strong>50.00</strong></td>
+                            <td><strong>53.25</strong></td>
+                        </tr>
+                        <tr>
+                            <td>P-Tuning v2</td>
+                            <td>46.95</td>
+                            <td>50.23</td>
+                            <td>33.08</td>
+                            <td>43.42</td>
+                            <td>62.19</td>
+                            <td>67.07</td>
+                            <td>59.14</td>
+                            <td>62.80</td>
+                        </tr>
+                        <tr style="background-color: #e8f5e9;">
+                            <td>+ SVDecode</td>
+                            <td><strong>48.78</strong></td>
+                            <td><strong>59.35</strong></td>
+                            <td><strong>35.09</strong></td>
+                            <td><strong>47.74</strong></td>
+                            <td><strong>64.63</strong></td>
+                            <td><strong>67.68</strong></td>
+                            <td><strong>60.97</strong></td>
+                            <td><strong>64.43</strong></td>
+                        </tr>
+                        <tr>
+                            <td>LoRA</td>
+                            <td>49.39</td>
+                            <td>51.31</td>
+                            <td>32.82</td>
+                            <td>44.51</td>
+                            <td>54.89</td>
+                            <td>49.39</td>
+                            <td>46.34</td>
+                            <td>50.21</td>
+                        </tr>
+                        <tr style="background-color: #e8f5e9;">
+                            <td>+ SVDecode</td>
+                            <td><strong>50.61</strong></td>
+                            <td><strong>58.33</strong></td>
+                            <td><strong>34.47</strong></td>
+                            <td><strong>47.80</strong></td>
+                            <td><strong>55.48</strong></td>
+                            <td><strong>50.61</strong></td>
+                            <td><strong>46.95</strong></td>
+                            <td><strong>51.01</strong></td>
+                        </tr>
+                        <!-- LLaMA3.1-8B -->
+                        <tr>
+                            <td rowspan="8" style="vertical-align: middle;">LLaMA3.1-8B</td>
+                            <td>Prompt Tuning</td>
+                            <td><strong>35.37</strong></td>
+                            <td>43.11</td>
+                            <td>22.43</td>
+                            <td>33.64</td>
+                            <td>36.58</td>
+                            <td>32.32</td>
+                            <td>28.55</td>
+                            <td>32.48</td>
+                        </tr>
+                        <tr style="background-color: #e8f5e9;">
+                            <td>+ SVDecode</td>
+                            <td>29.61</td>
+                            <td><strong>55.06</strong></td>
+                            <td><strong>30.64</strong></td>
+                            <td><strong>38.44</strong></td>
+                            <td><strong>37.90</strong></td>
+                            <td><strong>33.54</strong></td>
+                            <td><strong>28.66</strong></td>
+                            <td><strong>33.37</strong></td>
+                        </tr>
+                        <tr>
+                            <td>IA3</td>
+                            <td><strong>34.76</strong></td>
+                            <td>45.83</td>
+                            <td>24.85</td>
+                            <td>35.15</td>
+                            <td>43.90</td>
+                            <td>47.56</td>
+                            <td>39.63</td>
+                            <td>43.70</td>
+                        </tr>
+                        <tr style="background-color: #e8f5e9;">
+                            <td>+ SVDecode</td>
+                            <td>30.49</td>
+                            <td><strong>54.73</strong></td>
+                            <td><strong>31.89</strong></td>
+                            <td><strong>39.04</strong></td>
+                            <td><strong>44.51</strong></td>
+                            <td><strong>46.95</strong></td>
+                            <td><strong>40.23</strong></td>
+                            <td><strong>43.90</strong></td>
+                        </tr>
+                        <tr>
+                            <td>P-Tuning v2</td>
+                            <td><strong>38.41</strong></td>
+                            <td>46.14</td>
+                            <td>25.91</td>
+                            <td><strong>36.82</strong></td>
+                            <td>48.17</td>
+                            <td>48.78</td>
+                            <td>42.07</td>
+                            <td>46.34</td>
+                        </tr>
+                        <tr style="background-color: #e8f5e9;">
+                            <td>+ SVDecode</td>
+                            <td>31.71</td>
+                            <td><strong>49.52</strong></td>
+                            <td><strong>25.97</strong></td>
+                            <td>35.73</td>
+                            <td><strong>48.78</strong></td>
+                            <td><strong>50.12</strong></td>
+                            <td><strong>43.68</strong></td>
+                            <td><strong>47.53</strong></td>
+                        </tr>
+                        <tr>
+                            <td>LoRA</td>
+                            <td>46.34</td>
+                            <td>49.12</td>
+                            <td>33.20</td>
+                            <td>42.89</td>
+                            <td>51.21</td>
+                            <td>44.51</td>
+                            <td>41.63</td>
+                            <td>45.78</td>
+                        </tr>
+                        <tr style="background-color: #e8f5e9;">
+                            <td>+ SVDecode</td>
+                            <td><strong>48.17</strong></td>
+                            <td><strong>60.17</strong></td>
+                            <td><strong>35.07</strong></td>
+                            <td><strong>47.80</strong></td>
+                            <td><strong>51.82</strong></td>
+                            <td><strong>45.12</strong></td>
+                            <td><strong>42.68</strong></td>
+                            <td><strong>46.54</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="citation" class="paper-section">
+            <h2 id="bibtex">Citation</h2>
+            <p>If you find our work useful for your research, please consider citing our NeurIPS 2025 paper:</p>
+            <div class="bibtex">
+@inproceedings{hu2025svdecode,
+  title={Distribution-Aligned Decoding for Efficient LLM Task Adaptation},
+  author={Hu, Senkang and Han, Xudong and Jiang, Jinqi and Tao, Yihang and Fang, Zihan and Dai, Yong and Kwong, Sam Tak Wu and Fang, Yuguang},
+  booktitle={39th Conference on Neural Information Processing Systems (NeurIPS 2025)},
+  year={2025}
+}
+            </div>
+        </section>
+
+        <footer style="text-align: center; padding: 2rem 0; border-top: 1px solid var(--border-color); margin-top: 3rem; color: var(--light-text);">
+            <p>
+                Hong Kong JC STEM Lab of Smart City | City University of Hong Kong<br>
+                Website template inspired by <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+            </p>
+        </footer>
+
+    </div>
+
+    <script src="../../script.js"></script>
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

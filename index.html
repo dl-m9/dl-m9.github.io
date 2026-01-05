@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senkang Forest Hu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☯️</text></svg>">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#about" class="active">Biography</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#latest-news">News</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#honors">Honors</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#location">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 
+        Header 风格切换说明：
+        - 星空风格（默认）：保持 <header> 标签不变
+        - 渐变流动风格：在 <header> 标签上添加 class="header-gradient-flow"
+        例如：<header class="header-gradient-flow">
+    -->
+    <header>
+        <div class="header-bg-overlay">
+            <div class="shooting-star"></div>
+            <div class="shooting-star"></div>
+            <div class="shooting-star"></div>
+            <div class="shooting-star"></div>
+            <div class="shooting-star"></div>
+            <div class="shooting-star"></div>
+            <!-- 恒星 -->
+            <div class="twinkling-star" style="top: 15%; left: 20%;"></div>
+            <div class="twinkling-star" style="top: 25%; left: 85%;"></div>
+            <div class="twinkling-star" style="top: 70%; left: 10%;"></div>
+        </div>
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-info">
+                    <!-- Profile info will be loaded from JSON -->
+                </div>
+                <div class="profile-image">
+                    <img src="assets/profile.jpg" id="profile-img" alt="Senkang Forest Hu">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">Biography</h2>
+                <div class="about-content">
+                    <p><b>Senkang "Forest" Hu</b> (<span class="kai-font">胡森康</span>, feel free to call me "Forest") is currently a Ph.D. candidate at the <a href="https://www.cityu.edu.hk/">Department of Computer Science, City University of Hong Kong</a>, under the supervision of <a href="https://www.cs.cityu.edu.hk/~yugufang/">Chair Professor of Internet of Things and Fellow of ACM & IEEE & AAAS, <b>Prof. Yuguang "Michael" Fang</b></a>. Previously, he received his BSc degree from the School of Information and Electronics, <a href="https://www.bit.edu.cn/">Beijing Institute of Technology</a> in 2022. 
+                    His research interests include large language model (LLM) reasoning, intelligent agents, post-training techniques (such as PEFT and RL), as well as multi-agent systems, specifically in security, decision-making, and planning.
+                    His works have been published in top-tier conferences such as NeurIPS, AAAI (Oral), ICRA, etc., and top-tier journals such as TMC, TITS, ToN. He also serves as a reviewer or technical program committee member for ICML, ICLR, NeurIPS, ICRA, TMC, ToN, TITS, etc.</p><br>
+
+                    
+
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <div class="container">
+                <h2 class="section-title">Education & Experience</h2>
+                <div class="edu-list">
+                    <div class="edu-item">
+                        <div class="edu-watermark">OXFORD</div>
+                        <div class="edu-content-wrapper">
+                            <img src="assets/oxford-logo.png" alt="University of Oxford" class="edu-logo">
+                            <div class="edu-content-right">
+                                <div class="edu-school-name">Visiting PhD @ University of Oxford</div>
+                                <div class="edu-extra">
+                                    2026 - Now<br>
+                                    Computer Science
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="edu-item">
+                        <div class="edu-watermark">HUAWEI</div>
+                        <div class="edu-content-wrapper">
+                            <img src="assets/Huawei_Standard_logo.svg.png" alt="Huawei" class="edu-logo">
+                            <div class="edu-content-right">
+                                <div class="edu-school-name">Research Intern @ Huawei Hong Kong Research Center</div>
+                                <div class="edu-extra">
+                                    Jun. 2025 - Feb. 2026<br>
+                                    Conduct research on Agentic Reasoning, Retrieve-Augmented Generation, and Agentic Reinforcement Learning, proposed <a href="#" target="_blank">InfoReasoner</a> and <a href="#" target="_blank">ARES</a>.<br>
+                                    Mentored by <a href="https://zhaoyuzhi.github.io/" target="_blank">Dr. Yuzhi Zhao</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="edu-item">
+                        <div class="edu-watermark">CITYUHK</div>
+                        <div class="edu-content-wrapper">
+                            <img src="assets/cityu-logo.jpeg" alt="City University of Hong Kong" class="edu-logo">
+                            <div class="edu-content-right">
+                                <div class="edu-school-name">PhD @ City University of Hong Kong</div>
+                                <div class="edu-extra">
+                                    Aug. 2023 - Now<br>
+                                    Computer Science<br>
+                                    Supervised by  
+                                    <a href="https://www.cs.cityu.edu.hk/~yugufang/">Chair Prof. Yuguang "Michael" Fang</a>, ACM/IEEE/AAAS Fellow<br>
+                                    <b>Chow Yei Ching School of Graduate Studies Scholarship</b> (Top 0.3%, sole awardee in CS Dept.) 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="edu-item">
+                        <div class="edu-watermark">BIT</div>
+                        <div class="edu-content-wrapper">
+                            <img src="assets/bit-logo.jpg" alt="Beijing Institute of Technology" class="edu-logo">
+                            <div class="edu-content-right">
+                                <div class="edu-school-name">BSc @ Beijing Institute of Technology</div>
+                                <div class="edu-extra">
+                                    Sep. 2018 - Jul. 2022<br>
+                                    Electronic Information Engineering<br>
+                                    <b>National Scholarship</b> (Top 1%)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="research" class="section">
+            <div class="container">
+                <h2 class="section-title">Research Interests</h2>
+                <div class="research-areas">
+                    <div class="research-area">
+                        <i class="fas fa-brain"></i>
+                        <h3>Large Language Models</h3>
+                        <ul class="research-list">
+                            <li><strong>LLM Agentic Reasoning and Reinforcement Learning:</strong> Designing agentic reasoning and reinforcement learning methods to improve the performance of LLMs.</li>
+                            <li><strong>LLM Agentic Systems:</strong> Designing agentic systems (single/multi-agent) that can achieve complex tasks.</li>
+                            <li><strong>LLM Parameter-Efficient Fine-Tuning (PEFT) and Task Adaptation:</strong> Designing PEFT methods and task-adaptation strategies to adapt LLMs to specific tasks better and more efficiently.</li>
+                        </ul>
+                    </div>
+                    <div class="research-area">
+                        <i class="fas fa-robot"></i>
+                        <h3>Multi-Agent Systems</h3>
+                        <ul class="research-list">
+                            <li><strong>Multi-Agent System Security:</strong> Designing defense methods crucial for secure multi-agent systems as it expands the system's attack surface by leveraging information from other agents.</li>
+                            <li><strong>Multi-Agent Collaborative Perception:</strong> Overcoming limitations of single-agent perception systems like occlusion and sensing range by leveraging information from multiple agents.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="latest-news" class="section">
+            <div class="container">
+                <h2 class="section-title">Latest News</h2>
+                <div id="news-container" class="news-list">
+                    <!-- News items will be dynamically loaded here from news.json -->
+                </div>
+                <div class="view-all-news">
+                    <a href="pages/all-news.html" class="btn btn-primary" target="_self"><i class="fas fa-list"></i> View All News</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications" class="section">
+
+        <section id="honors" class="section">
+            <div class="container">
+                <h2 class="section-title">Honors & Awards</h2>
+                <div class="honors-list">
+                    <div class="honor-item">
+                        <div class="honor-year"><span class="year-highlight">Dec. 2025</span></div>
+                        <div class="honor-content">
+                            <h3>Best Paper Award</h3>
+                            <p>IEEE Communications Society<br><strong>UAV-enabled Computing Power Networks: Task Completion Probability Analysis</strong> at IEEE Global Communications Conference (GLOBECOM'25)</p>
+                        </div>
+                    </div>
+                    <div class="honor-item">
+                        <div class="honor-year"><span class="year-highlight">Nov. 2025</span></div>
+                        <div class="honor-content">
+                            <h3>IEEE ComSoc Student Grant</h3>
+                            <p>IEEE Communications Society</p>
+
+                        </div>
+                    </div>
+                    <div class="honor-item">
+                        <div class="honor-year"><span class="year-highlight">Nov. 2025</span></div>
+                        <div class="honor-content">
+                            <h3>Conference Travel Grant for Research Degree Students</h3>
+                            <p>City University of Hong Kong</p>
+                        </div>
+                    </div>
+                    <div class="honor-item">
+                        <div class="honor-year"><span class="year-highlight">Aug. 2025</span></div>
+                        <div class="honor-content">
+                            <h3><a href="https://scholars.cityu.edu.hk/en/prizes/chow-yei-ching-school-of-graduate-studies-scholarships-for-non-lo-67/" target="_blank">Chow Yei Ching School of Graduate Studies Scholarship</a>, Top 0.3%</h3>
+                            <p>City University of Hong Kong</p>
+                            <p><strong>10 awardees</strong> university-wide, and the <strong>sole awardee</strong> in the Department of Computer Science.</p>
+                        </div>
+                    </div>
+
+                    <div class="honor-item">
+                        <div class="honor-year"><span class="year-highlight">Aug. 2025</span></div>
+                        <div class="honor-content">
+                            <h3><a href="https://scholars.cityu.edu.hk/en/prizes/institutional-research-tuition-scholarship-531/" target="_blank">Research Tuition Scholarship</a></h3>
+                            <p>City University of Hong Kong</p>
+                        </div>
+                    </div>
+                    <div class="honor-item">
+                        <div class="honor-year"><span class="year-highlight">Nov. 2024</span></div>
+                        <div class="honor-content">
+                            <h3>IEEE ComSoc Student Travel Grant</h3>
+                            <p>IEEE Communications Society</p>
+                        </div>
+                    </div>
+                    <div class="honor-item">
+                        <div class="honor-year"><span class="year-highlight">2023</span></div>
+                        <div class="honor-content">
+                            <h3>Institutional Research Tuition Grant</h3>
+                            <p>City University of Hong Kong</p>
+                            <p>HK$170,000 to cover part of tuition fees during PhD.</p>
+                        </div>
+                    </div>
+                    <div class="honor-item">
+                        <div class="honor-year"><span class="year-highlight">2023</span></div>
+                        <div class="honor-content">
+                            <h3>InnoHK Award Funding</h3>
+                            <p>The Government of the Hong Kong Special Administrative Region</p>
+                            <p>Around HK$900,000 to support research and PhD career.</p>
+                        </div>
+                    </div>
+                    <div class="honor-item">
+                        <div class="honor-year"><span class="year-highlight">Dec. 2021</span></div>
+                        <div class="honor-content">
+                            <h3>National Scholarship</h3>
+                            <p>Ministry of Education of the People's Republic of China</p>
+                            <p>The highest honor for Chinese university students.</p>
+                        </div>
+                    </div>
+                    <div class="honor-item">
+                        <div class="honor-year"><span class="year-highlight">2020</span></div>
+                        <div class="honor-content">
+                            <h3>CASC Scholarship, Top 1%</h3>
+                            <p>Beijing Institute of Technology</p>
+                        </div>
+                    </div>
+                    <div class="honor-item">
+                        <div class="honor-year"><span class="year-highlight">2020</span></div>
+                        <div class="honor-content">
+                            <h3>Example of Scientific Research Innovation, Top 1%</h3>
+                            <p>Beijing Institute of Technology</p>
+                        </div>
+                    </div>
+                    <div class="honor-item">
+                        <div class="honor-year"><span class="year-highlight">2018-2021</span></div>
+                        <div class="honor-content">
+                            <h3>First Class Academic Scholarship, 4 times</h3>
+                            <p>Beijing Institute of Technology</p>
+                        </div>
+                    </div>
+                    <div class="honor-item">
+                        <div class="honor-year"><span class="year-highlight">2018-2021</span></div>
+                        <div class="honor-content">
+                            <h3>Excellent Student of Beijing Institute of Technology, 3 times</h3>
+                            <p>Beijing Institute of Technology</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="container">
+                <h2 class="section-title">Services</h2>
+                <div class="services-content">
+                    <div class="service-category">
+                        <h3>Conference Technical Program Committee & Reviewer</h3>
+                        <ul class="service-list">
+                            <li>ACM MM'25</li>
+                            <li>ICML'25</li>
+                            <li>ICLR'25</li>
+                            <li>AAAI'25</li>
+                            <li>CSCW'25</li>
+                            <li>ICRA'25</li>
+                            <li>ICCC'24</li>
+                            <li>IROS'24, 25</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-category">
+                        <h3>Journal Reviewer</h3>
+                        <ul class="service-list">
+                            <li>ACM Computing Surveys</li>
+                            <li>IEEE TMC</li>
+                            <li>IEEE/ACM ToN</li>
+                            <li>IEEE TITS</li>
+                            <li>IET Information Security</li>
+                            <li>IEEE TNSM</li>
+                            <li>ACM TAAS</li>
+                            <li>Information Fusion</li>
+                            <li>Pattern Recognition</li>
+                            <li>IEEE RA-L</li>
+                            <li>Proceedings of the IEEE</li>
+                            <li>IEEE TVT</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-category">
+                        <h3>Teaching Assistant</h3>
+                        <ul class="service-list">
+                            <li>Info Security for eCommerce, 2025 Fall</li>
+                            <li>Cloud Computing, 2025 Spring</li>
+                            <li>Computer Networks, 2024 Fall</li>
+                            <li>Cloud Computing: Theory and Practice, 2024 Spring</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- <section id="collaborator" class="section">
+            <div class="container">
+                <h2 class="section-title">Collaborators & Sponsors</h2>
+                <div class="collaborator-content">
+                    <div class="logo-container">
+                        <a href="https://www.cityu.edu.hk/" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/cityu-logo-long.png" alt="City University of Hong Kong" class="collaborator-logo">
+                        </a>
+                        <a href="https://www.hku.hk/" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/hku-logo.png" alt="The University of Hong Kong" class="collaborator-logo">
+                        </a>
+                        <a href="https://campaign.hkjc.com/ch/withyou/about-hkjc/charities-trust.aspx" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/JC.png" alt="The Hong Kong Jockey Club Charities Trust" class="collaborator-logo">
+                        </a>
+                        <a href="https://www.huawei.com/en/" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/huawei-logo.png" alt="Huawei" class="collaborator-logo">
+                        </a>
+                        <a href="https://x-humanoid.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/x-humanoid.png" alt="X-Humanoid" class="collaborator-logo">
+                        </a>
+                        <a href="https://www.uestc.edu.cn/" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/uestc-logo.jpg" alt="University of Electronic Science and Technology of China" class="collaborator-logo">
+                        </a>
+                        <a href="https://www.innohk.gov.hk/" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/innohk-logo.svg" alt="InnoHK" class="collaborator-logo">
+                        </a>
+                        <a href="https://www.comsoc.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/ieee-comsoc-logo.svg" alt="IEEE Communications Society" class="collaborator-logo">
+                        </a>
+                        <a href="https://www.jcstem.hk/en" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/jcstemlab-logo.png" alt="JC STEM Lab" class="collaborator-logo">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <section id="location" class="section">
+            <div class="container">
+                <h2 class="section-title">Contact</h2>
+                <div class="location-content">
+                    <div class="address-container">
+                        <div class="address-info">
+                            <h3>Office Address</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 83 Tat Chee Avenue Kowloon, Hong Kong</p>
+                        </div>
+                    </div>
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.1712626494353!2d114.17056927597595!3d22.33722397926719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x340406bd13bf7053%3A0x6f5bb9e0e1fb0e52!2s83%20Tat%20Chee%20Ave%2C%20Kowloon%20Tong%2C%20Hong%20Kong!5e0!3m2!1sen!2s!4v1716977566159!5m2!1sen!2s"
+                            width="100%" 
+                            height="400" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            <br><br><br><br>
+                <div style="width: 15%; height: auto; margin: auto;">
+                    <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=qLWVVAAvtN_5u37gNS4Dm-rflExCdP123yF9uf4KZnk"></script>
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Senkang Forest Hu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Update copyright year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Mobile navigation horizontal scroll handling
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make all links open in a new tab
+            document.querySelectorAll('a').forEach(link => {
+                // Skip navigation links that are meant for scrolling within the page
+                // Also skip the "View All News" link
+                const href = link.getAttribute('href');
+                if (href.startsWith('#') || href === 'pages/all-news.html' || link.textContent.trim() === 'View All News') {
+                    // For these specific links, ensure they open in the same tab
+                    link.setAttribute('target', '_self');
+                } else {
+                    link.setAttribute('target', '_blank');
+                    link.setAttribute('rel', 'noopener noreferrer');
+                }
+            });
+            
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks) {
+                // Check if scrollable
+                const checkScrollable = () => {
+                    const isScrollable = navLinks.scrollWidth > navLinks.clientWidth;
+                    document.querySelector('nav .container').classList.toggle('has-scroll', isScrollable);
+                };
+                
+                // Check on load and resize
+                checkScrollable();
+                window.addEventListener('resize', checkScrollable);
+                
+                // Scroll to active link
+                const activeLink = navLinks.querySelector('a.active');
+                if (activeLink) {
+                    const activeLi = activeLink.closest('li');
+                    if (activeLi) {
+                        setTimeout(() => {
+                            // Center the active link
+                            const scrollPos = activeLi.offsetLeft - (navLinks.clientWidth / 2) + (activeLi.offsetWidth / 2);
+                            navLinks.scrollLeft = Math.max(0, scrollPos);
+                        }, 100);
+                    }
+                }
+            }
+
+            // Apply KaiTi font to all Chinese characters that are not already wrapped in .kai-font
+            function applyKaiFont() {
+                const textNodes = [];
+                const chineseRegex = /[\u4e00-\u9fff]+/;
+                
+                // Recursive function to get all text nodes
+                function getTextNodes(node) {
+                    if (node.nodeType === 3) { // Text node
+                        if (chineseRegex.test(node.nodeValue)) {
+                            textNodes.push(node);
+                        }
+                    } else if (node.nodeType === 1 && node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') { // Element node
+                        // Skip if the node already has the kai-font class or is a parent of one
+                        if (!node.classList || !node.classList.contains('kai-font')) {
+                            for (let i = 0; i < node.childNodes.length; i++) {
+                                getTextNodes(node.childNodes[i]);
+                            }
+                        }
+                    }
+                }
+                
+                getTextNodes(document.body);
+                
+                // Process text nodes containing Chinese characters
+                textNodes.forEach(textNode => {
+                    const text = textNode.nodeValue;
+                    const parts = [];
+                    let lastIndex = 0;
+                    
+                    // Find all Chinese character sequences
+                    text.replace(/([\u4e00-\u9fff]+)/g, (match, p1, offset) => {
+                        // Add text before the match
+                        if (offset > lastIndex) {
+                            parts.push(document.createTextNode(text.substring(lastIndex, offset)));
+                        }
+                        
+                        // Create span for Chinese characters
+                        const span = document.createElement('span');
+                        span.className = 'kai-font';
+                        span.textContent = p1;
+                        parts.push(span);
+                        
+                        lastIndex = offset + match.length;
+                    });
+                    
+                    // Add remaining text
+                    if (lastIndex < text.length) {
+                        parts.push(document.createTextNode(text.substring(lastIndex)));
+                    }
+                    
+                    // Replace original text node with processed parts
+                    if (parts.length > 0) {
+                        const fragment = document.createDocumentFragment();
+                        parts.forEach(part => fragment.appendChild(part));
+                        textNode.parentNode.replaceChild(fragment, textNode);
+                    }
+                });
+            }
+            
+            // Run the function to apply KaiTi font to Chinese characters
+            applyKaiFont();
+        });
+    </script>
+</body>
+</html> 
+

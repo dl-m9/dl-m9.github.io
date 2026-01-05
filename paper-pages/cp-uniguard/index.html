@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CP-uniGuard: Unified Probability-Agnostic Adaptive Framework for Malicious Agent Detection | Senkang Forest Hu</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☯️</text></svg>">
+    <style>
+        .paper-nav {
+            background: linear-gradient(135deg, #BD384B, #3a7bd5);
+            padding: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+        
+        .paper-nav .nav-links {
+            display: flex;
+            list-style: none;
+            height: 60px;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 180px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            top: 60px;
+            left: 0;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .dropdown-content a {
+            color: #333 !important;
+            padding: 6px 12px !important;
+            text-decoration: none;
+            display: block;
+            height: auto !important;
+            line-height: 1.4 !important;
+            font-size: 1rem !important;
+            background: none !important;
+            border: none !important;
+            margin: 0 !important;
+            position: relative;
+        }
+        
+        .dropdown-content a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 8px;
+            right: 8px;
+            height: 1px;
+            background-color: #ccc;
+        }
+        
+        .dropdown-content a:last-child::after {
+            display: none;
+        }
+        
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-content a:hover {
+            background: none !important;
+            color: #0066cc !important;
+            transform: none;
+            border: none;
+            box-shadow: none;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeInSlide 0.3s ease;
+        }
+        
+        @keyframes fadeInSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .paper-nav .nav-links li {
+            margin-right: 2rem;
+        }
+        
+        .paper-nav .nav-links a {
+            display: inline-block;
+            height: 60px;
+            line-height: 60px;
+            font-weight: 500;
+            position: relative;
+            color: #fff;
+            padding: 0;
+            text-decoration: none;
+            font-size: 1rem;
+            background: none;
+            border: none;
+            border-radius: 0;
+        }
+        
+        .paper-nav .nav-links a:hover {
+            background: none;
+            transform: none;
+        }
+        
+        .paper-nav .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+        
+        .paper-nav .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .paper-header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+        
+        .paper-title {
+            font-family: 'Prata', serif;
+            font-size: 2.8em;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            color: var(--text-color);
+        }
+        
+        .paper-buttons {
+            margin: 1.5rem 0;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .paper-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+        }
+        
+        .paper-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
+            background: #0052a3;
+        }
+        
+        .authors {
+            font-size: 1.1em;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        
+        .authors strong {
+            color: var(--primary-color);
+        }
+        
+        .affiliations {
+            font-size: 0.9em;
+            color: var(--light-text);
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+        
+        .paper-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .paper-section h2 {
+            font-family: 'Prata', serif;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+        
+        .paper-abstract {
+            background: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 10px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #fff9e6 100%);
+            padding: 1.5rem;
+            border-left: 4px solid #ffc107;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-container img:hover {
+            transform: scale(1.02);
+        }
+        
+        .image-caption {
+            margin-top: 1rem;
+            font-size: 0.9em;
+            color: var(--light-text);
+            font-style: italic;
+        }
+        
+        .contribution-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .contribution-list li {
+            margin: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .contribution-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .equal-contrib {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .comparison-item {
+            text-align: center;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+        
+        .paper-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        
+        .paper-table th,
+        .paper-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .paper-table th {
+            background: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .paper-table tr:hover {
+            background: var(--secondary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .paper-nav .nav-links {
+                gap: 1rem;
+            }
+            
+            .paper-nav .nav-links a {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .paper-title {
+                font-size: 1.8em;
+            }
+            
+            .paper-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="paper-nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li style="margin-left: auto;" class="dropdown">
+                    <a href="#related-work"><i class="fas fa-link"></i> Related Work</a>
+                    <div class="dropdown-content">
+                        <a href="https://dl-m9.github.io/paper-pages/cpguard/index.html">CP-Guard</a>
+                        <br>
+                        <a href="https://dl-m9.github.io/paper-pages/cpguardp/index.html">CP-Guard+</a>
+                        <!-- <a href="#related-defense">Defense Methods</a>
+                        <a href="#related-datasets">Datasets</a> -->
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="paper-header">
+            <h1 class="paper-title">CP-uniGuard: A Unified, Probability-Agnostic, and Adaptive Framework for Malicious Agent Detection and Defense in Multi-Agent Embodied Perception Systems</h1>
+            
+            <div class="paper-buttons">
+                <a href="https://arxiv.org/abs/2506.22890" class="paper-btn" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> arXiv Preprint
+                </a>
+                <a href="https://github.com/CP-Security/CP-uniGuard" class="paper-btn" target="_blank">
+                    <i class="fa-solid fa-code"></i> Code
+                </a>
+            </div>
+            
+            <div class="authors">
+                <strong>Senkang Hu</strong><sup>1</sup>, 
+                <strong>Yihang Tao</strong><sup>1</sup>, 
+                <strong>Guowen Xu</strong><sup>2</sup>, 
+                <strong>Xinyuan Qian</strong><sup>2</sup>, 
+                <strong>Yiqin Deng</strong><sup>1</sup>, 
+                <strong>Xianhao Chen</strong><sup>3</sup>, 
+                <strong>Sam Kwong</strong><sup>4</sup>, 
+                <strong>Yuguang Fang</strong><sup>1</sup>
+            </div>
+            <div class="affiliations">
+                <sup>1</sup>Department of Computer Science, City University of Hong Kong<br>
+                <sup>2</sup>School of Computer Science and Engineering, University of Electronic Science and Technology of China<br>
+                <sup>3</sup>Department of Electrical and Electronic Engineering, The University of Hong Kong<br>
+                <sup>4</sup>School of Data Science, Lingnan University<br>
+                <br>
+                <em>Corresponding author: Yuguang Fang</em>
+            </div>
+        </div>
+
+        <section id="abstract" class="paper-section">
+            <h2>Abstract</h2>
+            <div class="paper-abstract">
+                <p>Collaborative Perception (CP) has been shown to be a promising technique for multi-agent autonomous driving and multi-agent robotic systems, where multiple agents share their perception information to enhance the overall perception performance and expand the perception range. However, in CP, an ego agent needs to receive messages from its collaborators, which makes it vulnerable to attacks from malicious agents. To address this critical issue, we propose a unified, probability-agnostic, and adaptive framework, namely, CP-uniGuard, which is a tailored defense mechanism for CP deployed by each agent to accurately detect and eliminate malicious agents in its collaboration network.</p>
+                
+                <p>Our key idea is to enable CP to reach a consensus rather than a conflict against an ego agent's perception results. Based on this idea, we first develop a probability-agnostic sample consensus (PASAC) method to effectively sample a subset of the collaborators and verify the consensus without prior probabilities of malicious agents. Furthermore, we define collaborative consistency loss (CCLoss) for object detection task and bird's eye view (BEV) segmentation task to capture the discrepancy between an ego agent and its collaborators, which is used as a verification criterion for consensus. In addition, we propose online adaptive threshold via dual sliding windows to dynamically adjust the threshold for consensus verification and ensure the reliability of the systems in dynamic environments. Finally, we conduct extensive experiments and demonstrate the effectiveness of our framework.</p>
+            </div>
+        </section>
+
+        <section id="problem" class="paper-section">
+            <h2>Problem Illustration</h2>
+            <div class="comparison-grid">
+                <div class="comparison-item">
+                    <div class="image-container">
+                        <img src="Security_threats.png" alt="Threats in Collaborative Perception">
+                        <div class="image-caption">(a) Illustration of the threats of malicious agent in collaborative perception. Malicious agents could easily send intricately crafted adversarial messages to an ego agent, consequently misleading the CP system to yield false perception outputs.</div>
+                    </div>
+                </div>
+                <div class="comparison-item">
+                    <div class="image-container">
+                        <img src="f3.png" alt="CP-uniGuard Defense">
+                        <div class="image-caption">(b) Visualization of no defense and defensive CP-uniGuard results on V2X-Sim datasets. Our framework can intelligently identify benign collaborators and eliminate malicious collaborators, thereby facilitating robust CP.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="approach" class="paper-section">
+            <h2>Our Approach</h2>
+            
+            <div class="highlight-box">
+                <strong>Key Innovation:</strong> A unified, probability-agnostic, and adaptive framework for malicious agent detection that eliminates the need for prior knowledge of malicious agent probabilities and adapts to dynamic environments.
+            </div>
+
+            <h3>Probability-Agnostic Sample Consensus (PASAC)</h3>
+            <p>PASAC is an adaptive binary-splitting procedure that examines ever smaller subsets of collaborators until a predefined quota of benign agents has been certified. Unlike previous methods that require prior probabilities of malicious agents, PASAC works without this knowledge, making it more practical for real-world scenarios.</p>
+
+            <div class="image-container">
+                <img src="f4.png" alt="PASAC comparison with other methods">
+                <div class="image-caption">Figure: Comparison results of PASAC, ROBOSAC and Linear Sampling. The y-axis represents the verification count, which is in logarithmic scale. PASAC shows superior sampling efficiency.</div>
+            </div>
+
+            <h3>Collaborative Consistency Loss (CCLoss)</h3>
+            <p>We design a novel loss function, Collaborative Consistency Loss (CCLoss), which calculates the discrepancy between the ego agent and the collaborative agents to verify consensus. CCLoss is specifically designed for both object detection and BEV segmentation tasks, making our framework applicable to various perception tasks.</p>
+
+            <h3>Online Adaptive Threshold via Dual Sliding Windows</h3>
+            <p>To maintain reliability under dynamic environments, we propose an online adaptive threshold mechanism via dual sliding windows. This mechanism keeps two fixed-length sliding windows: one stores the most recent scores labelled as benign, the other stores those labelled as contaminated. It dynamically adjusts the threshold for consensus verification to ensure system reliability.</p>
+
+            <div class="image-container" style="text-align: center;">
+                <img src="threshold_visualization_combined.png" alt="Online adaptive threshold mechanism" style="max-width: 50%; height: auto;">
+                <div class="image-caption">Figure: Visualization of the online adaptive threshold mechanism on V2X-Sim datasets. The threshold can quickly converge to a stable value and is dynamically adjusted based on the current situation.</div>
+            </div>
+        </section>
+
+        <section id="contributions" class="paper-section">
+            <h2>Main Contributions</h2>
+            <ul class="contribution-list">
+                <li>We analyze the vulnerabilities of CP against malicious agents and develop a novel framework for robust collaborative BEV perception, CP-uniGuard, which can defend against attacks and eliminate malicious agents from a local collaboration network.</li>
+                <li>We establish a probability-agnostic sample consensus (PASAC) method to effectively sample a subset of the collaborators and verify the consensus without prior probabilities of malicious agents.</li>
+                <li>We design a collaborative consistency loss (CCLoss) as a verification criterion for consensus, which can calculate the discrepancy between an ego agent and its collaborators.</li>
+                <li>We propose an online adaptive threshold scheme to dynamically adjust the threshold for consensus verification, which can ensure the reliability of the system in dynamic environments.</li>
+                <li>We conduct extensive experiments on collaborative object detection and collaborative BEV segmentation tasks and demonstrate the effectiveness of our CP-uniGuard.</li>
+            </ul>
+        </section>
+
+        <section id="results" class="paper-section">
+            <h2>Experimental Results</h2>
+            
+            <div class="highlight-box">
+                <strong>Key Performance:</strong> CP-uniGuard achieves over 39.3 mIoU on BEV segmentation tasks and over 80.2 AP@0.5 on object detection tasks across various adversarial attacks.
+            </div>
+
+            <h3>BEV Segmentation Performance</h3>
+            <p>On BEV segmentation tasks, CP-uniGuard achieves mIoU scores that closely approach the upper bound of 40.45, significantly outperforming the no-defense scenario where mIoU drops to 21.57 under FGSM attack.</p>
+
+            <div class="table-container">
+                <table class="paper-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Vehicle</th>
+                            <th>Sidewalk</th>
+                            <th>Terrain</th>
+                            <th>Road</th>
+                            <th>Buildings</th>
+                            <th>Pedestrian</th>
+                            <th>Vegetation</th>
+                            <th>mIoU</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Upper-bound</td><td>55.58</td><td>48.20</td><td>47.33</td><td>69.60</td><td>29.34</td><td>21.67</td><td>41.02</td><td>40.45</td></tr>
+                        <tr><td>CP-uniGuard (FGSM)</td><td>52.76</td><td>46.35</td><td>46.67</td><td>68.32</td><td>28.98</td><td>20.51</td><td>40.15</td><td>39.30</td></tr>
+                        <tr><td>CP-uniGuard (C&W)</td><td>49.22</td><td>44.08</td><td>44.76</td><td>65.58</td><td>30.12</td><td>20.83</td><td>39.10</td><td>37.95</td></tr>
+                        <tr><td>CP-uniGuard (PGD)</td><td>52.84</td><td>46.41</td><td>46.73</td><td>68.41</td><td>29.01</td><td>20.48</td><td>40.16</td><td>39.34</td></tr>
+                        <tr><td>Lower-bound</td><td>47.06</td><td>42.46</td><td>43.78</td><td>64.07</td><td>30.51</td><td>21.21</td><td>37.32</td><td>37.09</td></tr>
+                        <tr><td>No Defense (FGSM)</td><td>26.80</td><td>27.21</td><td>29.05</td><td>36.41</td><td>16.44</td><td>12.05</td><td>22.99</td><td>21.57</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Object Detection Performance</h3>
+            <p>On object detection tasks, CP-uniGuard consistently achieves the highest AP@0.5 and AP@0.7 across all attack scenarios, demonstrating its superior performance. Specifically, when defending against the PGD attack, CP-uniGuard achieves an AP@0.5 of 80.4 and an AP@0.7 of 78.3.</p>
+
+            <div class="table-container">
+                <table class="paper-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>AP@0.5</th>
+                            <th>AP@0.7</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Upper-bound++</td><td>81.8</td><td>79.6</td></tr>
+                        <tr><td>PGD Trained (White-box Defense)</td><td>75.6</td><td>73.0</td></tr>
+                        <tr><td>ROBOSAC (against PGD attack)</td><td>77.9</td><td>75.6</td></tr>
+                        <tr style="background: var(--secondary-color); font-weight: bold;"><td>CP-uniGuard (against PGD attack)</td><td>80.4</td><td>78.3</td></tr>
+                        <tr><td>C&W on PGD Trained (Black-box Defense)</td><td>43.2</td><td>40.8</td></tr>
+                        <tr><td>ROBOSAC (against C&W attack)</td><td>74.5</td><td>71.1</td></tr>
+                        <tr style="background: var(--secondary-color); font-weight: bold;"><td>CP-uniGuard (against C&W attack)</td><td>80.2</td><td>77.6</td></tr>
+                        <tr><td>Lower-bound</td><td>64.1</td><td>62.0</td></tr>
+                        <tr><td>No Defense (PGD attack)</td><td>44.2</td><td>43.7</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Sampling Efficiency Comparison</h3>
+            <p>We compare the sampling efficiency of PASAC with ROBOSAC and Linear Sampling. PASAC achieves a lower verification count than ROBOSAC under different attack ratios. For example, when the attack ratio is 0.6, the average verification count of PASAC is 7.59, which is lower than the average verification count of ROBOSAC (8.29).</p>
+
+            <div class="table-container">
+                <table class="paper-table">
+                    <thead>
+                        <tr>
+                            <th>Attack Ratio</th>
+                            <th colspan="3">ROBOSAC</th>
+                            <th colspan="3">PASAC (Ours)</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>Min</th>
+                            <th>Max</th>
+                            <th>Avg</th>
+                            <th>Min</th>
+                            <th>Max</th>
+                            <th>Avg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0.8</td><td>1</td><td>17</td><td>4.73</td><td>8</td><td><strong>8</strong></td><td>8.00</td></tr>
+                        <tr><td>0.6</td><td>1</td><td>46</td><td>8.29</td><td>6</td><td><strong>8</strong></td><td><strong>7.59</strong></td></tr>
+                        <tr><td>0.4</td><td>1</td><td>39</td><td>10.36</td><td>4</td><td><strong>8</strong></td><td><strong>6.60</strong></td></tr>
+                        <tr><td>0.2</td><td>1</td><td>19</td><td>4.89</td><td>4</td><td><strong>6</strong></td><td><strong>4.79</strong></td></tr>
+                        <tr style="font-weight: bold;"><td>Average</td><td>1.00</td><td>30.25</td><td>7.06</td><td>5.50</td><td><strong>7.50</strong></td><td><strong>6.74</strong></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="paper-section">
+            <h2>Additional Visualizations</h2>
+            
+            <div class="image-container">
+                <img src="f1.png" alt="PASAC performance analysis">
+                <div class="image-caption">Figure: Quantitative results of PASAC: Number of Overall Agents vs Verification Count.</div>
+            </div>
+            
+            <div class="image-container">
+                <img src="f2.png" alt="PASAC performance analysis">
+                <div class="image-caption">Figure: Quantitative results of PASAC: Number of Malicious Agents vs Verification Count.</div>
+            </div>
+        </section>
+
+        <footer style="text-align: center; padding: 2rem 0; border-top: 1px solid var(--border-color); margin-top: 3rem; color: var(--light-text);">
+            <p><strong>Contact:</strong> senkang.forest@my.cityu.edu.hk | <strong>Project:</strong> CP-uniGuard Research</p>
+        </footer>
+    </div>
+
+    <script src="../../script.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

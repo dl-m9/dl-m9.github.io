@@ -1,0 +1,36 @@
+{
+  "name": "Senkang Forest Hu",
+  "subtitle": "<span>PhD@CITYUHK, BSc@BIT</span><br><a href=\"https://jcstemlab-smartcity.netlify.app/\" target=\"_blank\">JC STEM Lab of Smart City</a><br><a href=\"https://www.cs.cityu.edu.hk/\" target=\"_blank\">Department of Computer Science, City University of Hong Kong</a>",
+  "socialLinks": [
+    {
+      "type": "email",
+      "url": "mailto:senkang.forest@gmail.com",
+      "icon": "<i class=\"fas fa-envelope\"></i>"
+    },
+    {
+      "type": "wechat",
+      "url": "assets/wechat.jpg",
+      "icon": "<i class=\"fab fa-weixin\"></i>",
+      "target": "_blank"
+    },
+    {
+      "type": "googleScholar",
+      "url": "https://scholar.google.com/citations?hl=en&user=rtPVwT8AAAAJ",
+      "icon": "<i class=\"fas fa-graduation-cap\"></i>",
+      "target": "_blank"
+    },
+    {
+      "type": "linkedin",
+      "url": "https://www.linkedin.com/in/senkang-hu-3123681b5/",
+      "icon": "<i class=\"fab fa-linkedin\"></i>",
+      "target": "_blank"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/dl-m9",
+      "icon": "<i class=\"fab fa-github\"></i>",
+      "target": "_blank"
+    }
+  ],
+  "profileImage": "assets/profile.jpg"
+}

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception | Senkang Forest Hu</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☯️</text></svg>">
+    <style>
+        .paper-nav {
+            background: linear-gradient(135deg, #BD384B, #3a7bd5);
+            padding: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+        
+        .paper-nav .nav-links {
+            display: flex;
+            list-style: none;
+            height: 60px;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 180px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            top: 60px;
+            left: 0;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .dropdown-content a {
+            color: #333 !important;
+            padding: 6px 12px !important;
+            text-decoration: none;
+            display: block;
+            height: auto !important;
+            line-height: 1.4 !important;
+            font-size: 1rem !important;
+            background: none !important;
+            border: none !important;
+            margin: 0 !important;
+        }
+        
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-content a:hover {
+            background: none !important;
+            color: #0066cc !important;
+            transform: none;
+            border: none;
+            box-shadow: none;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeInSlide 0.3s ease;
+        }
+        
+        @keyframes fadeInSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .paper-nav .nav-links li {
+            margin-right: 2rem;
+        }
+        
+        .paper-nav .nav-links a {
+            display: inline-block;
+            height: 60px;
+            line-height: 60px;
+            font-weight: 500;
+            position: relative;
+            color: #fff;
+            padding: 0;
+            text-decoration: none;
+            font-size: 1rem;
+            background: none;
+            border: none;
+            border-radius: 0;
+        }
+        
+        .paper-nav .nav-links a:hover {
+            background: none;
+            transform: none;
+        }
+        
+        .paper-nav .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+        
+        .paper-nav .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .paper-header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+        
+        .paper-title {
+            font-family: 'Prata', serif;
+            font-size: 2.8em;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            color: var(--text-color);
+        }
+        
+        .conference-badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 1rem;
+            display: inline-block;
+            font-weight: 600;
+        }
+        
+        .authors {
+            font-size: 1.1em;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        
+        .authors strong {
+            color: var(--primary-color);
+        }
+        
+        .affiliations {
+            font-size: 0.9em;
+            color: var(--light-text);
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+        
+        .paper-buttons {
+            margin: 1.5rem 0;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .paper-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+        }
+        
+        .paper-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
+            background: #0052a3;
+        }
+        
+        .paper-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .paper-section h2 {
+            font-family: 'Prata', serif;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+        
+        .paper-abstract {
+            background: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 10px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #fff9e6 100%);
+            padding: 1.5rem;
+            border-left: 4px solid #ffc107;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .image-container img {
+            max-width: 50%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-container img:hover {
+            transform: scale(1.02);
+        }
+        
+        .image-caption {
+            margin-top: 1rem;
+            font-size: 0.9em;
+            color: var(--light-text);
+            font-style: italic;
+        }
+        
+        .contribution-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .contribution-list li {
+            margin: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .contribution-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .equal-contrib {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        
+        @media (max-width: 768px) {
+            .paper-nav .nav-links {
+                gap: 1rem;
+            }
+            
+            .paper-nav .nav-links a {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .paper-title {
+                font-size: 1.8em;
+            }
+            
+            .paper-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="paper-nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li style="margin: 0 auto; font-weight: 600; color: white; position: absolute; left: 50%; transform: translateX(-50%);">AAAI'25 Oral</li>
+                <li style="margin-left: auto;" class="dropdown">
+                    <a href="#related-work"><i class="fas fa-link"></i> Related Work</a>
+                    <div class="dropdown-content">
+                        <a href="https://dl-m9.github.io/paper-pages/cpguardp/index.html">CP-Guard+</a>
+                        <br>
+                        <a href="https://dl-m9.github.io/paper-pages/cp-uniguard/index.html">CP-uniGuard</a>
+                        <!-- <a href="#related-defense">Defense Methods</a>
+                        <a href="#related-datasets">Datasets</a>
+                    </div> -->
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="paper-header">
+            <h1 class="paper-title">CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception</h1>
+            
+            <div class="paper-buttons">
+                <a href="https://ojs.aaai.org/index.php/AAAI/article/view/34486" class="paper-btn" target="_blank">
+                    <i class="fas fa-file-pdf"></i> Paper PDF
+                </a>
+                <a href="https://github.com/CP-Security/CP-Guard" class="paper-btn" target="_blank">
+                    <i class="fa-solid fa-code"></i> Code
+                </a>
+                <a href="https://arxiv.org/abs/2412.12000" class="paper-btn" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> arXiv Preprint
+                </a>
+            </div>
+            
+            <div class="authors">
+                <strong>Senkang Hu</strong><sup>1</sup><span class="equal-contrib">†</span>, 
+                <strong>Yihang Tao</strong><sup>1</sup><span class="equal-contrib">†</span>, 
+                <strong>Guowen Xu</strong><sup>2</sup>, 
+                <strong>Yiqin Deng</strong><sup>1</sup>*, 
+                <strong>Xianhao Chen</strong><sup>3</sup>, 
+                <strong>Yuguang Fang</strong><sup>1</sup>, 
+                <strong>Sam Kwong</strong><sup>4</sup>
+            </div>
+            <div class="affiliations">
+                <sup>1</sup>Department of Computer Science, City University of Hong Kong<br>
+                <sup>2</sup>School of Computer Science and Engineering, University of Electronic Science and Technology of China<br>
+                <sup>3</sup>Department of Electrical and Electronic Engineering, The University of Hong Kong<br>
+                <sup>4</sup>Department of Computing and Decision Sciences, Lingnan University<br>
+                <br>
+                <em>† Equal contribution</em><br>
+                <em>*Corresponding author</em>
+            </div>
+        </div>
+
+        <section id="abstract" class="paper-section">
+            <h2>Abstract</h2>
+            <div class="paper-abstract">
+                <p>Collaborative Perception (CP) has shown a promising technique for autonomous driving, where multiple connected and autonomous vehicles (CAVs) share their perception information to enhance the overall perception performance and expand the perception range. However, in CP, ego CAV needs to receive messages from its collaborators, which makes it easy to be attacked by malicious agents. For example, a malicious agent can send harmful information to the ego CAV to mislead it.</p>
+                
+                <p>To address this critical issue, we propose a novel method, <strong>CP-Guard</strong>, a tailored defense mechanism for CP that can be deployed by each agent to accurately detect and eliminate malicious agents in its collaboration network. Our key idea is to enable CP to reach a consensus rather than a conflict against the ego CAV's perception results. Based on this idea, we first develop a probability-agnostic sample consensus (PASAC) method to effectively sample a subset of the collaborators and verify the consensus without prior probabilities of malicious agents.</p>
+                
+                <p>Furthermore, we define a collaborative consistency loss (CCLoss) to capture the discrepancy between the ego CAV and its collaborators, which is used as a verification criterion for consensus. Finally, we conduct extensive experiments in collaborative bird's eye view (BEV) tasks and our results demonstrate the effectiveness of our CP-Guard.</p>
+            </div>
+        </section>
+
+        <section id="problem" class="paper-section">
+            <h2>Problem Illustration</h2>
+            <div class="image-container">
+                <img src="Security_threats.png" alt="Security threats in collaborative perception">
+                <div class="image-caption">Figure: Illustration of the threats of malicious agent in collaborative perception and our defense framework, CP-Guard.</div>
+            </div>
+        </section>
+
+        <section id="approach" class="paper-section">
+            <h2>Our Approach</h2>
+            
+            <div class="highlight-box">
+                <strong>Key Insight:</strong> Enable CP to achieve a consensus rather than a conflict against the ego CAV's perception results.
+            </div>
+
+            <h3>Probability-Agnostic Sample Consensus (PASAC)</h3>
+            <p>A novel method to effectively sample a subset of collaborators and verify consensus without requiring prior probabilities of malicious agents. This approach is robust to unknown attack patterns and doesn't rely on assumptions about the distribution of malicious agents.</p>
+
+            <h3>Collaborative Consistency Loss (CCLoss)</h3>
+            <p>A carefully designed loss function that captures the discrepancy between the ego CAV and its collaborators, serving as a verification criterion for consensus. This metric enables accurate identification of benign vs. malicious agents.</p>
+
+            <h3>Malicious Agent Detection</h3>
+            <p>If a collaborator's collaborative consistency loss exceeds a predefined threshold, it is considered benign; otherwise, it is identified as malicious and eliminated from the network. This process ensures robust defense while maintaining system performance.</p>
+        </section>
+
+        <section id="contributions" class="paper-section">
+            <h2>Key Contributions</h2>
+            <ul class="contribution-list">
+                <li>We analyze the vulnerabilities of CP against malicious agents and develop a novel framework for robust collaborative BEV perception, <strong>CP-Guard</strong>, which can defend against attacks and eliminate malicious agents from the local collaboration network.</li>
+                <li>We establish a <strong>probability-agnostic sample consensus (PASAC)</strong> method to effectively sample a subset of the collaborators and verify the consensus without prior probabilities of malicious agents.</li>
+                <li>We conduct extensive experiments on collaborative BEV tasks and demonstrate the effectiveness of our CP-Guard and its generalization to different attacks.</li>
+            </ul>
+        </section>
+
+        <footer style="text-align: center; padding: 2rem 0; border-top: 1px solid var(--border-color); margin-top: 3rem; color: var(--light-text);">
+            <p><strong>Contact:</strong> senkang.forest@my.cityu.edu.hk | <strong>Paper:</strong> AAAI 2025 Oral Presentation</p>
+        </footer>
+    </div>
+
+    <script src="../../script.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

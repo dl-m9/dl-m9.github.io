@@ -1,0 +1,46 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Styling Guidelines
+
+The website follows a clean, modern design with consistent styling throughout all sections.
+
+## CSS Organization
+
+The [styles.css](mdc:styles.css) file contains all styling for the website, organized into logical sections:
+
+1. Global styles and variables
+2. Header and navigation styles
+3. Section-specific styles
+4. Responsive design rules
+
+## Key Style Components
+
+### Layout
+- Container-based layout with max-width for content
+- Responsive grid and flexbox for content organization
+- Section-based organization with consistent spacing
+
+### Typography
+- Primary font: Inter (Google Fonts)
+- Font Awesome for icons
+
+### Color Scheme
+- Primary accent color: #0060df (blue)
+- Secondary colors: #e5edfb (light blue), #333333 (dark gray)
+- Text colors: #333333 (primary), #666666 (secondary)
+
+### Interactive Elements
+- Publication filtering buttons
+- Navigation with active state tracking
+- Smooth scrolling behavior
+
+## Responsive Design
+
+The website is fully responsive with:
+- Optimized mobile navigation with horizontal scrolling
+- Adaptive layouts for different screen sizes
+- Smart active link centering on mobile
+- Media queries for different device sizes

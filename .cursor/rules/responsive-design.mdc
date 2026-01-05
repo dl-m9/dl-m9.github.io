@@ -1,0 +1,58 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Responsive Design Implementation
+
+This academic website is built with comprehensive responsive design considerations to ensure optimal viewing across all devices.
+
+## Media Queries
+
+The [styles.css](mdc:styles.css) file contains several media queries for different screen sizes:
+
+- Mobile devices (< 768px)
+- Tablets (768px - 1024px)
+- Desktop (> 1024px)
+
+## Mobile Navigation
+
+The mobile navigation features:
+- Horizontal scrolling for menu items
+- Active link centering
+- Condensed header with optimized spacing
+- Touch-friendly interactive elements
+
+## Responsive Components
+
+Each section is carefully designed to adapt to different screen sizes:
+
+### Header
+- Stacked layout on mobile (profile info above profile image)
+- Side-by-side layout on larger screens
+
+### Publications
+- Simplified layout on mobile
+- Adjustable column width for different screen sizes
+
+### Timeline (Education)
+- Vertical orientation that works well on all devices
+- Responsive spacing between timeline items
+
+### Services & Honors
+- Multi-column on desktop
+- Single column on mobile
+
+## Responsive Images
+
+- Profile and logo images are sized appropriately for different screens
+- Use of relative units (%, em, rem) for flexible scaling
+
+## Testing Responsive Design
+
+When modifying the website, always test on:
+1. Mobile devices (portrait and landscape)
+2. Tablets
+3. Desktop screens of various sizes
+
+Use browser dev tools to simulate different device sizes during development.

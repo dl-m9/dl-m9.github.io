@@ -1,0 +1,94 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# JSON Data Structures Reference
+
+This website uses JSON files to store dynamic content. Understanding these structures is essential for updating the website.
+
+## Profile Information
+
+[profile-info.json](mdc:data/profile-info.json) follows this structure:
+
+```json
+{
+  "name": "Person's Name",
+  "subtitle": "PhD@Department, University",
+  "socialLinks": [
+    {
+      "type": "email",
+      "url": "mailto:your.email@example.com",
+      "icon": "<i class=\"fas fa-envelope\"></i>"
+    },
+    {
+      "type": "linkedin",
+      "url": "https://linkedin.com/in/profile",
+      "icon": "<i class=\"fab fa-linkedin\"></i>",
+      "target": "_blank"
+    }
+  ],
+  "profileImage": "assets/profile.jpg"
+}
+```
+
+## Publications
+
+[publications.json](mdc:data/publications.json) stores publications as an array:
+
+```json
+[
+  {
+    "number": 1,
+    "title": "Publication Title",
+    "authors": "<strong><u>Your Name</u></strong>, Co-author One, Co-author Two",
+    "type": "preprint",  // or "accepted"
+    "isFirstAuthor": true,  // for filtering
+    "venue": "Conference or Journal Name",  // for accepted papers
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "tag-pdf",
+        "link": "https://link-to-paper.pdf"
+      },
+      {
+        "text": "Code",
+        "class": "tag-code",
+        "link": "https://github.com/username/repo"
+      }
+    ]
+  }
+]
+```
+
+## News Items
+
+[news.json](mdc:data/news.json) stores news in chronological order:
+
+```json
+[
+  {
+    "date": "Month YYYY",
+    "title": "News Title",
+    "content": "News content description",
+    "links": [
+      {
+        "text": "Link Text",
+        "url": "https://link-url.com"
+      }
+    ]
+  }
+]
+```
+
+## Important Notes
+
+1. **HTML in JSON**: Some fields like `authors` and `icon` contain HTML markup. Be careful to properly escape quotes with backslashes.
+
+2. **Order Matters**: 
+   - In publications.json, items are displayed in the order they appear
+   - In news.json, newer items should be added at the beginning of the array
+
+3. **Required Fields**: Each JSON structure has required fields that must be present for the website to function correctly.
+
+4. **Links and Paths**: When adding links to external resources, use absolute URLs (https://). For internal resources like images, use relative paths.

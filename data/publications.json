@@ -1,0 +1,546 @@
+[
+  {
+    "title": "A Framework for Promoting Enhanced Robustness in Self-Supervised Reinforcement Learning Applied to Large-Scale Language Models",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yuguang Fang, et al.",
+    "type": "preprint",
+    "isFirstAuthor": true,
+    "categories": ["llm-agent"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
+  {
+    "title": "Optimizing Agentic Reasoning with Retrieval via Information Gain Reward",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Yu Guo, Sam Tak Wu Kwong, Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": true,
+    "categories": ["llm-agent"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
+  {
+    "title": "DSP-Reg: Domain-Sensitive Parameter Regularization for Robust Domain Generalization",
+    "authors": "Xudong Han*, <strong><u>Senkang \"Forest\" Hu</u>*<sup>, project leader</sup></strong>, Yihang Tao, Yu Guo, Philip Birch, Sam Tak Wu Kwong, Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": true,
+    "categories": ["llm-peft"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
+  {
+    "title": "CP-uniGuard: A Unified, Probability-Agnostic, and Adaptive Framework for Malicious Agent Detection and Defense in Multi-Agent Embodied Perception Systems",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Guowen Xu, Xinyuan Qian, Yiqin Deng, Xianhao Chen, Sam Tak Wu Kwong, Yuguang Fang",
+    "type": "accepted",
+    "venue": "IEEE Transactions on Mobile Computing.",
+    "year": "2025",
+    "isFirstAuthor": true,
+    "categories": ["multi-agent-security"],
+    "tags": [
+      {
+        "text": "TMC'25",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2506.22890"
+      },
+      {
+        "text": "Project",
+        "class": "code-tag",
+        "link": "paper-pages/cp-uniguard/index.html"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  
+  
+  {
+    "title": "CP-Guard+: A New Paradigm for Malicious Agent Detection and Defense in Collaborative Perception",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Zihang Fang, Guowen Xu, Yiqin Deng, Sam Kwong, Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": true,
+    "categories": ["multi-agent-security"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2502.07807v1"
+      },
+      {
+        "text": "Project",
+        "class": "code-tag",
+        "link": "paper-pages/cpguardp/index.html"
+      }
+    ]
+  },
+
+  {
+    "title": "GCP: Guarded Collaborative Perception with Spatial-Temporal Aware Malicious Agent Detection",
+    "authors": "Yihang Tao*, <strong><u>Senkang \"Forest\" Hu</u></strong>*, Yue Hu, Haonan An, Hangcheng Cao, Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": true,
+    "categories": ["multi-agent-security"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2501.02450"
+      }
+    ]
+  },
+  {
+    "title": "AgentsCoDriver: Large Language Model Empowered Collaborative Driving with Lifelong Learning",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Zhengru Fang, Zihan Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": true,
+    "categories": ["llm-agent"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2404.06345"
+      }
+    ]
+  },
+  {
+    "title": "Adaptive Attack on Multi-Agent Collaborative Perception",
+    "authors": "Yihang Tao, <strong><u>Senkang \"Forest\" Hu</u></strong>, Haonan An, Zhengru Fang, Hangcheng Cao, Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": false,
+    "categories": ["multi-agent-security"],
+    "tags": [
+      
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
+  {
+    "title": "Sense4FL: Vehicular Crowdsensing Enhanced Federated Learning for Autonomous Driving",
+    "authors": "Yanan Ma, <strong><u>Senkang \"Forest\" Hu</u></strong>, Zhengru Fang, Yun Ji, Yiqin Deng, Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": false,
+    "tags": [
+      
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2503.17697"
+      }
+    ]
+  },
+
+  {
+    "title": "Distribution-Aligned Decoding for Efficient LLM Task Adaptation",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Xudong Han, Jinqi Jiang, Yihang Tao, Zihan Fang, Yong Dai, Sam Tak Wu Kwong, Yuguang Fang",
+    "type": "accepted",
+    "venue": "The 39th Annual Conference on Neural Information Processing Systems, San Diego, USA, December 2025.",
+    "year": "2025",
+    "isFirstAuthor": true,
+    "categories": ["llm-peft"],
+    "tags": [
+      {
+        "text": "NeurIPS'25",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2509.15888"
+      },
+      {
+        "text": "Project",
+        "class": "code-tag",
+        "link": "paper-pages/SVDecode/index.html"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  
+  {
+    "title": "Task-Aware Parameter-Efficient Fine-Tuning of Large Pre-Trained Models at the Edge",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Yihang Tao, Zhengru Fang, Zihan Fang, Yiqin Deng, Sam Kwong, Yuguang Fang",
+    "type": "accepted",
+    "venue": "The 2025 IEEE Global Communications Conference, Taipei, Taiwan, December 2025.",
+    "year": "2025",
+    "isFirstAuthor": true,
+    "categories": ["llm-peft"],
+    "tags": [
+      {
+        "text": "GLOBECOM'25",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2504.03718"
+      },
+      {
+        "text": "CCF-C",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "AgentsCoMerge: Large Language Model Empowered Collaborative Decision Making for Multi-Lane Merging",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Zhengru Fang, Zihan Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong",
+    "type": "accepted",
+    "venue": "IEEE Transactions on Mobile Computing.",
+    "isFirstAuthor": true,
+    "year": "2025",
+    "categories": ["llm-agent"],
+    "tags": [
+      {
+        "text": "TMC'25",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://ieeexplore.ieee.org/abstract/document/10976336"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "Collaborative Perception for Connected and Autonomous Driving: Challenges, Possible Solutions and Opportunities",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Zhengru Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang",
+    "type": "accepted",
+    "venue": "IEEE Wireless Communications Magazine.",
+    "isFirstAuthor": true,
+    "year": "2025",
+    "categories": ["multi-agent-perception"],
+    "tags": [
+      {
+        "text": "WCM'25",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://ieeexplore.ieee.org/document/11020620"
+      },
+      {
+        "text": "JCR Q1",
+        "class": "ccf-tag"
+      },
+      {
+        "text": "IF 11.5",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "MartDE: A Privacy-Preserving and Cost-Efficient Evaluation Framework for Data Marketplaces",
+    "authors": "Xinyuan Qian, Haoyong Wang, Hangcheng Cao, Shuai Yuan, <strong><u>Senkang \"Forest\" Hu</u></strong>, Qingchuan Zhao, Hongwei Li, Guowen Xu",
+    "type": "accepted",
+    "venue": "The 40th Annual AAAI Conference on Artificial Intelligence, Singapore, January 2026.",
+    "isFirstAuthor": false,
+    "year": "2025",
+    "categories": ["others"],
+    "tags": [
+      {
+        "text": "AAAI'26",
+        "class": "venue-tag"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "Directed-CP: Directed Collaborative Perception for Connected and Autonomous Vehicles via Proactive Attention",
+    "authors": "Yihang Tao, <strong><u>Senkang \"Forest\" Hu</u></strong>, Zhengru Fang, Yuguang Fang",
+    "type": "accepted",
+    "isFirstAuthor": false,
+    "venue": "The 2025 IEEE International Conference on Robotics & Automation, 19-23 May, Atlanta, USA.",
+    "year": "2025",
+    "categories": ["multi-agent-perception"],
+    "tags": [
+      {
+        "text": "ICRA'25",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2409.08840"
+      },
+      {
+        "text": "Code",
+        "class": "code-tag",
+        "link": "https://github.com/yihangtao/Directed-CP"
+      },
+      {
+        "text": "CCF-B",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "UAV-enabled Computing Power Networks: Task Completion Probability Analysis",
+    "authors": "Yiqin Deng, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Haixia Zhang, and Yuguang Fang",
+    "type": "accepted",
+    "isFirstAuthor": false,
+    "venue": "IEEE Global Communications Conference, Taipei, Taiwan, December 2025.",
+    "year": "2025",
+    "tags": [
+      {
+        "text": "GLOBECOM'25<br><span style=\"color: #d32f2f;\">Best Paper Award</span>",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      },
+      {
+        "text": "CCF-C",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  
+  {
+    "title": "Task-Oriented Communications for Visual Navigation with Edge-Aerial Collaboration",
+    "authors": "Zhengru Fang, Zhenghao Liu, Jingjing Wang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yu Guo, Yiqin Deng, and Yuguang Fang",
+    "type": "accepted",
+    "isFirstAuthor": false,
+    "venue": "IEEE Global Communications Conference, Taipei, Taiwan, December 2025.",
+    "year": "2025",
+    "tags": [
+      {
+        "text": "GLOBECOM'25",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2504.18317"
+      },
+      {
+        "text": "Code",
+        "class": "code-tag",
+        "link": "https://github.com/fangzr/TOC-Edge-Aerial"
+      },
+      {
+        "text": "CCF-C",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  
+  {
+    "title": "CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>*, Yihang Tao*, Guowen Xu, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong",
+    "type": "accepted",
+    "isFirstAuthor": true,
+    "categories": ["multi-agent-security"],
+    "venue": "The 39th Annual AAAI Conference on Artificial Intelligence, Philadelphia, Pennsylvania, USA, February 2025.",
+    "year": "2024",
+    "tags": [
+      {
+        "text": "AAAI'25 <span style=\"color: #d32f2f;\">Oral</span>",
+        "class": "venue-tag"
+      },
+      {
+        "text": "Project",
+        "class": "code-tag",
+        "link": "paper-pages/cpguard/index.html"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://ojs.aaai.org/index.php/AAAI/article/view/34486"
+      },
+      {
+        "text": "Code",
+        "class": "code-tag",
+        "link": "https://github.com/CP-Security/CP-Guard"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "Toward Full-scene Domain Generalization in Multi-agent Collaborative Bird's Eye View Segmentation for Connected and Autonomous Driving",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Zhengru Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang, and Sam Kwong",
+    "type": "accepted",
+    "isFirstAuthor": true,
+    "venue": "IEEE Transactions on Intelligent Transportation Systems.",
+    "year": "2024",
+    "categories": ["multi-agent-perception"],
+    "tags": [
+      {
+        "text": "TITS'24",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://ieeexplore.ieee.org/abstract/document/10779389"
+      },
+      {
+        "text": "CCF-B",
+        "class": "ccf-tag"
+      },
+      {
+        "text": "JCR Q1",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "Adaptive Communications in Collaborative Perception with Domain Alignment for Autonomous Driving",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Zhengru Fang, Haonan An, Guowen Xu, Yuan Zhou, Xianhao Chen, and Yuguang Fang",
+    "type": "accepted",
+    "isFirstAuthor": true,
+    "venue": "IEEE Global Communications Conference, Cape Town, South Africa, December 2024.",
+    "year": "2024",
+    "categories": ["multi-agent-perception"],
+    "tags": [
+      {
+        "text": "GLOBECOM'24",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://ieeexplore.ieee.org/document/10901656"
+      },
+      {
+        "text": "CCF-C",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "Prioritized Information Bottleneck Theoretic Framework with Distributed Online Learning for Edge Video Analytics",
+    "authors": "Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Jingjing Wang, Yiqin Deng, Xianhao Chen, Yuguang Fang",
+    "type": "accepted",
+    "isFirstAuthor": false,
+    "venue": "IEEE/ACM Transactions on Networking.",
+    "categories": ["multi-agent-perception"],
+    "year": "2024",
+    "tags": [
+      {
+        "text": "ToN'24",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://ieeexplore.ieee.org/document/10845862"
+      },
+      {
+        "text": "Code",
+        "class": "code-tag",
+        "link": "https://github.com/fangzr/PIB-Prioritized-Information-Bottleneck-Framework"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "PACP: Priority-Aware Collaborative Perception for Connected and Autonomous Vehicles",
+    "authors": "Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Haonan An, Yuang Zhang, Jingjing Wang, Hangcheng Cao, Xianhao Chen, Yuguang Fang",
+    "type": "accepted",
+    "isFirstAuthor": false,
+    "venue": "IEEE Transactions on Mobile Computing.",
+    "year": "2024",
+    "categories": ["multi-agent-perception"],
+    "tags": [
+      {
+        "text": "TMC'24",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://ieeexplore.ieee.org/document/10646529"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "PIB: Prioritized Information Bottleneck Framework for Collaborative Edge Video Analytics",
+    "authors": "Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yuguang Fang, et al.",
+    "type": "accepted",
+    "isFirstAuthor": false,
+    "venue": "IEEE Global Communications Conference, Cape Town, South Africa, December 2024.",
+    "year": "2024",
+    "categories": ["multi-agent-perception"],
+    "tags": [
+      {
+        "text": "GLOBECOM'24",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://ieeexplore.ieee.org/document/10900993"
+      },
+      {
+        "text": "Code",
+        "class": "code-tag",
+        "link": "https://github.com/fangzr/PIB-Prioritized-Information-Bottleneck-Framework"
+      },
+      {
+        "text": "CCF-C",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "Malicious Agent Detection For Multi-Agent Systems",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Yuguang Fang",
+    "type": "patent",
+    "isFirstAuthor": true,
+    "categories": ["multi-agent-security"],
+    "tags": [
+      {
+        "text": "US Patent",
+        "class": "venue-tag"
+      },
+      {
+        "text": "Link",
+        "class": "code-tag",
+        "link": "https://scholars.cityu.edu.hk/en/publications/malicious-agent-detection-for-multi-agent-systems/"
+      }
+    ]
+  }
+] 

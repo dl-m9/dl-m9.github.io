@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All News - Senkang Forest Hu</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+    <style>
+        .kai-font {
+            font-family: KaiTi, STKaiti, "楷体", serif;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#" class="active">All News</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-info">
+                    <!-- Profile info will be loaded from JSON -->
+                </div>
+                <div class="profile-image">
+                    <img src="../assets/profile.jpg" alt="Senkang Hu" id="profile-img">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="all-news" class="section">
+            <div class="container">
+                <h2 class="section-title">All News & Updates</h2>
+                <div id="all-news-container" class="news-list">
+                    <!-- News items will be dynamically loaded here from news.json -->
+                </div>
+                <div class="back-to-home">
+                    <a href="../index.html" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to Homepage</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="copyright-year"></span> Senkang Forest Hu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Set copyright year
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+        
+        // Mobile navigation horizontal scroll handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks) {
+                // Check if scrollable
+                const checkScrollable = () => {
+                    const isScrollable = navLinks.scrollWidth > navLinks.clientWidth;
+                    document.querySelector('nav .container').classList.toggle('has-scroll', isScrollable);
+                };
+                
+                // Check on load and resize
+                checkScrollable();
+                window.addEventListener('resize', checkScrollable);
+                
+                // Scroll to active link
+                const activeLink = navLinks.querySelector('a.active');
+                if (activeLink) {
+                    const activeLi = activeLink.closest('li');
+                    if (activeLi) {
+                        setTimeout(() => {
+                            // Center the active link
+                            const scrollPos = activeLi.offsetLeft - (navLinks.clientWidth / 2) + (activeLi.offsetWidth / 2);
+                            navLinks.scrollLeft = Math.max(0, scrollPos);
+                        }, 100);
+                    }
+                }
+            }
+            
+            // Apply KaiTi font to all Chinese characters that are not already wrapped in .kai-font
+            function applyKaiFont() {
+                const textNodes = [];
+                const chineseRegex = /[\u4e00-\u9fff]+/;
+                
+                // Recursive function to get all text nodes
+                function getTextNodes(node) {
+                    if (node.nodeType === 3) { // Text node
+                        if (chineseRegex.test(node.nodeValue)) {
+                            textNodes.push(node);
+                        }
+                    } else if (node.nodeType === 1 && node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') { // Element node
+                        // Skip if the node already has the kai-font class or is a parent of one
+                        if (!node.classList || !node.classList.contains('kai-font')) {
+                            for (let i = 0; i < node.childNodes.length; i++) {
+                                getTextNodes(node.childNodes[i]);
+                            }
+                        }
+                    }
+                }
+                
+                getTextNodes(document.body);
+                
+                // Process text nodes containing Chinese characters
+                textNodes.forEach(textNode => {
+                    const text = textNode.nodeValue;
+                    const parts = [];
+                    let lastIndex = 0;
+                    
+                    // Find all Chinese character sequences
+                    text.replace(/([\u4e00-\u9fff]+)/g, (match, p1, offset) => {
+                        // Add text before the match
+                        if (offset > lastIndex) {
+                            parts.push(document.createTextNode(text.substring(lastIndex, offset)));
+                        }
+                        
+                        // Create span for Chinese characters
+                        const span = document.createElement('span');
+                        span.className = 'kai-font';
+                        span.textContent = p1;
+                        parts.push(span);
+                        
+                        lastIndex = offset + match.length;
+                    });
+                    
+                    // Add remaining text
+                    if (lastIndex < text.length) {
+                        parts.push(document.createTextNode(text.substring(lastIndex)));
+                    }
+                    
+                    // Replace original text node with processed parts
+                    if (parts.length > 0) {
+                        const fragment = document.createDocumentFragment();
+                        parts.forEach(part => fragment.appendChild(part));
+                        textNode.parentNode.replaceChild(fragment, textNode);
+                    }
+                });
+            }
+            
+            // Run the function to apply KaiTi font to Chinese characters
+            applyKaiFont();
+        });
+    </script>
+    <script src="../script.js"></script>
+</body>
+</html> 

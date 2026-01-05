@@ -1,0 +1,43 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# JavaScript Functionality
+
+The [script.js](mdc:script.js) file powers all dynamic content and interactions on the website.
+
+## Core Functions
+
+### Content Loading
+- `loadProfileInfo()`: Loads and renders personal information from profile-info.json
+- `loadPublications()`: Loads and renders publications from publications.json, organized by type
+- `renderNewsItems()`: Renders news items from news.json, with different behavior for homepage and all-news page
+
+### Interactive Features
+- Publication filtering (All/Preprints/Accepted/First Author)
+- Smooth scrolling navigation
+- Active link tracking during scrolling
+- Mobile-friendly navigation handling
+
+## Event Listeners
+
+The script sets up several event listeners:
+- DOM content loaded event: Initializes all functionality
+- Click events on filter buttons: For publication filtering
+- Click events on navigation links: For smooth scrolling
+- Scroll events: For updating active navigation links
+
+## JSON Data Processing
+
+Each JSON file is processed to dynamically generate HTML content:
+1. Fetch data from JSON file
+2. Process and organize the data
+3. Generate HTML elements
+4. Insert elements into the DOM
+
+## Responsive Behavior
+
+JavaScript also handles some aspects of responsive behavior:
+- Path adjustments for JSON files based on current page
+- Special handling for section visibility during filtering

@@ -1,0 +1,76 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Content Modification Guide
+
+This guide explains how to update and modify content on the website.
+
+## Personal Information
+
+To update personal information:
+1. Edit [data/profile-info.json](mdc:data/profile-info.json)
+2. Change the name, subtitle, and social links as needed
+3. Replace profile image in the assets directory if needed
+
+## Publications
+
+To add or modify publications:
+1. Edit [data/publications.json](mdc:data/publications.json)
+2. Follow the existing JSON structure:
+```json
+{
+  "number": 1,
+  "title": "Publication Title",
+  "authors": "<strong><u>Your Name</u></strong>, Co-author One, Co-author Two",
+  "type": "preprint",  // or "accepted"
+  "isFirstAuthor": true,
+  "venue": "Conference or Journal Name",  // for accepted papers
+  "tags": [
+    {
+      "text": "Tag Label",
+      "class": "tag-class",
+      "link": "https://link-to-paper.com"
+    }
+  ]
+}
+```
+
+## News Items
+
+To add new news items:
+1. Edit [data/news.json](mdc:data/news.json)
+2. Add new items at the beginning of the JSON array:
+```json
+{
+  "date": "Month YYYY",
+  "title": "News Title",
+  "content": "News content description",
+  "links": [
+    {
+      "text": "Link Text",
+      "url": "https://link-url.com"
+    }
+  ]
+}
+```
+
+## Static Content
+
+For other static content like Education, Research Interests, Honors & Awards, etc.:
+1. Directly edit the relevant sections in [index.html](mdc:index.html)
+2. Follow the existing HTML structure and styling
+
+## Adding Images
+
+To add new images:
+1. Place image files in the [assets](mdc:assets) directory
+2. Reference them using the relative path: `assets/image-name.jpg`
+
+## Adding New Pages
+
+To add a new page:
+1. Create a new HTML file in the [pages](mdc:pages) directory
+2. Follow the structure of [pages/all-news.html](mdc:pages/all-news.html) for header and styling consistency 
+3. Adjust path references for CSS, JavaScript, and JSON files (add `../` prefix)
