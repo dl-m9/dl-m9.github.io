@@ -1480,34 +1480,36 @@ nav {
 }
 
 /* Publications */
-.publication-filter {
-    margin-bottom: 2rem;
+.filter-container {
+    margin-bottom: 1rem;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
     position: relative;
+    justify-content: center;
 }
 
 /* 移动端优化：过滤按钮区域添加滚动提示 */
 @media (max-width: 768px) {
-    .publication-filter {
+    .filter-container {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: thin;
         padding-bottom: 0.5rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
+        justify-content: flex-start;
     }
     
-    .publication-filter::-webkit-scrollbar {
+    .filter-container::-webkit-scrollbar {
         height: 4px;
     }
     
-    .publication-filter::-webkit-scrollbar-track {
+    .filter-container::-webkit-scrollbar-track {
         background: rgba(0, 0, 0, 0.05);
         border-radius: 2px;
     }
     
-    .publication-filter::-webkit-scrollbar-thumb {
+    .filter-container::-webkit-scrollbar-thumb {
         background: var(--primary-color);
         border-radius: 2px;
     }
@@ -1538,6 +1540,8 @@ nav {
     transition: all 0.3s ease;
     white-space: nowrap;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 0.8rem;
+    margin-bottom: 0.8rem;
 }
 
 .filter-btn:hover {
