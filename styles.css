@@ -2,15 +2,20 @@
 :root {
     --primary-color: #0066cc;
     --secondary-color: #f8f9fa;
-    --text-color: #2c3e50;  /* 更深的文字颜色，提升对比度 */
+    --text-color: #2c3e50;
+    /* 更深的文字颜色，提升对比度 */
     --black-color: #000;
-    --light-text: #6c757d;  /* 更柔和的灰色 */
-    --border-color: #e9ecef;  /* 更柔和的边框 */
-    --section-spacing: 5rem;  /* 增加区块间距 */
+    --light-text: #6c757d;
+    /* 更柔和的灰色 */
+    --border-color: #e9ecef;
+    /* 更柔和的边框 */
+    --section-spacing: 5rem;
+    /* 增加区块间距 */
     --timeline-color: #f0f0f0;
-    --background-color: rgba(0, 102, 204, 0.1);  /* 更柔和的背景色 */
+    --background-color: rgba(0, 102, 204, 0.1);
+    /* 更柔和的背景色 */
     --subsection-font-size: 1.3rem;
-    
+
     /* 新增：阴影系统 */
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -35,7 +40,8 @@ body {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;  /* 增加左右内边距 */
+    padding: 0 20px;
+    /* 增加左右内边距 */
 }
 
 .kai-font {
@@ -189,109 +195,131 @@ header.header-gradient-flow .header-bg-overlay {
 
 /* 流动动画 - 增强幅度和速度 */
 @keyframes gf-base {
-    0%, 100% { 
-        background-position: 0% 0%, 100% 100%, 40% 60%; 
+
+    0%,
+    100% {
+        background-position: 0% 0%, 100% 100%, 40% 60%;
     }
-    33% { 
-        background-position: 50% 25%, 50% 75%, 60% 40%; 
+
+    33% {
+        background-position: 50% 25%, 50% 75%, 60% 40%;
     }
-    66% { 
-        background-position: 100% 50%, 0% 50%, 20% 80%; 
+
+    66% {
+        background-position: 100% 50%, 0% 50%, 20% 80%;
     }
 }
 
 @keyframes gf-liquid {
-    0%, 100% { 
-        transform: translate(0, 0) rotate(0deg) scale(1); 
-        opacity: 0.88; 
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        opacity: 0.88;
     }
-    20% { 
-        transform: translate(6%, -5%) rotate(3deg) scale(1.06); 
-        opacity: 0.95; 
+
+    20% {
+        transform: translate(6%, -5%) rotate(3deg) scale(1.06);
+        opacity: 0.95;
     }
-    40% { 
-        transform: translate(-4%, 5%) rotate(-2deg) scale(0.94); 
-        opacity: 0.82; 
+
+    40% {
+        transform: translate(-4%, 5%) rotate(-2deg) scale(0.94);
+        opacity: 0.82;
     }
-    60% { 
-        transform: translate(5%, 4%) rotate(2deg) scale(1.04); 
-        opacity: 0.9; 
+
+    60% {
+        transform: translate(5%, 4%) rotate(2deg) scale(1.04);
+        opacity: 0.9;
     }
-    80% { 
-        transform: translate(-3%, -3%) rotate(-1deg) scale(0.97); 
-        opacity: 0.85; 
+
+    80% {
+        transform: translate(-3%, -3%) rotate(-1deg) scale(0.97);
+        opacity: 0.85;
     }
 }
 
 @keyframes gf-waves {
-    0%, 100% { 
-        transform: translate(0, 0) rotate(0deg) scale(1); 
-        filter: blur(70px); 
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        filter: blur(70px);
     }
-    20% { 
-        transform: translate(-6%, 4%) rotate(8deg) scale(1.08); 
-        filter: blur(75px); 
+
+    20% {
+        transform: translate(-6%, 4%) rotate(8deg) scale(1.08);
+        filter: blur(75px);
     }
-    40% { 
-        transform: translate(5%, -5%) rotate(-6deg) scale(0.92); 
-        filter: blur(65px); 
+
+    40% {
+        transform: translate(5%, -5%) rotate(-6deg) scale(0.92);
+        filter: blur(65px);
     }
-    60% { 
-        transform: translate(-4%, 6%) rotate(7deg) scale(1.06); 
-        filter: blur(78px); 
+
+    60% {
+        transform: translate(-4%, 6%) rotate(7deg) scale(1.06);
+        filter: blur(78px);
     }
-    80% { 
-        transform: translate(6%, -4%) rotate(-5deg) scale(0.95); 
-        filter: blur(68px); 
+
+    80% {
+        transform: translate(6%, -4%) rotate(-5deg) scale(0.95);
+        filter: blur(68px);
     }
 }
 
 @keyframes gf-texture {
-    0% { 
-        transform: translate(0, 0) rotate(0deg); 
+    0% {
+        transform: translate(0, 0) rotate(0deg);
     }
-    50% { 
-        transform: translate(80px, 80px) rotate(180deg); 
+
+    50% {
+        transform: translate(80px, 80px) rotate(180deg);
     }
-    100% { 
-        transform: translate(160px, 160px) rotate(360deg); 
+
+    100% {
+        transform: translate(160px, 160px) rotate(360deg);
     }
 }
 
 /* 旋转动画 - 让背景真正流动起来 */
 @keyframes gf-rotate {
-    0% { 
-        transform: translate(0, 0) rotate(0deg); 
+    0% {
+        transform: translate(0, 0) rotate(0deg);
         background-position: 0% 0%;
     }
-    50% { 
-        transform: translate(5%, 5%) rotate(180deg); 
+
+    50% {
+        transform: translate(5%, 5%) rotate(180deg);
         background-position: 50% 50%;
     }
-    100% { 
-        transform: translate(0, 0) rotate(360deg); 
+
+    100% {
+        transform: translate(0, 0) rotate(360deg);
         background-position: 100% 100%;
     }
 }
 
 @keyframes gf-rotate-reverse {
-    0% { 
-        transform: translate(0, 0) rotate(0deg); 
+    0% {
+        transform: translate(0, 0) rotate(0deg);
         background-position: 0% 0%;
     }
-    50% { 
-        transform: translate(-5%, -5%) rotate(-180deg); 
+
+    50% {
+        transform: translate(-5%, -5%) rotate(-180deg);
         background-position: 50% 50%;
     }
-    100% { 
-        transform: translate(0, 0) rotate(-360deg); 
+
+    100% {
+        transform: translate(0, 0) rotate(-360deg);
         background-position: 100% 100%;
     }
 }
 
 /* 渐变流动风格下的头像效果调整 - 能量光晕 */
 header.header-gradient-flow #profile-img {
-    box-shadow: 
+    box-shadow:
         0 0 0 4px rgba(255, 255, 255, 0.2),
         /* 电光紫光晕 */
         0 0 20px rgba(139, 92, 246, 0.5),
@@ -310,7 +338,7 @@ header.header-gradient-flow #profile-img {
 
 header.header-gradient-flow #profile-img:hover {
     transform: scale(1.05) rotate(5deg);
-    box-shadow: 
+    box-shadow:
         0 0 0 4px rgba(255, 255, 255, 0.3),
         /* 增强的电光紫光晕 */
         0 0 30px rgba(139, 92, 246, 0.7),
@@ -334,7 +362,7 @@ header::before {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: 
+    background:
         radial-gradient(circle at 50% 50%, rgba(76, 29, 149, 0.15), transparent 40%),
         radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.1), transparent 30%),
         radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.1), transparent 30%);
@@ -352,7 +380,7 @@ header::after {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
+    background-image:
         /* 细碎繁星 */
         radial-gradient(1px 1px at 10% 10%, #fff, transparent),
         radial-gradient(1px 1px at 20% 20%, #fff, transparent),
@@ -364,8 +392,8 @@ header::after {
         radial-gradient(1px 1px at 80% 80%, #fff, transparent),
         radial-gradient(1px 1px at 90% 90%, #fff, transparent),
         /* 亮星 */
-        radial-gradient(2px 2px at 15% 25%, rgba(255,255,255,0.9), transparent),
-        radial-gradient(2px 2px at 75% 65%, rgba(255,255,255,0.9), transparent);
+        radial-gradient(2px 2px at 15% 25%, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(2px 2px at 75% 65%, rgba(255, 255, 255, 0.9), transparent);
     background-size: 100% 100%;
     animation: starPulse 4s ease-in-out infinite alternate;
     opacity: 0.6;
@@ -455,8 +483,8 @@ header::after {
     height: 2px;
     background: #fff;
     border-radius: 50%;
-    box-shadow: 
-        0 0 4px 1px rgba(255, 255, 255, 0.8), 
+    box-shadow:
+        0 0 4px 1px rgba(255, 255, 255, 0.8),
         0 0 12px 2px rgba(56, 189, 248, 0.6);
     animation: twinkle 5s ease-in-out infinite;
 }
@@ -485,26 +513,41 @@ header::after {
 }
 
 @keyframes twinkle {
-    0%, 100% { 
-        transform: scale(0.8) rotate(0deg); 
-        opacity: 0.4; 
+
+    0%,
+    100% {
+        transform: scale(0.8) rotate(0deg);
+        opacity: 0.4;
         filter: brightness(0.8);
     }
-    50% { 
-        transform: scale(1.2) rotate(10deg); 
-        opacity: 1; 
+
+    50% {
+        transform: scale(1.2) rotate(10deg);
+        opacity: 1;
         filter: brightness(1.5) drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
     }
 }
 
 @keyframes nebulaRotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes starPulse {
-    0% { opacity: 0.4; transform: scale(0.98); }
-    100% { opacity: 0.8; transform: scale(1.02); }
+    0% {
+        opacity: 0.4;
+        transform: scale(0.98);
+    }
+
+    100% {
+        opacity: 0.8;
+        transform: scale(1.02);
+    }
 }
 
 @keyframes animateShootingStar {
@@ -512,9 +555,11 @@ header::after {
         transform: rotate(315deg) translateX(0);
         opacity: 1;
     }
+
     70% {
         opacity: 1;
     }
+
     100% {
         transform: rotate(315deg) translateX(-1000px);
         opacity: 0;
@@ -546,7 +591,8 @@ header .subtitle {
 }
 
 header .subtitle span {
-    color: rgba(255, 255, 255, 0.85); /* 与链接颜色一致 */
+    color: rgba(255, 255, 255, 0.85);
+    /* 与链接颜色一致 */
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -591,7 +637,7 @@ header .contact-info i {
     border-radius: 50%;
     object-fit: cover;
     /* 星球光环效果 */
-    box-shadow: 
+    box-shadow:
         0 0 0 4px rgba(255, 255, 255, 0.1),
         0 0 20px rgba(56, 189, 248, 0.4),
         0 0 40px rgba(76, 29, 149, 0.2),
@@ -605,7 +651,7 @@ header .contact-info i {
 
 #profile-img:hover {
     transform: scale(1.05) rotate(5deg);
-    box-shadow: 
+    box-shadow:
         0 0 0 4px rgba(255, 255, 255, 0.2),
         0 0 30px rgba(56, 189, 248, 0.6),
         0 0 60px rgba(76, 29, 149, 0.4),
@@ -675,10 +721,12 @@ h1 {
 
 /* Navigation Styles */
 nav {
-    background: rgba(10, 14, 39, 0.95); /* 深色半透明背景，与header匹配 */
+    background: rgba(10, 14, 39, 0.95);
+    /* 深色半透明背景，与header匹配 */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);  /* 毛玻璃效果 */
+    backdrop-filter: blur(10px);
+    /* 毛玻璃效果 */
     position: sticky;
     top: 0;
     z-index: 100;
@@ -737,31 +785,34 @@ nav {
     h1 {
         font-size: 2rem;
     }
-    
+
     nav {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         z-index: 1000;
-        background: rgba(10, 14, 39, 0.98); /* 移动端深色背景 */
+        background: rgba(10, 14, 39, 0.98);
+        /* 移动端深色背景 */
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         overflow: hidden;
     }
-    
+
     body {
         padding-top: 0;
     }
-    
+
     .nav-links {
         display: flex;
         justify-content: flex-start;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin; /* Firefox - 显示细滚动条 */
+        scrollbar-width: thin;
+        /* Firefox - 显示细滚动条 */
         scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-        -ms-overflow-style: none;  /* IE and Edge */
+        -ms-overflow-style: none;
+        /* IE and Edge */
         white-space: nowrap;
         padding: 0.5rem 0;
         height: auto;
@@ -769,24 +820,25 @@ nav {
         margin: 0;
         position: relative;
     }
-    
+
     .nav-links::-webkit-scrollbar {
-        height: 3px; /* Chrome, Safari, Opera - 显示细滚动条 */
+        height: 3px;
+        /* Chrome, Safari, Opera - 显示细滚动条 */
     }
-    
+
     .nav-links::-webkit-scrollbar-track {
         background: transparent;
     }
-    
+
     .nav-links::-webkit-scrollbar-thumb {
         background: rgba(255, 255, 255, 0.3);
         border-radius: 2px;
     }
-    
+
     .nav-links::-webkit-scrollbar-thumb:hover {
         background: rgba(255, 255, 255, 0.5);
     }
-    
+
     /* 添加渐变提示，表示可以滚动 */
     nav .container::after {
         content: '';
@@ -799,27 +851,28 @@ nav {
         pointer-events: none;
         z-index: 1;
     }
-    
+
     nav .container {
         padding: 0;
         position: relative;
     }
-    
+
     .nav-links li {
         display: inline-block;
         margin: 0 0.8rem;
         flex-shrink: 0;
     }
-    
+
     .nav-links li:first-child {
         margin-left: 15px;
     }
-    
+
     .nav-links li:last-child {
         margin-right: 15px;
-        padding-right: 5px; /* Add a bit of padding at the end for better scrolling */
+        padding-right: 5px;
+        /* Add a bit of padding at the end for better scrolling */
     }
-    
+
     .nav-links a {
         height: auto;
         line-height: normal;
@@ -828,113 +881,113 @@ nav {
         white-space: nowrap;
         color: #fff;
     }
-    
+
     /* 保留渐变提示，但只在需要时显示 */
     nav .container::before {
         display: none;
     }
-    
+
     /* 渐变提示会在滚动时动态显示/隐藏 */
     nav .container::after {
         opacity: 0;
         transition: opacity 0.3s ease;
     }
-    
+
     /* 当导航可以滚动时显示渐变提示 */
     nav .container.has-scroll::after {
         opacity: 1;
     }
-    
+
     .section {
         padding: 3rem 0;
     }
-    
+
     #profile-img {
         width: 150px;
         height: 150px;
     }
-    
+
     .profile-image {
         width: 150px;
         height: 150px;
     }
-    
-        
+
+
     .projects-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .gallery-container {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
-    
+
     /* Hide timeline elements on mobile */
     .timeline {
         padding-left: 0;
     }
-    
+
     .timeline::before {
         display: none;
     }
-    
+
     .timeline-marker {
         display: none;
     }
-    
+
     .edu-content-wrapper {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .edu-text {
         padding-right: 0;
         margin-bottom: 1rem;
     }
-    
+
     .school-logo {
         align-self: center;
     }
-    
+
     .edu-logo {
         width: 100px;
         height: 100px;
     }
-    
+
     .honor-item {
         flex-direction: column;
     }
-    
+
     .honor-year {
         margin-bottom: 0.75rem;
         margin-right: 0;
     }
-    
+
     .news-item {
         flex-direction: column;
     }
-    
+
     .news-date {
         margin-right: 0;
         margin-bottom: 1rem;
     }
-    
+
     .service-list {
         gap: 0.5rem;
     }
-    
+
     .service-list li {
         font-size: 0.85rem;
         padding: 0.5rem 1rem;
     }
-    
+
     .address-info p {
         font-size: 1rem;
     }
-    
+
     .address-description {
         font-size: 0.9rem !important;
     }
-    
+
     header {
         padding-top: 80px;
     }
@@ -944,45 +997,46 @@ nav {
     nav {
         padding: 0;
     }
-    
+
     body {
-        padding-top: 42px; /* Adjust padding for smaller screens */
+        padding-top: 42px;
+        /* Adjust padding for smaller screens */
     }
-    
+
     .nav-links {
         padding: 0.3rem 0;
     }
-    
+
     .nav-links li {
         margin: 0 0.6rem;
     }
-    
+
     .nav-links li:first-child {
         margin-left: 10px;
     }
-    
+
     .nav-links li:last-child {
         margin-right: 10px;
     }
-    
+
     .nav-links a {
         font-size: 0.9rem;
         padding: 0.4rem 0;
         color: #fff;
     }
-    
+
     .container nav::before,
     .container nav::after {
         width: 20px;
     }
-    
+
     .contact-info {
         flex-direction: row;
         gap: 0.5rem;
         justify-content: flex-start;
         margin-bottom: 1rem;
     }
-    
+
     .contact-info a {
         width: auto;
         min-width: 45px;
@@ -991,54 +1045,54 @@ nav {
         border-radius: 20px;
         white-space: nowrap;
     }
-    
+
     .contact-info i {
         font-size: 1.5rem;
     }
-    
+
     .icon-svg {
         width: 1.5rem;
         height: 1.5rem;
     }
-    
+
     .skill-item {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .skill-name {
         margin-bottom: 0.5rem;
     }
-    
+
     .gallery-container {
         grid-template-columns: 1fr;
     }
-    
+
     .contact-info-card {
         grid-template-columns: 1fr;
     }
-    
+
     .contact-social {
         grid-column: span 1;
     }
-    
+
     nav .container {
         padding: 0 2px;
     }
-    
+
     .profile-image {
         align-self: center;
         margin: 0 auto;
         width: 140px;
         height: 140px;
     }
-    
+
     #profile-img {
         width: 140px;
         height: 140px;
     }
-    
-        
+
+
     header {
         padding-top: 70px;
     }
@@ -1090,8 +1144,49 @@ nav {
     font-size: 1.1rem;
 }
 
+.job-seeking-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    margin: 2rem auto;
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.08) 0%, rgba(102, 126, 234, 0.08) 100%);
+    border-radius: 50px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    text-align: center;
+    width: fit-content;
+}
+
+.job-seeking-notice b {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.job-seeking-notice u {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    position: relative;
+}
+
+.job-seeking-notice u::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color) 0%, rgba(102, 126, 234, 0.5) 100%);
+    border-radius: 1px;
+    opacity: 0.6;
+}
+
 /* News Section */
-.news-container, .news-list {
+.news-container,
+.news-list {
     margin-top: 1rem;
 }
 
@@ -1146,7 +1241,8 @@ nav {
     box-shadow: none;
 }
 
-.date-highlight, .year-highlight {
+.date-highlight,
+.year-highlight {
     background: linear-gradient(135deg, var(--primary-color) 0%, #667eea 100%);
     color: white;
     padding: 8px 18px;
@@ -1189,7 +1285,8 @@ nav {
     text-decoration: underline;
 }
 
-.view-all-news, .back-to-home {
+.view-all-news,
+.back-to-home {
     margin-top: 2rem;
     text-align: center;
 }
@@ -1221,7 +1318,7 @@ nav {
     .news-item {
         flex-direction: column;
     }
-    
+
     .news-date {
         margin-right: 0;
         margin-bottom: 1rem;
@@ -1254,7 +1351,7 @@ nav {
         flex-direction: column;
         gap: 1.5rem;
     }
-    
+
     .research-area {
         min-width: 100%;
         padding: 1.5rem;
@@ -1364,7 +1461,8 @@ nav {
     font-family: 'Prata', serif;
     font-size: 6rem;
     font-weight: 1000;
-    color: rgba(0, 0, 0, 0.03); /* Extremely subtle */
+    color: rgba(0, 0, 0, 0.03);
+    /* Extremely subtle */
     letter-spacing: 0.05em;
     white-space: nowrap;
     z-index: -1;
@@ -1412,21 +1510,27 @@ nav {
     .edu-item {
         padding: 1rem 0;
     }
+
     .edu-content-wrapper {
         gap: 1rem;
     }
+
     .edu-logo {
         width: 60px;
         height: 60px;
         padding: 0;
     }
+
     .edu-school-name {
         font-size: 1.2rem;
     }
+
     .edu-watermark {
         font-size: 4rem;
-        display: none; /* Hide on mobile to avoid overlap */
+        display: none;
+        /* Hide on mobile to avoid overlap */
     }
+
     .edu-extra {
         font-size: 0.85rem;
     }
@@ -1499,21 +1603,21 @@ nav {
         margin-bottom: 2rem;
         justify-content: flex-start;
     }
-    
+
     .filter-container::-webkit-scrollbar {
         height: 4px;
     }
-    
+
     .filter-container::-webkit-scrollbar-track {
         background: rgba(0, 0, 0, 0.05);
         border-radius: 2px;
     }
-    
+
     .filter-container::-webkit-scrollbar-thumb {
         background: var(--primary-color);
         border-radius: 2px;
     }
-    
+
     .filter-btn {
         flex-shrink: 0;
         font-size: 0.8rem;
@@ -1562,7 +1666,8 @@ nav {
 .publications-list {
     display: flex;
     flex-direction: column;
-    gap: 0; /* Gap managed by padding/border */
+    gap: 0;
+    /* Gap managed by padding/border */
 }
 
 .publication {
@@ -1626,7 +1731,8 @@ nav {
 .pub-content-main {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end; /* Align tags with the last line of text (venue/author) */
+    align-items: flex-end;
+    /* Align tags with the last line of text (venue/author) */
     gap: 1.5rem;
 }
 
@@ -1663,26 +1769,29 @@ nav {
     margin-bottom: 0.2rem;
 }
 
-.pub-content-text > p:last-child {
+.pub-content-text>p:last-child {
     margin-bottom: 0;
 }
 
 .pub-tags {
     display: flex;
-    flex-direction: row; /* Back to horizontal */
+    flex-direction: row;
+    /* Back to horizontal */
     flex-wrap: wrap;
     gap: 0.8rem;
     align-items: center;
-    justify-content: flex-end; /* Right align under the text */
+    justify-content: flex-end;
+    /* Right align under the text */
     flex-shrink: 0;
     margin-top: 0;
 }
 
-.pub-tags > * {
+.pub-tags>* {
     display: inline-flex !important;
     justify-content: flex-end !important;
     text-align: right !important;
-    width: auto !important; /* Back to auto width */
+    width: auto !important;
+    /* Back to auto width */
     padding: 0 !important;
     margin: 0 !important;
     box-sizing: border-box;
@@ -1719,7 +1828,7 @@ nav {
     .publication {
         flex-direction: column;
     }
-    
+
     .pub-venue-label {
         width: 100%;
         flex-direction: row;
@@ -1731,7 +1840,7 @@ nav {
     .pub-number::after {
         content: '.';
     }
-    
+
     .pub-content {
         padding: 0;
     }
@@ -1770,7 +1879,9 @@ nav {
 }
 
 /* Link tags (PDF, Code, Blog, Project) */
-.highlight-tag, .code-tag, .blog-tag {
+.highlight-tag,
+.code-tag,
+.blog-tag {
     background-color: transparent;
     color: var(--primary-color);
     text-decoration: none;
@@ -1783,7 +1894,8 @@ nav {
     cursor: pointer;
 }
 
-.code-tag:hover, .blog-tag:hover {
+.code-tag:hover,
+.blog-tag:hover {
     color: #004080;
     background: none;
     transform: none;
@@ -1799,7 +1911,8 @@ nav {
     font-size: 0.75rem;
 }
 
-.code-link, .blog-link {
+.code-link,
+.blog-link {
     align-items: center;
     padding: 0;
     background-color: transparent;
@@ -1814,7 +1927,8 @@ nav {
     letter-spacing: 0.02em;
 }
 
-.code-link:hover, .blog-link:hover {
+.code-link:hover,
+.blog-link:hover {
     color: #004080;
     text-decoration: underline;
     background: none;
@@ -1923,17 +2037,17 @@ footer {
     .honor-item {
         flex-direction: column;
     }
-    
+
     .honor-year {
         margin-bottom: 0.75rem;
         margin-right: 0;
     }
-    
+
     /* 优化Education section在移动端的间距 */
     .edu-item {
         margin-bottom: 0.5rem;
     }
-    
+
     /* 优化Services section在移动端的显示 */
     .service-category {
         margin-bottom: 2rem;
@@ -1955,7 +2069,7 @@ footer {
 .btn-primary {
     background-color: var(--background-color);
     color: var(--primary-color);
-    border:  var(--background-color);
+    border: var(--background-color);
 }
 
 .btn-primary:hover {
@@ -2049,13 +2163,13 @@ footer {
         align-items: center;
         gap: 2rem;
     }
-    
+
     .profile-image {
         align-self: center;
         margin-left: 0;
         text-align: center;
     }
-    
+
     .research-areas {
         flex-direction: column;
     }
@@ -2065,74 +2179,74 @@ footer {
     h1 {
         font-size: 2rem;
     }
-    
+
     .nav-links {
         justify-content: center;
     }
-    
+
     .nav-links li {
         margin: 0 1rem;
     }
-    
+
     .section {
         padding: 3rem 0;
     }
-    
+
     #profile-img {
         width: 150px;
         height: 150px;
     }
-    
+
     .profile-image {
         width: 150px;
         height: 150px;
     }
-    
-        
+
+
     .projects-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .gallery-container {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
-    
+
     /* Hide timeline elements on mobile */
     .timeline {
         padding-left: 0;
     }
-    
+
     .timeline::before {
         display: none;
     }
-    
+
     .timeline-marker {
         display: none;
     }
-    
+
     .edu-content-wrapper {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .edu-text {
         padding-right: 0;
         margin-bottom: 1rem;
     }
-    
+
     .school-logo {
         align-self: center;
     }
-    
+
     .edu-logo {
         width: 100px;
         height: 100px;
     }
-    
+
     .honor-item {
         flex-direction: column;
     }
-    
+
     .honor-year {
         margin-bottom: 0.75rem;
         margin-right: 0;
@@ -2146,7 +2260,7 @@ footer {
         justify-content: flex-start;
         margin-bottom: 1rem;
     }
-    
+
     .contact-info a {
         width: auto;
         min-width: 45px;
@@ -2155,80 +2269,81 @@ footer {
         border-radius: 20px;
         white-space: nowrap;
     }
-    
+
     .contact-info i {
         font-size: 1.5rem;
     }
-    
+
     .icon-svg {
         width: 1.5rem;
         height: 1.5rem;
     }
-    
+
     nav {
         padding: 3px 0;
     }
-    
+
     .nav-links {
         height: auto;
         padding: 5px 0;
     }
-    
+
     .nav-links li {
         margin: 0 10px;
     }
-    
+
     .nav-links a {
         font-size: 0.9rem;
         padding: 8px 0;
     }
-    
+
     .container nav::before,
     .container nav::after {
         width: 20px;
     }
-    
+
     .skill-item {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .skill-name {
         margin-bottom: 0.5rem;
     }
-    
+
     .gallery-container {
         grid-template-columns: 1fr;
     }
-    
+
     .contact-info-card {
         grid-template-columns: 1fr;
     }
-    
+
     .contact-social {
         grid-column: span 1;
     }
-    
+
     .profile-image {
         align-self: center;
         margin: 0 auto;
         width: 140px;
         height: 140px;
     }
-    
+
     #profile-img {
         width: 140px;
         height: 140px;
     }
-    
-        
+
+
     header {
         padding-top: 70px;
     }
 }
 
 /* Ensure date-highlight and year-highlight have the same styling */
-.date-highlight, .year-highlight {
+.date-highlight,
+.year-highlight {
     display: inline-block;
     background: linear-gradient(135deg, var(--primary-color) 0%, #667eea 100%);
     color: white;
@@ -2249,6 +2364,7 @@ footer {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -2318,7 +2434,7 @@ footer {
     .service-list {
         gap: 0.5rem;
     }
-    
+
     .service-list li {
         font-size: 0.85rem;
         padding: 0.5rem 1rem;
@@ -2385,7 +2501,7 @@ footer {
     .address-info p {
         font-size: 1rem;
     }
-    
+
     .address-description {
         font-size: 0.9rem !important;
     }
