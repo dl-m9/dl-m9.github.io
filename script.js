@@ -272,17 +272,19 @@ function loadPublications() {
         .then(publications => {
             // Group publications by type and year field
             const preprints = publications.filter(pub => pub.type === 'preprint');
+            const accepted2026 = publications.filter(pub => pub.type === 'accepted' && pub.year === '2026');
             const accepted2025 = publications.filter(pub => pub.type === 'accepted' && pub.year === '2025');
             const accepted2024 = publications.filter(pub => pub.type === 'accepted' && pub.year === '2024');
             const patents = publications.filter(pub => pub.type === 'patent');
             
             // Debug - log the counts to console
             console.log('Preprints:', preprints.length);
+            console.log('2026 Papers:', accepted2026.length);
             console.log('2025 Papers:', accepted2025.length);
             console.log('2024 Papers:', accepted2024.length);
             console.log('Patents:', patents.length);
             console.log('Total:', publications.length);
-            console.log('Sum of groups:', preprints.length + accepted2025.length + accepted2024.length + patents.length);
+            console.log('Sum of groups:', preprints.length + accepted2026.length + accepted2025.length + accepted2024.length + patents.length);
             
             // Counters for auto-numbering publications
             let counter = 1;
@@ -297,6 +299,18 @@ function loadPublications() {
                 // Add preprints
                 renderPublicationGroup(preprints, publicationsList, counter);
                 counter += preprints.length;
+            }
+            
+            // Add section title for Accepted Papers in 2026
+            if (accepted2026.length > 0) {
+                const accepted2026Title = document.createElement('h3');
+                accepted2026Title.className = 'publication-section-title';
+                accepted2026Title.textContent = 'Accepted Papers in 2026';
+                publicationsList.appendChild(accepted2026Title);
+                
+                // Add 2026 papers
+                renderPublicationGroup(accepted2026, publicationsList, counter);
+                counter += accepted2026.length;
             }
             
             // Add section title for Accepted Papers in 2025

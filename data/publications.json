@@ -42,6 +42,29 @@
     ]
   },
   {
+    "title": "UAV-enabled Computing Power Networks: Design and Performance Analysis under Energy Constraints",
+    "authors": "Yiqin Deng, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Xiaoyu Guo, Haixia Zhang, and Yuguang Fang",
+    "type": "accepted",
+    "isFirstAuthor": false,
+    "venue": "IEEE Transactions on Mobile Computing.",
+    "year": "2026",
+    "tags": [
+      {
+        "text": "TMC'26",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
     "title": "CP-uniGuard: A Unified, Probability-Agnostic, and Adaptive Framework for Malicious Agent Detection and Defense in Multi-Agent Embodied Perception Systems",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Guowen Xu, Xinyuan Qian, Yiqin Deng, Xianhao Chen, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "accepted",
@@ -304,6 +327,7 @@
       }
     ]
   },
+  
   {
     "title": "UAV-enabled Computing Power Networks: Task Completion Probability Analysis",
     "authors": "Yiqin Deng, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Haixia Zhang, and Yuguang Fang",
