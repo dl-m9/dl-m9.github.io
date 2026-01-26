@@ -8,12 +8,6 @@
       "icon": "<i class=\"fas fa-envelope\"></i>"
     },
     {
-      "type": "wechat",
-      "url": "assets/wechat.jpg",
-      "icon": "<i class=\"fab fa-weixin\"></i>",
-      "target": "_blank"
-    },
-    {
       "type": "googleScholar",
       "url": "https://scholar.google.com/citations?hl=en&user=rtPVwT8AAAAJ",
       "icon": "<i class=\"fas fa-graduation-cap\"></i>",
