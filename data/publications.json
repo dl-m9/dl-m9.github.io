@@ -1,21 +1,7 @@
 [
   {
-    "title": "A Framework for Promoting Enhanced Robustness in Self-Supervised Reinforcement Learning Applied to Large-Scale Language Models",
-    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yuguang Fang, et al.",
-    "type": "preprint",
-    "isFirstAuthor": true,
-    "categories": ["llm-agent"],
-    "tags": [
-      {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "#"
-      }
-    ]
-  },
-  {
     "title": "Optimizing Agentic Reasoning with Retrieval via Information Gain Reward",
-    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Yu Guo, Sam Tak Wu Kwong, Yuguang Fang",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yong Dai, Yuzhi Zhao, Yihang Tao, Yu Guo, Zhengru Fang, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "preprint",
     "isFirstAuthor": true,
     "categories": ["llm-agent"],
