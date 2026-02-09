@@ -10,6 +10,11 @@
         "text": "PDF",
         "class": "code-tag",
         "link": "https://arxiv.org/abs/2602.00845"
+      },
+      {
+        "text": "Code", 
+        "class": "code-tag",
+        "link": "https://github.com/dl-m9/InfoReasoner"
       }
     ]
   },
