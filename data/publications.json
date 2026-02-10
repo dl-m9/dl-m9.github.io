@@ -193,6 +193,11 @@
         "link": "paper-pages/SVDecode/index.html"
       },
       {
+        "text": "Code",
+        "class": "code-tag",
+        "link": "https://github.com/dl-m9/SVDecode"
+      },
+      {
         "text": "CCF-A",
         "class": "ccf-tag"
       }
