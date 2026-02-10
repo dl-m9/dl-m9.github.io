@@ -12,6 +12,11 @@
         "link": "https://arxiv.org/abs/2602.00845"
       },
       {
+        "text": "Project",
+        "class": "code-tag",
+        "link": "paper-pages/inforeasoner/index.html"
+      },
+      {
         "text": "Code", 
         "class": "code-tag",
         "link": "https://github.com/dl-m9/InfoReasoner"

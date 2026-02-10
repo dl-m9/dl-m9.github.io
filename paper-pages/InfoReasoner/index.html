@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoReasoner: Optimizing Agentic Reasoning with Retrieval | Senkang Forest Hu</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../paper-common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☯️</text></svg>">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .paper-nav {
+            background: linear-gradient(135deg, #2f3d4a, #3a7bd5);
+            padding: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+
+        .paper-nav .nav-links {
+            display: flex;
+            list-style: none;
+            height: 60px;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            top: 60px;
+            right: 0;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .dropdown-content a {
+            color: #333 !important;
+            padding: 8px 14px !important;
+            text-decoration: none;
+            display: block;
+            line-height: 1.4 !important;
+            font-size: 0.95rem !important;
+            background: none !important;
+            border: none !important;
+            margin: 0 !important;
+            height: auto !important;
+            position: relative;
+        }
+
+        .dropdown-content a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            right: 10px;
+            height: 1px;
+            background-color: #ececec;
+        }
+
+        .dropdown-content a:last-child::after {
+            display: none;
+        }
+
+        .dropdown-content a:hover {
+            color: #0066cc !important;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeInSlide 0.25s ease;
+        }
+
+        @keyframes fadeInSlide {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .paper-nav .nav-links a {
+            display: inline-block;
+            height: 60px;
+            line-height: 60px;
+            font-weight: 500;
+            position: relative;
+            color: #fff;
+            padding: 0;
+            text-decoration: none;
+            font-size: 1rem;
+            background: none;
+            border: none;
+            border-radius: 0;
+        }
+
+        .paper-nav .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+
+        .paper-nav .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .paper-abstract {
+            text-align: justify;
+        }
+
+        .key-findings {
+            margin: 0;
+            padding-left: 1.2rem;
+        }
+
+        .key-findings li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .bibtex {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            white-space: pre;
+            border: 1px solid #ccc;
+        }
+
+        .math-block {
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .figure-panel {
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+        }
+
+        .paper-figure-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0;
+            border: none;
+            background: transparent;
+        }
+
+        .figure-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(260px, 1fr));
+            gap: 0.8rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.25rem 0;
+        }
+
+        .paper-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .paper-table th,
+        .paper-table td {
+            border-bottom: 1px solid #e4e4e4;
+            padding: 0.55rem 0.6rem;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .paper-table th {
+            background: #f7f9fd;
+            font-weight: 700;
+        }
+
+        .paper-table td:first-child,
+        .paper-table th:first-child {
+            text-align: left;
+        }
+
+        .ours-row {
+            background: #e8f5e9;
+        }
+
+        .case-box {
+            background: #f8fbff;
+            border: 1px solid #d9e8fb;
+            border-left: 4px solid #3a7bd5;
+            border-radius: 8px;
+            padding: 1rem;
+            line-height: 1.65;
+        }
+
+        .mono-line {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.9rem;
+            margin: 0.45rem 0;
+        }
+
+        .paper-disclaimer {
+            margin-top: 1rem;
+            padding: 0.75rem 0.9rem;
+            border-radius: 8px;
+            background: #fff8e8;
+            border: 1px solid #edd8a2;
+            color: #6d561b;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .paper-nav .nav-links {
+                gap: 1rem;
+            }
+
+            .paper-nav .nav-links a {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .dropdown-content {
+                right: -20px;
+            }
+
+            .figure-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="paper-nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#method">Method</a></li>
+                <li><a href="#results">Results</a></li>
+                <li style="margin-left: auto;" class="dropdown">
+                    <a href="javascript:void(0)">More Projects <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="../SVDecode/index.html">SVDecode</a>
+                        <a href="../cpguard/index.html">CP-Guard</a>
+                        <a href="../cpguardp/index.html">CP-Guard+</a>
+                        <a href="../cp-uniguard/index.html">CP-uniGuard</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="paper-header">
+            <h1 class="paper-title">Optimizing Agentic Reasoning with Retrieval via Synthetic Semantic Information Gain Reward</h1>
+
+            <div class="paper-buttons">
+                <a href="https://arxiv.org/abs/2602.00845" class="paper-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-file-pdf"></i> Paper PDF
+                </a>
+                <a href="https://github.com/dl-m9/InfoReasoner" class="paper-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-code"></i> Code
+                </a>
+                <a href="#bibtex" class="paper-btn">
+                    <i class="fas fa-quote-right"></i> BibTeX
+                </a>
+            </div>
+
+            <div class="authors">
+                <strong>Senkang Hu</strong><sup>1,2</sup>,
+                <strong>Yong Dai</strong><sup>3</sup>,
+                <strong>Yuzhi Zhao</strong><sup>2,&#8224;</sup>,
+                <strong>Yihang Tao</strong><sup>1,2</sup>,
+                <strong>Yu Guo</strong><sup>1,2</sup>,
+                <strong>Zhengru Fang</strong><sup>1,2</sup>,
+                <strong>Sam Tak Wu Kwong</strong><sup>4</sup>,
+                <strong>Yuguang Fang</strong><sup>1,2</sup>
+            </div>
+
+            <div class="affiliations">
+                <span><sup>1</sup>Hong Kong JC STEM Lab of Smart City</span>,
+                <span><sup>2</sup>City University of Hong Kong</span>,
+                <span><sup>3</sup>Fudan University</span>,
+                <span><sup>4</sup>Lingnan University</span><br>
+                <span style="font-size: 0.85rem; color: #888;">
+                    &#8224; Corresponding author: yzzhao2-c@my.cityu.edu.hk
+                </span>
+            </div>
+
+        </div>
+
+        <section id="abstract" class="paper-section">
+            <h2>Abstract</h2>
+            <div class="paper-abstract">
+                <p>
+                    Large reasoning models have shown strong capabilities in complex tasks by combining chain-of-thought reasoning with external retrieval. However, existing training signals for retrieval are often sparse and delayed, making it difficult to assign credit to intermediate search actions.
+                </p>
+                <p>
+                    We introduce <strong>InfoReasoner</strong>, a unified framework that rewards retrieval by measuring <strong>synthetic semantic information gain</strong>. The key idea is simple: good retrieval should reduce uncertainty over the answer. We formalize this as uncertainty reduction over belief states and provide properties such as non-negativity and telescoping additivity to justify per-step optimization.
+                </p>
+                <p>
+                    Across seven QA benchmarks, InfoReasoner consistently outperforms strong retrieval-augmented baselines and achieves up to <strong>5.4% average accuracy improvement</strong>.
+                </p>
+            </div>
+        </section>
+
+        <section id="method" class="paper-section">
+            <h2>Method Overview</h2>
+            <p>
+                InfoReasoner computes a dense intrinsic reward directly from model outputs without manual retrieval annotation:
+            </p>
+            <div class="highlight-box">
+                <ol style="margin: 0; padding-left: 1.2rem;">
+                    <li>Sample multiple candidate answers with and without retrieved evidence.</li>
+                    <li>Group semantically equivalent answers via bidirectional textual entailment.</li>
+                    <li>Estimate belief distributions over semantic classes.</li>
+                    <li>Use entropy reduction as information gain reward to train retrieval policy.</li>
+                </ol>
+            </div>
+            <p>
+                The policy is optimized with GRPO, combining output reward and information gain reward to balance answer quality and uncertainty-reducing retrieval behaviors.
+            </p>
+        </section>
+
+        <section class="paper-section">
+            <h2>Framework Figure</h2>
+            <div class="figure-panel">
+                <img class="paper-figure-img" src="fig/overview.png" alt="Overview of InfoReasoner framework">
+                <div class="image-caption">
+                    <strong>Figure 1:</strong> Overview of InfoReasoner from the original paper.
+                </div>
+            </div>
+        </section>
+
+        <section class="paper-section">
+            <h2>Theoretical Foundations</h2>
+            <p>
+                InfoReasoner views multi-step retrieval as an uncertainty-reduction process. Instead of rewarding only the final answer, it gives credit to retrieval actions that make the model more certain about the correct semantic answer class.
+            </p>
+            <p>
+                This gives a dense learning signal during reasoning, while still keeping the final correctness objective in training.
+            </p>
+        </section>
+
+        <section class="paper-section">
+            <h2>Practical Reward Formulation</h2>
+            <p>
+                In implementation, the model compares uncertainty before and after retrieval, and uses their difference as an intrinsic reward:
+            </p>
+            <div class="math-block">
+                $$\widehat{\mathrm{IG}}_t(x_t,a_t)=H_{\text{sem}}(x_t,B)-H_{\text{sem}}(x_t,C_t).$$
+            </div>
+            <p>
+                The training reward then combines exact-match correctness and this information-gain term (weighted by \(\lambda\)).
+            </p>
+        </section>
+
+        <section id="results" class="paper-section">
+            <h2>Main Results (QA Benchmarks)</h2>
+            <div class="highlight-box">
+                <ul class="key-findings">
+                    <li><strong>Consistent gains across 7 datasets</strong>, including both single-hop and multi-hop QA settings.</li>
+                    <li><strong>Parameter-efficient performance:</strong> the 3B model surpasses several 7B retrieval baselines.</li>
+                    <li><strong>State-of-the-art at both scales:</strong> strong improvements are maintained at 3B and 7B.</li>
+                    <li><strong>Better retrieval behavior:</strong> reward shaping encourages exploration early and efficient evidence use later.</li>
+                </ul>
+            </div>
+
+            <div class="table-container">
+                <table class="paper-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>NQ</th>
+                            <th>TriviaQA</th>
+                            <th>PopQA</th>
+                            <th>HotpotQA</th>
+                            <th>2Wiki</th>
+                            <th>MuSiQue</th>
+                            <th>Bamboogle</th>
+                            <th>Avg.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RAG (3B)</td>
+                            <td>0.348</td>
+                            <td>0.544</td>
+                            <td>0.387</td>
+                            <td>0.255</td>
+                            <td>0.226</td>
+                            <td>0.047</td>
+                            <td>0.080</td>
+                            <td>0.270</td>
+                        </tr>
+                        <tr>
+                            <td>Search-R1-3B-Instruct</td>
+                            <td>0.405</td>
+                            <td>0.566</td>
+                            <td>0.354</td>
+                            <td>0.316</td>
+                            <td>0.224</td>
+                            <td>0.056</td>
+                            <td>0.184</td>
+                            <td>0.301</td>
+                        </tr>
+                        <tr class="ours-row">
+                            <td><strong>InfoReasoner-3B</strong></td>
+                            <td><strong>0.453</strong></td>
+                            <td><strong>0.634</strong></td>
+                            <td><strong>0.442</strong></td>
+                            <td><strong>0.344</strong></td>
+                            <td><strong>0.324</strong></td>
+                            <td><strong>0.080</strong></td>
+                            <td>0.144</td>
+                            <td><strong>0.346</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Search-R1-7B-Instruct</td>
+                            <td>0.407</td>
+                            <td>0.590</td>
+                            <td>0.390</td>
+                            <td>0.340</td>
+                            <td>0.194</td>
+                            <td>0.080</td>
+                            <td>0.360</td>
+                            <td>0.337</td>
+                        </tr>
+                        <tr>
+                            <td>AutoRefine-7B-Base</td>
+                            <td>0.439</td>
+                            <td>0.608</td>
+                            <td>0.402</td>
+                            <td>0.410</td>
+                            <td>0.242</td>
+                            <td>0.116</td>
+                            <td>0.368</td>
+                            <td>0.369</td>
+                        </tr>
+                        <tr class="ours-row">
+                            <td><strong>InfoReasoner-7B</strong></td>
+                            <td><strong>0.447</strong></td>
+                            <td><strong>0.614</strong></td>
+                            <td><strong>0.416</strong></td>
+                            <td><strong>0.414</strong></td>
+                            <td><strong>0.302</strong></td>
+                            <td><strong>0.120</strong></td>
+                            <td><strong>0.424</strong></td>
+                            <td><strong>0.391</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="image-caption">
+                    <strong>Table 1:</strong> Main comparison across seven QA benchmarks. Values are copied from the paper experiment table.
+                </div>
+            </div>
+        </section>
+
+        <section class="paper-section">
+            <h2>Ablation: Information Gain Weight \(\lambda\)</h2>
+            <div class="table-container">
+                <table class="paper-table">
+                    <thead>
+                        <tr>
+                            <th>Setting</th>
+                            <th>NQ</th>
+                            <th>TriviaQA</th>
+                            <th>PopQA</th>
+                            <th>HotpotQA</th>
+                            <th>2Wiki</th>
+                            <th>MuSiQue</th>
+                            <th>Bamboogle</th>
+                            <th>Avg.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>\(\lambda=1.0\)</td><td>0.435</td><td>0.600</td><td>0.432</td><td>0.320</td><td>0.274</td><td>0.052</td><td>0.128</td><td>0.320</td></tr>
+                        <tr><td>\(\lambda=0.8\)</td><td>0.436</td><td>0.590</td><td>0.426</td><td>0.292</td><td>0.238</td><td>0.032</td><td>0.112</td><td>0.304</td></tr>
+                        <tr class="ours-row"><td><strong>\(\lambda=0.6\)</strong></td><td><strong>0.452</strong></td><td><strong>0.634</strong></td><td><strong>0.442</strong></td><td><strong>0.344</strong></td><td><strong>0.324</strong></td><td><strong>0.080</strong></td><td><strong>0.144</strong></td><td><strong>0.346</strong></td></tr>
+                        <tr><td>\(\lambda=0.4\)</td><td>0.443</td><td>0.602</td><td>0.424</td><td>0.324</td><td>0.266</td><td>0.058</td><td>0.088</td><td>0.315</td></tr>
+                        <tr><td>\(\lambda=0.2\)</td><td>0.448</td><td>0.618</td><td>0.432</td><td>0.322</td><td>0.288</td><td>0.044</td><td>0.136</td><td>0.327</td></tr>
+                        <tr><td>\(\lambda=0.0\)</td><td>0.426</td><td>0.538</td><td>0.426</td><td>0.294</td><td>0.254</td><td>0.040</td><td>0.118</td><td>0.299</td></tr>
+                    </tbody>
+                </table>
+                <div class="image-caption">
+                    <strong>Table 2:</strong> Ablation on information gain coefficient. \(\lambda=0.6\) gives the best average score.
+                </div>
+            </div>
+        </section>
+
+        
+
+        <section class="paper-section">
+            <h2>Case Study</h2>
+            
+            <div class="case-box">
+                <p><strong>Query:</strong> In what city was the band behind the album <em>Love Bites</em> formed?</p>
+                <p><strong>Ground-truth:</strong> Bolton, England</p>
+                <div class="mono-line">&lt;search&gt; band Love Bites album &lt;/search&gt;</div>
+                <div class="mono-line">&lt;information&gt; Love Bites is by Buzzcocks... &lt;/information&gt;</div>
+                <div class="mono-line">&lt;search&gt; formation city Buzzcocks band &lt;/search&gt;</div>
+                <div class="mono-line">&lt;information&gt; Buzzcocks were formed in Bolton, England... &lt;/information&gt;</div>
+                <div class="mono-line">&lt;answer&gt; Bolton, England &lt;/answer&gt;</div>
+            </div>
+            <div class="image-caption">
+                <strong>Figure 2:</strong> A representative multi-hop retrieval trajectory from the paper case study.
+            </div>
+        </section>
+
+        <section class="paper-section">
+            <h2>Conclusion</h2>
+            <p>
+                InfoReasoner provides a theoretically grounded and practical path to optimize agentic reasoning with retrieval. By rewarding uncertainty reduction directly, it offers better credit assignment for intermediate retrieval steps and improves end-task performance in a scalable way.
+            </p>
+        </section>
+
+        <section id="bibtex" class="paper-section">
+            <h2>BibTeX</h2>
+            <div class="bibtex">@article{hu2026inforeasoner,
+  title={Optimizing Agentic Reasoning with Retrieval via Synthetic Semantic Information Gain Reward},
+  author={Hu, Senkang and Dai, Yong and Zhao, Yuzhi and Tao, Yihang and Guo, Yu and Fang, Zhengru and Kwong, Sam Tak Wu and Fang, Yuguang},
+  journal={arXiv preprint arXiv:2602.00845},
+  year={2026}
+}</div>
+        </section>
+
+        <section class="paper-section">
+            <div class="paper-disclaimer">
+                <strong>Disclaimer:</strong> This page is an overview for quick reading. For formal definitions, complete derivations, experiment protocols, and final conclusions, please refer to the original paper and official release.
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.querySelectorAll('.paper-nav a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 /* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 /* Base Styles */
 :root {
@@ -33,7 +33,7 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: #fff;
@@ -664,10 +664,10 @@ header .contact-info i {
 
 
 h1 {
-    font-family: 'Prata', serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: -0.02em;
 }
 
@@ -675,7 +675,7 @@ h1 {
     font-size: 1.25rem;
     color: var(--light-text);
     margin-bottom: 1.5rem;
-    font-family: 'Prata', serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .contact-info {
@@ -1114,12 +1114,12 @@ nav {
 }
 
 .section-title {
-    font-family: 'Prata', serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 2.5rem;
     margin-bottom: 2rem;
     position: relative;
     display: inline-block;
-    font-weight: 400;
+    font-weight: 700;
     color: var(--text-color);
 }
 
@@ -1374,10 +1374,10 @@ nav {
 
 
 .research-area h3 {
-    font-family: 'Prata', serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .research-area p {
@@ -1461,7 +1461,7 @@ nav {
     top: 55%;
     right: 0;
     transform: translateY(-50%);
-    font-family: 'Prata', serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 6rem;
     font-weight: 1000;
     color: rgba(0, 0, 0, 0.03);
@@ -1492,7 +1492,7 @@ nav {
 }
 
 .edu-school-name {
-    font-family: 'Prata', serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.3rem;
     color: var(--text-color);
     margin-bottom: 0.2rem;
@@ -1577,7 +1577,7 @@ nav {
     font-family: 'Prata', serif;
     margin-bottom: 0.5rem;
     color: var(--text-color);
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .timeline-date {
@@ -1745,7 +1745,7 @@ nav {
 }
 
 .pub-content h3 {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.0rem;
     font-weight: 700;
     margin-bottom: 0.4rem;
@@ -2123,10 +2123,10 @@ footer {
 }
 
 .contact-method h3 {
-    font-family: 'Prata', serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .contact-method p {
@@ -2384,13 +2384,13 @@ footer {
 }
 
 .service-category h3 {
-    font-family: 'Prata', serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: var(--subsection-font-size);
     /* color: var(--primary-color); */
     margin-bottom: 1.5rem;
     position: relative;
     display: inline-block;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .service-category h3::after {
@@ -2464,11 +2464,11 @@ footer {
 }
 
 .address-info h3 {
-    font-family: 'Prata', serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.3rem;
     color: var(--primary-color);
     margin-bottom: 1rem;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .address-info p {
@@ -2523,11 +2523,11 @@ footer {
 
 /* Publication section titles */
 .publication-section-title {
-    font-family: 'Prata', serif;
+    font-family: 'Montserrat', sans-serif;
     margin-top: 2rem;
     margin-bottom: 1.2rem;
     font-size: var(--subsection-font-size);
-    font-weight: 400;
+    font-weight: 600;
     position: relative;
     display: inline-block;
 }
