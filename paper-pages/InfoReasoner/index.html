@@ -363,7 +363,13 @@
             <div class="figure-panel">
                 <img class="paper-figure-img" src="fig/overview.png" alt="Overview of InfoReasoner framework">
                 <div class="image-caption">
-                    <strong>Figure 1:</strong> Overview of InfoReasoner from the original paper.
+                    <strong>Figure 1 (Overview):</strong> The pipeline has four connected stages: (1) input question and current reasoning context, (2) two parallel branches for baseline/no-retrieval and retrieval-conditioned generation, (3) semantic clustering over sampled answers, and (4) policy optimization with information-gain reward.
+                    <br>
+                    <strong>How to read:</strong> the key comparison is the uncertainty gap between the two branches. If retrieved evidence makes answer distributions more concentrated, semantic entropy drops and IG increases.
+                    <br>
+                    <strong>Main takeaway:</strong> InfoReasoner rewards retrieval actions that reduce uncertainty, not only actions that immediately produce a correct final answer.
+                    <br>
+                    <strong>Role in this page:</strong> this figure supports the Method section by showing why the reward is dense and why it improves multi-step retrieval behavior.
                 </div>
             </div>
         </section>
@@ -487,7 +493,13 @@
                     </tbody>
                 </table>
                 <div class="image-caption">
-                    <strong>Table 1:</strong> Main comparison across seven QA benchmarks. Values are copied from the paper experiment table.
+                    <strong>Table 1 (Main Results):</strong> Comparison across seven QA benchmarks covering single-hop (NQ, TriviaQA, PopQA) and multi-hop (HotpotQA, 2Wiki, MuSiQue, Bamboogle) settings.
+                    <br>
+                    <strong>How to read:</strong> compare each baseline row with `InfoReasoner-3B` and `InfoReasoner-7B` in the same columns; the last column (`Avg.`) summarizes overall performance.
+                    <br>
+                    <strong>Main takeaway:</strong> InfoReasoner improves both 3B and 7B settings consistently, and the 3B model already outperforms several stronger 7B retrieval baselines on average.
+                    <br>
+                    <strong>Role in this page:</strong> this table is the primary quantitative evidence that the proposed information-gain reward improves retrieval-augmented reasoning quality.
                 </div>
             </div>
         </section>
@@ -519,7 +531,13 @@
                     </tbody>
                 </table>
                 <div class="image-caption">
-                    <strong>Table 2:</strong> Ablation on information gain coefficient. \(\lambda=0.6\) gives the best average score.
+                    <strong>Table 2 (Ablation on \(\lambda\)):</strong> Sensitivity analysis of the information-gain weight across the same seven QA benchmarks.
+                    <br>
+                    <strong>How to read:</strong> \(\lambda=0.0\) means no information-gain term, while larger values increase the reward contribution from uncertainty reduction.
+                    <br>
+                    <strong>Main takeaway:</strong> moderate weighting works best in this setup (\(\lambda=0.6\)); too small weakens retrieval guidance, too large may over-emphasize intrinsic reward.
+                    <br>
+                    <strong>Role in this page:</strong> this table explains why performance gains come from balancing task correctness and information gain, rather than maximizing either term alone.
                 </div>
             </div>
         </section>
@@ -539,7 +557,13 @@
                 <div class="mono-line">&lt;answer&gt; Bolton, England &lt;/answer&gt;</div>
             </div>
             <div class="image-caption">
-                <strong>Figure 2:</strong> A representative multi-hop retrieval trajectory from the paper case study.
+                <strong>Figure 2 (Case Study):</strong> This example illustrates two-hop evidence accumulation: the first retrieval identifies the target entity (Buzzcocks), and the second retrieval resolves the target attribute (formation city).
+                <br>
+                <strong>How to read:</strong> each `search -> information -> reasoning` step narrows the candidate answer space.
+                <br>
+                <strong>Main takeaway:</strong> the model succeeds by making retrieval steps complementary rather than redundant.
+                <br>
+                <strong>Role in this page:</strong> this figure-level example explains the qualitative mechanism behind the quantitative gains reported in the results tables.
             </div>
         </section>
 
