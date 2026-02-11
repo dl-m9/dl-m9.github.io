@@ -591,7 +591,14 @@
         </section>
     </div>
 
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="copyright-year"></span> Senkang Forest Hu. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
         document.querySelectorAll('.paper-nav a[href^="#"]').forEach(function(anchor) {
             anchor.addEventListener('click', function(e) {
                 var target = document.querySelector(this.getAttribute('href'));

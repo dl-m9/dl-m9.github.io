@@ -620,17 +620,17 @@
             </div>
         </section>
 
-        <footer style="text-align: center; padding: 2rem 0; border-top: 1px solid var(--border-color); margin-top: 3rem; color: var(--light-text);">
-            <p>
-                Hong Kong JC STEM Lab of Smart City | City University of Hong Kong<br>
-                Website template inspired by <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
-            </p>
-        </footer>
-
     </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="copyright-year"></span> Senkang Forest Hu. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="../../script.js"></script>
     <script>
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

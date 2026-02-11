@@ -262,13 +262,17 @@
             </ul>
         </section>
 
-        <footer style="text-align: center; padding: 2rem 0; border-top: 1px solid var(--border-color); margin-top: 3rem; color: var(--light-text);">
-            <p><strong>Contact:</strong> senkang.forest@my.cityu.edu.hk | <strong>Paper:</strong> AAAI 2025 Oral Presentation</p>
-        </footer>
     </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="copyright-year"></span> Senkang Forest Hu. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="../../script.js"></script>
     <script>
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
