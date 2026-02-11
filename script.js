@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const latestNewsSection = document.getElementById('latest-news');
             if (latestNewsSection) {
                 // On homepage - show limited news (first 12 items)
-                renderNewsItems(data.slice(0, 12), 'news-container');
+                renderNewsItems(data.slice(0, 8), 'news-container');
             }
             
             // Check if we're on the all-news page
