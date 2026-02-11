@@ -1688,8 +1688,9 @@ nav {
 }
 
 .publication:hover {
-    transform: none;
-    background-color: rgba(0, 102, 204, 0.02);
+    transform: translateX(5px);
+    background-color: rgba(0, 102, 204, 0.05);
+    box-shadow: none;
 }
 
 .pub-venue-label {
