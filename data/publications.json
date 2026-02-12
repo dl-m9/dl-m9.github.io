@@ -7,19 +7,9 @@
     "categories": ["llm-agent"],
     "tags": [
       {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "https://arxiv.org/abs/2602.00845"
-      },
-      {
         "text": "Project",
         "class": "code-tag",
         "link": "paper-pages/InfoReasoner/index.html"
-      },
-      {
-        "text": "Code", 
-        "class": "code-tag",
-        "link": "https://github.com/dl-m9/InfoReasoner"
       }
     ]
   },
@@ -74,19 +64,9 @@
         "class": "venue-tag"
       },
       {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "https://arxiv.org/abs/2506.22890"
-      },
-      {
         "text": "Project",
         "class": "code-tag",
         "link": "paper-pages/cp-uniguard/index.html"
-      },
-      {
-        "text": "Code",
-        "class": "code-tag",
-        "link": "https://github.com/CP-Security/CP-uniGuard"
       },
       {
         "text": "CCF-A",
@@ -103,11 +83,6 @@
     "isFirstAuthor": true,
     "categories": ["multi-agent-security"],
     "tags": [
-      {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "https://arxiv.org/abs/2502.07807v1"
-      },
       {
         "text": "Project",
         "class": "code-tag",
@@ -188,19 +163,9 @@
         "class": "venue-tag"
       },
       {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "https://arxiv.org/abs/2509.15888"
-      },
-      {
         "text": "Project",
         "class": "code-tag",
         "link": "paper-pages/SVDecode/index.html"
-      },
-      {
-        "text": "Code",
-        "class": "code-tag",
-        "link": "https://github.com/dl-m9/SVDecode"
       },
       {
         "text": "CCF-A",
@@ -404,16 +369,6 @@
         "text": "Project",
         "class": "code-tag",
         "link": "paper-pages/cpguard/index.html"
-      },
-      {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "https://ojs.aaai.org/index.php/AAAI/article/view/34486"
-      },
-      {
-        "text": "Code",
-        "class": "code-tag",
-        "link": "https://github.com/CP-Security/CP-Guard"
       },
       {
         "text": "CCF-A",
