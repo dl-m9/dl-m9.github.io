@@ -99,12 +99,12 @@
   },
   {
     "date": "Mar. 2025",
-    "title": "New Project Launched: <a href='https://github.com/dl-m9/Multi-Agent-Autonomous-Driving' target='_blank'>Multi-Agent Autonomous Driving</a>",
-    "content": "🔥🔥🔥 We launched a new project about Multi-Agent Autonomous Driving! This project will continuously collect papers from recent years in the field of multi-agent autonomous driving and is the most comprehensive repo in this field! Welcome to Star ⭐️ & Contribute!",
+    "title": "New Project Launched: <a href='https://github.com/dl-m9/Multi-Agent-Embodied-Autonomous-Driving' target='_blank'>Multi-Agent Embodied Autonomous Driving</a>",
+    "content": "🔥🔥🔥 We launched a new project about Multi-Agent Embodied Autonomous Driving! This project will continuously collect papers from recent years in the field of multi-agent embodied autonomous driving and is the most comprehensive repo in this field! Welcome to Star ⭐️ & Contribute!",
     "links": [
       {
         "text": "Github Repository",
-        "url": "https://github.com/dl-m9/Multi-Agent-Autonomous-Driving"
+        "url": "https://github.com/dl-m9/Multi-Agent-Embodied-Autonomous-Driving"
       }
     ]
   },
