@@ -308,7 +308,7 @@
     "year": "2025",
     "tags": [
       {
-        "text": "GLOBECOM'25<br><span style=\"color: #d32f2f;\">Best Paper Award</span>",
+        "text": "GLOBECOM'25<br><span style=\"color: #d32f2f; font-size: 0.85rem;\">Best Paper Award</span>",
         "class": "venue-tag"
       },
       {
