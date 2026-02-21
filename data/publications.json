@@ -28,6 +28,74 @@
     ]
   },
   {
+    "title": "Learning Mutual View Information Graph for Adaptive Adversarial Collaborative Perception",
+    "authors": "Yihang Tao*, <strong><u>Senkang \"Forest\" Hu</u></strong>*, Haonan An, Zhengru Fang, Hangcheng Cao, Yuguang Fang",
+    "type": "accepted",
+    "isFirstAuthor": true,
+    "venue": "The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Denver, USA, 2026.",
+    "year": "2026",
+    "categories": ["multi-agent-security"],
+    "tags": [
+      {
+        "text": "CVPR'26",
+        "class": "venue-tag"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "From Exploration to Exploitation: A Two-Stage Entropy RLVR Approach for Noise-Tolerant MLLM Training",
+    "authors": "Donglai Xu, Hongzheng Yang, Yuzhi Zhao, Pingping Zhang, Jinpeng Chen, Wenao Ma, Zhijian Hou, Mengyang Wu, Xiaolei Li, <strong><u>Senkang \"Forest\" Hu</u></strong>, Ziyi Guan, Jason Chun Lok Li, Lai Man Po",
+    "type": "accepted",
+    "isFirstAuthor": false,
+    "venue": "The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Denver, USA, 2026.",
+    "year": "2026",
+    "categories": ["llm-agent"],
+    "tags": [
+      {
+        "text": "CVPR'26",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2511.07738"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "Mobility Helps Learning: Unsupervised Model Adaptation for Object Recognition with Movable Agents",
+    "authors": "Yanan Ma, Yihang Tao, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Xianhao Chen, Yuguang Fang",
+    "type": "accepted",
+    "isFirstAuthor": false,
+    "venue": "The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Denver, USA, 2026.",
+    "year": "2026",
+    "categories": ["multi-agent-perception"],
+    "tags": [
+      {
+        "text": "CVPR'26 Findings",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://openreview.net/forum?id=Auw2gIdAJm"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+ 
+  {
     "title": "UAV-enabled Computing Power Networks: Design and Performance Analysis under Energy Constraints",
     "authors": "Yiqin Deng, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Xiaoyu Guo, Haixia Zhang, and Yuguang Fang",
     "type": "accepted",
@@ -116,21 +184,6 @@
         "text": "PDF",
         "class": "code-tag",
         "link": "https://arxiv.org/abs/2404.06345"
-      }
-    ]
-  },
-  {
-    "title": "Adaptive Attack on Multi-Agent Collaborative Perception",
-    "authors": "Yihang Tao, <strong><u>Senkang \"Forest\" Hu</u></strong>, Haonan An, Zhengru Fang, Hangcheng Cao, Yuguang Fang",
-    "type": "preprint",
-    "isFirstAuthor": false,
-    "categories": ["multi-agent-security"],
-    "tags": [
-      
-      {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "#"
       }
     ]
   },
