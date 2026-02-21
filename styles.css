@@ -1195,7 +1195,7 @@ nav {
 
 .news-item {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     margin-bottom: 0.6rem;
     padding: 0.4rem 0.5rem 0.6rem;
     border-bottom: 1px solid var(--border-color);
@@ -1224,10 +1224,9 @@ nav {
     color: var(--primary-color);
     margin-right: 18px;
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 2px;
+    display: block;
+    text-align: center;
+    padding-top: 0;
 }
 
 /* News日期样式：primary color粗体，无背景 */
@@ -1239,7 +1238,7 @@ nav {
     display: inline-block;
     font-size: 1.05rem;
     font-weight: 700;
-    text-align: left;
+    text-align: center;
     min-width: auto;
     max-width: none;
     line-height: 1.2;
@@ -1958,7 +1957,7 @@ footer {
 
 .honor-item {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     margin-bottom: 0.4rem;
     padding: 0.4rem 0.5rem 0.6rem;
     border-bottom: 1px solid var(--border-color);
@@ -1986,10 +1985,9 @@ footer {
     color: var(--primary-color);
     margin-right: 18px;
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 2px;
+    display: block;
+    text-align: center;
+    padding-top: 0;
 }
 
 /* Honor日期样式：primary color粗体，无背景，与news一致 */
@@ -2001,7 +1999,7 @@ footer {
     display: inline-block;
     font-size: 1.05rem;
     font-weight: 700;
-    text-align: left;
+    text-align: center;
     min-width: auto;
     max-width: none;
     line-height: 1.2;
