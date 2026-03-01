@@ -81,31 +81,6 @@
     ]
   },
   {
-    "title": "Mobility Helps Learning: Unsupervised Model Adaptation for Object Recognition with Movable Agents",
-    "authors": "Yanan Ma, Yihang Tao, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Xianhao Chen, Yuguang Fang",
-    "type": "accepted",
-    "isFirstAuthor": false,
-    "venue": "The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Denver, USA, 2026.",
-    "year": "2026",
-    "categories": ["multi-agent-perception"],
-    "tags": [
-      {
-        "text": "CVPR'26 Findings",
-        "class": "venue-tag"
-      },
-      {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "https://openreview.net/forum?id=Auw2gIdAJm"
-      },
-      {
-        "text": "CCF-A",
-        "class": "ccf-tag"
-      }
-    ]
-  },
- 
-  {
     "title": "UAV-enabled Computing Power Networks: Design and Performance Analysis under Energy Constraints",
     "authors": "Yiqin Deng, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Xiaoyu Guo, Haixia Zhang, and Yuguang Fang",
     "type": "accepted",
