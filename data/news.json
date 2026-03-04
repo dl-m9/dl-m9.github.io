@@ -148,11 +148,15 @@
   {
     "date": "Jan. 2025",
     "title": "Paper Accepted by ICRA'25",
-    "content": "One co-authored paper entitled <strong>Direct-CP: Directed Collaborative Perception for Connected and Autonomous Vehicles via Proactive Attention</strong> was accepted by The 2025 IEEE International Conference on Robotics and Automation (ICRA'25)!",
+    "content": "One co-authored paper entitled <strong>Directed-CP: Directed Collaborative Perception for Connected and Autonomous Vehicles via Proactive Attention</strong> was accepted by The 2025 IEEE International Conference on Robotics and Automation (ICRA'25)!",
     "links": [
       {
         "text": "PDF",
         "url": "https://arxiv.org/abs/2409.08840"
+      },
+      {
+        "text": "Code",
+        "url": "https://github.com/yihangtao/Directed-CP"
       }
     ]
   },
