@@ -70,6 +70,14 @@
       {
         "text": "PDF",
         "url": "https://arxiv.org/abs/2509.15888"
+      },
+      {
+        "text": "Project",
+        "url": "paper-pages/SVDecode/index.html"
+      },
+      {
+        "text": "Code",
+        "url": "https://github.com/dl-m9/SVDecode"
       }
     ]
   },
