@@ -31,7 +31,7 @@
     "title": "Learning Mutual View Information Graph for Adaptive Adversarial Collaborative Perception",
     "authors": "Yihang Tao, <strong><u>Senkang \"Forest\" Hu</u></strong>, Haonan An, Zhengru Fang, Hangcheng Cao, Yuguang Fang",
     "type": "accepted",
-    "isFirstAuthor": true,
+    "isFirstAuthor": false,
     "venue": "The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Denver, USA, 2026.",
     "year": "2026",
     "categories": ["multi-agent-security"],
