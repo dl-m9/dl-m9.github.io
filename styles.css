@@ -1285,6 +1285,11 @@ nav {
     margin-left: 5px;
 }
 
+.news-content h3 a {
+    margin-left: 0;
+    font-weight: inherit;
+}
+
 .news-content a:hover {
     text-decoration: underline;
 }
