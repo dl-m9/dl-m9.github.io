@@ -7,7 +7,21 @@
   {
     "date": "Feb. 2026",
     "title": "Invited Talk at SLAI",
-    "content": "Senkang was invited to give a presentation at the <strong>Agentic Intelligence for Human–AI Society Symposium</strong> in Shenzhen Loop Area Institute (SLAI)."
+    "content": "Senkang was invited to give a presentation at the <strong>Agentic Intelligence for Human–AI Society Symposium</strong> in <a href="https://www.slai.edu.cn/" target="_blank">Shenzhen Loop Area Institute (SLAI)</a>, presenting <strong>Optimizing Agentic Reasoning with Retrieval via Synthetic Semantic Information Gain Reward</strong>.",
+    "links": [
+      {
+        "text": "PDF",
+        "url": "https://arxiv.org/abs/2602.00845"
+      },
+      {
+        "text": "Project",
+        "url": "paper-pages/InfoReasoner/index.html"
+      },
+      {
+        "text": "Code",
+        "url": "https://github.com/dl-m9/InfoReasoner"
+      }
+    ]
   },
   {
     "date": "Jan. 2026",
