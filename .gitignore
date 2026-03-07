@@ -1,6 +1,9 @@
 # OMC
 .omc/
 
+# Claude
+.claude/
+
 # System files
 .DS_Store
 Thumbs.db

@@ -4,7 +4,8 @@
       "WebFetch(domain:gy65896.github.io)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(python3 -c \"import json; json.load\\(open\\('data/news.json'\\)\\); print\\('JSON valid'\\)\")"
     ],
     "deny": []
   }
