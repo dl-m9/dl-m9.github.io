@@ -5,7 +5,9 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(python3 -c \"import json; json.load\\(open\\('data/news.json'\\)\\); print\\('JSON valid'\\)\")"
+      "Bash(python3 -c \"import json; json.load\\(open\\('data/news.json'\\)\\); print\\('JSON valid'\\)\")",
+      "Bash(lsof -i :8000 2>/dev/null | head -5)",
+      "Bash(open http://localhost:8000)"
     ],
     "deny": []
   }

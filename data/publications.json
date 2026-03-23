@@ -310,6 +310,11 @@
         "class": "venue-tag"
       },
       {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://ojs.aaai.org/index.php/AAAI/article/view/40889"
+      },
+      {
         "text": "CCF-A",
         "class": "ccf-tag"
       }

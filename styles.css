@@ -1463,15 +1463,15 @@ nav {
 }
 
 .huawei-logo {
-    transform: scale(0.9);
+    transform: scale(1);
 }
 
 .edu-item .huawei-logo {
-    transform: scale(0.9);
+    transform: scale(1);
 }
 
 .edu-item:hover .huawei-logo {
-    transform: scale(0.972);
+    transform: scale(1.08);
 }
 
 .edu-watermark {
