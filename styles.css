@@ -1156,7 +1156,7 @@ nav {
     margin: 2rem auto;
     background: linear-gradient(135deg, rgba(0, 102, 204, 0.08) 0%, rgba(102, 126, 234, 0.08) 100%);
     border-radius: 50px;
-    font-size: 1.05rem;
+    font-size: 1.16rem;
     line-height: 1.6;
     color: var(--text-color);
     text-align: center;
@@ -1335,34 +1335,66 @@ nav {
 }
 
 /* Research Areas */
+.research-vision {
+    margin-top: 2rem;
+}
+
+.vision-statement {
+    max-width: 980px;
+    margin: 0 auto 2.2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.vision-statement span {
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
 .research-areas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.2rem;
     margin-top: 2rem;
 }
 
 .research-area {
-    flex: 1;
-    min-width: 250px;
-    padding: 2rem;
-    background: white;
-    border-radius: 20px;
-    text-align: center;
+    position: relative;
+    min-height: 270px;
+    padding: 1.6rem 1.4rem 1.5rem;
+    background: #fff;
+    border-radius: 14px;
+    text-align: left;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: var(--shadow-md);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 102, 204, 0.12);
+    overflow: hidden;
+}
+
+@media (max-width: 1100px) {
+    .research-areas {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 /* 移动端优化：Research区域全宽显示 */
 @media (max-width: 768px) {
+    .vision-statement {
+        font-size: 1.35rem;
+        text-align: left;
+    }
+
     .research-areas {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
 
     .research-area {
-        min-width: 100%;
+        min-height: auto;
         padding: 1.5rem;
     }
 }
@@ -1372,24 +1404,39 @@ nav {
     box-shadow: var(--shadow-lg);
 }
 
-.research-area i {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
+.research-kicker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    margin-bottom: 1.2rem;
 }
 
+.research-kicker i {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.research-kicker span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
 
 .research-area h3 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.05rem;
     margin-bottom: 1rem;
-    font-weight: 600;
+    font-weight: 700;
+    line-height: 1.35;
 }
 
 .research-area p {
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     color: var(--light-text);
-    line-height: 1.5;
+    line-height: 1.65;
+    margin-bottom: 0;
 }
 
 .research-list {

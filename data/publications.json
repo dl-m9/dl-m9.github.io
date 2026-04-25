@@ -6,7 +6,7 @@
     "venue": "IEEE Transactions on Dependable and Secure Computing.",
     "year": "2026",
     "isFirstAuthor": true,
-    "categories": ["multi-agent-security"],
+    "categories": ["trustworthiness"],
     "tags": [
       {
         "text": "TDSC'26",
@@ -28,7 +28,7 @@
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yong Dai, Yuzhi Zhao, Yihang Tao, Yu Guo, Zhengru Fang, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "preprint",
     "isFirstAuthor": true,
-    "categories": ["llm-agent", "llm-peft"],
+    "categories": ["intelligence", "efficiency"],
     "tags": [
       {
         "text": "Project",
@@ -42,7 +42,7 @@
     "authors": "Xudong Han*, <strong><u>Senkang \"Forest\" Hu</u>*<sup>, project leader</sup></strong>, Yihang Tao, Yu Guo, Philip Birch, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "preprint",
     "isFirstAuthor": true,
-    "categories": ["multi-agent-perception"],
+    "categories": ["trustworthiness"],
     "tags": [
       {
         "text": "PDF",
@@ -58,7 +58,7 @@
     "isFirstAuthor": false,
     "venue": "The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Denver, USA, 2026.",
     "year": "2026",
-    "categories": ["multi-agent-security"],
+    "categories": ["trustworthiness"],
     "tags": [
       {
         "text": "CVPR'26",
@@ -87,7 +87,7 @@
     "isFirstAuthor": false,
     "venue": "The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Denver, USA, 2026.",
     "year": "2026",
-    "categories": ["llm-agent"],
+    "categories": ["intelligence"],
     "tags": [
       {
         "text": "CVPR'26",
@@ -111,6 +111,7 @@
     "venue": "IEEE Transactions on Mobile Computing.",
     "year": "2026",
     "isFirstAuthor": false,
+    "categories": ["others"],
     "tags": [
       {
         "text": "TMC'26",
@@ -158,6 +159,7 @@
     "isFirstAuthor": false,
     "venue": "IEEE Transactions on Mobile Computing.",
     "year": "2026",
+    "categories": ["others"],
     "tags": [
       {
         "text": "TMC'26",
@@ -181,7 +183,7 @@
     "venue": "IEEE Transactions on Mobile Computing.",
     "year": "2025",
     "isFirstAuthor": true,
-    "categories": ["multi-agent-security"],
+    "categories": ["trustworthiness"],
     "tags": [
       {
         "text": "TMC'25",
@@ -205,7 +207,7 @@
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Zihang Fang, Guowen Xu, Yiqin Deng, Sam Kwong, Yuguang Fang",
     "type": "preprint",
     "isFirstAuthor": true,
-    "categories": ["multi-agent-security"],
+    "categories": ["trustworthiness"],
     "tags": [
       {
         "text": "Project",
@@ -219,7 +221,7 @@
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Zhengru Fang, Zihan Fang, Yiqin Deng, Xianhao Chen, Yuguang Fang",
     "type": "preprint",
     "isFirstAuthor": true,
-    "categories": ["llm-agent"],
+    "categories": ["intelligence", "collaboration"],
     "tags": [
       {
         "text": "PDF",
@@ -235,7 +237,7 @@
     "venue": "The 39th Annual Conference on Neural Information Processing Systems, San Diego, USA, December 2025.",
     "year": "2025",
     "isFirstAuthor": true,
-    "categories": ["llm-peft"],
+    "categories": ["efficiency"],
     "tags": [
       {
         "text": "NeurIPS'25",
@@ -260,7 +262,7 @@
     "venue": "The 2025 IEEE Global Communications Conference, Taipei, Taiwan, December 2025.",
     "year": "2025",
     "isFirstAuthor": true,
-    "categories": ["llm-peft"],
+    "categories": ["efficiency"],
     "tags": [
       {
         "text": "GLOBECOM'25",
@@ -284,7 +286,7 @@
     "venue": "IEEE Transactions on Mobile Computing.",
     "isFirstAuthor": true,
     "year": "2025",
-    "categories": ["llm-agent"],
+    "categories": ["intelligence", "collaboration"],
     "tags": [
       {
         "text": "TMC'25",
@@ -308,7 +310,7 @@
     "venue": "IEEE Wireless Communications Magazine.",
     "isFirstAuthor": true,
     "year": "2025",
-    "categories": ["multi-agent-perception"],
+    "categories": ["collaboration"],
     "tags": [
       {
         "text": "WCM'25",
@@ -360,7 +362,7 @@
     "isFirstAuthor": false,
     "venue": "The 2025 IEEE International Conference on Robotics & Automation, 19-23 May, Atlanta, USA.",
     "year": "2025",
-    "categories": ["multi-agent-perception"],
+    "categories": ["collaboration"],
     "tags": [
       {
         "text": "ICRA'25",
@@ -390,6 +392,7 @@
     "isFirstAuthor": false,
     "venue": "IEEE Global Communications Conference, Taipei, Taiwan, December 2025.",
     "year": "2025",
+    "categories": ["others"],
     "tags": [
       {
         "text": "GLOBECOM'25<br><span style=\"color: #d32f2f; font-size: 0.85rem;\">Best Paper Award</span>",
@@ -414,7 +417,7 @@
     "isFirstAuthor": false,
     "venue": "IEEE Global Communications Conference, Taipei, Taiwan, December 2025.",
     "year": "2025",
-    "categories": ["multi-agent-perception"],
+    "categories": ["collaboration"],
     "tags": [
       {
         "text": "GLOBECOM'25",
@@ -442,7 +445,7 @@
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>*, Yihang Tao*, Guowen Xu, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong",
     "type": "accepted",
     "isFirstAuthor": true,
-    "categories": ["multi-agent-security"],
+    "categories": ["trustworthiness"],
     "venue": "The 39th Annual AAAI Conference on Artificial Intelligence, Philadelphia, Pennsylvania, USA, February 2025.",
     "year": "2024",
     "tags": [
@@ -468,7 +471,7 @@
     "isFirstAuthor": true,
     "venue": "IEEE Transactions on Intelligent Transportation Systems.",
     "year": "2024",
-    "categories": ["multi-agent-perception"],
+    "categories": ["collaboration", "trustworthiness"],
     "tags": [
       {
         "text": "TITS'24",
@@ -496,7 +499,7 @@
     "isFirstAuthor": true,
     "venue": "IEEE Global Communications Conference, Cape Town, South Africa, December 2024.",
     "year": "2024",
-    "categories": ["multi-agent-perception"],
+    "categories": ["collaboration", "trustworthiness"],
     "tags": [
       {
         "text": "GLOBECOM'24",
@@ -519,7 +522,7 @@
     "type": "accepted",
     "isFirstAuthor": false,
     "venue": "IEEE/ACM Transactions on Networking.",
-    "categories": ["multi-agent-perception"],
+    "categories": ["others"],
     "year": "2024",
     "tags": [
       {
@@ -549,7 +552,7 @@
     "isFirstAuthor": false,
     "venue": "IEEE Transactions on Mobile Computing.",
     "year": "2024",
-    "categories": ["multi-agent-perception"],
+    "categories": ["collaboration"],
     "tags": [
       {
         "text": "TMC'24",
@@ -573,7 +576,7 @@
     "isFirstAuthor": false,
     "venue": "IEEE Global Communications Conference, Cape Town, South Africa, December 2024.",
     "year": "2024",
-    "categories": ["multi-agent-perception"],
+    "categories": ["others"],
     "tags": [
       {
         "text": "GLOBECOM'24",
@@ -600,7 +603,7 @@
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Yuguang Fang",
     "type": "patent",
     "isFirstAuthor": true,
-    "categories": ["multi-agent-security"],
+    "categories": ["trustworthiness"],
     "tags": [
       {
         "text": "US Patent",

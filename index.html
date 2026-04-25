@@ -174,32 +174,33 @@
 
         <section id="research" class="section">
             <div class="container">
-                <h2 class="section-title">Research Interests</h2>
-                <div class="research-areas">
-                    <div class="research-area">
-                        <i class="fas fa-brain"></i>
-                        <h3>Agentic RL & Agents</h3>
-                        <ul class="research-list">
-                            <li><strong>Agentic RL:</strong> Designing reinforcement learning methods for agentic
-                                reasoning, planning, and post-training of foundation models.</li>
-                            <li><strong>Tool-Use and Search Agents:</strong> Building agents that can use
-                                external tools, structured actions, retrieval/search, and execution feedback to solve
-                                complex tasks.</li>
-                            <li><strong>Self-Evolving Agents:</strong> Building agentic systems that iteratively improve their
-                                policies, tool-use strategies, and workflows through autonomous feedback loops.</li>
-                        </ul>
-                    </div>
-                    <div class="research-area">
-                        <i class="fas fa-robot"></i>
-                        <h3>Multi-Agent Intelligence</h3>
-                        <ul class="research-list">
-                            <li><strong>Multi-Agent Agentic Systems:</strong> Building multi-agent agentic systems to
-                                solve complex digital tasks through coordination, planning, and tool interaction.</li>
-                            <li><strong>Coordination and Decision-Making:</strong> Designing multi-agent systems that
-                                coordinate perception, communication, and actions for complex tasks.</li>
-                            <li><strong>Robust and Adaptive Multi-Agent Systems:</strong> Building multi-agent systems
-                                that remain reliable under uncertainty, distribution shifts, and adversarial settings.</li>
-                        </ul>
+                <h2 class="section-title">Research Vision</h2>
+                <div class="research-vision">
+                    <p class="vision-statement">
+                        Building <span>intelligent</span>, <span>efficient</span>, <span>collaborative</span>, and
+                        <span>trustworthy</span> LLM-based <strong>agentic systems</strong> for complex real-world tasks.
+                    </p>
+                    <div class="research-areas">
+                        <div class="research-area">
+                            <div class="research-kicker"><i class="fas fa-brain"></i><span>Intelligence</span></div>
+                            <h3>Agentic Reasoning &amp; Reinforcement Learning</h3>
+                            <p>Developing agentic reasoning, reinforcement learning, and self-evolution methods for LLM agents that plan, search, use tools, and continually improve through feedback.</p>
+                        </div>
+                        <div class="research-area">
+                            <div class="research-kicker"><i class="fas fa-bolt"></i><span>Efficiency</span></div>
+                            <h3>Efficient Post-Training &amp; Inference</h3>
+                            <p>Building efficient post-training, decoding, and inference-time adaptation methods that reduce token usage, tool calls, and deployment costs for capable LLM agents.</p>
+                        </div>
+                        <div class="research-area">
+                            <div class="research-kicker"><i class="fas fa-network-wired"></i><span>Collaboration</span></div>
+                            <h3>Collaborative Agent Systems</h3>
+                            <p>Building multi-agent agentic systems that solve complex tasks through coordination, planning, communication, and tool interaction.</p>
+                        </div>
+                        <div class="research-area">
+                            <div class="research-kicker"><i class="fas fa-shield-alt"></i><span>Trustworthiness</span></div>
+                            <h3>Trustworthy Multi-Agent Systems</h3>
+                            <p>Developing robust and adaptive multi-agent systems that remain reliable under uncertainty, distribution shifts, and malicious-agent attacks.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -232,10 +233,10 @@
                     <div class="filter-group">
                         <button class="filter-btn active" data-filter="all">All</button>
                         <button class="filter-btn" data-filter="first-author">First Author</button>
-                        <button class="filter-btn" data-filter="llm-agent">Agent & RL</button>
-                        <button class="filter-btn" data-filter="llm-peft">LLM Efficiency</button>
-                        <button class="filter-btn" data-filter="multi-agent-security">Multi-Agent Trustworthiness</button>
-                        <button class="filter-btn" data-filter="multi-agent-perception">Agent Vision</button>
+                        <button class="filter-btn" data-filter="intelligence">Intelligence</button>
+                        <button class="filter-btn" data-filter="efficiency">Efficiency</button>
+                        <button class="filter-btn" data-filter="collaboration">Collaboration</button>
+                        <button class="filter-btn" data-filter="trustworthiness">Trustworthiness</button>
                         <button class="filter-btn" data-filter="others">Others</button>
 
                     </div>
@@ -468,7 +469,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20260425-1"></script>
     <script>
         // Update copyright year
         document.getElementById('current-year').textContent = new Date().getFullYear();

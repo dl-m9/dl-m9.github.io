@@ -79,14 +79,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 let matchAny = false;
 
                 for (const filter of activeFilters) {
+                    const categories = (pub.dataset.categories || '').split(' ');
                     if (filter === 'preprint' && pub.classList.contains('preprint')) matchAny = true;
                     else if (filter === 'accepted' && pub.classList.contains('accepted')) matchAny = true;
                     else if (filter === 'first-author' && pub.classList.contains('first-author')) matchAny = true;
-                    else if (filter === 'llm-agent' && pub.classList.contains('llm-agent')) matchAny = true;
-                    else if (filter === 'llm-peft' && pub.classList.contains('llm-peft')) matchAny = true;
-                    else if (filter === 'multi-agent-security' && pub.classList.contains('multi-agent-security')) matchAny = true;
-                    else if (filter === 'multi-agent-perception' && pub.classList.contains('multi-agent-perception')) matchAny = true;
-                    else if (filter === 'others' && pub.classList.contains('others')) matchAny = true;
+                    else if (categories.includes(filter)) matchAny = true;
 
                     if (matchAny) break;
                 }
@@ -431,10 +428,11 @@ function renderPublicationGroup(publications, container, startCounter) {
                 classes.push(category);
             });
         } else {
-            // If no categories field or empty categories, add to others
-            classes.push('others');
+            // Keep uncategorized publications visible under "All" only.
+            classes.push('uncategorized');
         }
         pubElement.className = classes.join(' ');
+        pubElement.dataset.categories = (pub.categories || []).join(' ');
 
         // Store the original number as a data attribute for reference
         pubElement.dataset.originalNumber = counter;
