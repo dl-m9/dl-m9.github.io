@@ -28,7 +28,7 @@
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yong Dai, Yuzhi Zhao, Yihang Tao, Yu Guo, Zhengru Fang, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "preprint",
     "isFirstAuthor": true,
-    "categories": ["llm-agent"],
+    "categories": ["llm-agent", "llm-peft"],
     "tags": [
       {
         "text": "Project",
@@ -42,7 +42,7 @@
     "authors": "Xudong Han*, <strong><u>Senkang \"Forest\" Hu</u>*<sup>, project leader</sup></strong>, Yihang Tao, Yu Guo, Philip Birch, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "preprint",
     "isFirstAuthor": true,
-    "categories": ["others"],
+    "categories": ["multi-agent-perception"],
     "tags": [
       {
         "text": "PDF",
@@ -414,6 +414,7 @@
     "isFirstAuthor": false,
     "venue": "IEEE Global Communications Conference, Taipei, Taiwan, December 2025.",
     "year": "2025",
+    "categories": ["multi-agent-perception"],
     "tags": [
       {
         "text": "GLOBECOM'25",
