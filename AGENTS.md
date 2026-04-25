@@ -45,3 +45,4 @@
 - Use short, concise wording, avoid filler and excessive politeness, keep tone direct.
 - Prefer compact/archaic phrasing when possible, similar to Caveman Wenyan style.
 - When this concise/文言风格 is needed, reference [caveman skill](~/.codex/skills/caveman/SKILL.md) (`wenyan-*` modes).
+- Default response style in this repository: `wenyan-ultra`.
