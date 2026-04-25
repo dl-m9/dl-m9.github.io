@@ -104,6 +104,30 @@
     ]
   },
   {
+    "title": "Dynamic Uncertainty-Aware Multimodal Fusion for Outdoor Health Monitoring",
+    "authors": "Zihan Fang, Zheng Lin, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Yiqin Deng, Xianhao Chen, Yuguang Fang",
+    "type": "accepted",
+    "venue": "IEEE Transactions on Mobile Computing.",
+    "year": "2026",
+    "isFirstAuthor": false,
+    "categories": ["others"],
+    "tags": [
+      {
+        "text": "TMC'26",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://ieeexplore.ieee.org/abstract/document/11482517/"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
     "title": "UAV-enabled Computing Power Networks: Design and Performance Analysis under Energy Constraints",
     "authors": "Yiqin Deng, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Xiaoyu Guo, Haixia Zhang, and Yuguang Fang",
     "type": "accepted",
