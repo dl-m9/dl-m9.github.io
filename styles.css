@@ -1689,6 +1689,12 @@ nav {
     flex-direction: column;
     gap: 0;
     /* Gap managed by padding/border */
+    transition: opacity 0.14s ease, transform 0.14s ease;
+}
+
+.publications-list.is-filtering {
+    opacity: 0.35;
+    transform: translateX(-4px);
 }
 
 .publication {
@@ -1711,6 +1717,49 @@ nav {
     box-shadow: none;
 }
 
+.publication.filter-reveal,
+.publication-section-title.filter-reveal,
+.publication-empty-state.filter-reveal {
+    animation: publicationFilterReveal 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--filter-delay, 0ms);
+}
+
+.publication-section-title.filter-reveal {
+    animation-name: publicationTitleReveal;
+}
+
+.publication-empty-state {
+    display: none;
+    padding: 1.4rem 0;
+    color: var(--light-text);
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+@keyframes publicationFilterReveal {
+    from {
+        opacity: 0;
+        transform: translateX(-14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes publicationTitleReveal {
+    from {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 .pub-venue-label {
     display: flex;
     flex-direction: column;
@@ -1729,6 +1778,23 @@ nav {
     font-weight: 700;
     margin-bottom: 0.2rem;
     color: var(--primary-color);
+    display: inline-block;
+}
+
+.pub-number.number-flip {
+    animation: publicationNumberFlip 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes publicationNumberFlip {
+    from {
+        opacity: 0;
+        transform: rotateX(72deg) translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: rotateX(0) translateY(0);
+    }
 }
 
 .venue-text {

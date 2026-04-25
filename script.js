@@ -1,3 +1,7 @@
+function isElementVisible(element) {
+    return window.getComputedStyle(element).display !== 'none';
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Load profile information
     loadProfileInfo();
@@ -5,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Publication filters - including "First Author" for publications where user is first author or has equal contribution
     const filterBtns = document.querySelectorAll('.filter-btn');
     const publications = document.querySelectorAll('.publication');
+    let filterAnimationTimer = null;
 
     // Load publications data from JSON file
     loadPublications();
@@ -18,11 +23,28 @@ document.addEventListener('DOMContentLoaded', function () {
             this.classList.add('active');
 
             // Apply filters based on the single active button
-            applyFilters();
+            applyFilters(true);
         });
     });
 
-    function applyFilters() {
+    function applyFilters(animate = false) {
+        const publicationsList = document.querySelector('.publications-list');
+
+        if (animate && publicationsList) {
+            clearTimeout(filterAnimationTimer);
+            publicationsList.classList.add('is-filtering');
+            filterAnimationTimer = setTimeout(() => {
+                runFilterUpdate();
+                publicationsList.classList.remove('is-filtering');
+                animateVisiblePublications();
+            }, 140);
+            return;
+        }
+
+        runFilterUpdate();
+    }
+
+    function runFilterUpdate() {
         const activeBtns = document.querySelectorAll('.filter-btn.active');
         const activeFilters = Array.from(activeBtns).map(btn => btn.getAttribute('data-filter'));
 
@@ -33,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (activeFilters.includes('all')) {
             // Show all publications and section titles
             pubElements.forEach(pub => {
-                pub.style.display = 'flex';
+                pub.style.display = '';
                 // Reset to original number when showing all
                 const numberElement = pub.querySelector('.pub-number');
                 if (numberElement) {
@@ -41,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
             sectionTitles.forEach(title => {
-                title.style.display = 'block';
+                title.style.display = '';
             });
         } else {
             // Filter logic: OR (Union)
@@ -70,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 if (matchAny) {
-                    pub.style.display = 'flex';
+                    pub.style.display = '';
                 }
             });
 
@@ -79,18 +101,62 @@ document.addEventListener('DOMContentLoaded', function () {
                 let hasVisiblePub = false;
                 let currentEl = title.nextElementSibling;
                 while (currentEl && !currentEl.classList.contains('publication-section-title')) {
-                    if (currentEl.classList.contains('publication') && currentEl.style.display === 'flex') {
+                    if (currentEl.classList.contains('publication') && isElementVisible(currentEl)) {
                         hasVisiblePub = true;
                         break;
                     }
                     currentEl = currentEl.nextElementSibling;
                 }
-                title.style.display = hasVisiblePub ? 'block' : 'none';
+                title.style.display = hasVisiblePub ? '' : 'none';
             });
 
             // 4. Update publication numbers for all visible publications (global numbering)
             updatePublicationNumbers(true);
         }
+
+        updatePublicationEmptyState();
+    }
+
+    function animateVisiblePublications() {
+        const visibleElements = Array.from(document.querySelectorAll('.publication, .publication-section-title, .publication-empty-state'))
+            .filter(isElementVisible);
+
+        visibleElements.forEach((element, index) => {
+            element.classList.remove('filter-reveal');
+            element.style.setProperty('--filter-delay', `${Math.min(index * 28, 280)}ms`);
+            void element.offsetWidth;
+            element.classList.add('filter-reveal');
+            element.addEventListener('animationend', () => {
+                element.classList.remove('filter-reveal');
+            }, { once: true });
+
+            const numberElement = element.querySelector('.pub-number');
+            if (numberElement) {
+                numberElement.classList.remove('number-flip');
+                void numberElement.offsetWidth;
+                numberElement.classList.add('number-flip');
+                numberElement.addEventListener('animationend', () => {
+                    numberElement.classList.remove('number-flip');
+                }, { once: true });
+            }
+        });
+    }
+
+    function updatePublicationEmptyState() {
+        const publicationsList = document.querySelector('.publications-list');
+        if (!publicationsList) return;
+
+        let emptyState = publicationsList.querySelector('.publication-empty-state');
+        if (!emptyState) {
+            emptyState = document.createElement('div');
+            emptyState.className = 'publication-empty-state';
+            emptyState.textContent = 'No publications in this category yet.';
+            publicationsList.appendChild(emptyState);
+        }
+
+        const hasVisiblePublication = Array.from(document.querySelectorAll('.publication'))
+            .some(isElementVisible);
+        emptyState.style.display = hasVisiblePublication ? 'none' : 'block';
     }
 
     // Smooth scrolling for navigation links
@@ -475,7 +541,7 @@ function renderPublicationGroup(publications, container, startCounter) {
 // Function to update publication numbers based on visible publications
 function updatePublicationNumbers(flat = false) {
     // Get all visible publications
-    const visiblePubs = document.querySelectorAll('.publication[style="display: flex;"]');
+    const visiblePubs = Array.from(document.querySelectorAll('.publication')).filter(isElementVisible);
 
     // If no publications are visible, hide all section titles
     if (visiblePubs.length === 0) {
@@ -497,7 +563,7 @@ function updatePublicationNumbers(flat = false) {
         });
     } else {
         // Section mode: number within each section
-        const visibleSectionTitles = document.querySelectorAll('.publication-section-title[style="display: block;"]');
+        const visibleSectionTitles = Array.from(document.querySelectorAll('.publication-section-title')).filter(isElementVisible);
         if (visibleSectionTitles.length > 0) {
             visibleSectionTitles.forEach(title => {
                 let sectionCounter = 1;
@@ -505,7 +571,7 @@ function updatePublicationNumbers(flat = false) {
                 // Process all elements until next section title
                 while (currentEl && !currentEl.classList.contains('publication-section-title')) {
                     if (currentEl.classList.contains('publication') &&
-                        currentEl.style.display === 'flex') {
+                        isElementVisible(currentEl)) {
                         const numberElement = currentEl.querySelector('.pub-number');
                         if (numberElement) {
                             numberElement.textContent = sectionCounter++;

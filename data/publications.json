@@ -42,7 +42,7 @@
     "authors": "Xudong Han*, <strong><u>Senkang \"Forest\" Hu</u>*<sup>, project leader</sup></strong>, Yihang Tao, Yu Guo, Philip Birch, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "preprint",
     "isFirstAuthor": true,
-    "categories": ["llm-peft"],
+    "categories": ["others"],
     "tags": [
       {
         "text": "PDF",
