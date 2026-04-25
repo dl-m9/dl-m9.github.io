@@ -1,5 +1,29 @@
 [
   {
+    "title": "GCP: Guarded Collaborative Perception with Spatial-Temporal Aware Malicious Agent Detection",
+    "authors": "Yihang Tao*, <strong><u>Senkang \"Forest\" Hu</u></strong>*, Yue Hu, Haonan An, Hangcheng Cao, Yuguang Fang",
+    "type": "accepted",
+    "venue": "IEEE Transactions on Dependable and Secure Computing.",
+    "year": "2026",
+    "isFirstAuthor": true,
+    "categories": ["multi-agent-security"],
+    "tags": [
+      {
+        "text": "TDSC'26",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2501.02450"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
     "title": "Optimizing Agentic Reasoning with Retrieval via Synthetic Semantic Information Gain Reward",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yong Dai, Yuzhi Zhao, Yihang Tao, Yu Guo, Zhengru Fang, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "preprint",
@@ -187,21 +211,6 @@
         "text": "Project",
         "class": "code-tag",
         "link": "paper-pages/cpguardp/index.html"
-      }
-    ]
-  },
-
-  {
-    "title": "GCP: Guarded Collaborative Perception with Spatial-Temporal Aware Malicious Agent Detection",
-    "authors": "Yihang Tao*, <strong><u>Senkang \"Forest\" Hu</u></strong>*, Yue Hu, Haonan An, Hangcheng Cao, Yuguang Fang",
-    "type": "preprint",
-    "isFirstAuthor": true,
-    "categories": ["multi-agent-security"],
-    "tags": [
-      {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "https://arxiv.org/abs/2501.02450"
       }
     ]
   },
