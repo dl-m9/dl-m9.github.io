@@ -28,8 +28,9 @@
 
 ## Preview Rule
 
-- After any page-related change, always provide a local preview path for the user.
-- First check whether the local preview server is already running.
+- Do not automatically open previews after page-related changes.
+- Only preview when the user explicitly asks for preview.
+- When preview is requested, first check whether the local preview server is already running.
 - If the local preview server is not running, start it with `python3 -m http.server 8001` from the repository root.
 - If the same page has already been opened during the current turn, do not open it again.
 - Otherwise, open the relevant page in the browser so the user can review the change.
@@ -37,7 +38,7 @@
 ## Verification
 
 - After editing `data/news.json`, `data/publications.json`, or `data/profile-info.json`, validate that the JSON is still parseable.
-- After editing `index.html`, `styles.css`, `script.js`, or any file under `paper-pages/`, ensure the relevant page can still be previewed locally.
+- After editing `index.html`, `styles.css`, `script.js`, or any file under `paper-pages/`, preview locally only if the user explicitly asks.
 
 ## Communication Style
 

@@ -1156,7 +1156,7 @@ nav {
     margin: 2rem auto;
     background: linear-gradient(135deg, rgba(0, 102, 204, 0.08) 0%, rgba(102, 126, 234, 0.08) 100%);
     border-radius: 50px;
-    font-size: 1.16rem;
+    font-size: 1.05rem;
     line-height: 1.6;
     color: var(--text-color);
     text-align: center;
@@ -1661,6 +1661,13 @@ nav {
     justify-content: center;
 }
 
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
 /* 移动端优化：过滤按钮区域添加滚动提示 */
 @media (max-width: 768px) {
     .filter-container {
@@ -1729,6 +1736,14 @@ nav {
     color: white;
     border-color: var(--primary-color);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.filter-divider {
+    display: block;
+    width: 2px;
+    height: 2rem;
+    margin: 0 1rem 0.8rem 0.2rem;
+    background-color: rgba(0, 102, 204, 0.22);
 }
 
 .publications-list {
