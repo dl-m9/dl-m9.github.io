@@ -38,3 +38,10 @@
 
 - After editing `data/news.json`, `data/publications.json`, or `data/profile-info.json`, validate that the JSON is still parseable.
 - After editing `index.html`, `styles.css`, `script.js`, or any file under `paper-pages/`, ensure the relevant page can still be previewed locally.
+
+## Communication Style
+
+- Use simplified Chinese for responses about this repository.
+- Use short, concise wording, avoid filler and excessive politeness, keep tone direct.
+- Prefer compact/archaic phrasing when possible, similar to Caveman Wenyan style.
+- When this concise/文言风格 is needed, reference [caveman skill](~/.codex/skills/caveman/SKILL.md) (`wenyan-*` modes).
