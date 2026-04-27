@@ -470,7 +470,7 @@
         </div>
     </footer>
 
-    <script src="script.js?v=20260425-1"></script>
+    <script src="script.js?v=20260427-2"></script>
     <script>
         // Update copyright year
         document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -479,11 +479,10 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Make all links open in a new tab
             document.querySelectorAll('a').forEach(link => {
-                // Skip navigation links that are meant for scrolling within the page
-                // Also skip the "View All News" link
+                // Skip navigation links that are meant for scrolling within the page.
                 const href = link.getAttribute('href');
-                if (href.startsWith('#') || href === 'pages/all-news.html' || link.textContent.trim() === 'View All News') {
-                    // For these specific links, ensure they open in the same tab
+                if (href.startsWith('#')) {
+                    // Keep in-page navigation in the same tab.
                     link.setAttribute('target', '_self');
                 } else {
                     link.setAttribute('target', '_blank');

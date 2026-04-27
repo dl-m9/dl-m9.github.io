@@ -1,3 +1,8 @@
+const siteRootUrl = (() => {
+    const scriptUrl = document.currentScript && document.currentScript.src;
+    return scriptUrl ? new URL('.', scriptUrl).href : new URL('.', window.location.href).href;
+})();
+
 function isElementVisible(element) {
     return window.getComputedStyle(element).display !== 'none';
 }
@@ -241,6 +246,11 @@ document.addEventListener('DOMContentLoaded', function () {
 function wrapChineseWithKaiFont(text) {
     if (!text) return '';
     return text.replace(/([\u4e00-\u9fff]+)/g, '<span class="kai-font">$1</span>');
+}
+
+function resolveRelativeUrl(url) {
+    if (!url || /^(https?:|mailto:|#|\/)/.test(url)) return url;
+    return new URL(url, siteRootUrl).href;
 }
 
 // Function to load profile information
@@ -643,7 +653,7 @@ function renderNewsItems(newsData, containerId) {
 
                 // Create link
                 const linkElement = document.createElement('a');
-                linkElement.href = link.url;
+                linkElement.href = resolveRelativeUrl(link.url);
                 linkElement.innerHTML = wrapChineseWithKaiFont(link.text);
                 linkElement.target = "_blank";
                 linkElement.rel = "noopener noreferrer";
@@ -657,7 +667,7 @@ function renderNewsItems(newsData, containerId) {
             paragraphElement.appendChild(space);
 
             const linkElement = document.createElement('a');
-            linkElement.href = newsItem.link;
+            linkElement.href = resolveRelativeUrl(newsItem.link);
             linkElement.innerHTML = wrapChineseWithKaiFont(newsItem.linkText);
             linkElement.target = "_blank";
             linkElement.rel = "noopener noreferrer";
