@@ -1,6 +1,15 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
+@font-face {
+    font-family: 'TW-Kai-Web';
+    src: local('TW-Kai'), local('TW Kai'),
+        url('https://sources.debian.org/data/main/f/fonts-cns11643/103.1%2B20181001-1/TW-Kai-98_1.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Base Styles */
 :root {
     --primary-color: #0066cc;
@@ -48,7 +57,7 @@ body {
 }
 
 .kai-font {
-    font-family: KaiTi, STKaiti, "楷体", "楷体_GB2312", serif;
+    font-family: 'TW-Kai-Web', KaiTi, STKaiti, "楷体", "楷体_GB2312", serif;
 }
 
 a {
