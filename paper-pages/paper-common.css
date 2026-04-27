@@ -1,5 +1,120 @@
 /* Shared styles for paper subpages */
 
+.paper-nav {
+    background: linear-gradient(135deg, #BD384B, #3a7bd5);
+    padding: 0;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.paper-nav .nav-links {
+    display: flex;
+    list-style: none;
+    height: 60px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.paper-nav .nav-links li {
+    margin-right: 2rem;
+}
+
+.paper-nav .nav-links a {
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    font-weight: 500;
+    position: relative;
+    color: #fff;
+    padding: 0;
+    text-decoration: none;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    border-radius: 0;
+}
+
+.paper-nav .nav-links a:hover {
+    background: none;
+    transform: none;
+}
+
+.paper-nav .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #fff;
+    transition: width 0.3s ease;
+}
+
+.paper-nav .nav-links a:hover::after {
+    width: 100%;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: white;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    top: 60px;
+    left: 0;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+}
+
+.dropdown-content a {
+    color: #333 !important;
+    padding: 6px 12px !important;
+    text-decoration: none;
+    display: block;
+    height: auto !important;
+    line-height: 1.4 !important;
+    font-size: 1rem !important;
+    background: none !important;
+    border: none !important;
+    margin: 0 !important;
+}
+
+.dropdown-content a:hover {
+    background: none !important;
+    color: #0066cc !important;
+    transform: none;
+    border: none;
+    box-shadow: none;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    animation: fadeInSlide 0.3s ease;
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .paper-header {
     text-align: center;
     padding: 2rem 0;
