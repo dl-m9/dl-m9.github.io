@@ -17,19 +17,19 @@
     "linkText": "Read All"
   },
   {
-    "title": "AgentsCoMerge",
-    "summary": "Collaborative decision-making for multi-lane merging with LLM-powered agents.",
-    "date": "Apr. 2025",
-    "tag": "Multi-Agent Systems",
-    "link": "https://mp.weixin.qq.com/s/D15TrRp1L_4Mrblg1ZZU-A",
-    "linkText": "Read All"
-  },
-  {
     "title": "AgentsCoDriver",
     "summary": "LLM-powered collaborative driving with lifelong learning for connected autonomous agents.",
     "date": "Apr. 2024",
     "tag": "LLM Agents",
     "link": "https://mp.weixin.qq.com/s/HVfs4-PT58WujCvEZZboug",
+    "linkText": "Read All"
+  },
+  {
+    "title": "AgentsCoMerge",
+    "summary": "Collaborative decision-making for multi-lane merging with LLM-powered agents.",
+    "date": "Apr. 2025",
+    "tag": "Multi-Agent Systems",
+    "link": "https://mp.weixin.qq.com/s/D15TrRp1L_4Mrblg1ZZU-A",
     "linkText": "Read All"
   },
   {
