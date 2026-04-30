@@ -1,5 +1,24 @@
 [
   {
+    "date": "Apr. 2026",
+    "title": "Paper Accepted by ICML'26",
+    "content": "One first-author paper, <strong>Optimizing Agentic Reasoning with Retrieval via Synthetic Semantic Information Gain Reward</strong>, was accepted by The 43rd International Conference on Machine Learning (ICML 2026).",
+    "links": [
+      {
+        "text": "PDF",
+        "url": "https://arxiv.org/abs/2602.00845"
+      },
+      {
+        "text": "Project",
+        "url": "paper-pages/InfoReasoner/index.html"
+      },
+      {
+        "text": "Code",
+        "url": "https://github.com/dl-m9/InfoReasoner"
+      }
+    ]
+  },
+  {
     "date": "Mar. 2026",
     "title": "Start a New Journey in Oxford",
     "content": "Senkang started a new journey as a Visiting PhD at the Department of Computer Science, University of Oxford, working on LLM agentic RL, self-evolution, and game theory."
