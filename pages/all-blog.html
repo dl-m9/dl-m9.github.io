@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Blogs - Senkang Forest Hu</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .kai-font {
+            font-family: KaiTi, STKaiti, "楷体", serif;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#" class="active">All Blogs</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-info">
+                    <!-- Profile info will be loaded from JSON -->
+                </div>
+                <div class="profile-image">
+                    <img src="../assets/profile.jpg" alt="Senkang Hu" id="profile-img">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="all-blogs" class="section">
+            <div class="container">
+                <h2 class="section-title">All Blogs & Notes</h2>
+                <div id="all-blog-container" class="blog-grid">
+                    <!-- Blog notes will be dynamically loaded here from blogs.json -->
+                </div>
+                <div class="back-to-home">
+                    <a href="../index.html" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to Homepage</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="copyright-year"></span> Senkang Forest Hu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks) {
+                const checkScrollable = () => {
+                    const isScrollable = navLinks.scrollWidth > navLinks.clientWidth;
+                    document.querySelector('nav .container').classList.toggle('has-scroll', isScrollable);
+                };
+
+                checkScrollable();
+                window.addEventListener('resize', checkScrollable);
+            }
+        });
+    </script>
+    <script src="../script.js?v=20260430-1"></script>
+</body>
+</html>

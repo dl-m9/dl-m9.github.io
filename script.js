@@ -240,6 +240,8 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => {
             console.error('Error loading news data:', error);
         });
+
+    loadBlogNotes();
 });
 
 // Helper function to wrap Chinese characters with kai-font span
@@ -251,6 +253,83 @@ function wrapChineseWithKaiFont(text) {
 function resolveRelativeUrl(url) {
     if (!url || /^(https?:|mailto:|#|\/)/.test(url)) return url;
     return new URL(url, siteRootUrl).href;
+}
+
+function loadBlogNotes() {
+    const blogContainer = document.getElementById('blog-container');
+    const allBlogContainer = document.getElementById('all-blog-container');
+    if (!blogContainer && !allBlogContainer) return;
+
+    let blogsJsonPath = 'data/blogs.json';
+    if (window.location.pathname.includes('/pages/')) {
+        blogsJsonPath = '../data/blogs.json';
+    }
+
+    fetch(blogsJsonPath)
+        .then(response => response.json())
+        .then(data => {
+            if (blogContainer) {
+                renderBlogNotes(data.slice(0, 3), blogContainer);
+            }
+            if (allBlogContainer) {
+                renderBlogNotes(data, allBlogContainer);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading blog notes:', error);
+        });
+}
+
+function renderBlogNotes(blogData, container) {
+    container.innerHTML = '';
+
+    blogData.forEach(item => {
+        const card = document.createElement('article');
+        card.className = item.featured ? 'blog-card featured' : 'blog-card';
+
+        const meta = document.createElement('div');
+        meta.className = 'blog-meta';
+
+        const tag = document.createElement('span');
+        tag.className = 'blog-card-tag';
+        tag.innerHTML = wrapChineseWithKaiFont(item.tag);
+        meta.appendChild(tag);
+
+        if (item.featured) {
+            const featured = document.createElement('span');
+            featured.className = 'blog-featured';
+            featured.textContent = 'Featured';
+            meta.appendChild(featured);
+        }
+
+        const title = document.createElement('h3');
+        title.innerHTML = wrapChineseWithKaiFont(item.title);
+
+        const summary = document.createElement('p');
+        summary.innerHTML = wrapChineseWithKaiFont(item.summary);
+
+        const footer = document.createElement('div');
+        footer.className = 'blog-card-footer';
+
+        const date = document.createElement('span');
+        date.className = 'blog-date';
+        date.textContent = item.date;
+        footer.appendChild(date);
+
+        const link = document.createElement('a');
+        link.className = 'blog-read-link';
+        link.href = resolveRelativeUrl(item.link);
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.innerHTML = `${wrapChineseWithKaiFont(item.linkText || 'Read Note')} <i class="fas fa-arrow-right"></i>`;
+        footer.appendChild(link);
+
+        card.appendChild(meta);
+        card.appendChild(title);
+        card.appendChild(summary);
+        card.appendChild(footer);
+        container.appendChild(card);
+    });
 }
 
 // Function to load profile information

@@ -28,6 +28,7 @@
 - When adding links to paper pages or homepage cards, reuse existing button/link patterns instead of inventing new markup.
 - When updating a paper project page venue/status, follow existing paper-page nav style: place the venue/status text in the center of the nav bar when needed. Do not add extra badge-like buttons under the title unless the user explicitly asks.
 - Keep paper project page nav bars visually consistent with the homepage nav color and treatment.
+- Keep paper project page nav bars minimal: only include `Home`, the centered publication venue/status when available, and `Related Work` when the page has related-work links. Do not add section anchors such as Abstract, Method, Results, or BibTeX unless explicitly requested.
 
 ## Preview Rule
 
