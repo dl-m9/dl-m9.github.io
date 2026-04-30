@@ -1,5 +1,19 @@
 [
   {
+    "title": "Self-Induced Outcome Potentials: Turn-Level Credit Assignment for Agents without Verifiers",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yong Dai, Xudong Han, Qianru Wang, Zhengru Fang, Yuzhi Zhao, Sam Tak Wu Kwong, Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": true,
+    "categories": ["intelligence"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
+  {
     "title": "Optimizing Agentic Reasoning with Retrieval via Synthetic Semantic Information Gain Reward",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yong Dai, Yuzhi Zhao, Yihang Tao, Yu Guo, Zhengru Fang, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "accepted",
