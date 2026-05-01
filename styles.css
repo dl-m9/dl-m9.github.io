@@ -1305,6 +1305,14 @@ nav {
     text-align: center;
 }
 
+.back-to-home {
+    margin-top: 3.5rem;
+}
+
+.view-all-blog {
+    margin-top: 3rem;
+}
+
 /* Writing & Notes Section */
 .blog-section-description {
     white-space: nowrap;

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loadProfileInfo();
 
     // Publication filters - including "First Author" for publications where user is first author or has equal contribution
-    const filterBtns = document.querySelectorAll('.filter-btn');
+    const filterBtns = document.querySelectorAll('.filter-btn[data-filter]');
     const publications = document.querySelectorAll('.publication');
     let filterAnimationTimer = null;
 
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function runFilterUpdate() {
-        const activeBtns = document.querySelectorAll('.filter-btn.active');
+        const activeBtns = document.querySelectorAll('.filter-btn[data-filter].active');
         const activeFilters = Array.from(activeBtns).map(btn => btn.getAttribute('data-filter'));
 
         const pubElements = document.querySelectorAll('.publication');
@@ -273,6 +273,7 @@ function loadBlogNotes() {
             }
             if (allBlogContainer) {
                 renderBlogNotes(data, allBlogContainer);
+                setupBlogYearFilters();
             }
         })
         .catch(error => {
@@ -286,6 +287,8 @@ function renderBlogNotes(blogData, container) {
     blogData.forEach(item => {
         const card = document.createElement('article');
         card.className = item.featured ? 'blog-card featured' : 'blog-card';
+        const yearMatch = (item.date || '').match(/20\d{2}/);
+        card.dataset.year = item.year || (yearMatch ? yearMatch[0] : '');
 
         const meta = document.createElement('div');
         meta.className = 'blog-meta';
@@ -329,6 +332,26 @@ function renderBlogNotes(blogData, container) {
         card.appendChild(summary);
         card.appendChild(footer);
         container.appendChild(card);
+    });
+}
+
+function setupBlogYearFilters() {
+    const filterButtons = document.querySelectorAll('.blog-year-filter-btn');
+    const blogCards = document.querySelectorAll('#all-blog-container .blog-card');
+    if (!filterButtons.length || !blogCards.length) return;
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const selectedYear = this.dataset.blogYear;
+
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+
+            blogCards.forEach(card => {
+                const shouldShow = selectedYear === 'all' || card.dataset.year === selectedYear;
+                card.style.display = shouldShow ? '' : 'none';
+            });
+        });
     });
 }
 
