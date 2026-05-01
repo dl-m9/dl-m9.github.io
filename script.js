@@ -293,10 +293,13 @@ function renderBlogNotes(blogData, container) {
         const meta = document.createElement('div');
         meta.className = 'blog-meta';
 
-        const tag = document.createElement('span');
-        tag.className = 'blog-card-tag';
-        tag.innerHTML = wrapChineseWithKaiFont(item.tag);
-        meta.appendChild(tag);
+        const tags = item.tags || (item.tag ? [item.tag] : []);
+        tags.forEach(tagText => {
+            const tag = document.createElement('span');
+            tag.className = 'blog-card-tag';
+            tag.innerHTML = wrapChineseWithKaiFont(tagText);
+            meta.appendChild(tag);
+        });
 
         if (item.featured) {
             const featured = document.createElement('span');

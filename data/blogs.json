@@ -3,41 +3,63 @@
     "title": "InfoReasoner: Optimizing Agentic Reasoning with Retrieval",
     "summary": "A project note on using synthetic semantic information gain to reward retrieval actions in LLM agentic reasoning.",
     "date": "Apr. 2026",
-    "tag": "Agentic RL",
     "link": "paper-pages/InfoReasoner/index.html",
     "linkText": "Read All",
-    "featured": true
+    "tags": [
+      "Agentic RL",
+      "Intelligence"
+    ]
   },
   {
     "title": "SVDecode: Distribution-Aligned Decoding for Efficient LLM Task Adaptation",
     "summary": "A project note on improving LLM task adaptation efficiency through distribution-aligned decoding.",
     "date": "Dec. 2025",
-    "tag": "LLM Efficiency",
     "link": "paper-pages/SVDecode/index.html",
-    "linkText": "Read All"
+    "linkText": "Read All",
+    "tags": [
+      "LLM Efficiency"
+    ]
   },
   {
     "title": "AgentsCoDriver",
     "summary": "LLM-powered collaborative driving with lifelong learning for connected autonomous agents.",
     "date": "Apr. 2024",
-    "tag": "LLM Agents",
     "link": "https://mp.weixin.qq.com/s/HVfs4-PT58WujCvEZZboug",
-    "linkText": "Read All"
+    "linkText": "Read All",
+    "tags": [
+      "LLM Agents",
+      "Intelligence"
+    ]
   },
   {
     "title": "AgentsCoMerge",
     "summary": "Collaborative decision-making for multi-lane merging with LLM-powered agents.",
     "date": "Apr. 2025",
-    "tag": "Multi-Agent Systems",
     "link": "https://mp.weixin.qq.com/s/D15TrRp1L_4Mrblg1ZZU-A",
-    "linkText": "Read All"
+    "linkText": "Read All",
+    "tags": [
+      "LLM Agent",
+      "Intelligence"
+    ]
+  },
+  {
+    "title": "CP-Guard+: A New Paradigm for Collaborative Perception Security",
+    "summary": "A project note on malicious-agent detection and defense for collaborative perception under complex attack settings.",
+    "date": "Feb. 2025",
+    "link": "paper-pages/cpguardp/index.html",
+    "linkText": "Read All",
+    "tags": [
+      "Multi-Agent Trustworthiness"
+    ]
   },
   {
     "title": "CP-Guard: Malicious Agent Detection and Defense",
     "summary": "A project note on defending collaborative bird's-eye-view perception against malicious agents.",
     "date": "Dec. 2024",
-    "tag": "Multi-Agent Security",
     "link": "paper-pages/cpguard/index.html",
-    "linkText": "Read All"
+    "linkText": "Read All",
+    "tags": [
+      "Multi-Agent Trustworthiness"
+    ]
   }
 ]
