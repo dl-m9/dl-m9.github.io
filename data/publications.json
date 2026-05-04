@@ -14,6 +14,20 @@
     ]
   },
   {
+    "title": "Inference-Time Budget Control for LLM Search Agents",
+    "authors": "Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Zhonghao Chang, Yu Guo, Yihang Tao, Hongyao Liu, Mengzhe Ruan, Jun Huang, Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": false,
+    "categories": ["intelligence", "efficiency"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "#"
+      }
+    ]
+  },
+  {
     "title": "Optimizing Agentic Reasoning with Retrieval via Synthetic Semantic Information Gain Reward",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yong Dai, Yuzhi Zhao, Yihang Tao, Yu Guo, Zhengru Fang, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "accepted",
