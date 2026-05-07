@@ -129,6 +129,24 @@
             margin: 1.5rem 0;
         }
 
+        .source-figure-pair {
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            grid-template-columns: 36fr 60fr;
+            align-items: start;
+            margin-bottom: 0.35rem;
+        }
+
+        .training-figure-grid {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            grid-template-columns: repeat(4, 1fr);
+            align-items: start;
+            margin-bottom: 0.35rem;
+        }
+
         .math-block {
             margin: 1rem 0;
             overflow-x: auto;
@@ -220,6 +238,15 @@
             }
 
             .figure-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .source-figure-pair {
+                width: 100%;
+            }
+
+            .training-figure-grid {
+                width: 100%;
                 grid-template-columns: 1fr;
             }
 
@@ -468,23 +495,22 @@
             <p>
                 The training curves explain why the method works. InfoReasoner explores more in the early phase because useful retrieval can receive positive reward even before the final answer is correct. After that phase, EM rises, entropy stabilizes, and responses become shorter.
             </p>
-            <div class="figure-grid">
+            <div class="figure-grid training-figure-grid">
                 <div class="figure-panel">
                     <img class="paper-figure-img" src="fig/em_score_mean_comparison.png" alt="EM score comparison between InfoReasoner and Search-R1">
-                    <div class="image-caption">EM grows more slowly at first, then surpasses Search-R1 after useful retrieval behavior emerges.</div>
                 </div>
                 <div class="figure-panel">
                     <img class="paper-figure-img" src="fig/all_score_infogain_iroutput_comparison.png" alt="Reward component comparison for InfoReasoner">
-                    <div class="image-caption">Information gain supplies dense intermediate reward while final-answer reward anchors correctness.</div>
                 </div>
                 <div class="figure-panel">
                     <img class="paper-figure-img" src="fig/entropy_loss_comparison.png" alt="Entropy loss comparison between InfoReasoner and Search-R1">
-                    <div class="image-caption">Entropy first rises with exploration, then drops as the policy becomes more certain.</div>
                 </div>
                 <div class="figure-panel">
                     <img class="paper-figure-img" src="fig/response_length_comparison.png" alt="Response length comparison between InfoReasoner and Search-R1">
-                    <div class="image-caption">The learned policy produces shorter and more stable responses without sacrificing accuracy.</div>
                 </div>
+            </div>
+            <div class="image-caption">
+                <strong>Training dynamics analysis:</strong> (a) EM score trajectories compare InfoReasoner with Search-R1 during training. (b) Reward components decompose the total training signal into Information Gain (IG) and EM scores. (c) Entropy loss shows how the policy first explores diverse retrieval paths and then becomes more certain. (d) Response length shows that InfoReasoner learns shorter and more stable outputs while maintaining better final accuracy.
             </div>
         </section>
 
@@ -505,6 +531,17 @@
             <p>
                 The first search identifies the target entity. The second search resolves the target attribute. InfoReasoner rewards this kind of complementary retrieval because each step makes the final answer distribution more certain.
             </p>
+            <div class="figure-grid source-figure-pair">
+                <div class="figure-panel">
+                    <img class="paper-figure-img" src="fig/boxplot_comparison.png" alt="Information gain boxplot across retrieval scenarios">
+                </div>
+                <div class="figure-panel">
+                    <img class="paper-figure-img" src="fig/dict_lineplot.png" alt="Group size sensitivity for information gain estimation">
+                </div>
+            </div>
+            <div class="image-caption">
+                <strong>Information gain analysis:</strong> (a) The boxplot compares different retrieval scenarios in the Love Bites example. Jointly observing both documents gives stronger information gain than using either document alone, showing that complementary evidence matters in multi-hop search. (b) The line plot studies group size sensitivity for reward estimation. The error drops quickly as the sampling group grows, then shows diminishing returns, which motivates a moderate group size for balancing reward quality and computation.
+            </div>
         </section>
 
         <section id="related-work" class="paper-section">

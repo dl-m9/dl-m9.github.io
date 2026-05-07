@@ -29,6 +29,9 @@
 - When updating a paper project page venue/status, follow existing paper-page nav style: place the venue/status text in the center of the nav bar when needed. Do not add extra badge-like buttons under the title unless the user explicitly asks.
 - Keep paper project page nav bars visually consistent with the homepage nav color and treatment.
 - Keep paper project page nav bars minimal: only include `Home`, the centered publication venue/status when available, and `Related Work` when the page has related-work links. Do not add section anchors such as Abstract, Method, Results, or BibTeX unless explicitly requested.
+- When building paper project pages from source files, use only figures that are actually referenced or used in the paper text. Do not add figures just because they exist in the source repository.
+- Preserve figure grouping from the source paper. If the paper uses one caption for a multi-panel figure, the project page should also use one group caption instead of separate captions for each subfigure.
+- Keep figure captions visually close to their figures, especially for grouped figures. Avoid large vertical gaps between a figure group and its caption.
 
 ## Preview Rule
 
