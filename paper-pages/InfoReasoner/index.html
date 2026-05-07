@@ -23,34 +23,78 @@
     </script>
     <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        .paper-abstract {
-            text-align: justify;
+        .blog-lede {
+            font-size: 1.08rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            max-width: 900px;
+            margin: 0 auto 1.25rem;
         }
 
-        .key-findings {
+        .story-callout {
+            margin: 1.4rem 0;
+            padding: 1rem 1.15rem;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 10px;
+            background: rgba(0, 102, 204, 0.06);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        .story-steps {
+            counter-reset: story-step;
+            display: grid;
+            gap: 0.9rem;
+            margin: 1.3rem 0;
+        }
+
+        .story-step {
+            counter-increment: story-step;
+            position: relative;
+            padding: 1rem 1rem 1rem 3.2rem;
+            border: 1px solid rgba(0, 102, 204, 0.12);
+            border-radius: 14px;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .story-step::before {
+            content: counter(story-step);
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            width: 1.45rem;
+            height: 1.45rem;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .story-step h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 0.35rem;
+            color: var(--text-color);
+        }
+
+        .story-step p {
             margin: 0;
-            padding-left: 1.2rem;
+            color: var(--light-text);
+            line-height: 1.65;
         }
 
-        .key-findings li {
-            margin-bottom: 0.5rem;
-            line-height: 1.6;
+        .paper-nav .nav-links {
+            position: relative;
         }
 
-        .bibtex {
-            background-color: #f0f0f0;
-            padding: 15px;
-            border-radius: 5px;
-            font-family: "Courier New", Courier, monospace;
-            font-size: 0.85rem;
-            overflow-x: auto;
-            white-space: pre;
-            border: 1px solid #ccc;
-        }
-
-        .math-block {
-            margin: 1rem 0;
-            overflow-x: auto;
+        .paper-nav .dropdown:last-child .dropdown-content {
+            right: 0;
+            left: auto;
         }
 
         .figure-panel {
@@ -58,6 +102,7 @@
             border: none;
             border-radius: 0;
             padding: 0;
+            margin: 1.5rem 0;
         }
 
         .paper-figure-img {
@@ -69,10 +114,25 @@
             background: transparent;
         }
 
+        .image-caption {
+            color: var(--light-text);
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin-top: 0.65rem;
+            text-align: center;
+        }
+
         .figure-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(260px, 1fr));
-            gap: 0.8rem;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .math-block {
+            margin: 1rem 0;
+            overflow-x: auto;
+            text-align: center;
         }
 
         .table-container {
@@ -111,8 +171,8 @@
         .case-box {
             background: #f8fbff;
             border: 1px solid #d9e8fb;
-            border-left: 4px solid #3a7bd5;
-            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 10px;
             padding: 1rem;
             line-height: 1.65;
         }
@@ -121,6 +181,17 @@
             font-family: "Courier New", Courier, monospace;
             font-size: 0.9rem;
             margin: 0.45rem 0;
+        }
+
+        .bibtex {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            white-space: pre;
+            border: 1px solid #ccc;
         }
 
         .paper-disclaimer {
@@ -151,6 +222,7 @@
             .figure-grid {
                 grid-template-columns: 1fr;
             }
+
         }
     </style>
 </head>
@@ -160,6 +232,12 @@
             <ul class="nav-links">
                 <li><a href="../../index.html">Home</a></li>
                 <li style="margin: 0 auto; font-weight: 600; color: white; position: absolute; left: 50%; transform: translateX(-50%);">ICML'26</li>
+                <li style="margin-left: auto;" class="dropdown">
+                    <a href="#related-work"><i class="fas fa-link"></i> Related Work</a>
+                    <div class="dropdown-content">
+                        <a href="../SIOP/index.html">SIOP</a>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
@@ -197,92 +275,72 @@
                 <span><sup>3</sup>Fudan University</span>,
                 <span><sup>4</sup>Lingnan University</span>
             </div>
-
         </div>
 
-        <section id="abstract" class="paper-section">
-            <h2>Abstract</h2>
-            <div class="paper-abstract">
-                <p>
-                    Large reasoning models have shown strong capabilities in complex tasks by combining chain-of-thought reasoning with external retrieval. However, existing training signals for retrieval are often sparse and delayed, making it difficult to assign credit to intermediate search actions.
-                </p>
-                <p>
-                    We introduce <strong>InfoReasoner</strong>, a unified framework that rewards retrieval by measuring <strong>synthetic semantic information gain</strong>. The key idea is simple: good retrieval should reduce uncertainty over the answer. We formalize this as uncertainty reduction over belief states and provide properties such as non-negativity and telescoping additivity to justify per-step optimization.
-                </p>
-                <p>
-                    Across seven QA benchmarks, InfoReasoner consistently outperforms strong retrieval-augmented baselines and achieves up to <strong>5.4% average accuracy improvement</strong>.
-                </p>
-            </div>
-        </section>
-
-        <section id="method" class="paper-section">
-            <h2>Method Overview</h2>
-            <p>
-                InfoReasoner computes a dense intrinsic reward directly from model outputs without manual retrieval annotation:
+        <section class="paper-section">
+            <h2>Why This Project Exists</h2>
+            <p class="blog-lede">
+                Retrieval gives an LLM agent a way to look outside its parametric memory. But learning when to search, what to search, and whether a search result actually helps is still difficult. In most training pipelines, the agent only receives a final answer reward. That reward arrives too late to explain which retrieval action changed the reasoning trajectory.
             </p>
-            <div class="highlight-box">
-                <ol style="margin: 0; padding-left: 1.2rem;">
-                    <li>Sample multiple candidate answers with and without retrieved evidence.</li>
-                    <li>Group semantically equivalent answers via bidirectional textual entailment.</li>
-                    <li>Estimate belief distributions over semantic classes.</li>
-                    <li>Use entropy reduction as information gain reward to train retrieval policy.</li>
-                </ol>
-            </div>
             <p>
-                The policy is optimized with GRPO, combining output reward and information gain reward to balance answer quality and uncertainty-reducing retrieval behaviors.
+                A good search step does not always contain the final answer directly. Sometimes it removes a wrong hypothesis. Sometimes it makes one candidate answer much more plausible than the rest. If training only asks whether the final answer is correct, this useful intermediate behavior is easy to miss.
             </p>
+            <div class="story-callout">
+                <strong>The question behind InfoReasoner is simple:</strong> can we reward retrieval actions by measuring how much they reduce semantic uncertainty during reasoning?
+            </div>
         </section>
 
         <section class="paper-section">
-            <h2>Framework Figure</h2>
+            <h2>The Core Intuition</h2>
+            <p>
+                Imagine asking the model the same question several times. Before retrieval, its answers may scatter across multiple semantic possibilities. After a useful search, those answers should concentrate around a better supported answer class. This concentration is information gain.
+            </p>
+            <p>
+                InfoReasoner turns that intuition into a reward. It samples answers with and without retrieved evidence, groups equivalent answers by meaning, estimates semantic belief distributions, and rewards retrieval when evidence increases support for the correct semantic answer class.
+            </p>
+            <div class="math-block">
+                $$r_t = \log p(c^\star\mid C_t) - \log p(c^\star\mid B).$$
+            </div>
+        </section>
+
+        <section class="paper-section">
+            <h2>How InfoReasoner Works</h2>
+            <div class="story-steps">
+                <div class="story-step">
+                    <h3>Sample answer beliefs</h3>
+                    <p>For a reasoning state, the model samples candidate answers before and after a retrieval action.</p>
+                </div>
+                <div class="story-step">
+                    <h3>Cluster semantic answers</h3>
+                    <p>Answers that express the same meaning are grouped together, so the reward tracks meaning rather than surface wording.</p>
+                </div>
+                <div class="story-step">
+                    <h3>Estimate uncertainty</h3>
+                    <p>The semantic answer clusters form belief distributions, and their entropy describes how uncertain the model is.</p>
+                </div>
+                <div class="story-step">
+                    <h3>Reward useful retrieval</h3>
+                    <p>A search action receives intrinsic reward when retrieved evidence increases probability mass on the correct semantic class.</p>
+                </div>
+                <div class="story-step">
+                    <h3>Optimize the agent</h3>
+                    <p>The information-gain reward is combined with final answer reward, then used to train the retrieval policy with GRPO.</p>
+                </div>
+            </div>
+
             <div class="figure-panel">
                 <img class="paper-figure-img" src="fig/overview.png" alt="Overview of InfoReasoner framework">
                 <div class="image-caption">
-                    <strong>Figure 1 (Overview):</strong> The pipeline has four connected stages: (1) input question and current reasoning context, (2) two parallel branches for baseline/no-retrieval and retrieval-conditioned generation, (3) semantic clustering over sampled answers, and (4) policy optimization with information-gain reward.
-                    <br>
-                    <strong>How to read:</strong> the key comparison is the uncertainty gap between the two branches. If retrieved evidence makes answer distributions more concentrated, semantic entropy drops and IG increases.
-                    <br>
-                    <strong>Main takeaway:</strong> InfoReasoner rewards retrieval actions that reduce uncertainty, not only actions that immediately produce a correct final answer.
-                    <br>
-                    <strong>Role in this page:</strong> this figure supports the Method section by showing why the reward is dense and why it improves multi-step retrieval behavior.
+                    <strong>Overview:</strong> InfoReasoner compares answer beliefs before and after retrieval, turns semantic information gain into a dense reward, and trains the agent to search when search meaningfully improves belief.
                 </div>
             </div>
         </section>
 
         <section class="paper-section">
-            <h2>Theoretical Foundations</h2>
+            <h2>What We Observed</h2>
             <p>
-                InfoReasoner views multi-step retrieval as an uncertainty-reduction process. Instead of rewarding only the final answer, it gives credit to retrieval actions that make the model more certain about the correct semantic answer class.
+                We evaluate InfoReasoner on seven question-answering benchmarks, including both single-hop and multi-hop settings. The results show that information-gain reward improves retrieval-augmented reasoning at both 3B and 7B scales.
             </p>
-            <p>
-                This gives a dense learning signal during reasoning, while still keeping the final correctness objective in training.
-            </p>
-        </section>
-
-        <section class="paper-section">
-            <h2>Practical Reward Formulation</h2>
-            <p>
-                In implementation, the model compares uncertainty before and after retrieval, and uses their difference as an intrinsic reward:
-            </p>
-            <div class="math-block">
-                $$\widehat{\mathrm{IG}}_t(x_t,a_t)=H_{\text{sem}}(x_t,B)-H_{\text{sem}}(x_t,C_t).$$
-            </div>
-            <p>
-                The training reward then combines exact-match correctness and this information-gain term (weighted by \(\lambda\)).
-            </p>
-        </section>
-
-        <section id="results" class="paper-section">
-            <h2>Main Results (QA Benchmarks)</h2>
-            <div class="highlight-box">
-                <ul class="key-findings">
-                    <li><strong>Consistent gains across 7 datasets</strong>, including both single-hop and multi-hop QA settings.</li>
-                    <li><strong>Parameter-efficient performance:</strong> the 3B model surpasses several 7B retrieval baselines.</li>
-                    <li><strong>State-of-the-art at both scales:</strong> strong improvements are maintained at 3B and 7B.</li>
-                    <li><strong>Better retrieval behavior:</strong> reward shaping encourages exploration early and efficient evidence use later.</li>
-                </ul>
-            </div>
-
             <div class="table-container">
                 <table class="paper-table">
                     <thead>
@@ -368,19 +426,13 @@
                     </tbody>
                 </table>
                 <div class="image-caption">
-                    <strong>Table 1 (Main Results):</strong> Comparison across seven QA benchmarks covering single-hop (NQ, TriviaQA, PopQA) and multi-hop (HotpotQA, 2Wiki, MuSiQue, Bamboogle) settings.
-                    <br>
-                    <strong>How to read:</strong> compare each baseline row with `InfoReasoner-3B` and `InfoReasoner-7B` in the same columns; the last column (`Avg.`) summarizes overall performance.
-                    <br>
-                    <strong>Main takeaway:</strong> InfoReasoner improves both 3B and 7B settings consistently, and the 3B model already outperforms several stronger 7B retrieval baselines on average.
-                    <br>
-                    <strong>Role in this page:</strong> this table is the primary quantitative evidence that the proposed information-gain reward improves retrieval-augmented reasoning quality.
+                    <strong>Main result:</strong> InfoReasoner gives consistent gains across seven benchmarks. The 3B model already surpasses several stronger retrieval baselines on average, and the 7B model keeps the advantage.
                 </div>
             </div>
-        </section>
 
-        <section class="paper-section">
-            <h2>Ablation: Information Gain Weight \(\lambda\)</h2>
+            <p>
+                The ablation tells the same story from another angle. A moderate information-gain weight works best. Too little makes the retrieval signal weak. Too much can over-emphasize intrinsic reward and drift away from final answer quality.
+            </p>
             <div class="table-container">
                 <table class="paper-table">
                     <thead>
@@ -405,47 +457,72 @@
                         <tr><td>\(\lambda=0.0\)</td><td>0.426</td><td>0.538</td><td>0.426</td><td>0.294</td><td>0.254</td><td>0.040</td><td>0.118</td><td>0.299</td></tr>
                     </tbody>
                 </table>
-                <div class="image-caption">
-                    <strong>Table 2 (Ablation on \(\lambda\)):</strong> Sensitivity analysis of the information-gain weight across the same seven QA benchmarks.
-                    <br>
-                    <strong>How to read:</strong> \(\lambda=0.0\) means no information-gain term, while larger values increase the reward contribution from uncertainty reduction.
-                    <br>
-                    <strong>Main takeaway:</strong> moderate weighting works best in this setup (\(\lambda=0.6\)); too small weakens retrieval guidance, too large may over-emphasize intrinsic reward.
-                    <br>
-                    <strong>Role in this page:</strong> this table explains why performance gains come from balancing task correctness and information gain, rather than maximizing either term alone.
+            </div>
+            <p>
+                Beyond short-answer QA, InfoReasoner also transfers to more agentic settings. On MATH500 with Python tool execution, InfoReasoner-7B reaches 85.8%. On WebDetective, a long-horizon deep-search benchmark, InfoReasoner-3B improves Pass@1 from 26.5% to 30.0% over Search-R1-3B-Base.
+            </p>
+        </section>
+
+        <section class="paper-section">
+            <h2>Training Dynamics</h2>
+            <p>
+                The training curves explain why the method works. InfoReasoner explores more in the early phase because useful retrieval can receive positive reward even before the final answer is correct. After that phase, EM rises, entropy stabilizes, and responses become shorter.
+            </p>
+            <div class="figure-grid">
+                <div class="figure-panel">
+                    <img class="paper-figure-img" src="fig/em_score_mean_comparison.png" alt="EM score comparison between InfoReasoner and Search-R1">
+                    <div class="image-caption">EM grows more slowly at first, then surpasses Search-R1 after useful retrieval behavior emerges.</div>
+                </div>
+                <div class="figure-panel">
+                    <img class="paper-figure-img" src="fig/all_score_infogain_iroutput_comparison.png" alt="Reward component comparison for InfoReasoner">
+                    <div class="image-caption">Information gain supplies dense intermediate reward while final-answer reward anchors correctness.</div>
+                </div>
+                <div class="figure-panel">
+                    <img class="paper-figure-img" src="fig/entropy_loss_comparison.png" alt="Entropy loss comparison between InfoReasoner and Search-R1">
+                    <div class="image-caption">Entropy first rises with exploration, then drops as the policy becomes more certain.</div>
+                </div>
+                <div class="figure-panel">
+                    <img class="paper-figure-img" src="fig/response_length_comparison.png" alt="Response length comparison between InfoReasoner and Search-R1">
+                    <div class="image-caption">The learned policy produces shorter and more stable responses without sacrificing accuracy.</div>
                 </div>
             </div>
         </section>
 
-        
-
         <section class="paper-section">
-            <h2>Case Study</h2>
-            
+            <h2>A Small Example</h2>
+            <p>
+                The behavior we want is not more search by default. We want search that narrows the answer space. A two-hop question shows this clearly.
+            </p>
             <div class="case-box">
                 <p><strong>Query:</strong> In what city was the band behind the album <em>Love Bites</em> formed?</p>
-                <p><strong>Ground-truth:</strong> Bolton, England</p>
+                <p><strong>Ground truth:</strong> Bolton, England</p>
                 <div class="mono-line">&lt;search&gt; band Love Bites album &lt;/search&gt;</div>
                 <div class="mono-line">&lt;information&gt; Love Bites is by Buzzcocks... &lt;/information&gt;</div>
                 <div class="mono-line">&lt;search&gt; formation city Buzzcocks band &lt;/search&gt;</div>
                 <div class="mono-line">&lt;information&gt; Buzzcocks were formed in Bolton, England... &lt;/information&gt;</div>
                 <div class="mono-line">&lt;answer&gt; Bolton, England &lt;/answer&gt;</div>
             </div>
-            <div class="image-caption">
-                <strong>Figure 2 (Case Study):</strong> This example illustrates two-hop evidence accumulation: the first retrieval identifies the target entity (Buzzcocks), and the second retrieval resolves the target attribute (formation city).
-                <br>
-                <strong>How to read:</strong> each `search -> information -> reasoning` step narrows the candidate answer space.
-                <br>
-                <strong>Main takeaway:</strong> the model succeeds by making retrieval steps complementary rather than redundant.
-                <br>
-                <strong>Role in this page:</strong> this figure-level example explains the qualitative mechanism behind the quantitative gains reported in the results tables.
+            <p>
+                The first search identifies the target entity. The second search resolves the target attribute. InfoReasoner rewards this kind of complementary retrieval because each step makes the final answer distribution more certain.
+            </p>
+        </section>
+
+        <section id="related-work" class="paper-section">
+            <h2>Related Work</h2>
+            <p>
+                SIOP follows the same credit-assignment theme from another direction. InfoReasoner focuses on retrieval actions and semantic information gain. SIOP focuses on verifier-free turn-level outcome potential for longer agent trajectories.
+            </p>
+            <div class="paper-buttons">
+                <a href="../SIOP/index.html" class="paper-btn">
+                    <i class="fas fa-link"></i> Read SIOP
+                </a>
             </div>
         </section>
 
         <section class="paper-section">
-            <h2>Conclusion</h2>
+            <h2>Takeaway</h2>
             <p>
-                InfoReasoner provides a theoretically grounded and practical path to optimize agentic reasoning with retrieval. By rewarding uncertainty reduction directly, it offers better credit assignment for intermediate retrieval steps and improves end-task performance in a scalable way.
+                InfoReasoner teaches retrieval agents to search when search changes belief. This is a small but important shift: from rewarding final answers only, to rewarding the intermediate actions that make good answers more likely.
             </p>
         </section>
 

@@ -1,5 +1,16 @@
 [
   {
+    "title": "SIOP: Self-Induced Outcome Potential",
+    "summary": "A blog-style note on verifier-free turn-level credit assignment for long-horizon LLM agents.",
+    "date": "May 2026",
+    "link": "paper-pages/SIOP/index.html",
+    "linkText": "Read All",
+    "tags": [
+      "Agentic RL",
+      "Intelligence"
+    ]
+  },
+  {
     "title": "InfoReasoner: Optimizing Agentic Reasoning with Retrieval",
     "summary": "A project note on using synthetic semantic information gain to reward retrieval actions in LLM agentic reasoning.",
     "date": "Apr. 2026",

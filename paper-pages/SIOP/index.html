@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIOP: Self-Induced Outcome Potential | Senkang Forest Hu</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../paper-common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☯️</text></svg>">
+    <style>
+        .blog-lede {
+            font-size: 1.08rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            max-width: 900px;
+            margin: 0 auto 1.25rem;
+        }
+
+        .story-callout {
+            margin: 1.4rem 0;
+            padding: 1rem 1.15rem;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 10px;
+            background: rgba(0, 102, 204, 0.06);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        .story-steps {
+            counter-reset: story-step;
+            display: grid;
+            gap: 0.9rem;
+            margin: 1.3rem 0;
+        }
+
+        .story-step {
+            counter-increment: story-step;
+            position: relative;
+            padding: 1rem 1rem 1rem 3.2rem;
+            border: 1px solid rgba(0, 102, 204, 0.12);
+            border-radius: 14px;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .story-step::before {
+            content: counter(story-step);
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            width: 1.45rem;
+            height: 1.45rem;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .story-step h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 0.35rem;
+            color: var(--text-color);
+        }
+
+        .story-step p {
+            margin: 0;
+            color: var(--light-text);
+            line-height: 1.65;
+        }
+
+        .paper-nav .nav-links {
+            position: relative;
+        }
+
+        .paper-nav .dropdown:last-child .dropdown-content {
+            right: 0;
+            left: auto;
+        }
+
+        .figure-panel {
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .paper-figure-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0;
+            border: none;
+            background: transparent;
+        }
+
+        .image-caption {
+            color: var(--light-text);
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin-top: 0.65rem;
+            text-align: center;
+        }
+
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.94rem;
+        }
+
+        .result-table th,
+        .result-table td {
+            padding: 0.7rem 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .result-table th:first-child,
+        .result-table td:first-child {
+            text-align: left;
+        }
+
+        .result-table th {
+            background: #f7f9fd;
+            font-weight: 700;
+        }
+
+        .bibtex {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            white-space: pre;
+            border: 1px solid #ccc;
+        }
+
+        .paper-disclaimer {
+            margin-top: 1rem;
+            padding: 0.75rem 0.9rem;
+            border-radius: 8px;
+            background: #fff8e8;
+            border: 1px solid #edd8a2;
+            color: #6d561b;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .paper-nav .nav-links {
+                gap: 1rem;
+            }
+
+            .paper-nav .nav-links a {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <nav class="paper-nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li style="margin: 0 auto; font-weight: 600; color: white; position: absolute; left: 50%; transform: translateX(-50%);">arXiv Preprint</li>
+                <li style="margin-left: auto;" class="dropdown">
+                    <a href="#related-work"><i class="fas fa-link"></i> Related Work</a>
+                    <div class="dropdown-content">
+                        <a href="../InfoReasoner/index.html">InfoReasoner</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="paper-header">
+            <h1 class="paper-title">Self-Induced Outcome Potential: Turn-Level Credit Assignment for Agents without Verifiers</h1>
+
+            <div class="paper-buttons">
+                <a href="https://arxiv.org/abs/2605.04984" class="paper-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-file-pdf"></i> Paper PDF
+                </a>
+                <a href="#bibtex" class="paper-btn">
+                    <i class="fas fa-quote-right"></i> BibTeX
+                </a>
+            </div>
+
+            <div class="authors">
+                <strong>Senkang Hu</strong><sup>1,2,3</sup>,
+                <strong>Yong Dai</strong><sup>4</sup>,
+                <strong>Xudong Han</strong><sup>5</sup>,
+                <strong>Zhengru Fang</strong><sup>1,2</sup>,
+                <strong>Yuzhi Zhao</strong><sup>6</sup>,
+                <strong>Sam Tak Wu Kwong</strong><sup>7</sup>,
+                <strong>Yuguang Fang</strong><sup>1,2</sup>
+            </div>
+
+            <div class="affiliations">
+                <span><sup>1</sup>Hong Kong JC STEM Lab of Smart City</span>,
+                <span><sup>2</sup>City University of Hong Kong</span>,
+                <span><sup>3</sup>University of Oxford</span><br>
+                <span><sup>4</sup>Fudan University</span>,
+                <span><sup>5</sup>University of Sussex</span>,
+                <span><sup>6</sup>Huazhong University of Science and Technology</span>,
+                <span><sup>7</sup>Lingnan University</span>
+            </div>
+        </div>
+
+        <section class="paper-section">
+            <h2>Why This Project Exists</h2>
+            <p class="blog-lede">
+                Long-horizon LLM agents do not usually fail in one single moment. They drift. A bad search query, a weak observation, or a misleading intermediate thought can quietly move the whole trajectory toward the wrong final answer. The hard part is that the training signal often arrives only at the end.
+            </p>
+            <p>
+                If a verifier tells us whether the final answer is correct, outcome RL can reward the whole trajectory. But that reward is blunt. It says that the trajectory was good or bad, without telling us which turn helped and which turn hurt. Process supervision can solve this, but it usually needs annotated intermediate steps or a reliable task-specific verifier. Many agentic settings do not have either.
+            </p>
+            <div class="story-callout">
+                <strong>The question behind SIOP is simple:</strong> can an agent create a useful turn-level learning signal from its own rollouts, without gold answers and without a task-specific verifier?
+            </div>
+        </section>
+
+        <section class="paper-section">
+            <h2>The Core Intuition</h2>
+            <p>
+                When we sample several rollouts for the same query, the final answers often fall into a few semantic groups. Some rollouts say the same thing in different words. Some groups are supported by retrieved evidence. Some groups look like low-consensus noise. This structure is already present in the model's own behavior.
+            </p>
+            <p>
+                SIOP treats these semantic answer groups as latent future outcome states. Instead of asking whether a turn moves the model toward a known gold answer, it asks whether the turn increases support for a reliable future outcome mode induced by the agent's own sampled rollouts.
+            </p>
+        </section>
+
+        <section class="paper-section">
+            <h2>How SIOP Works</h2>
+            <div class="story-steps">
+                <div class="story-step">
+                    <h3>Sample multiple agent rollouts</h3>
+                    <p>For each query, the current policy generates several search-augmented trajectories and final answers.</p>
+                </div>
+                <div class="story-step">
+                    <h3>Cluster final answers into outcome modes</h3>
+                    <p>Answers with the same meaning are grouped into semantic outcome modes, so the reward is less sensitive to surface wording.</p>
+                </div>
+                <div class="story-step">
+                    <h3>Calibrate which modes are reliable</h3>
+                    <p>Raw majority is not enough. SIOP reweights outcome modes using reliability signals such as evidence support from tool observations.</p>
+                </div>
+                <div class="story-step">
+                    <h3>Measure turn-level support gain</h3>
+                    <p>Each turn receives credit when it increases prefix-conditioned support for the rollout's reliable semantic outcome mode.</p>
+                </div>
+                <div class="story-step">
+                    <h3>Propagate terminal mass through turn advantages</h3>
+                    <p>The final answer receives outcome mass at the terminal turn, and earlier turns receive credit through turn-local discounted returns.</p>
+                </div>
+            </div>
+
+            <div class="figure-panel">
+                <img class="paper-figure-img" src="fig/SIOP.png" alt="Overview of Self-Induced Outcome Potential framework">
+                <div class="image-caption">
+                    <strong>Overview:</strong> SIOP turns sampled final answers into semantic outcome modes, calibrates their reliability, computes prefix outcome potential, and optimizes the agent with turn-level advantages.
+                </div>
+            </div>
+        </section>
+
+        <section class="paper-section">
+            <h2>What We Observed</h2>
+            <p>
+                We test SIOP on seven search-augmented question-answering benchmarks with Qwen3-4B and Qwen3-8B backbones. The comparison is designed to separate verifier-free learning from gold-supervised learning. SIOP uses no gold labels during training.
+            </p>
+            <table class="result-table">
+                <thead>
+                    <tr>
+                        <th>Backbone</th>
+                        <th>Avg. EM</th>
+                        <th>Avg. F1</th>
+                        <th>Main Takeaway</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Qwen3-4B</td>
+                        <td><strong>0.360</strong></td>
+                        <td><strong>0.445</strong></td>
+                        <td>Best verifier-free average on both metrics.</td>
+                    </tr>
+                    <tr>
+                        <td>Qwen3-8B</td>
+                        <td><strong>0.388</strong></td>
+                        <td><strong>0.480</strong></td>
+                        <td>Matches gold-supervised GRPO in average EM and improves average F1.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+                The behavior curves tell a similar story. SIOP does not simply make the model search more. It learns a more controlled interaction pattern, with fewer redundant turns, shorter responses, lower clip ratios, and lower generation entropy.
+            </p>
+
+            <div class="figure-panel">
+                <img class="paper-figure-img" src="fig/behavior_training_curves.png" alt="Training dynamics for SIOP">
+                <div class="image-caption">
+                    <strong>Training dynamics:</strong> SIOP reduces redundant search and continuation while preserving end-task quality.
+                </div>
+            </div>
+        </section>
+
+        <section class="paper-section">
+            <h2>Takeaway</h2>
+            <p>
+                SIOP is a step toward agentic RL that can learn from its own outcome structure. The agent does not need a gold answer for every query, and it does not need a hand-built verifier for every environment. It only needs enough rollouts to reveal plausible future outcome modes, then it can ask a more local question: which turns made the reliable futures more likely?
+            </p>
+        </section>
+
+        <section id="related-work" class="paper-section">
+            <h2>Related Work</h2>
+            <p>
+                InfoReasoner is closely related in spirit. It studies retrieval-oriented credit assignment through semantic information gain, while SIOP extends the self-induced signal idea toward verifier-free turn-level learning for longer agent trajectories.
+            </p>
+            <div class="paper-buttons">
+                <a href="../InfoReasoner/index.html" class="paper-btn">
+                    <i class="fas fa-link"></i> Read InfoReasoner
+                </a>
+            </div>
+        </section>
+
+        <section id="bibtex" class="paper-section">
+            <h2>BibTeX</h2>
+            <div class="bibtex">@article{hu2026siop,
+  title={Self-Induced Outcome Potential: Turn-Level Credit Assignment for Agents without Verifiers},
+  author={Hu, Senkang and Dai, Yong and Han, Xudong and Fang, Zhengru and Zhao, Yuzhi and Kwong, Sam Tak Wu and Fang, Yuguang},
+  journal={arXiv preprint arXiv:2605.04984},
+  year={2026}
+}</div>
+        </section>
+
+        <section class="paper-section">
+            <div class="paper-disclaimer">
+                <strong>Disclaimer:</strong> This page is an overview for quick reading. For formal definitions, complete derivations, experiment protocols, and final conclusions, please refer to the original paper and official release.
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="copyright-year"></span> Senkang Forest Hu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

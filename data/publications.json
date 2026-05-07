@@ -10,6 +10,11 @@
         "text": "PDF",
         "class": "code-tag",
         "link": "https://arxiv.org/abs/2605.04984"
+      },
+      {
+        "text": "Project",
+        "class": "code-tag",
+        "link": "paper-pages/SIOP/index.html"
       }
     ]
   },
