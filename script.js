@@ -455,15 +455,6 @@ function loadPublications() {
             const accepted2024 = publications.filter(pub => pub.type === 'accepted' && pub.year === '2024');
             const patents = publications.filter(pub => pub.type === 'patent');
 
-            // Debug - log the counts to console
-            console.log('Preprints:', preprints.length);
-            console.log('2026 Papers:', accepted2026.length);
-            console.log('2025 Papers:', accepted2025.length);
-            console.log('2024 Papers:', accepted2024.length);
-            console.log('Patents:', patents.length);
-            console.log('Total:', publications.length);
-            console.log('Sum of groups:', preprints.length + accepted2026.length + accepted2025.length + accepted2024.length + patents.length);
-
             // Counters for auto-numbering publications
             let counter = 1;
 
