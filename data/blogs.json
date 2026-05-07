@@ -1,7 +1,7 @@
 [
   {
     "title": "SIOP: Self-Induced Outcome Potential",
-    "summary": "A blog-style note on verifier-free turn-level credit assignment for long-horizon LLM agents.",
+    "summary": "Verifier-free turn-level credit assignment for long-horizon LLM agents.",
     "date": "May 2026",
     "link": "paper-pages/SIOP/index.html",
     "linkText": "Read All",
@@ -12,7 +12,7 @@
   },
   {
     "title": "InfoReasoner: Optimizing Agentic Reasoning with Retrieval",
-    "summary": "A project note on using synthetic semantic information gain to reward retrieval actions in LLM agentic reasoning.",
+    "summary": "Synthetic semantic information gain rewards for retrieval actions in LLM agentic reasoning.",
     "date": "Apr. 2026",
     "link": "paper-pages/InfoReasoner/index.html",
     "linkText": "Read All",
@@ -23,7 +23,7 @@
   },
   {
     "title": "SVDecode: Distribution-Aligned Decoding for Efficient LLM Task Adaptation",
-    "summary": "A project note on improving LLM task adaptation efficiency through distribution-aligned decoding.",
+    "summary": "Distribution-aligned decoding for efficient LLM task adaptation.",
     "date": "Dec. 2025",
     "link": "paper-pages/SVDecode/index.html",
     "linkText": "Read All",
@@ -55,7 +55,7 @@
   },
   {
     "title": "CP-Guard+: A New Paradigm for Collaborative Perception Security",
-    "summary": "A project note on malicious-agent detection and defense for collaborative perception under complex attack settings.",
+    "summary": "Malicious-agent detection and defense for collaborative perception under complex attack settings.",
     "date": "Feb. 2025",
     "link": "paper-pages/cpguardp/index.html",
     "linkText": "Read All",
@@ -65,7 +65,7 @@
   },
   {
     "title": "CP-Guard: Malicious Agent Detection and Defense",
-    "summary": "A project note on defending collaborative bird's-eye-view perception against malicious agents.",
+    "summary": "Defense for collaborative bird's-eye-view perception against malicious agents.",
     "date": "Dec. 2024",
     "link": "paper-pages/cpguard/index.html",
     "linkText": "Read All",
