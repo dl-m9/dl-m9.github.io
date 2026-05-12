@@ -20,15 +20,15 @@
   },
   {
     "title": "Inference-Time Budget Control for LLM Search Agents",
-    "authors": "Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Zhonghao Chang, Yu Guo, Yihang Tao, Hongyao Liu, Mengzhe Ruan, Jun Huang, Yuguang Fang",
+    "authors": "Zhengru Fang*, <strong><u>Senkang \"Forest\" Hu</u></strong>*, Zhonghao Chang, Yu Guo, Yihang Tao, Hongyao Liu, Mengzhe Ruan, Jun Huang, Yuguang Fang",
     "type": "preprint",
-    "isFirstAuthor": false,
+    "isFirstAuthor": true,
     "categories": ["intelligence", "efficiency"],
     "tags": [
       {
         "text": "PDF",
         "class": "code-tag",
-        "link": "#"
+        "link": "https://arxiv.org/abs/2605.05701"
       }
     ]
   },
