@@ -10,6 +10,21 @@
 - Additional static pages live in `pages/`
 - Paper landing pages live in `paper-pages/`
 
+## Commands
+
+- No build step, no package manager, no test framework. Pure static site (HTML/CSS/JS), deployed via GitHub Pages.
+- Local preview: `python3 -m http.server 8001` from repo root, then open `http://localhost:8001/`.
+- Subpages use relative `../` paths, so they only resolve correctly when served (not via `file://`).
+- Validate JSON after editing a `data/*.json` file: `python3 -m json.tool data/<file>.json > /dev/null`.
+
+## Architecture
+
+- The page is static HTML hydrated at runtime: `index.html` ships empty containers, and `script.js` `fetch()`es the JSON files in `data/` on `DOMContentLoaded` to render content into the DOM. There is no server-side rendering.
+- Content/behavior split: hand-written sections (Biography, Education, Research Interests, Honors, Services, Contact) are literal HTML in `index.html`; data-driven sections are rendered from JSON by `script.js`.
+- `script.js` data loaders: `loadProfileInfo()` (`data/profile-info.json`), `loadPublications()` (`data/publications.json`), `renderNewsItems()` (`data/news.json`), `loadBlogNotes()` (`data/blogs.json`). It also handles publication filtering (All/Preprints/Accepted/First Author), smooth-scroll nav, and scroll-based active-link tracking.
+- Path resolution: each loader detects whether it runs from the homepage or a `pages/` subpage and prefixes JSON paths with `../` accordingly. Reuse this pattern when adding loaders or new subpages.
+- Styling is layered: global `styles.css`; paper pages additionally load `paper-pages/paper-common.css`, then per-page inline `<style>` overrides. See `paper-pages/SKILL.md` for the paper-page skeleton and reusable classes.
+
 ## Content Map
 
 - Update homepage biography, education, research interests, services, and similar hand-written sections in `index.html`.
