@@ -1,0 +1,19 @@
+name = "dl-m9-analytics"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# Public aggregated stats are cacheable; visits are written to D1.
+# The database_id below is a PLACEHOLDER. Replace it with the id printed by:
+#   wrangler d1 create visitor_analytics
+[[d1_databases]]
+binding = "DB"
+database_name = "visitor_analytics"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+
+[vars]
+# Comma-separated allow-list of browser Origins permitted to call this Worker.
+# Add a localhost origin while developing the homepage locally.
+ALLOWED_ORIGINS = "https://dl-m9.github.io"
+
+# HASH_SALT is a SECRET, not a var. Do NOT put it here. Set it with:
+#   wrangler secret put HASH_SALT

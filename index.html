@@ -467,10 +467,19 @@
             </div>
         </section> -->
 
-        <div style="width: 15%; height: auto; margin: auto; padding: 2rem 0;">
-            <script type="text/javascript" id="clstr_globe"
-                src="//clustrmaps.com/globe.js?d=qLWVVAAvtN_5u37gNS4Dm-rflExCdP123yF9uf4KZnk"></script>
-        </div>
+        <section id="visitors" class="section visitors-section">
+            <div class="container">
+                <h2 class="section-title">Visitors</h2>
+                <div class="visitors-content">
+                    <div id="visitor-globe" class="visitor-globe">
+                        <div class="visitor-globe-skeleton" aria-hidden="true"></div>
+                    </div>
+                    <div id="visitor-stats" class="visitor-stats">
+                        <div class="visitor-loading">Loading visitor stats&hellip;</div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -480,6 +489,11 @@
     </footer>
 
     <script src="script.js?v=20260504-1"></script>
+
+    <!-- Self-hosted visitor analytics + globe (replaces ClustrMaps) -->
+    <script src="assets/vendor/globe.gl.min.js"></script>
+    <script src="visitor-globe.js?v=20260530-4"></script>
+    <script src="analytics.js?v=20260530-4"></script>
     <script>
         // Update copyright year
         document.getElementById('current-year').textContent = new Date().getFullYear();

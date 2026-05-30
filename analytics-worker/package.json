@@ -1,0 +1,15 @@
+{
+  "name": "dl-m9-analytics",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Self-hosted ClustrMaps-style visitor analytics Worker (Cloudflare Workers + D1)",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init:local": "wrangler d1 execute visitor_analytics --file=./schema.sql",
+    "db:init:remote": "wrangler d1 execute visitor_analytics --remote --file=./schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^3.80.0"
+  }
+}
