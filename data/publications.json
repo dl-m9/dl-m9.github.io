@@ -292,6 +292,39 @@
     ]
   },
   {
+    "title": "Unified Context Evolution for LLM Agents",
+    "authors": "Zixuan Zhu, Yitong Hu, Yong Dai, Junfeng Fang, Chunyang Jiang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yuzhi Zhao",
+    "type": "preprint",
+    "isFirstAuthor": false,
+    "categories": ["intelligence"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2606.02304"
+      }
+    ]
+  },
+  {
+    "title": "Skill-Conditioned Gated Self-Distillation for LLM Reasoning",
+    "authors": "Jiazhen Huang, Xiao Chen, Xiao Luo, Yong Dai, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yuzhi Zhao",
+    "type": "preprint",
+    "isFirstAuthor": false,
+    "categories": ["intelligence", "efficiency"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2605.28791"
+      },
+      {
+        "text": "Code",
+        "class": "code-tag",
+        "link": "https://github.com/walawalagoose/SGSD"
+      }
+    ]
+  },
+  {
     "title": "Distribution-Aligned Decoding for Efficient LLM Task Adaptation",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Xudong Han, Jinqi Jiang, Yihang Tao, Zihan Fang, Yong Dai, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "accepted",

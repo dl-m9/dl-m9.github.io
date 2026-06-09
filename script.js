@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const publications = document.querySelectorAll('.publication');
     let filterAnimationTimer = null;
 
+    document.addEventListener('publicationsLoaded', () => applyFilters(false));
+
     // Load publications data from JSON file
     loadPublications();
 
@@ -515,6 +517,8 @@ function loadPublications() {
                 // Add patents (restart numbering from 1)
                 renderPublicationGroup(patents, publicationsList, 1);
             }
+
+            document.dispatchEvent(new Event('publicationsLoaded'));
         })
         .catch(error => {
             console.error('Error loading publications data:', error);
