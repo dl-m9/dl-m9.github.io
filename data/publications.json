@@ -19,6 +19,19 @@
     ]
   },
   {
+    "title": "Multi-Agent Embodied Autonomous Driving: From V2X Information Exchange to Shared World Models",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Zhengru Fang, Yihang Tao, Zihan Fang, Sam Tak Wu Kwong, Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": true,
+    "categories": ["collaboration"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag"
+      }
+    ]
+  },
+  {
     "title": "Inference-Time Budget Control for LLM Search Agents",
     "authors": "Zhengru Fang*, <strong><u>Senkang \"Forest\" Hu</u></strong>*, Zhonghao Chang, Yu Guo, Yihang Tao, Hongyao Liu, Mengzhe Ruan, Jun Huang, Yuguang Fang",
     "type": "preprint",
