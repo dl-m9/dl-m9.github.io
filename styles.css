@@ -1668,6 +1668,14 @@ nav {
     margin-right: 0;
 }
 
+.edu-item .xhs-logo {
+    transform: scale(0.9);
+}
+
+.edu-item:hover .xhs-logo {
+    transform: scale(0.94);
+}
+
 .edu-item:hover .nus-logo {
     transform: scale(1.08);
 }
