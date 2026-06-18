@@ -293,6 +293,20 @@
     ]
   },
   {
+    "title": "CXR-ContraBench: Benchmarking Negated-Option Attraction in Medical VLMs",
+    "authors": "Zhengru Fang, Yanan Ma, Yu Guo, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yixian Zhang, Hangcheng Cao, Wenbo Ding, Yuguang Fang",
+    "type": "preprint",
+    "isFirstAuthor": false,
+    "categories": ["others"],
+    "tags": [
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2605.05810"
+      }
+    ]
+  },
+  {
     "title": "Unified Context Evolution for LLM Agents",
     "authors": "Zixuan Zhu, Yitong Hu, Yong Dai, Junfeng Fang, Chunyang Jiang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yuzhi Zhao",
     "type": "preprint",
