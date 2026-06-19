@@ -2070,6 +2070,19 @@ nav {
     text-underline-offset: 2px;
 }
 
+.authors .corr {
+    font-size: 11px;
+    color: var(--primary-color);
+    margin-left: 2px;
+    position: relative;
+    top: -2px;
+}
+
+.cofirst {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
 .venue {
     font-size: 0.85rem;
     font-style: italic;

@@ -34,7 +34,7 @@
   },
   {
     "title": "Inference-Time Budget Control for LLM Search Agents",
-    "authors": "Zhengru Fang*, <strong><u>Senkang \"Forest\" Hu</u></strong>*, Zhonghao Chang, Yu Guo, Yihang Tao, Hongyao Liu, Mengzhe Ruan, Jun Huang, Yuguang Fang",
+    "authors": "Zhengru Fang<span class=\"cofirst\">*</span>, <strong><u>Senkang \"Forest\" Hu</u></strong><span class=\"cofirst\">*</span>, Zhonghao Chang, Yu Guo, Yihang Tao, Hongyao Liu, Mengzhe Ruan, Jun Huang, Yuguang Fang",
     "type": "preprint",
     "isFirstAuthor": true,
     "categories": ["intelligence", "efficiency"],
@@ -72,7 +72,7 @@
   },
   {
     "title": "GCP: Guarded Collaborative Perception with Spatial-Temporal Aware Malicious Agent Detection",
-    "authors": "Yihang Tao*, <strong><u>Senkang \"Forest\" Hu</u></strong>*, Yue Hu, Haonan An, Hangcheng Cao, Yuguang Fang",
+    "authors": "Yihang Tao<span class=\"cofirst\">*</span>, <strong><u>Senkang \"Forest\" Hu</u></strong><span class=\"cofirst\">*</span>, Yue Hu, Haonan An, Hangcheng Cao, Yuguang Fang",
     "type": "accepted",
     "venue": "IEEE Transactions on Dependable and Secure Computing.",
     "year": "2026",
@@ -96,7 +96,7 @@
   },
   {
     "title": "DSP-Reg: Domain-Sensitive Parameter Regularization for Robust Domain Generalization",
-    "authors": "Xudong Han*, <strong><u>Senkang \"Forest\" Hu</u>*<sup>, project leader</sup></strong>, Yihang Tao, Yu Guo, Philip Birch, Sam Tak Wu Kwong, Yuguang Fang",
+    "authors": "Xudong Han<span class=\"cofirst\">*</span>, <strong><u>Senkang \"Forest\" Hu</u><span class=\"cofirst\">*</span><sup>, project leader</sup></strong>, Yihang Tao, Yu Guo, Philip Birch, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "preprint",
     "isFirstAuthor": true,
     "categories": ["trustworthiness"],
@@ -570,7 +570,7 @@
   
   {
     "title": "CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception",
-    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>*, Yihang Tao*, Guowen Xu, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong><span class=\"cofirst\">*</span>, Yihang Tao<span class=\"cofirst\">*</span>, Guowen Xu, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong",
     "type": "accepted",
     "isFirstAuthor": true,
     "categories": ["trustworthiness"],
