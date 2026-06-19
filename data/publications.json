@@ -96,7 +96,7 @@
   },
   {
     "title": "DSP-Reg: Domain-Sensitive Parameter Regularization for Robust Domain Generalization",
-    "authors": "Xudong Han<span class=\"cofirst\">*</span>, <strong><u>Senkang \"Forest\" Hu</u><span class=\"cofirst\">*</span><sup>, project leader</sup></strong>, Yihang Tao, Yu Guo, Philip Birch, Sam Tak Wu Kwong, Yuguang Fang",
+    "authors": "Xudong Han<span class=\"cofirst\">*</span>, <strong><u>Senkang \"Forest\" Hu</u><span class=\"cofirst\">*</span><sup>, project leader</sup></strong>, Yihang Tao, Yu Guo, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "preprint",
     "isFirstAuthor": true,
     "categories": ["trustworthiness"],
