@@ -1,31 +1,41 @@
 [
   {
     "date": "Jun. 2026",
+    "date_zh": "2026年6月",
     "title": "Research Featured by CCTV, China News, and China Daily",
-    "content": "Major media outlets reported CityUHK's connected-vehicle perception research. The coverage highlighted Senkang's domain generalization mechanism for robust cross-domain collaborative perception, which improves perception accuracy and robustness under adverse weather conditions.",
+    "title_zh": "研究获央视、中国新闻网与中国日报报道",
+    "content": "Major media outlets reported CityUHK's multi-agent perception research. The coverage highlighted Senkang's domain generalization mechanism for robust cross-domain collaborative perception, which improves perception accuracy and robustness under adverse weather conditions.",
+    "content_zh": "多家主流媒体报道了香港城市大学的多智能体联合感知研究。报道重点介绍了胡森康提出的域泛化机制，该机制用于鲁棒的跨域协同感知，可在恶劣天气条件下提升感知精度与鲁棒性。",
     "links": [
       {
         "text": "CCTV",
+        "text_zh": "央视",
         "url": "https://jingji.cctv.com/2026/06/03/ARTI7OQTaSpUHwuP1oAJDFlX260603.shtml"
       },
       {
         "text": "China News",
+        "text_zh": "中国新闻网",
         "url": "http://www.xj.chinanews.com.cn/kejiao/2026-06-12/detail-ihffhxiw7356666.shtml"
       },
       {
         "text": "China Daily",
+        "text_zh": "中国日报",
         "url": "https://caijing.chinadaily.com.cn/a/202606/15/WS6a2f8990a310d709c2fb8039.html"
       },
       {
         "text": "Paper",
+        "text_zh": "论文",
         "url": "https://ieeexplore.ieee.org/abstract/document/10779389"
       }
     ]
   },
   {
     "date": "Apr. 2026",
+    "date_zh": "2026年4月",
     "title": "Paper Accepted by ICML'26",
+    "title_zh": "论文被 ICML'26 录用",
     "content": "One first-author paper, <strong>Optimizing Agentic Reasoning with Retrieval via Synthetic Semantic Information Gain Reward</strong>, was accepted by The 43rd International Conference on Machine Learning (ICML 2026), see you in Seoul, South Korea. 🇰🇷🇰🇷🇰🇷",
+    "content_zh": "一篇第一作者论文 <strong>Optimizing Agentic Reasoning with Retrieval via Synthetic Semantic Information Gain Reward</strong> 被第 43 届国际机器学习大会（ICML 2026）录用，韩国首尔见。🇰🇷🇰🇷🇰🇷",
     "links": [
       {
         "text": "PDF",
@@ -33,28 +43,39 @@
       },
       {
         "text": "Project",
+        "text_zh": "项目",
         "url": "paper-pages/InfoReasoner/index.html"
       },
       {
         "text": "Code",
+        "text_zh": "代码",
         "url": "https://github.com/dl-m9/InfoReasoner"
       }
     ]
   },
   {
     "date": "Mar. 2026",
+    "date_zh": "2026年3月",
     "title": "Start a New Journey in Oxford",
-    "content": "Senkang started a new journey as a Visiting PhD at the Department of Computer Science, University of Oxford, working on LLM agentic RL, self-evolution, and game theory."
+    "title_zh": "开启牛津新旅程",
+    "content": "Senkang started a new journey as a Visiting PhD at the Department of Computer Science, University of Oxford, working on LLM agentic RL, self-evolution, and game theory.",
+    "content_zh": "胡森康作为访问博士加入牛津大学计算机科学系，开启新旅程，研究方向为大语言模型智能体强化学习、自进化与博弈论。"
   },
   {
     "date": "Feb. 2026",
+    "date_zh": "2026年2月",
     "title": "Three Papers Accepted by CVPR'26",
-    "content": "Three papers were accepted by CVPR 2026, including 2 main conference papers and 1 Findings paper. See you in Denver, USA. 🇺🇸🇺🇸🇺🇸"
+    "title_zh": "三篇论文被 CVPR'26 录用",
+    "content": "Three papers were accepted by CVPR 2026, including 2 main conference papers and 1 Findings paper. See you in Denver, USA. 🇺🇸🇺🇸🇺🇸",
+    "content_zh": "三篇论文被 CVPR 2026 录用，包括 2 篇主会论文与 1 篇 Findings 论文，美国丹佛见。🇺🇸🇺🇸🇺🇸"
   },
   {
     "date": "Feb. 2026",
+    "date_zh": "2026年2月",
     "title": "Invited Talk at <a href=\"https://www.slai.edu.cn/\" target=\"_blank\">SLAI</a>",
+    "title_zh": "在 <a href=\"https://www.slai.edu.cn/\" target=\"_blank\">SLAI</a> 的特邀报告",
     "content": "Senkang gave an invited presentation at the <strong>Agentic Intelligence for Human-AI Society Symposium</strong> at Shenzhen Loop Area Institute (SLAI), featuring his recent work on Agentic RL, <strong>Optimizing Agentic Reasoning with Retrieval via Synthetic Semantic Information Gain Reward</strong>.",
+    "content_zh": "胡森康在深圳河套研究院（SLAI）举办的 <strong>Agentic Intelligence for Human-AI Society Symposium</strong> 上作特邀报告，介绍其智能体强化学习的近期工作 <strong>Optimizing Agentic Reasoning with Retrieval via Synthetic Semantic Information Gain Reward</strong>。",
     "links": [
       {
         "text": "PDF",
@@ -62,23 +83,31 @@
       },
       {
         "text": "Project",
+        "text_zh": "项目",
         "url": "paper-pages/InfoReasoner/index.html"
       },
       {
         "text": "Code",
+        "text_zh": "代码",
         "url": "https://github.com/dl-m9/InfoReasoner"
       }
     ]
   },
   {
     "date": "Jan. 2026",
+    "date_zh": "2026年1月",
     "title": "Invited Talk at PolyU",
-    "content": "Senkang gave an invited talk at The Hong Kong Polytechnic University (PolyU), titled <strong>Toward Efficient Agentic Reasoning and Task Adaptation</strong>."
+    "title_zh": "在香港理工大学（PolyU）的特邀报告",
+    "content": "Senkang gave an invited talk at The Hong Kong Polytechnic University (PolyU), titled <strong>Toward Efficient Agentic Reasoning and Task Adaptation</strong>.",
+    "content_zh": "胡森康在香港理工大学（PolyU）作特邀报告，题为 <strong>Toward Efficient Agentic Reasoning and Task Adaptation</strong>。"
   },
   {
     "date": "Dec. 2025",
+    "date_zh": "2025年12月",
     "title": "Paper Accepted by TMC",
+    "title_zh": "论文被 TMC 录用",
     "content": "One first-author paper, <strong>CP-uniGuard: A Unified, Probability-Agnostic, and Adaptive Framework for Malicious Agent Detection and Defense in Multi-Agent Embodied Perception Systems</strong>, was accepted by IEEE Transactions on Mobile Computing (TMC).",
+    "content_zh": "一篇第一作者论文 <strong>CP-uniGuard: A Unified, Probability-Agnostic, and Adaptive Framework for Malicious Agent Detection and Defense in Multi-Agent Embodied Perception Systems</strong> 被 IEEE Transactions on Mobile Computing（TMC）录用。",
     "links": [
       {
         "text": "PDF",
@@ -86,33 +115,47 @@
       },
       {
         "text": "Project",
+        "text_zh": "项目",
         "url": "paper-pages/cp-uniguard/index.html"
       },
       {
         "text": "Code",
+        "text_zh": "代码",
         "url": "https://github.com/CP-Security/CP-uniGuard"
       }
     ]
   },
   {
     "date": "Dec. 2025",
+    "date_zh": "2025年12月",
     "title": "Invited Talk at NJU",
-    "content": "Senkang gave an invited talk at the School of Intelligence Science and Technology, Nanjing University (NJU)."
+    "title_zh": "在南京大学（NJU）的特邀报告",
+    "content": "Senkang gave an invited talk at the School of Intelligence Science and Technology, Nanjing University (NJU).",
+    "content_zh": "胡森康在南京大学（NJU）智能科学与技术学院作特邀报告。"
   },
   {
     "date": "Dec. 2025",
+    "date_zh": "2025年12月",
     "title": "Best Paper Award",
-    "content": "Our paper <strong>UAV-enabled Computing Power Networks: Task Completion Probability Analysis</strong> received the <strong>Best Paper Award</strong> at IEEE GLOBECOM 2025."
+    "title_zh": "最佳论文奖",
+    "content": "Our paper <strong>UAV-enabled Computing Power Networks: Task Completion Probability Analysis</strong> received the <strong>Best Paper Award</strong> at IEEE GLOBECOM 2025.",
+    "content_zh": "我们的论文 <strong>UAV-enabled Computing Power Networks: Task Completion Probability Analysis</strong> 荣获 IEEE GLOBECOM 2025 <strong>最佳论文奖</strong>。"
   },
   {
     "date": "Nov. 2025",
+    "date_zh": "2025年11月",
     "title": "IEEE ComSoc Student Grant Award",
-    "content": "Senkang was awarded the IEEE ComSoc Student Grant to support his conference travel."
+    "title_zh": "获 IEEE ComSoc 学生资助",
+    "content": "Senkang was awarded the IEEE ComSoc Student Grant to support his conference travel.",
+    "content_zh": "胡森康获得 IEEE ComSoc 学生资助，用于支持会议差旅。"
   },
   {
     "date": "Sep. 2025",
+    "date_zh": "2025年9月",
     "title": "Paper Accepted by NeurIPS'25",
+    "title_zh": "论文被 NeurIPS'25 录用",
     "content": "One first-author paper, <strong>Distribution-Aligned Decoding for Efficient LLM Task Adaptation</strong>, was accepted by NeurIPS 2025. See you in San Diego, USA. 🇺🇸🇺🇸🇺🇸",
+    "content_zh": "一篇第一作者论文 <strong>Distribution-Aligned Decoding for Efficient LLM Task Adaptation</strong> 被 NeurIPS 2025 录用，美国圣地亚哥见。🇺🇸🇺🇸🇺🇸",
     "links": [
       {
         "text": "PDF",
@@ -120,18 +163,23 @@
       },
       {
         "text": "Project",
+        "text_zh": "项目",
         "url": "paper-pages/SVDecode/index.html"
       },
       {
         "text": "Code",
+        "text_zh": "代码",
         "url": "https://github.com/dl-m9/SVDecode"
       }
     ]
   },
   {
     "date": "Aug. 2025",
+    "date_zh": "2025年8月",
     "title": "Two Scholarships Awarded",
+    "title_zh": "获两项奖学金",
     "content": "Senkang was awarded <strong>Chow Yei Ching School of Graduate Studies (CYCSGS) Scholarship</strong> (<strong>10 awardees</strong> university-wide and the <strong>sole awardee</strong> in the Department of Computer Science) and <strong>Research Tuition Scholarship (RTS)</strong>! Congratulations! 🎉",
+    "content_zh": "胡森康获得 <strong>周亦卿研究生院（CYCSGS）奖学金</strong>（全校 <strong>10 名获奖者</strong>，计算机科学系 <strong>唯一获奖者</strong>）与 <strong>研究学费奖学金（RTS）</strong>！祝贺！🎉",
     "links": [
       {
         "text": "CYCSGS",
@@ -145,8 +193,11 @@
   },
   {
     "date": "Jul. 2025",
+    "date_zh": "2025年7月",
     "title": "Three Papers Accepted by GLOBECOM'25",
+    "title_zh": "三篇论文被 GLOBECOM'25 录用",
     "content": "Three papers were accepted by IEEE GLOBECOM 2025, including one first-author paper, <strong>Task-Aware Parameter-Efficient Fine-Tuning of Large Pre-Trained Models at the Edge</strong>. See you in Taipei.",
+    "content_zh": "三篇论文被 IEEE GLOBECOM 2025 录用，其中包括一篇第一作者论文 <strong>Task-Aware Parameter-Efficient Fine-Tuning of Large Pre-Trained Models at the Edge</strong>，台北见。",
     "links": [
       {
         "text": "PDF",
@@ -156,8 +207,11 @@
   },
   {
     "date": "Apr. 2025",
+    "date_zh": "2025年4月",
     "title": "Paper Accepted by TMC",
+    "title_zh": "论文被 TMC 录用",
     "content": "One first-author paper, <strong>AgentsCoMerge: Large Language Model Empowered Collaborative Decision Making for Ramp Merging</strong>, was accepted by IEEE Transactions on Mobile Computing (TMC).",
+    "content_zh": "一篇第一作者论文 <strong>AgentsCoMerge: Large Language Model Empowered Collaborative Decision Making for Ramp Merging</strong> 被 IEEE Transactions on Mobile Computing（TMC）录用。",
     "links": [
       {
         "text": "PDF",
@@ -167,8 +221,11 @@
   },
   {
     "date": "Apr. 2025",
+    "date_zh": "2025年4月",
     "title": "Paper Accepted by WCM",
+    "title_zh": "论文被 WCM 录用",
     "content": "One first-author paper, <strong>Collaborative Perception for Connected and Autonomous Driving: Challenges, Possible Solutions and Opportunities</strong>, was accepted by IEEE Wireless Communications Magazine (WCM).",
+    "content_zh": "一篇第一作者论文 <strong>Collaborative Perception for Connected and Autonomous Driving: Challenges, Possible Solutions and Opportunities</strong> 被 IEEE Wireless Communications Magazine（WCM）录用。",
     "links": [
       {
         "text": "PDF",
@@ -178,24 +235,34 @@
   },
   {
     "date": "Mar. 2025",
+    "date_zh": "2025年3月",
     "title": "New Project Launched: <a href='https://github.com/dl-m9/Multi-Agent-Embodied-Autonomous-Driving' target='_blank'>Multi-Agent Embodied Autonomous Driving</a>",
+    "title_zh": "启动新项目：<a href='https://github.com/dl-m9/Multi-Agent-Embodied-Autonomous-Driving' target='_blank'>Multi-Agent Embodied Autonomous Driving</a>",
     "content": "We launched a new project on Multi-Agent Embodied Autonomous Driving. The repository continuously collects recent papers in this area and serves as a curated resource for the community.",
+    "content_zh": "我们启动了一个关于多智能体具身自动驾驶的新项目。该仓库持续收集该领域的最新论文，作为面向社区的精选资源。",
     "links": [
       {
         "text": "Github Repository",
+        "text_zh": "GitHub 仓库",
         "url": "https://github.com/dl-m9/Multi-Agent-Embodied-Autonomous-Driving"
       }
     ]
   },
   {
     "date": "Feb. 2025",
+    "date_zh": "2025年2月",
     "title": "PhD Qualification Success",
-    "content": "Senkang passed the PhD Qualifying Examination (QE)! He is now a PhD candidate! 🎉🎉🎉"
+    "title_zh": "通过博士资格考试",
+    "content": "Senkang passed the PhD Qualifying Examination (QE)! He is now a PhD candidate! 🎉🎉🎉",
+    "content_zh": "胡森康通过博士资格考试（QE），正式成为博士候选人！🎉🎉🎉"
   },
   {
     "date": "Jan. 2025",
+    "date_zh": "2025年1月",
     "title": "Paper Accepted by ICRA'25",
+    "title_zh": "论文被 ICRA'25 录用",
     "content": "One co-authored paper, <strong>Directed-CP: Directed Collaborative Perception for Connected and Autonomous Vehicles via Proactive Attention</strong>, was accepted by ICRA 2025.",
+    "content_zh": "一篇合作论文 <strong>Directed-CP: Directed Collaborative Perception for Connected and Autonomous Vehicles via Proactive Attention</strong> 被 ICRA 2025 录用。",
     "links": [
       {
         "text": "PDF",
@@ -203,19 +270,26 @@
       },
       {
         "text": "Code",
+        "text_zh": "代码",
         "url": "https://github.com/yihangtao/Directed-CP"
       }
     ]
   },
   {
     "date": "Jan. 2025",
+    "date_zh": "2025年1月",
     "title": "AAAI'25 Oral Presentation",
-    "content": "Our paper accepted by AAAI'25 was selected for Oral Presentation! Congratulations again! 🎉"
+    "title_zh": "AAAI'25 口头报告",
+    "content": "Our paper accepted by AAAI'25 was selected for Oral Presentation! Congratulations again! 🎉",
+    "content_zh": "我们被 AAAI'25 录用的论文入选口头报告（Oral）！再次祝贺！🎉"
   },
   {
     "date": "Dec. 2024",
+    "date_zh": "2024年12月",
     "title": "Paper Accepted by ToN",
+    "title_zh": "论文被 ToN 录用",
     "content": "One co-authored paper was accepted by IEEE/ACM Transactions on Networking (ToN).",
+    "content_zh": "一篇合作论文被 IEEE/ACM Transactions on Networking（ToN）录用。",
     "links": [
       {
         "text": "PDF",
@@ -223,14 +297,18 @@
       },
       {
         "text": "Code",
+        "text_zh": "代码",
         "url": "https://github.com/fangzr/PIB-Prioritized-Information-Bottleneck-Framework"
       }
     ]
   },
   {
     "date": "Dec. 2024",
+    "date_zh": "2024年12月",
     "title": "Paper Accepted by AAAI'25",
+    "title_zh": "论文被 AAAI'25 录用",
     "content": "Congratulations! 🎉 One first-author paper entitled <strong>CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception</strong> was accepted by The 39th Annual AAAI Conference on Artificial Intelligence (AAAI'25), see you in Philadelphia, USA 🇺🇸!",
+    "content_zh": "祝贺！🎉 一篇第一作者论文 <strong>CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception</strong> 被第 39 届 AAAI 人工智能大会（AAAI'25）录用，美国费城见 🇺🇸！",
     "links": [
       {
         "text": "PDF",
@@ -238,18 +316,23 @@
       },
       {
         "text": "Project",
+        "text_zh": "项目",
         "url": "paper-pages/cpguard/index.html"
       },
       {
         "text": "Code",
+        "text_zh": "代码",
         "url": "https://github.com/CP-Security/CP-Guard"
       }
     ]
   },
   {
     "date": "Nov. 2024",
+    "date_zh": "2024年11月",
     "title": "Paper Accepted by IEEE TITS",
+    "title_zh": "论文被 IEEE TITS 录用",
     "content": "One paper was accepted by IEEE Transactions on Intelligent Transportation Systems (TITS).",
+    "content_zh": "一篇论文被 IEEE Transactions on Intelligent Transportation Systems（TITS）录用。",
     "links": [
       {
         "text": "PDF",
@@ -259,42 +342,66 @@
   },
   {
     "date": "Nov. 2024",
+    "date_zh": "2024年11月",
     "title": "IEEE ComSoc Student Grant Award",
-    "content": "Senkang was awarded the IEEE ComSoc Student Grant to support his conference travel."
+    "title_zh": "获 IEEE ComSoc 学生资助",
+    "content": "Senkang was awarded the IEEE ComSoc Student Grant to support his conference travel.",
+    "content_zh": "胡森康获得 IEEE ComSoc 学生资助，用于支持会议差旅。"
   },
   {
     "date": "Aug. 2024",
+    "date_zh": "2024年8月",
     "title": "Paper Accepted by IEEE TMC",
-    "content": "One paper was accepted by IEEE Transactions on Mobile Computing (TMC)."
+    "title_zh": "论文被 IEEE TMC 录用",
+    "content": "One paper was accepted by IEEE Transactions on Mobile Computing (TMC).",
+    "content_zh": "一篇论文被 IEEE Transactions on Mobile Computing（TMC）录用。"
   },
   {
     "date": "Jul. 2024",
+    "date_zh": "2024年7月",
     "title": "Two Papers Accepted by GLOBECOM'24",
-    "content": "Two papers were accepted by GLOBECOM'24, see you in Cape Town, South Africa 🇿🇦!"
+    "title_zh": "两篇论文被 GLOBECOM'24 录用",
+    "content": "Two papers were accepted by GLOBECOM'24, see you in Cape Town, South Africa 🇿🇦!",
+    "content_zh": "两篇论文被 GLOBECOM'24 录用，南非开普敦见 🇿🇦！"
   },
   {
     "date": "Sep. 2023",
+    "date_zh": "2023年9月",
     "title": "Institutional Research Tuition Grant",
-    "content": "Senkang was awarded the Institutional Research Tuition Grant, nearly HK$170,000."
+    "title_zh": "获校级研究学费资助",
+    "content": "Senkang was awarded the Institutional Research Tuition Grant, nearly HK$170,000.",
+    "content_zh": "胡森康获得校级研究学费资助，近 17 万港元。"
   },
   {
     "date": "Jul. 2023",
+    "date_zh": "2023年7月",
     "title": "Relocation to Hong Kong",
-    "content": "Congratulations to Senkang! 🎉 Finally moved to Hong Kong 🇭🇰🇭🇰🇭🇰 to start his new career!"
+    "title_zh": "移居香港",
+    "content": "Congratulations to Senkang! 🎉 Finally moved to Hong Kong 🇭🇰🇭🇰🇭🇰 to start his new career!",
+    "content_zh": "祝贺胡森康！🎉 终于移居香港 🇭🇰🇭🇰🇭🇰，开启全新的事业！"
   },
   {
     "date": "Jun. 2023",
+    "date_zh": "2023年6月",
     "title": "InnoHK Award Funding",
-    "content": "Thanks to Prof. Fang's strong support, Senkang received the InnoHK Award Funding, around HK$900,000 from the Government of the Hong Kong Special Administrative Region to support his research and PhD career."
+    "title_zh": "获 InnoHK 资助",
+    "content": "Thanks to Prof. Fang's strong support, Senkang received the InnoHK Award Funding, around HK$900,000 from the Government of the Hong Kong Special Administrative Region to support his research and PhD career.",
+    "content_zh": "感谢方教授的大力支持，胡森康获得来自香港特别行政区政府的 InnoHK 资助，约 90 万港元，用于支持其科研与博士生涯。"
   },
   {
     "date": "Jun. 2022",
+    "date_zh": "2022年6月",
     "title": "Graduation from BIT",
-    "content": "Senkang graduated from Beijing Institute of Technology. Thanks to all the professors, senior students and friends who helped him in the past four years."
+    "title_zh": "从北京理工大学毕业",
+    "content": "Senkang graduated from Beijing Institute of Technology. Thanks to all the professors, senior students and friends who helped him in the past four years.",
+    "content_zh": "胡森康从北京理工大学毕业。感谢过去四年里帮助过他的所有老师、学长学姐与朋友。"
   },
   {
     "date": "Dec. 2021",
+    "date_zh": "2021年12月",
     "title": "National Scholarship Award",
-    "content": "Senkang was awarded the National Scholarship for ranking in the top 1% of his department, one of the highest honors for undergraduate students in China."
+    "title_zh": "获国家奖学金",
+    "content": "Senkang was awarded the National Scholarship for ranking in the top 1% of his department, one of the highest honors for undergraduate students in China.",
+    "content_zh": "胡森康因在院系排名前 1% 而获得国家奖学金，这是中国本科生的最高荣誉之一。"
   }
 ]

@@ -3,22 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            try {
+                var l = localStorage.getItem('siteLang');
+                if (l === 'zh' || l === 'en') document.documentElement.setAttribute('lang', l);
+            } catch (e) { /* ignore */ }
+        })();
+    </script>
     <title>All News - Senkang Forest Hu</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .kai-font {
-            font-family: KaiTi, STKaiti, "楷体", serif;
-        }
-    </style>
 </head>
 <body>
     <nav>
         <div class="container">
             <ul class="nav-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="#" class="active">All News</a></li>
+                <li><a href="../index.html"><span data-lang="en">Home</span><span data-lang="zh">主页</span></a></li>
+                <li><a href="#" class="active"><span data-lang="en">All News</span><span data-lang="zh">全部动态</span></a></li>
             </ul>
+            <button type="button" class="lang-toggle" aria-label="Switch language / 切换语言">
+                <span class="lt-en">EN</span><span class="lt-sep" aria-hidden="true">/</span><span class="lt-cn">CN</span>
+            </button>
         </div>
     </nav>
 
@@ -38,12 +44,12 @@
     <main>
         <section id="all-news" class="section">
             <div class="container">
-                <h2 class="section-title">All News & Updates</h2>
+                <h2 class="section-title"><span data-lang="en">All News & Updates</span><span data-lang="zh">全部动态</span></h2>
                 <div id="all-news-container" class="news-list">
                     <!-- News items will be dynamically loaded here from news.json -->
                 </div>
                 <div class="back-to-home">
-                    <a href="../index.html" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to Homepage</a>
+                    <a href="../index.html" class="btn btn-primary"><i class="fas fa-arrow-left"></i> <span data-lang="en">Back to Homepage</span><span data-lang="zh">返回主页</span></a>
                 </div>
             </div>
         </section>
@@ -51,7 +57,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; <span id="copyright-year"></span> Senkang Forest Hu. All rights reserved.</p>
+            <p>&copy; <span id="copyright-year"></span> Senkang Forest Hu. <span data-lang="en">All rights reserved.</span><span data-lang="zh">版权所有。</span></p>
         </div>
     </footer>
 

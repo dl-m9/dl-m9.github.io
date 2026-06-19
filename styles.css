@@ -1,5 +1,6 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
 
 /* Base Styles */
 :root {
@@ -48,7 +49,14 @@ body {
 }
 
 .kai-font {
-    font-family: KaiTi, STKaiti, "楷体", "楷体_GB2312", serif;
+    /* Chinese text uses Noto Sans SC (思源黑体), with system sans fallbacks. */
+    font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;
+}
+
+/* ===== i18n: bilingual visibility (toggled by <html lang>) ===== */
+html[lang="en"] [data-lang="zh"],
+html[lang="zh"] [data-lang="en"] {
+    display: none !important;
 }
 
 a {
@@ -779,6 +787,52 @@ nav {
     width: 100%;
 }
 
+/* Language toggle control (scoped to the main-site nav, not paper-page navs) */
+nav:not(.paper-nav) .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.lang-toggle .lt-en,
+.lang-toggle .lt-cn {
+    opacity: 0.5;
+    transition: opacity 0.25s ease;
+}
+
+.lang-toggle .lt-sep {
+    opacity: 0.4;
+    margin: 0 0.3rem;
+}
+
+.lang-toggle:hover .lt-en,
+.lang-toggle:hover .lt-cn {
+    opacity: 0.85;
+}
+
+/* Emphasize the currently active language within the single toggle. */
+html[lang="en"] .lang-toggle .lt-en,
+html[lang="zh"] .lang-toggle .lt-cn {
+    opacity: 1;
+    font-weight: 600;
+}
+
 /* Mobile Navigation Menu */
 .menu-toggle {
     display: none;
@@ -819,9 +873,20 @@ nav {
         white-space: nowrap;
         padding: 0.5rem 0;
         height: auto;
-        width: 100%;
+        flex: 1 1 auto;
+        min-width: 0;
         margin: 0;
         position: relative;
+    }
+
+    .lang-toggle {
+        position: relative;
+        z-index: 2;
+        font-size: 0.9rem;
+    }
+
+    .lang-toggle .lt-sep {
+        margin: 0 0.25rem;
     }
 
     .nav-links::-webkit-scrollbar {

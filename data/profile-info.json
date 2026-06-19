@@ -1,6 +1,7 @@
 {
   "name": "Senkang Forest Hu",
   "subtitle": "<span>PhD @ CITYUHK, Visiting PhD @ Oxford, BSc @ BIT</span><br><a href=\"https://jcstemlab-smartcity.github.io\" target=\"_blank\">JC STEM Lab of Smart City</a><br><a href=\"https://www.cs.cityu.edu.hk/\" target=\"_blank\">Department of Computer Science, City University of Hong Kong</a>",
+  "subtitle_zh": "<span>博士@香港城市大学，访问博士@牛津大学，本科@北京理工大学</span><br><a href=\"https://jcstemlab-smartcity.github.io\" target=\"_blank\">香港赛马会智慧城市创科实验室</a><br><a href=\"https://www.cs.cityu.edu.hk/\" target=\"_blank\">香港城市大学 计算机科学系</a>",
   "socialLinks": [
     {
       "type": "email",

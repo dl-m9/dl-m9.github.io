@@ -7,6 +7,133 @@ function isElementVisible(element) {
     return window.getComputedStyle(element).display !== 'none';
 }
 
+/* ============================================================
+   i18n core: language state, UI strings, helpers
+   ============================================================ */
+const I18N_STORAGE_KEY = 'siteLang';
+
+const UI_STRINGS = {
+    en: {
+        preprints: 'Preprints',
+        patents: 'Patents',
+        preprint: 'Preprint',
+        patent: 'Patent',
+        emptyPub: 'No publications in this category yet.',
+        featured: 'Featured',
+        readNote: 'Read Note',
+        acceptedIn: function (year) { return 'Accepted Papers in ' + year; }
+    },
+    zh: {
+        preprints: '预印本',
+        patents: '专利',
+        preprint: '预印本',
+        patent: '专利',
+        emptyPub: '该类别暂无论文。',
+        featured: '精选',
+        readNote: '阅读笔记',
+        acceptedIn: function (year) { return year + ' 年录用论文'; }
+    }
+};
+
+// Current language from <html lang>; only 'en' or 'zh'.
+function getLang() {
+    return document.documentElement.getAttribute('lang') === 'zh' ? 'zh' : 'en';
+}
+
+// UI string by key for the current language (falls back to English).
+function t(key, arg) {
+    const dict = UI_STRINGS[getLang()] || UI_STRINGS.en;
+    let val = dict[key];
+    if (val == null) val = UI_STRINGS.en[key];
+    return typeof val === 'function' ? val(arg) : (val == null ? '' : val);
+}
+
+// Pick a localized field from a data object: uses `field_zh` when in zh and
+// non-empty, otherwise falls back to the base English field.
+function localized(item, field) {
+    if (!item) return '';
+    if (getLang() === 'zh') {
+        const zh = item[field + '_zh'];
+        if (zh != null && zh !== '') return zh;
+    }
+    return item[field];
+}
+
+// Re-render all JSON-driven content for the current language.
+function rerenderLocalizedContent() {
+    loadProfileInfo();
+    loadPublications();
+    loadNews();
+    loadBlogNotes();
+}
+
+function setLanguage(lang) {
+    lang = (lang === 'zh') ? 'zh' : 'en';
+    document.documentElement.setAttribute('lang', lang);
+    try { localStorage.setItem(I18N_STORAGE_KEY, lang); } catch (e) { /* ignore */ }
+    rerenderLocalizedContent();
+}
+
+// Single toggle button: each click flips between English and Chinese.
+// Active-language emphasis is handled by CSS via the <html lang> attribute.
+// Delegated on document so it survives any DOM re-rendering of the nav.
+function initLangToggle() {
+    document.addEventListener('click', function (e) {
+        const toggle = e.target.closest ? e.target.closest('.lang-toggle') : null;
+        if (toggle) {
+            setLanguage(getLang() === 'zh' ? 'en' : 'zh');
+        }
+    });
+}
+
+// Wrap runs of Chinese characters in the static DOM with .kai-font spans.
+// JSON-driven content is wrapped at render time via wrapChineseWithKaiFont().
+function applyKaiFont() {
+    const chineseRegex = /[一-鿿]+/;
+    const textNodes = [];
+
+    function getTextNodes(node) {
+        if (node.nodeType === 3) {
+            if (chineseRegex.test(node.nodeValue)) textNodes.push(node);
+        } else if (node.nodeType === 1 && node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
+            if (!node.classList || !node.classList.contains('kai-font')) {
+                for (let i = 0; i < node.childNodes.length; i++) {
+                    getTextNodes(node.childNodes[i]);
+                }
+            }
+        }
+    }
+
+    getTextNodes(document.body);
+
+    textNodes.forEach(textNode => {
+        const text = textNode.nodeValue;
+        const parts = [];
+        let lastIndex = 0;
+
+        text.replace(/([一-鿿]+)/g, (match, p1, offset) => {
+            if (offset > lastIndex) {
+                parts.push(document.createTextNode(text.substring(lastIndex, offset)));
+            }
+            const span = document.createElement('span');
+            span.className = 'kai-font';
+            span.textContent = p1;
+            parts.push(span);
+            lastIndex = offset + match.length;
+        });
+
+        if (lastIndex < text.length) {
+            parts.push(document.createTextNode(text.substring(lastIndex)));
+        }
+
+        if (parts.length > 0) {
+            const fragment = document.createDocumentFragment();
+            parts.forEach(part => fragment.appendChild(part));
+            textNode.parentNode.replaceChild(fragment, textNode);
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Load profile information
     loadProfileInfo();
@@ -154,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!emptyState) {
             emptyState = document.createElement('div');
             emptyState.className = 'publication-empty-state';
-            emptyState.textContent = 'No publications in this category yet.';
+            emptyState.innerHTML = wrapChineseWithKaiFont(t('emptyPub'));
             publicationsList.appendChild(emptyState);
         }
 
@@ -215,6 +342,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Load news data
+    loadNews();
+
+    loadBlogNotes();
+
+    // Wire the language toggle and apply KaiTi to static Chinese text.
+    initLangToggle();
+    applyKaiFont();
+});
+
+// Function to load news items into homepage and/or all-news page
+function loadNews() {
     // Determine the correct path for news.json based on current page
     let newsJsonPath = 'data/news.json';
     if (window.location.pathname.includes('/pages/')) {
@@ -242,9 +380,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => {
             console.error('Error loading news data:', error);
         });
-
-    loadBlogNotes();
-});
+}
 
 // Helper function to wrap Chinese characters with kai-font span
 function wrapChineseWithKaiFont(text) {
@@ -295,7 +431,9 @@ function renderBlogNotes(blogData, container) {
         const meta = document.createElement('div');
         meta.className = 'blog-meta';
 
-        const tags = item.tags || (item.tag ? [item.tag] : []);
+        const tags = (getLang() === 'zh' && item.tags_zh)
+            ? item.tags_zh
+            : (item.tags || (item.tag ? [item.tag] : []));
         tags.forEach(tagText => {
             const tag = document.createElement('span');
             tag.className = 'blog-card-tag';
@@ -306,22 +444,22 @@ function renderBlogNotes(blogData, container) {
         if (item.featured) {
             const featured = document.createElement('span');
             featured.className = 'blog-featured';
-            featured.textContent = 'Featured';
+            featured.innerHTML = wrapChineseWithKaiFont(t('featured'));
             meta.appendChild(featured);
         }
 
         const title = document.createElement('h3');
-        title.innerHTML = wrapChineseWithKaiFont(item.title);
+        title.innerHTML = wrapChineseWithKaiFont(localized(item, 'title'));
 
         const summary = document.createElement('p');
-        summary.innerHTML = wrapChineseWithKaiFont(item.summary);
+        summary.innerHTML = wrapChineseWithKaiFont(localized(item, 'summary'));
 
         const footer = document.createElement('div');
         footer.className = 'blog-card-footer';
 
         const date = document.createElement('span');
         date.className = 'blog-date';
-        date.textContent = item.date;
+        date.innerHTML = wrapChineseWithKaiFont(localized(item, 'date'));
         footer.appendChild(date);
 
         const link = document.createElement('a');
@@ -329,7 +467,7 @@ function renderBlogNotes(blogData, container) {
         link.href = resolveRelativeUrl(item.link);
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
-        link.innerHTML = `${wrapChineseWithKaiFont(item.linkText || 'Read Note')} <i class="fas fa-arrow-right"></i>`;
+        link.innerHTML = `${wrapChineseWithKaiFont(localized(item, 'linkText') || t('readNote'))} <i class="fas fa-arrow-right"></i>`;
         footer.appendChild(link);
 
         card.appendChild(meta);
@@ -386,7 +524,7 @@ function loadProfileInfo() {
             // Add subtitle
             const subtitleElement = document.createElement('p');
             subtitleElement.className = 'subtitle';
-            subtitleElement.innerHTML = wrapChineseWithKaiFont(data.subtitle);
+            subtitleElement.innerHTML = wrapChineseWithKaiFont(localized(data, 'subtitle'));
             profileInfoContainer.appendChild(subtitleElement);
 
             // Add social links container
@@ -464,7 +602,7 @@ function loadPublications() {
             if (preprints.length > 0) {
                 const preprintTitle = document.createElement('h3');
                 preprintTitle.className = 'publication-section-title';
-                preprintTitle.textContent = 'Preprints';
+                preprintTitle.innerHTML = wrapChineseWithKaiFont(t('preprints'));
                 publicationsList.appendChild(preprintTitle);
 
                 // Add preprints
@@ -476,7 +614,7 @@ function loadPublications() {
             if (accepted2026.length > 0) {
                 const accepted2026Title = document.createElement('h3');
                 accepted2026Title.className = 'publication-section-title';
-                accepted2026Title.textContent = 'Accepted Papers in 2026';
+                accepted2026Title.innerHTML = wrapChineseWithKaiFont(t('acceptedIn', '2026'));
                 publicationsList.appendChild(accepted2026Title);
 
                 // Add 2026 papers
@@ -488,7 +626,7 @@ function loadPublications() {
             if (accepted2025.length > 0) {
                 const accepted2025Title = document.createElement('h3');
                 accepted2025Title.className = 'publication-section-title';
-                accepted2025Title.textContent = 'Accepted Papers in 2025';
+                accepted2025Title.innerHTML = wrapChineseWithKaiFont(t('acceptedIn', '2025'));
                 publicationsList.appendChild(accepted2025Title);
 
                 // Add 2025 papers
@@ -500,7 +638,7 @@ function loadPublications() {
             if (accepted2024.length > 0) {
                 const accepted2024Title = document.createElement('h3');
                 accepted2024Title.className = 'publication-section-title';
-                accepted2024Title.textContent = 'Accepted Papers in 2024';
+                accepted2024Title.innerHTML = wrapChineseWithKaiFont(t('acceptedIn', '2024'));
                 publicationsList.appendChild(accepted2024Title);
 
                 // Add 2024 papers
@@ -511,7 +649,7 @@ function loadPublications() {
             if (patents.length > 0) {
                 const patentsTitle = document.createElement('h3');
                 patentsTitle.className = 'publication-section-title';
-                patentsTitle.textContent = 'Patents';
+                patentsTitle.innerHTML = wrapChineseWithKaiFont(t('patents'));
                 publicationsList.appendChild(patentsTitle);
 
                 // Add patents (restart numbering from 1)
@@ -554,10 +692,10 @@ function renderPublicationGroup(publications, container, startCounter) {
         // Determine what text to show in the left column
         let venueText = '';
         if (pub.type === 'preprint') {
-            venueText = 'Preprint';
+            venueText = t('preprint');
         } else if (pub.type === 'patent') {
             const venueTag = pub.tags.find(tag => tag.class === 'venue-tag');
-            venueText = venueTag ? venueTag.text : 'Patent';
+            venueText = venueTag ? venueTag.text : t('patent');
         } else if (pub.venue) {
             // Extract short venue name from the venue string or tags
             const venueTag = pub.tags.find(tag => tag.class === 'venue-tag');
@@ -720,29 +858,22 @@ function renderNewsItems(newsData, containerId) {
 
         const dateHighlight = document.createElement('span');
         dateHighlight.className = 'year-highlight';
-        dateHighlight.innerHTML = wrapChineseWithKaiFont(newsItem.date);
+        dateHighlight.innerHTML = wrapChineseWithKaiFont(localized(newsItem, 'date'));
         dateElement.appendChild(dateHighlight);
 
         // Create the content element
         const contentElement = document.createElement('div');
         contentElement.className = 'news-content';
 
-        // Create the title element
+        // Create the title element (title may contain HTML such as '<a href=')
         const titleElement = document.createElement('h3');
-
-        // Check if title contains HTML (like '<a href=')
-        if (newsItem.title && newsItem.title.includes('<a href=')) {
-            // Parse HTML in title with Chinese characters wrapped
-            titleElement.innerHTML = wrapChineseWithKaiFont(newsItem.title);
-        } else {
-            titleElement.innerHTML = wrapChineseWithKaiFont(newsItem.title);
-        }
+        titleElement.innerHTML = wrapChineseWithKaiFont(localized(newsItem, 'title'));
 
         contentElement.appendChild(titleElement);
 
         // Create the paragraph for content
         const paragraphElement = document.createElement('p');
-        paragraphElement.innerHTML = wrapChineseWithKaiFont(newsItem.content);
+        paragraphElement.innerHTML = wrapChineseWithKaiFont(localized(newsItem, 'content'));
 
         // Add links if provided in the links array format
         if (newsItem.links && newsItem.links.length > 0) {
@@ -754,7 +885,7 @@ function renderNewsItems(newsData, containerId) {
                 // Create link
                 const linkElement = document.createElement('a');
                 linkElement.href = resolveRelativeUrl(link.url);
-                linkElement.innerHTML = wrapChineseWithKaiFont(link.text);
+                linkElement.innerHTML = wrapChineseWithKaiFont(localized(link, 'text'));
                 linkElement.target = "_blank";
                 linkElement.rel = "noopener noreferrer";
                 paragraphElement.appendChild(linkElement);
@@ -768,7 +899,7 @@ function renderNewsItems(newsData, containerId) {
 
             const linkElement = document.createElement('a');
             linkElement.href = resolveRelativeUrl(newsItem.link);
-            linkElement.innerHTML = wrapChineseWithKaiFont(newsItem.linkText);
+            linkElement.innerHTML = wrapChineseWithKaiFont(localized(newsItem, 'linkText'));
             linkElement.target = "_blank";
             linkElement.rel = "noopener noreferrer";
             paragraphElement.appendChild(linkElement);

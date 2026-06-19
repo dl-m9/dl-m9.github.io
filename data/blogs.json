@@ -1,76 +1,129 @@
 [
   {
     "title": "SIOP: Self-Induced Outcome Potential",
+    "title_zh": "SIOP：面向长程 LLM 智能体的自诱导结果潜势",
     "summary": "Verifier-free turn-level credit assignment for long-horizon LLM agents.",
+    "summary_zh": "面向长程 LLM 智能体、无需验证器的回合级信用分配方法。",
     "date": "May 2026",
+    "date_zh": "2026年5月",
     "link": "paper-pages/SIOP/index.html",
     "linkText": "Read All",
+    "linkText_zh": "阅读全文",
     "tags": [
       "Agentic RL",
       "Intelligence"
+    ],
+    "tags_zh": [
+      "智能体强化学习",
+      "智能"
     ]
   },
   {
     "title": "InfoReasoner: Optimizing Agentic Reasoning with Retrieval",
+    "title_zh": "InfoReasoner：基于检索的智能体推理优化",
     "summary": "Synthetic semantic information gain rewards for retrieval actions in LLM agentic reasoning.",
+    "summary_zh": "为 LLM 智能体推理中的检索动作合成语义信息增益奖励。",
     "date": "Apr. 2026",
+    "date_zh": "2026年4月",
     "link": "paper-pages/InfoReasoner/index.html",
     "linkText": "Read All",
+    "linkText_zh": "阅读全文",
     "tags": [
       "Agentic RL",
       "Intelligence"
+    ],
+    "tags_zh": [
+      "智能体强化学习",
+      "智能"
     ]
   },
   {
     "title": "SVDecode: Distribution-Aligned Decoding for Efficient LLM Task Adaptation",
+    "title_zh": "SVDecode：面向高效 LLM 任务适配的分布对齐解码",
     "summary": "Distribution-aligned decoding for efficient LLM task adaptation.",
+    "summary_zh": "面向高效 LLM 任务适配的分布对齐解码。",
     "date": "Dec. 2025",
+    "date_zh": "2025年12月",
     "link": "paper-pages/SVDecode/index.html",
     "linkText": "Read All",
+    "linkText_zh": "阅读全文",
     "tags": [
       "LLM Efficiency"
+    ],
+    "tags_zh": [
+      "大模型高效化"
     ]
   },
   {
     "title": "AgentsCoDriver",
+    "title_zh": "AgentsCoDriver：大模型驱动的协同驾驶",
     "summary": "LLM-powered collaborative driving with lifelong learning for connected autonomous agents.",
+    "summary_zh": "面向网联自动驾驶智能体、具备终身学习能力的大模型协同驾驶。",
     "date": "Apr. 2024",
+    "date_zh": "2024年4月",
     "link": "https://mp.weixin.qq.com/s/HVfs4-PT58WujCvEZZboug",
     "linkText": "Read All",
+    "linkText_zh": "阅读全文",
     "tags": [
       "LLM Agents",
       "Intelligence"
+    ],
+    "tags_zh": [
+      "大模型智能体",
+      "智能"
     ]
   },
   {
     "title": "AgentsCoMerge",
+    "title_zh": "AgentsCoMerge：多车道汇入的协同决策",
     "summary": "Collaborative decision-making for multi-lane merging with LLM-powered agents.",
+    "summary_zh": "由大模型驱动的多车道汇入协同决策。",
     "date": "Apr. 2025",
+    "date_zh": "2025年4月",
     "link": "https://mp.weixin.qq.com/s/D15TrRp1L_4Mrblg1ZZU-A",
     "linkText": "Read All",
+    "linkText_zh": "阅读全文",
     "tags": [
       "LLM Agent",
       "Intelligence"
+    ],
+    "tags_zh": [
+      "大模型智能体",
+      "智能"
     ]
   },
   {
     "title": "CP-Guard+: A New Paradigm for Collaborative Perception Security",
+    "title_zh": "CP-Guard+：协同感知安全的新范式",
     "summary": "Malicious-agent detection and defense for collaborative perception under complex attack settings.",
+    "summary_zh": "面向复杂攻击场景的协同感知恶意智能体检测与防御。",
     "date": "Feb. 2025",
+    "date_zh": "2025年2月",
     "link": "paper-pages/cpguardp/index.html",
     "linkText": "Read All",
+    "linkText_zh": "阅读全文",
     "tags": [
       "Multi-Agent Trustworthiness"
+    ],
+    "tags_zh": [
+      "多智能体可信"
     ]
   },
   {
     "title": "CP-Guard: Malicious Agent Detection and Defense",
+    "title_zh": "CP-Guard：恶意智能体检测与防御",
     "summary": "Defense for collaborative bird's-eye-view perception against malicious agents.",
+    "summary_zh": "面向协同鸟瞰图感知、抵御恶意智能体的防御方法。",
     "date": "Dec. 2024",
+    "date_zh": "2024年12月",
     "link": "paper-pages/cpguard/index.html",
     "linkText": "Read All",
+    "linkText_zh": "阅读全文",
     "tags": [
       "Multi-Agent Trustworthiness"
+    ],
+    "tags_zh": [
+      "多智能体可信"
     ]
   }
 ]
