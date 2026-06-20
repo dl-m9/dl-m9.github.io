@@ -5,7 +5,7 @@
     "title": "Research Featured by CCTV, China News, and China Daily",
     "title_zh": "研究获央视、中国新闻网与中国日报报道",
     "content": "Major media outlets reported CityUHK's multi-agent perception research. The coverage highlighted Senkang's domain generalization mechanism for robust cross-domain collaborative perception, which improves perception accuracy and robustness under adverse weather conditions.",
-    "content_zh": "多家主流媒体报道了香港城市大学的多智能体联合感知研究。报道重点介绍了胡森康提出的域泛化机制，该机制用于鲁棒的跨域协同感知，可在恶劣天气条件下提升感知精度与鲁棒性。",
+    "content_zh": "多家主流媒体报道了香港城市大学的多智能体联合感知研究。报道重点介绍了胡森康提出的域泛化方法：该方法面向跨域协同感知，能在恶劣天气下提升感知的精度与鲁棒性。",
     "links": [
       {
         "text": "CCTV",
@@ -59,7 +59,7 @@
     "title": "Start a New Journey in Oxford",
     "title_zh": "开启牛津新旅程",
     "content": "Senkang started a new journey as a Visiting PhD at the Department of Computer Science, University of Oxford, working on LLM agentic RL, self-evolution, and game theory.",
-    "content_zh": "胡森康作为访问博士加入牛津大学计算机科学系，开启新旅程，研究方向为大语言模型智能体强化学习、自进化与博弈论。"
+    "content_zh": "胡森康以访问博士身份加入牛津大学计算机科学系，从事大语言模型智能体的强化学习、自进化与博弈论研究。"
   },
   {
     "date": "Feb. 2026",
@@ -147,7 +147,7 @@
     "title": "IEEE ComSoc Student Grant Award",
     "title_zh": "获 IEEE ComSoc 学生资助",
     "content": "Senkang was awarded the IEEE ComSoc Student Grant to support his conference travel.",
-    "content_zh": "胡森康获得 IEEE ComSoc 学生资助，用于支持会议差旅。"
+    "content_zh": "胡森康获得 IEEE ComSoc 学生资助，用于参会差旅。"
   },
   {
     "date": "Sep. 2025",
@@ -239,7 +239,7 @@
     "title": "New Project Launched: <a href='https://github.com/dl-m9/Multi-Agent-Embodied-Autonomous-Driving' target='_blank'>Multi-Agent Embodied Autonomous Driving</a>",
     "title_zh": "启动新项目：<a href='https://github.com/dl-m9/Multi-Agent-Embodied-Autonomous-Driving' target='_blank'>Multi-Agent Embodied Autonomous Driving</a>",
     "content": "We launched a new project on Multi-Agent Embodied Autonomous Driving. The repository continuously collects recent papers in this area and serves as a curated resource for the community.",
-    "content_zh": "我们启动了一个关于多智能体具身自动驾驶的新项目。该仓库持续收集该领域的最新论文，作为面向社区的精选资源。",
+    "content_zh": "我们发起了一个多智能体具身自动驾驶的新项目，持续收集该领域的最新论文，为社区提供一份精选资源。",
     "links": [
       {
         "text": "Github Repository",
@@ -346,7 +346,7 @@
     "title": "IEEE ComSoc Student Grant Award",
     "title_zh": "获 IEEE ComSoc 学生资助",
     "content": "Senkang was awarded the IEEE ComSoc Student Grant to support his conference travel.",
-    "content_zh": "胡森康获得 IEEE ComSoc 学生资助，用于支持会议差旅。"
+    "content_zh": "胡森康获得 IEEE ComSoc 学生资助，用于参会差旅。"
   },
   {
     "date": "Aug. 2024",
@@ -386,7 +386,7 @@
     "title": "InnoHK Award Funding",
     "title_zh": "获 InnoHK 资助",
     "content": "Thanks to Prof. Fang's strong support, Senkang received the InnoHK Award Funding, around HK$900,000 from the Government of the Hong Kong Special Administrative Region to support his research and PhD career.",
-    "content_zh": "感谢方教授的大力支持，胡森康获得来自香港特别行政区政府的 InnoHK 资助，约 90 万港元，用于支持其科研与博士生涯。"
+    "content_zh": "感谢方教授的大力支持，胡森康获得香港特别行政区政府的 InnoHK 资助，约 90 万港元，支持其科研与博士阶段的学业。"
   },
   {
     "date": "Jun. 2022",
