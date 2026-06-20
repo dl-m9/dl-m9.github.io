@@ -1199,20 +1199,19 @@ nav {
 
 .news-item {
     display: flex;
-    align-items: baseline;
-    margin-bottom: 0.6rem;
-    padding: 0.4rem 0.5rem 0.6rem;
+    gap: 1.2rem;
+    padding: 0.95rem 0;
     border-bottom: 1px solid var(--border-color);
-    transition: all 0.2s ease;
-    border-radius: 4px;
-    background-color: transparent;
+    transition: transform 0.2s ease;
+    margin-bottom: 0;
+    border-radius: 0;
+    background: transparent;
     box-shadow: none;
 }
 
 .news-item:hover {
-    transform: translateX(5px);
-    background-color: rgba(0, 102, 204, 0.05);
-    box-shadow: none;
+    transform: translateX(4px);
+    background-color: transparent;
 }
 
 .news-item:last-child {
@@ -1221,31 +1220,27 @@ nav {
 
 
 .news-date {
-    min-width: 140px;
-    width: 140px;
-    font-size: 1.05rem;
-    font-weight: 700;
+    flex: 0 0 120px;
+    font-size: 0.88rem;
+    font-weight: 600;
     color: var(--primary-color);
-    margin-right: 18px;
     flex-shrink: 0;
     display: block;
-    text-align: center;
-    padding-top: 0;
+    padding-top: 0.1rem;
 }
 
-/* News日期样式：primary color粗体，无背景 */
+/* News 日期胶囊：半透明蓝底 + 蓝字 + 全圆角 */
 .news-date .year-highlight {
-    background: none;
+    background: rgba(0, 102, 204, 0.10);
     color: var(--primary-color);
-    padding: 0;
-    border-radius: 0;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
     display: inline-block;
-    font-size: 1.05rem;
-    font-weight: 700;
+    font-size: 0.82rem;
+    font-weight: 600;
     text-align: center;
     min-width: auto;
-    max-width: none;
-    line-height: 1.2;
+    line-height: 1.3;
     box-shadow: none;
 }
 
@@ -1267,7 +1262,11 @@ nav {
 
 .news-content {
     flex: 1;
+    font-size: 0.92rem;
+    color: var(--light-text);
+    line-height: 1.55;
 }
+.news-content strong { color: var(--text-color); }
 
 .news-content h3 {
     font-size: 1.0rem;
