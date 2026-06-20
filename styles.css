@@ -80,14 +80,14 @@ header {
 /* 深色基底，明显流动 */
 header.header-gradient-flow {
     background:
-        radial-gradient(ellipse at 20% 25%, rgba(12, 18, 35, 0.95) 0%, transparent 45%),
-        radial-gradient(ellipse at 80% 75%, rgba(20, 30, 55, 0.95) 0%, transparent 45%),
+        radial-gradient(ellipse at 20% 25%, rgba(12, 18, 35, 0.9) 0%, transparent 45%),
+        radial-gradient(ellipse at 80% 75%, rgba(20, 30, 55, 0.72) 0%, transparent 45%),
         linear-gradient(140deg,
-            #0b1224 0%,
-            #111c32 25%,
-            #152a55 50%,
-            #1f2562 75%,
-            #0f1438 100%);
+            #050714 0%,
+            #0f1429 25%,
+            #2563eb 50%,
+            #1a1f3a 75%,
+            #050714 100%);
     background-size: 250% 250%, 250% 250%, 400% 400%;
     background-position: 0% 0%, 100% 100%, 40% 60%;
     animation: gf-base 18s ease-in-out infinite;
@@ -102,23 +102,23 @@ header.header-gradient-flow::before {
     width: 160%;
     height: 160%;
     background:
-        /* 深蓝-电光紫丝带 - 更大范围 */
+        /* 深青-靛蓝丝带 - 更大范围 */
         conic-gradient(from 20deg at 35% 35%,
             transparent 0deg,
-            rgba(33, 74, 186, 0.5) 45deg,
-            rgba(92, 74, 255, 0.6) 90deg,
-            rgba(154, 110, 255, 0.55) 135deg,
+            rgba(37, 99, 235, 0.52) 45deg,
+            rgba(124, 58, 237, 0.58) 90deg,
+            rgba(56, 189, 248, 0.46) 135deg,
             transparent 180deg),
-        /* 青绿-玫红丝带 - 更大范围 */
+        /* 青绿-蓝紫丝带 - 更大范围 */
         conic-gradient(from 200deg at 70% 65%,
             transparent 0deg,
-            rgba(16, 200, 204, 0.5) 40deg,
-            rgba(24, 211, 135, 0.45) 80deg,
-            rgba(240, 92, 170, 0.55) 120deg,
+            rgba(56, 189, 248, 0.5) 40deg,
+            rgba(37, 99, 235, 0.42) 80deg,
+            rgba(124, 58, 237, 0.48) 120deg,
             transparent 180deg),
         /* 丝绸高光 - 更明显 */
-        radial-gradient(ellipse 1000px 750px at 42% 32%, rgba(160, 120, 255, 0.35) 0%, transparent 55%),
-        radial-gradient(ellipse 800px 1000px at 60% 70%, rgba(20, 210, 200, 0.28) 0%, transparent 55%);
+        radial-gradient(ellipse 1000px 750px at 42% 32%, rgba(124, 58, 237, 0.3) 0%, transparent 55%),
+        radial-gradient(ellipse 800px 1000px at 60% 70%, rgba(56, 189, 248, 0.3) 0%, transparent 55%);
     background-size: 120% 120%;
     background-position: 0% 0%;
     filter: blur(45px);
@@ -137,21 +137,21 @@ header.header-gradient-flow::after {
     height: 170%;
     background:
         /* 流线型褶皱轨迹 - 更明显 */
-        radial-gradient(ellipse 1400px 380px at 20% 55%, rgba(150, 120, 255, 0.4) 0%, transparent 42%),
-        radial-gradient(ellipse 1100px 480px at 78% 28%, rgba(30, 200, 210, 0.35) 0%, transparent 48%),
+        radial-gradient(ellipse 1400px 380px at 20% 55%, rgba(56, 189, 248, 0.34) 0%, transparent 42%),
+        radial-gradient(ellipse 1100px 480px at 78% 28%, rgba(124, 58, 237, 0.3) 0%, transparent 48%),
         /* 漩涡 - 旋转更明显 */
         conic-gradient(from 60deg at 50% 50%,
             transparent 0deg,
-            rgba(110, 120, 255, 0.25) 120deg,
+            rgba(56, 189, 248, 0.24) 120deg,
             transparent 180deg,
-            rgba(240, 92, 170, 0.25) 300deg,
+            rgba(124, 58, 237, 0.24) 300deg,
             transparent 360deg),
         /* 柔和光斑/氛围灯 - 更亮 */
-        radial-gradient(circle 480px at 18% 18%, rgba(154, 110, 255, 0.5) 0%, transparent 62%),
-        radial-gradient(circle 580px at 82% 82%, rgba(16, 200, 204, 0.42) 0%, transparent 65%),
-        radial-gradient(circle 400px at 52% 12%, rgba(240, 92, 170, 0.38) 0%, transparent 58%),
+        radial-gradient(circle 480px at 18% 18%, rgba(124, 58, 237, 0.42) 0%, transparent 62%),
+        radial-gradient(circle 580px at 82% 82%, rgba(56, 189, 248, 0.42) 0%, transparent 65%),
+        radial-gradient(circle 400px at 52% 12%, rgba(56, 189, 248, 0.3) 0%, transparent 58%),
         /* 烟雾暗部 */
-        radial-gradient(ellipse 1400px 1000px at 52% 50%, rgba(12, 18, 35, 0.65) 0%, transparent 72%);
+        radial-gradient(ellipse 1400px 1000px at 52% 50%, rgba(10, 14, 39, 0.72) 0%, transparent 72%);
     background-size: 110% 110%;
     background-position: 0% 0%;
     filter: blur(70px);
@@ -171,12 +171,12 @@ header.header-gradient-flow .header-content::before {
     background:
         repeating-linear-gradient(42deg,
             transparent 0px,
-            rgba(140, 110, 255, 0.04) 1px,
+            rgba(56, 189, 248, 0.04) 1px,
             transparent 3px,
             transparent 14px),
         repeating-linear-gradient(-38deg,
             transparent 0px,
-            rgba(24, 200, 190, 0.035) 1px,
+            rgba(124, 58, 237, 0.035) 1px,
             transparent 3px,
             transparent 16px);
     opacity: 0.55;
@@ -324,17 +324,16 @@ header.header-gradient-flow .header-bg-overlay {
 header.header-gradient-flow #profile-img {
     box-shadow:
         0 0 0 4px rgba(255, 255, 255, 0.2),
-        /* 电光紫光晕 */
-        0 0 20px rgba(139, 92, 246, 0.5),
-        0 0 40px rgba(99, 102, 241, 0.4),
+        /* 靛蓝光晕 */
+        0 0 20px rgba(124, 58, 237, 0.42),
+        0 0 40px rgba(124, 58, 237, 0.34),
         /* 青绿色光晕 */
-        0 0 60px rgba(6, 182, 212, 0.35),
-        /* 玫红色光晕 */
-        0 0 80px rgba(236, 72, 153, 0.3),
+        0 0 60px rgba(56, 189, 248, 0.38),
+        0 0 80px rgba(37, 99, 235, 0.28),
         /* 丝绸质感高光 */
         inset 0 0 30px rgba(255, 255, 255, 0.1),
         /* 柔和阴影 */
-        inset 0 0 60px rgba(139, 92, 246, 0.15);
+        inset 0 0 60px rgba(37, 99, 235, 0.18);
     border: 2px solid rgba(255, 255, 255, 0.85);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -343,17 +342,16 @@ header.header-gradient-flow #profile-img:hover {
     transform: scale(1.05) rotate(5deg);
     box-shadow:
         0 0 0 4px rgba(255, 255, 255, 0.3),
-        /* 增强的电光紫光晕 */
-        0 0 30px rgba(139, 92, 246, 0.7),
-        0 0 60px rgba(99, 102, 241, 0.6),
+        /* 增强的靛蓝光晕 */
+        0 0 30px rgba(124, 58, 237, 0.56),
+        0 0 60px rgba(124, 58, 237, 0.46),
         /* 增强的青绿色光晕 */
-        0 0 90px rgba(6, 182, 212, 0.5),
-        /* 增强的玫红色光晕 */
-        0 0 120px rgba(236, 72, 153, 0.4),
+        0 0 90px rgba(56, 189, 248, 0.52),
+        0 0 120px rgba(37, 99, 235, 0.38),
         /* 更亮的丝绸高光 */
         inset 0 0 40px rgba(255, 255, 255, 0.2),
         /* 更强的内发光 */
-        inset 0 0 80px rgba(139, 92, 246, 0.25);
+        inset 0 0 80px rgba(37, 99, 235, 0.26);
     border-color: rgba(255, 255, 255, 0.95);
 }
 
@@ -366,9 +364,9 @@ header::before {
     width: 200%;
     height: 200%;
     background:
-        radial-gradient(circle at 50% 50%, rgba(76, 29, 149, 0.15), transparent 40%),
-        radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.1), transparent 30%),
-        radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.1), transparent 30%);
+        radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.18), transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.12), transparent 30%),
+        radial-gradient(circle at 20% 80%, rgba(56, 189, 248, 0.12), transparent 30%);
     filter: blur(60px);
     animation: nebulaRotate 60s linear infinite;
     pointer-events: none;
@@ -488,7 +486,7 @@ header::after {
     border-radius: 50%;
     box-shadow:
         0 0 4px 1px rgba(255, 255, 255, 0.8),
-        0 0 12px 2px rgba(56, 189, 248, 0.6);
+        0 0 12px 2px rgba(56, 189, 248, 0.62);
     animation: twinkle 5s ease-in-out infinite;
 }
 
@@ -606,7 +604,7 @@ header .subtitle a {
 
 header .subtitle a:hover {
     color: #ffffff;
-    text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
 }
 
 header .contact-info a {
@@ -618,7 +616,7 @@ header .contact-info a {
 header .contact-info a:hover {
     background-color: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.32);
 }
 
 header .contact-info i {
@@ -642,8 +640,8 @@ header .contact-info i {
     /* 星球光环效果 */
     box-shadow:
         0 0 0 4px rgba(255, 255, 255, 0.1),
-        0 0 20px rgba(56, 189, 248, 0.4),
-        0 0 40px rgba(76, 29, 149, 0.2),
+        0 0 20px rgba(56, 189, 248, 0.42),
+        0 0 40px rgba(124, 58, 237, 0.24),
         inset 0 0 20px rgba(0, 0, 0, 0.5);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -656,12 +654,186 @@ header .contact-info i {
     transform: scale(1.05) rotate(5deg);
     box-shadow:
         0 0 0 4px rgba(255, 255, 255, 0.2),
-        0 0 30px rgba(56, 189, 248, 0.6),
-        0 0 60px rgba(76, 29, 149, 0.4),
+        0 0 30px rgba(56, 189, 248, 0.62),
+        0 0 60px rgba(124, 58, 237, 0.36),
         inset 0 0 20px rgba(0, 0, 0, 0.5);
     border-color: #fff;
 }
 
+/* Minimal systems/AI hero */
+header {
+    padding: 4.4rem 0 4rem;
+    background:
+        linear-gradient(rgba(56, 189, 248, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.045) 1px, transparent 1px),
+        linear-gradient(135deg, #050714 0%, #0f1429 52%, #1a1f3a 100%);
+    background-size: 36px 36px, 36px 36px, auto;
+    border-top: none;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.18);
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 90% 70% at 50% 18%, rgba(56, 189, 248, 0.12), transparent 64%),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.04), rgba(124, 58, 237, 0.05), rgba(37, 99, 235, 0.04));
+    opacity: 1;
+    filter: none;
+    animation: none;
+    pointer-events: none;
+    mix-blend-mode: normal;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 48%, rgba(0, 0, 0, 0.08));
+    opacity: 1;
+    animation: none;
+    pointer-events: none;
+    mix-blend-mode: normal;
+}
+
+.header-bg-overlay {
+    display: none;
+}
+
+.header-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 210px;
+    align-items: center;
+    gap: clamp(2.4rem, 7vw, 5.5rem);
+    min-height: 270px;
+    padding: 1.2rem 0;
+    border: none;
+}
+
+.profile-info {
+    color: #f8fafc;
+    max-width: 850px;
+}
+
+header h1 {
+    color: #f8fafc;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.7rem, 5.6vw, 4.7rem);
+    font-weight: 800;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    text-shadow: none;
+    margin-bottom: 1rem;
+}
+
+header .subtitle {
+    max-width: 760px;
+    color: rgba(226, 232, 240, 0.9);
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    line-height: 1.75;
+    margin-bottom: 1.35rem;
+}
+
+header .subtitle span,
+header .subtitle a {
+    color: rgba(226, 232, 240, 0.88);
+    text-shadow: none;
+}
+
+header .subtitle a {
+    border-bottom: 1px solid rgba(56, 189, 248, 0.42);
+}
+
+header .subtitle a:hover {
+    color: #fff;
+    text-shadow: none;
+    border-bottom-color: #fff;
+}
+
+header .contact-info {
+    gap: 0.55rem;
+}
+
+header .contact-info a {
+    width: auto;
+    min-width: 62px;
+    height: 48px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    color: #fff;
+    background: rgba(37, 99, 235, 0.14);
+    border: 1px solid rgba(56, 189, 248, 0.28);
+    backdrop-filter: blur(8px);
+    box-shadow: none;
+}
+
+header .contact-info a:hover {
+    transform: translateY(-2px);
+    color: #050714;
+    background: #fff;
+    border-color: #fff;
+    box-shadow: 0 14px 34px rgba(56, 189, 248, 0.24);
+}
+
+header .contact-info i {
+    color: currentColor;
+    font-size: 1.35rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.35rem;
+    height: 1.35rem;
+}
+
+header .icon-svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    display: block;
+    color: currentColor;
+    fill: none;
+    stroke: currentColor;
+    opacity: 1;
+    filter: none;
+}
+
+header .contact-info a:hover .icon-svg {
+    filter: none;
+}
+
+.profile-image {
+    width: 210px;
+    height: 210px;
+    margin-left: 0;
+    justify-self: end;
+    align-self: center;
+}
+
+#profile-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    filter: saturate(0.92) contrast(1.05);
+    border: 2px solid rgba(255, 255, 255, 0.78);
+    background: #050714;
+    box-shadow:
+        0 0 0 10px rgba(37, 99, 235, 0.14),
+        0 28px 80px rgba(0, 0, 0, 0.32),
+        0 0 56px rgba(56, 189, 248, 0.22);
+}
+
+#profile-img:hover {
+    transform: translateY(-3px) scale(1.025);
+    filter: saturate(1) contrast(1.06);
+    border-color: #fff;
+    box-shadow:
+        0 0 0 10px rgba(56, 189, 248, 0.18),
+        0 30px 90px rgba(0, 0, 0, 0.34),
+        0 0 70px rgba(56, 189, 248, 0.28);
+}
 
 h1 {
     font-family: 'Montserrat', sans-serif;
@@ -725,11 +897,10 @@ h1 {
 /* Navigation Styles */
 nav {
     background: rgba(10, 14, 39, 0.95);
-    /* 深色半透明背景，与header匹配 */
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
-    /* 毛玻璃效果 */
     position: sticky;
     top: 0;
     z-index: 100;
@@ -750,9 +921,12 @@ nav {
     display: inline-block;
     height: 60px;
     line-height: 60px;
-    font-weight: 500;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     position: relative;
-    color: #fff;
+    color: rgba(226, 232, 240, 0.86);
 }
 
 .nav-links a.active {
@@ -796,9 +970,8 @@ nav {
         width: 100%;
         z-index: 1000;
         background: rgba(10, 14, 39, 0.98);
-        /* 移动端深色背景 */
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid rgba(56, 189, 248, 0.16);
+        box-shadow: 0 10px 30px rgba(10, 14, 39, 0.22);
         overflow: hidden;
     }
 
@@ -813,7 +986,7 @@ nav {
         -webkit-overflow-scrolling: touch;
         scrollbar-width: thin;
         /* Firefox - 显示细滚动条 */
-        scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+        scrollbar-color: rgba(37, 99, 235, 0.35) transparent;
         -ms-overflow-style: none;
         /* IE and Edge */
         white-space: nowrap;
@@ -834,12 +1007,12 @@ nav {
     }
 
     .nav-links::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(37, 99, 235, 0.35);
         border-radius: 2px;
     }
 
     .nav-links::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba(37, 99, 235, 0.55);
     }
 
     /* 添加渐变提示，表示可以滚动 */
@@ -882,7 +1055,7 @@ nav {
         padding: 0.5rem 0;
         font-size: 0.95rem;
         white-space: nowrap;
-        color: #fff;
+        color: rgba(226, 232, 240, 0.88);
     }
 
     /* 保留渐变提示，但只在需要时显示 */
@@ -1025,7 +1198,7 @@ nav {
     .nav-links a {
         font-size: 0.9rem;
         padding: 0.4rem 0;
-        color: #fff;
+        color: rgba(226, 232, 240, 0.88);
     }
 
     .container nav::before,
@@ -2864,4 +3037,60 @@ footer {
 /* No top margin for the first section title */
 .publication-section-title:first-child {
     margin-top: 0;
+}
+
+@media (max-width: 992px) {
+    .header-content {
+        grid-template-columns: 1fr;
+        align-items: start;
+        gap: 2rem;
+        min-height: auto;
+    }
+
+    .profile-image {
+        justify-self: start;
+        align-self: auto;
+        width: min(220px, 62vw);
+        height: min(220px, 62vw);
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 5.2rem 0 2.4rem;
+    }
+
+    .header-content {
+        padding: 1.8rem 0 1.6rem;
+    }
+
+    header h1 {
+        font-size: clamp(2.6rem, 15vw, 4.2rem);
+    }
+
+    header .subtitle {
+        font-size: 1rem;
+    }
+
+    header .contact-info {
+        flex-wrap: wrap;
+    }
+
+    header .contact-info a {
+        min-width: 54px;
+        height: 42px;
+        padding: 7px 15px;
+        border-radius: 999px;
+    }
+
+    .profile-image {
+        width: 170px;
+        height: 170px;
+    }
+
+    #profile-img {
+        width: 100%;
+        height: 100%;
+    }
 }
