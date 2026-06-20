@@ -3,18 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        (function () {
-            try {
-                var l = localStorage.getItem('siteLang');
-                if (l === 'zh' || l === 'en') document.documentElement.setAttribute('lang', l);
-            } catch (e) { /* ignore */ }
-        })();
-    </script>
     <title>Collaboration - Senkang Forest Hu</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        .kai-font {
+            font-family: KaiTi, STKaiti, "wS", serif;
+        }
         .collaboration-content {
             max-width: 800px;
             margin: 0 auto;
@@ -41,12 +36,9 @@
     <nav>
         <div class="container">
             <ul class="nav-links">
-                <li><a href="../index.html"><span data-lang="en">Home</span><span data-lang="zh">主页</span></a></li>
-                <li><a href="#" class="active"><span data-lang="en">Collaboration</span><span data-lang="zh">合作</span></a></li>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#" class="active">Collaboration</a></li>
             </ul>
-            <button type="button" class="lang-toggle" aria-label="Switch language / 切换语言">
-                <span class="lt-en">EN</span><span class="lt-sep" aria-hidden="true">/</span><span class="lt-cn">CN</span>
-            </button>
         </div>
     </nav>
 
@@ -57,79 +49,42 @@
             <div class="container">
                 <!-- <h2 class="section-title">Collaboration Opportunities</h2> -->
                 <div class="collaboration-content">
-                    <div data-lang="en">
-                        <p>Hi, here 👋👋</p>
+                    <p>Hi, here 👋👋</p>
+                    
+                    <p>If you are willing to collaborate with me, here is what you may want to know:</p>
 
-                        <p>If you are willing to collaborate with me, here is what you may want to know:</p>
+                    <h3>What can I provide?</h3>
+                    <ul>
+                        <li><strong>Idea</strong>. I have a lot of interesting ideas about (M)LLM reasoning, LLM parameter-efficient fine-tuning (PEFT), LLM Agent, etc. If you have your own ideas, we can discuss.</li>
+                        <li><strong>Paper writing.</strong> I can provide part of paper writing.</li>
+                        <li><strong>Guidance</strong>. I can guide you in all aspects, such as experiments, writing, rebuttal (revision or response for journal), etc.</li>
+                        <li><strong>GPUs</strong>. I have several high-performance GPU stations. It would be even better if you have your own GPUs.</li>
+                    </ul>
 
-                        <h3>What can I provide?</h3>
-                        <ul>
-                            <li><strong>Idea</strong>. I have a lot of interesting ideas about (M)LLM reasoning, LLM parameter-efficient fine-tuning (PEFT), LLM Agent, etc. If you have your own ideas, we can discuss.</li>
-                            <li><strong>Paper writing.</strong> I can provide part of paper writing.</li>
-                            <li><strong>Guidance</strong>. I can guide you in all aspects, such as experiments, writing, rebuttal (revision or response for journal), etc.</li>
-                            <li><strong>GPUs</strong>. I have several high-performance GPU stations. It would be even better if you have your own GPUs.</li>
-                        </ul>
+                    <h3>What are the expectations for you?</h3>
+                    <ul>
+                        <li>Self-motivated.</li>
+                        <li>Have some hands-on experience in the field of LLM, such as LLM training.</li>
+                        <li>Having published papers is a major plus, although the paper is not in top venues.</li>
+                    </ul>
 
-                        <h3>What are the expectations for you?</h3>
-                        <ul>
-                            <li>Self-motivated.</li>
-                            <li>Have some hands-on experience in the field of LLM, such as LLM training.</li>
-                            <li>Having published papers is a major plus, although the paper is not in top venues.</li>
-                        </ul>
+                    <h3>Upon confirmation of our collaboration, your responsibilities will include:</h3>
+                    <ul>
+                        <li>Implement the methods or algorithms, you will write the codes.</li>
+                        <li>Conduct the experiments.</li>
+                        <li>Write part of papers.</li>
+                    </ul>
 
-                        <h3>Upon confirmation of our collaboration, your responsibilities will include:</h3>
-                        <ul>
-                            <li>Implement the methods or algorithms, you will write the codes.</li>
-                            <li>Conduct the experiments.</li>
-                            <li>Write part of papers.</li>
-                        </ul>
-
-                        <h3>Goals</h3>
-                        <ul>
-                            <li>Do meaningful and impactful work.</li>
-                            <li>Publish papers in top conference such as NeurIPS, ICML, ICLR, ACL, CVPR, etc. (You will be the <strong>first or co-first author</strong>)</li>
-                            <li>Produce open-source projects.</li>
-                            <li>Thereby benefiting each other.</li>
-                        </ul>
-                    </div>
-                    <div data-lang="zh">
-                        <p>你好，欢迎 👋👋</p>
-
-                        <p>如果你愿意与我合作，以下是你可能想了解的信息：</p>
-
-                        <h3>我能提供什么？</h3>
-                        <ul>
-                            <li><strong>想法</strong>。我在（多模态）大语言模型推理、大语言模型参数高效微调（PEFT）、大语言模型智能体等方向有很多有趣的想法。如果你有自己的想法，我们也可以讨论。</li>
-                            <li><strong>论文写作。</strong>我可以承担部分论文写作。</li>
-                            <li><strong>指导</strong>。我可以在各方面给予指导，例如实验、写作、rebuttal（期刊的修改或回复）等。</li>
-                            <li><strong>GPU</strong>。我有多台高性能 GPU 工作站。如果你也有自己的 GPU 就更好了。</li>
-                        </ul>
-
-                        <h3>对你的期望是什么？</h3>
-                        <ul>
-                            <li>自我驱动。</li>
-                            <li>在大语言模型领域有一定动手经验，例如大模型训练。</li>
-                            <li>发表过论文是很大的加分项，即使论文并非发表于顶级会议或期刊。</li>
-                        </ul>
-
-                        <h3>确认合作后，你的职责包括：</h3>
-                        <ul>
-                            <li>实现方法或算法，由你编写代码。</li>
-                            <li>开展实验。</li>
-                            <li>撰写部分论文。</li>
-                        </ul>
-
-                        <h3>目标</h3>
-                        <ul>
-                            <li>做有意义、有影响力的工作。</li>
-                            <li>在 NeurIPS、ICML、ICLR、ACL、CVPR 等顶级会议发表论文（你将是<strong>第一作者或共同第一作者</strong>）。</li>
-                            <li>产出开源项目。</li>
-                            <li>从而实现互利共赢。</li>
-                        </ul>
-                    </div>
+                    <h3>Goals</h3>
+                    <ul>
+                        <li>Do meaningful and impactful work.</li>
+                        <li>Publish papers in top conference such as NeurIPS, ICML, ICLR, ACL, CVPR, etc. (You will be the <strong>first or co-first author</strong>)</li>
+                        <li>Produce open-source projects.</li>
+                        <li>Thereby benefiting each other.</li>
+                    </ul>
                 </div>
                 <div class="back-to-home">
-                    <a href="../index.html" class="btn btn-primary"><i class="fas fa-arrow-left"></i> <span data-lang="en">Back to Homepage</span><span data-lang="zh">返回主页</span></a>
+                    <a href="../index.html" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to Homepage</a>
                 </div>
             </div>
         </section>
@@ -137,13 +92,12 @@
 
     <footer>
         <div class="container">
-            <p>&copy; <span id="copyright-year"></span> Senkang Forest Hu. <span data-lang="en">All rights reserved.</span><span data-lang="zh">版权所有。</span></p>
+            <p>&copy; <span id="copyright-year"></span> Senkang Forest Hu. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
         document.getElementById('copyright-year').textContent = new Date().getFullYear();
     </script>
-    <script src="../script.js?v=20260504-1"></script>
 </body>
 </html>

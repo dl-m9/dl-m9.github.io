@@ -4,15 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        // Apply saved language before paint to avoid a flash of the wrong language.
-        (function () {
-            try {
-                var l = localStorage.getItem('siteLang');
-                if (l === 'zh' || l === 'en') document.documentElement.setAttribute('lang', l);
-            } catch (e) { /* ignore */ }
-        })();
-    </script>
     <title>Senkang Forest Hu</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -24,18 +15,15 @@
     <nav>
         <div class="container">
             <ul class="nav-links">
-                <li><a href="#about" class="active"><span data-lang="en">Biography</span><span data-lang="zh">简介</span></a></li>
-                <li><a href="#experience"><span data-lang="en">Experience</span><span data-lang="zh">经历</span></a></li>
-                <li><a href="#research"><span data-lang="en">Research</span><span data-lang="zh">研究</span></a></li>
-                <li><a href="#latest-news"><span data-lang="en">News</span><span data-lang="zh">动态</span></a></li>
-                <li><a href="#writing-notes"><span data-lang="en">Blogs</span><span data-lang="zh">博客</span></a></li>
-                <li><a href="#publications"><span data-lang="en">Publications</span><span data-lang="zh">论文</span></a></li>
-                <li><a href="#honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉</span></a></li>
-                <li><a href="#services"><span data-lang="en">Services</span><span data-lang="zh">服务</span></a></li>
+                <li><a href="#about" class="active">Biography</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#latest-news">News</a></li>
+                <li><a href="#writing-notes">Blogs</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#honors">Honors</a></li>
+                <li><a href="#services">Services</a></li>
             </ul>
-            <button type="button" class="lang-toggle" aria-label="Switch language / 切换语言">
-                <span class="lt-en">EN</span><span class="lt-sep" aria-hidden="true">/</span><span class="lt-cn">CN</span>
-            </button>
         </div>
     </nav>
 
@@ -73,29 +61,23 @@
     <main>
         <section id="about" class="section">
             <div class="container">
-                <h2 class="section-title"><span data-lang="en">Biography</span><span data-lang="zh">个人简介</span></h2>
+                <h2 class="section-title">Biography</h2>
                 <div class="about-content">
-                    <div data-lang="en">
-                        <p><b>Senkang "Forest" Hu</b> (<span class="kai-font">胡森康</span>, feel free to call me "Forest") is
-                            currently a Ph.D. candidate at the <a href="https://www.cityu.edu.hk/">Department of Computer
-                                Science, City University of Hong Kong</a>, under the supervision of <a
-                                href="https://www.cs.cityu.edu.hk/~yugufang/">
-                                Fellow of ACM & IEEE & AAAS, <b>Chair Prof. Yuguang "Michael" Fang</b></a>. He is also a
-                            Visiting PhD at the <a href="https://www.ox.ac.uk/">Department of Computer Science,
-                                University of Oxford</a>, working with <a href="https://scholar.google.com/citations?user=25GYJiwAAAAJ&hl=en" target="_blank">Prof. Jiarui Gan</a>. Previously, he
-                            received his BSc degree from the School of Information and Electronics, <a
-                                href="https://www.bit.edu.cn/">Beijing Institute of Technology</a> in 2022.</p>
-                        <p>His long-term research vision is to develop intelligent, efficient, collaborative, and trustworthy LLM-based agentic systems that solve complex real-world tasks and move toward AGI. His works have been published in top-tier conferences such as ICML,  NeurIPS, CVPR, AAAI (Oral), ICRA,
-                            etc., and top-tier journals such as TMC, TITS, ToN. He also serves as a reviewer or technical
-                            program committee member for ICML, ICLR, NeurIPS, ICRA, TMC, ToN, TITS, etc. He received the
-                            CYCSGS Scholarship, CityUHK's highest honor for PhD students, as the sole awardee in the
-                            Dept. of CS. He received the Best
-                            Paper Award at GLOBECOM'25.</p>
-                    </div>
-                    <div data-lang="zh">
-                        <p><b>胡森康</b>（Senkang "Forest" Hu，英文名 Forest）现为<a href="https://www.cityu.edu.hk/">香港城市大学计算机科学系</a>博士研究生，导师为 ACM、IEEE、AAAS 会士 <a href="https://www.cs.cityu.edu.hk/~yugufang/"><b>方玉光（Michael）讲座教授</b></a>。他同时是<a href="https://www.ox.ac.uk/">牛津大学计算机科学系</a>访问博士，与 <a href="https://scholar.google.com/citations?user=25GYJiwAAAAJ&hl=en" target="_blank">Jiarui Gan 教授</a>合作研究。2022 年本科毕业于<a href="https://www.bit.edu.cn/">北京理工大学</a>信息与电子学院。</p>
-                        <p>他的长期研究愿景，是构建智能、高效、协作且可信的大语言模型智能体系统，以解决复杂的现实任务，迈向通用人工智能（AGI）。研究成果发表于 ICML、NeurIPS、CVPR、AAAI（Oral）、ICRA 等顶级会议，以及 TMC、TITS、ToN 等权威期刊，并担任 ICML、ICLR、NeurIPS、ICRA、TMC、ToN、TITS 等会议与期刊的审稿人及技术程序委员会（TPC）委员。他荣获香港城市大学授予博士生的最高荣誉——周亦卿研究生院奖学金（CYCSGS），是计算机科学系唯一获奖者，并曾获 GLOBECOM'25 最佳论文奖。</p>
-                    </div>
+                    <p><b>Senkang "Forest" Hu</b> (<span class="kai-font">胡森康</span>, feel free to call him "Forest") is
+                        currently a Ph.D. candidate at the <a href="https://www.cityu.edu.hk/">Department of Computer
+                            Science, City University of Hong Kong</a>, under the supervision of <a
+                            href="https://www.cs.cityu.edu.hk/~yugufang/">
+                            Fellow of ACM & IEEE & AAAS, <b>Chair Prof. Yuguang "Michael" Fang</b></a>. He is also a
+                        Visiting PhD at the <a href="https://www.ox.ac.uk/">Department of Computer Science,
+                            University of Oxford</a>, working with <a href="https://scholar.google.com/citations?user=25GYJiwAAAAJ&hl=en" target="_blank">Prof. Jiarui Gan</a>. Previously, he
+                        received his BSc degree from the School of Information and Electronics, <a
+                            href="https://www.bit.edu.cn/">Beijing Institute of Technology</a> in 2022.</p>
+                    <p>His long-term research vision is to develop intelligent, efficient, collaborative, and trustworthy LLM-based agentic systems that solve complex real-world tasks and move toward AGI. His works have been published in top-tier conferences such as ICML,  NeurIPS, CVPR, AAAI (Oral), ICRA,
+                        etc., and top-tier journals such as TMC, TITS, ToN. He also serves as a reviewer or technical
+                        program committee member for ICML, ICLR, NeurIPS, ICRA, TMC, ToN, TITS, etc. He received the
+                        CYCSGS Scholarship, CityUHK's highest honor for PhD students, as the sole awardee in the
+                        Dept. of CS. He received the Best
+                        Paper Award at GLOBECOM'25.</p>
 
                 </div>
             </div>
@@ -103,7 +85,7 @@
 
         <section id="experience" class="section">
             <div class="container">
-                <h2 class="section-title"><span data-lang="en">Education & Experience</span><span data-lang="zh">教育与经历</span></h2>
+                <h2 class="section-title">Education & Experience</h2>
                 <div class="edu-list">
                     
                     <!-- <div class="edu-item">
@@ -141,18 +123,11 @@
                         <div class="edu-content-wrapper">
                             <img src="assets/oxford-logo.png" alt="University of Oxford" class="edu-logo">
                             <div class="edu-content-right">
-                                <div class="edu-school-name"><span data-lang="en">Visiting PhD @ University of Oxford</span><span data-lang="zh">牛津大学 · 访问博士</span></div>
+                                <div class="edu-school-name">Visiting PhD @ University of Oxford</div>
                                 <div class="edu-extra">
-                                    <span data-lang="en">
-                                        Mar. 2026 - Now<br>
-                                        Dept. of Computer Science, conduct research on LLM Agentic RL, self-evolution and game theory<br>
-                                        Working with <a href="https://scholar.google.com/citations?user=25GYJiwAAAAJ&hl=en" target="_blank">Prof. Jiarui Gan</a>
-                                    </span>
-                                    <span data-lang="zh">
-                                        2026年3月 - 至今<br>
-                                        计算机科学系，从事大语言模型智能体的强化学习、自进化与博弈论研究<br>
-                                        合作导师：<a href="https://scholar.google.com/citations?user=25GYJiwAAAAJ&hl=en" target="_blank">Jiarui Gan 教授</a>
-                                    </span>
+                                    Mar. 2026 - Now<br>
+                                    Dept. of Computer Science, conduct research on LLM Agentic RL, self-evolution and game theory.<br>
+                                    Working with <a href="https://scholar.google.com/citations?user=25GYJiwAAAAJ&hl=en" target="_blank">Prof. Jiarui Gan</a>
                                 </div>
                             </div>
                         </div>
@@ -163,19 +138,12 @@
                         <div class="edu-content-wrapper">
                             <img src="assets/Huawei_Standard_logo.svg.png" alt="Huawei" class="edu-logo huawei-logo">
                             <div class="edu-content-right">
-                                <div class="edu-school-name"><span data-lang="en">Research Intern @ Huawei Hong Kong Research Center</span><span data-lang="zh">华为香港研究所 · 研究实习生</span></div>
+                                <div class="edu-school-name">Research Intern @ Huawei Hong Kong Research Center</div>
                                 <div class="edu-extra">
-                                    <span data-lang="en">
-                                        Jun. 2025 - Feb. 2026<br>
-                                        Conduct research on Agentic Reasoning and Reinforcement Learning, proposed <a href="paper-pages/InfoReasoner/index.html" target="_blank">InfoReasoner (ICML'26)</a><br>
-                                        Working with <a href="https://zhaoyuzhi.github.io/" target="_blank">Prof. Yuzhi
-                                            Zhao</a>
-                                    </span>
-                                    <span data-lang="zh">
-                                        2025年6月 - 2026年2月<br>
-                                        从事智能体推理与强化学习研究，提出 <a href="paper-pages/InfoReasoner/index.html" target="_blank">InfoReasoner (ICML'26)</a><br>
-                                        合作导师：<a href="https://zhaoyuzhi.github.io/" target="_blank">Yuzhi Zhao 教授</a>
-                                    </span>
+                                    Jun. 2025 - Feb. 2026<br>
+                                    Conduct research on Agentic Reasoning and Reinforcement Learning, proposed <a href="paper-pages/InfoReasoner/index.html" target="_blank">InfoReasoner (ICML'26)</a>.<br>
+                                    Working with <a href="https://zhaoyuzhi.github.io/" target="_blank">Prof. Yuzhi
+                                        Zhao</a>
                                 </div>
                             </div>
                         </div>
@@ -186,19 +154,12 @@
                         <div class="edu-content-wrapper">
                             <img src="assets/cityu-logo.jpeg" alt="City University of Hong Kong" class="edu-logo">
                             <div class="edu-content-right">
-                                <div class="edu-school-name"><span data-lang="en">PhD @ City University of Hong Kong</span><span data-lang="zh">香港城市大学 · 博士研究生</span></div>
+                                <div class="edu-school-name">PhD @ City University of Hong Kong</div>
                                 <div class="edu-extra">
-                                    <span data-lang="en">
-                                        Aug. 2023 - Now<br>
-                                        Dept. of Computer Science, supervised by <a href="https://www.cs.cityu.edu.hk/~yugufang/">Chair Prof. Yuguang "Michael" Fang</a>, ACM/IEEE/AAAS Fellow<br>
-                                        <b>Chow Yei Ching School of Graduate Studies Scholarship</b> (Top 0.3%, sole awardee
-                                        in CS Dept.)
-                                    </span>
-                                    <span data-lang="zh">
-                                        2023年8月 - 至今<br>
-                                        计算机科学系，导师为 ACM/IEEE/AAAS 会士 <a href="https://www.cs.cityu.edu.hk/~yugufang/">方玉光（Michael）讲座教授</a><br>
-                                        <b>周亦卿研究生院奖学金</b>（前 0.3%，计算机科学系唯一获奖者）
-                                    </span>
+                                    Aug. 2023 - Now<br>
+                                    Dept. of Computer Science, supervised by <a href="https://www.cs.cityu.edu.hk/~yugufang/">Chair Prof. Yuguang "Michael" Fang</a>, ACM/IEEE/AAAS Fellow<br>
+                                    <b>Chow Yei Ching School of Graduate Studies Scholarship</b> (Top 0.3%, sole awardee
+                                    in CS Dept.)
                                 </div>
                             </div>
                         </div>
@@ -209,18 +170,11 @@
                         <div class="edu-content-wrapper">
                             <img src="assets/bit-logo.jpg" alt="Beijing Institute of Technology" class="edu-logo">
                             <div class="edu-content-right">
-                                <div class="edu-school-name"><span data-lang="en">BSc @ Beijing Institute of Technology</span><span data-lang="zh">北京理工大学 · 学士</span></div>
+                                <div class="edu-school-name">BSc @ Beijing Institute of Technology</div>
                                 <div class="edu-extra">
-                                    <span data-lang="en">
-                                        Sep. 2018 - Jul. 2022<br>
-                                        Electronic Information Engineering<br>
-                                        <b>National Scholarship</b> (Top 1%)
-                                    </span>
-                                    <span data-lang="zh">
-                                        2018年9月 - 2022年7月<br>
-                                        电子信息工程<br>
-                                        <b>国家奖学金</b>（前 1%）
-                                    </span>
+                                    Sep. 2018 - Jul. 2022<br>
+                                    Electronic Information Engineering<br>
+                                    <b>National Scholarship</b> (Top 1%)
                                 </div>
                             </div>
                         </div>
@@ -231,35 +185,32 @@
 
         <section id="research" class="section">
             <div class="container">
-                <h2 class="section-title"><span data-lang="en">Research Vision</span><span data-lang="zh">研究愿景</span></h2>
+                <h2 class="section-title">Research Vision</h2>
                 <div class="research-vision">
-                    <p class="vision-statement" data-lang="en">
+                    <p class="vision-statement">
                         Building <span>intelligent</span>, <span>efficient</span>, <span>collaborative</span>, and
                         <span>trustworthy</span> LLM-based <strong>agentic systems</strong> that solve complex real-world tasks and move toward AGI.
                     </p>
-                    <p class="vision-statement" data-lang="zh">
-                        构建<span>智能</span>、<span>高效</span>、<span>协作</span>且<span>可信</span>的大语言模型<strong>智能体系统</strong>，解决复杂的现实任务，迈向通用人工智能（AGI）。
-                    </p>
                     <div class="research-areas">
                         <div class="research-area">
-                            <div class="research-kicker"><i class="fas fa-brain"></i><span data-lang="en">Intelligence</span><span data-lang="zh">智能</span></div>
-                            <h3><span data-lang="en">Agentic Reasoning &amp; Reinforcement Learning</span><span data-lang="zh">智能体推理与强化学习</span></h3>
-                            <p><span data-lang="en">Developing agentic reasoning, reinforcement learning, and self-evolution methods for LLM agents that plan, search, use tools, and continually improve through feedback.</span><span data-lang="zh">为大语言模型智能体研发推理、强化学习与自进化方法，使其能够规划、搜索、调用工具，并通过反馈持续改进。</span></p>
+                            <div class="research-kicker"><i class="fas fa-brain"></i><span>Intelligence</span></div>
+                            <h3>Agentic Reasoning &amp; Reinforcement Learning</h3>
+                            <p>Developing agentic reasoning, reinforcement learning, and self-evolution methods for LLM agents that plan, search, use tools, and continually improve through feedback.</p>
                         </div>
                         <div class="research-area">
-                            <div class="research-kicker"><i class="fas fa-bolt"></i><span data-lang="en">Efficiency</span><span data-lang="zh">高效</span></div>
-                            <h3><span data-lang="en">Efficient Post-Training &amp; Inference</span><span data-lang="zh">高效后训练与推理</span></h3>
-                            <p><span data-lang="en">Building efficient post-training, decoding, and inference-time adaptation methods that reduce token usage, tool calls, and deployment costs for capable LLM agents.</span><span data-lang="zh">研发高效的后训练、解码与推理时自适应方法，为高性能大语言模型智能体降低 token 消耗、工具调用与部署成本。</span></p>
+                            <div class="research-kicker"><i class="fas fa-bolt"></i><span>Efficiency</span></div>
+                            <h3>Efficient Post-Training &amp; Inference</h3>
+                            <p>Building efficient post-training, decoding, and inference-time adaptation methods that reduce token usage, tool calls, and deployment costs for capable LLM agents.</p>
                         </div>
                         <div class="research-area">
-                            <div class="research-kicker"><i class="fas fa-network-wired"></i><span data-lang="en">Collaboration</span><span data-lang="zh">协作</span></div>
-                            <h3><span data-lang="en">Collaborative Agent Systems</span><span data-lang="zh">协作式智能体系统</span></h3>
-                            <p><span data-lang="en">Building multi-agent agentic systems that solve complex tasks through coordination, planning, communication, and tool interaction.</span><span data-lang="zh">构建多智能体系统，通过协调、规划、通信与工具交互来解决复杂任务。</span></p>
+                            <div class="research-kicker"><i class="fas fa-network-wired"></i><span>Collaboration</span></div>
+                            <h3>Collaborative Agent Systems</h3>
+                            <p>Building multi-agent agentic systems that solve complex tasks through coordination, planning, communication, and tool interaction.</p>
                         </div>
                         <div class="research-area">
-                            <div class="research-kicker"><i class="fas fa-shield-alt"></i><span data-lang="en">Trustworthiness</span><span data-lang="zh">可信</span></div>
-                            <h3><span data-lang="en">Trustworthy Multi-Agent Systems</span><span data-lang="zh">可信多智能体系统</span></h3>
-                            <p><span data-lang="en">Developing robust and adaptive multi-agent systems that remain reliable under uncertainty, distribution shifts, and malicious-agent attacks.</span><span data-lang="zh">研发鲁棒且自适应的多智能体系统，在不确定性、分布偏移与恶意智能体攻击下保持可靠。</span></p>
+                            <div class="research-kicker"><i class="fas fa-shield-alt"></i><span>Trustworthiness</span></div>
+                            <h3>Trustworthy Multi-Agent Systems</h3>
+                            <p>Developing robust and adaptive multi-agent systems that remain reliable under uncertainty, distribution shifts, and malicious-agent attacks.</p>
                         </div>
                     </div>
                 </div>
@@ -268,50 +219,50 @@
 
         <section id="latest-news" class="section">
             <div class="container">
-                <h2 class="section-title"><span data-lang="en">Latest News</span><span data-lang="zh">最新动态</span></h2>
+                <h2 class="section-title">Latest News</h2>
                 <div id="news-container" class="news-list">
                     <!-- News items will be dynamically loaded here from news.json -->
                 </div>
                 <div class="view-all-news">
                     <a href="pages/all-news.html" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fas fa-list"></i>
-                        <span data-lang="en">View All News</span><span data-lang="zh">查看全部动态</span></a>
+                        View All News</a>
                 </div>
             </div>
         </section>
 
         <section id="writing-notes" class="section">
             <div class="container">
-                <h2 class="section-title"><span data-lang="en">Blogs & Notes</span><span data-lang="zh">博客与笔记</span></h2>
+                <h2 class="section-title">Blogs & Notes</h2>
                 <div id="blog-container" class="blog-grid">
                     <!-- Blog notes will be dynamically loaded here from blogs.json -->
                 </div>
                 <div class="view-all-blog">
                     <a href="pages/all-blog.html" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fas fa-pen-nib"></i>
-                        <span data-lang="en">View All Blogs</span><span data-lang="zh">查看全部博客</span></a>
+                        View All Blogs</a>
                 </div>
             </div>
         </section>
 
         <section id="publications" class="section">
             <div class="container">
-                <h2 class="section-title"><span data-lang="en">Publications</span><span data-lang="zh">论文成果</span></h2>
+                <h2 class="section-title">Publications</h2>
                 <!-- Publication Legend -->
                 <div class="publication-legend"
                     style="text-align: left; margin-bottom: 1rem; font-size: 0.9rem; color: var(--light-text);">
-                    <span><span data-lang="en">*co-first author, </span><span data-lang="zh">*共同第一作者，</span></span>
-                    <span><i class="fas fa-envelope corr" title="Corresponding author"></i> <span data-lang="en">corresponding author</span><span data-lang="zh">通讯作者</span></span>
+                    <span>*co-first author, </span>
+                    <span>✉️ corresponding author</span>
                 </div>
                 <!-- Publication Filters -->
                 <div class="filter-container">
                     <div class="filter-group">
-                        <button class="filter-btn" data-filter="all"><span data-lang="en">All</span><span data-lang="zh">全部</span></button>
-                        <button class="filter-btn active" data-filter="first-author"><span data-lang="en">First Author</span><span data-lang="zh">第一作者</span></button>
+                        <button class="filter-btn" data-filter="all">All</button>
+                        <button class="filter-btn active" data-filter="first-author">First Author</button>
                         <span class="filter-divider" aria-hidden="true"></span>
-                        <button class="filter-btn" data-filter="intelligence"><span data-lang="en">Intelligence</span><span data-lang="zh">智能</span></button>
-                        <button class="filter-btn" data-filter="efficiency"><span data-lang="en">Efficiency</span><span data-lang="zh">高效</span></button>
-                        <button class="filter-btn" data-filter="collaboration"><span data-lang="en">Collaboration</span><span data-lang="zh">协作</span></button>
-                        <button class="filter-btn" data-filter="trustworthiness"><span data-lang="en">Trustworthiness</span><span data-lang="zh">可信</span></button>
-                        <button class="filter-btn" data-filter="others"><span data-lang="en">Others</span><span data-lang="zh">其他</span></button>
+                        <button class="filter-btn" data-filter="intelligence">Intelligence</button>
+                        <button class="filter-btn" data-filter="efficiency">Efficiency</button>
+                        <button class="filter-btn" data-filter="collaboration">Collaboration</button>
+                        <button class="filter-btn" data-filter="trustworthiness">Trustworthiness</button>
+                        <button class="filter-btn" data-filter="others">Others</button>
 
                     </div>
                 </div>
@@ -329,109 +280,109 @@
 
         <section id="honors" class="section">
             <div class="container">
-                <h2 class="section-title"><span data-lang="en">Honors & Awards</span><span data-lang="zh">荣誉与奖项</span></h2>
+                <h2 class="section-title">Honors & Awards</h2>
                 <div class="honors-list">
                     <div class="honor-item">
-                        <div class="honor-year"><span class="year-highlight"><span data-lang="en">Mar. 2026</span><span data-lang="zh">2026年3月</span></span></div>
+                        <div class="honor-year"><span class="year-highlight">Mar. 2026</span></div>
                         <div class="honor-content">
-                            <h3><span data-lang="en">Research Activity Fund</span><span data-lang="zh">科研活动基金</span></h3>
-                            <p><span data-lang="en">City University of Hong Kong</span><span data-lang="zh">香港城市大学</span></p>
+                            <h3>Research Activity Fund</h3>
+                            <p>City University of Hong Kong</p>
                         </div>
                     </div>
                     <div class="honor-item">
-                        <div class="honor-year"><span class="year-highlight"><span data-lang="en">Dec. 2025</span><span data-lang="zh">2025年12月</span></span></div>
+                        <div class="honor-year"><span class="year-highlight">Dec. 2025</span></div>
                         <div class="honor-content">
-                            <h3><span data-lang="en">Best Paper Award</span><span data-lang="zh">最佳论文奖</span></h3>
-                            <p><span data-lang="en">IEEE Communications Society<br><strong>UAV-enabled Computing Power Networks: Task
+                            <h3>Best Paper Award</h3>
+                            <p>IEEE Communications Society<br><strong>UAV-enabled Computing Power Networks: Task
                                     Completion Probability Analysis</strong> at IEEE Global Communications Conference
-                                (GLOBECOM'25)</span><span data-lang="zh">IEEE 通信学会<br><strong>UAV-enabled Computing Power Networks: Task Completion Probability Analysis</strong>，发表于 IEEE 全球通信大会（GLOBECOM'25）</span></p>
+                                (GLOBECOM'25)</p>
                         </div>
                     </div>
                     <div class="honor-item">
-                        <div class="honor-year"><span class="year-highlight"><span data-lang="en">Nov. 2025</span><span data-lang="zh">2025年11月</span></span></div>
+                        <div class="honor-year"><span class="year-highlight">Nov. 2025</span></div>
                         <div class="honor-content">
-                            <h3><span data-lang="en">IEEE ComSoc Student Grant</span><span data-lang="zh">IEEE ComSoc 学生资助</span></h3>
-                            <p><span data-lang="en">IEEE Communications Society</span><span data-lang="zh">IEEE 通信学会</span></p>
+                            <h3>IEEE ComSoc Student Grant</h3>
+                            <p>IEEE Communications Society</p>
 
                         </div>
                     </div>
                     <div class="honor-item">
-                        <div class="honor-year"><span class="year-highlight"><span data-lang="en">Nov. 2025</span><span data-lang="zh">2025年11月</span></span></div>
+                        <div class="honor-year"><span class="year-highlight">Nov. 2025</span></div>
                         <div class="honor-content">
-                            <h3><span data-lang="en">Conference Travel Grant for Research Degree Students</span><span data-lang="zh">研究学位学生会议差旅资助</span></h3>
-                            <p><span data-lang="en">City University of Hong Kong</span><span data-lang="zh">香港城市大学</span></p>
+                            <h3>Conference Travel Grant for Research Degree Students</h3>
+                            <p>City University of Hong Kong</p>
                         </div>
                     </div>
                     <div class="honor-item">
-                        <div class="honor-year"><span class="year-highlight"><span data-lang="en">Aug. 2025</span><span data-lang="zh">2025年8月</span></span></div>
+                        <div class="honor-year"><span class="year-highlight">Aug. 2025</span></div>
                         <div class="honor-content">
                             <h3><a href="https://scholars.cityu.edu.hk/en/prizes/chow-yei-ching-school-of-graduate-studies-scholarships-for-non-lo-67/"
-                                    target="_blank"><span data-lang="en">Chow Yei Ching School of Graduate Studies Scholarship</span><span data-lang="zh">周亦卿研究生院奖学金</span></a><span data-lang="en">, Top 0.3%</span><span data-lang="zh">，前 0.3%</span>
+                                    target="_blank">Chow Yei Ching School of Graduate Studies Scholarship</a>, Top 0.3%
                             </h3>
-                            <p><span data-lang="en">City University of Hong Kong</span><span data-lang="zh">香港城市大学</span></p>
-                            <p><span data-lang="en"><strong>10 awardees</strong> university-wide, and the <strong>sole awardee</strong> in
-                                the Department of Computer Science.</span><span data-lang="zh">全校<strong>10 名获奖者</strong>，计算机科学系<strong>唯一获奖者</strong>。</span></p>
+                            <p>City University of Hong Kong</p>
+                            <p><strong>10 awardees</strong> university-wide, and the <strong>sole awardee</strong> in
+                                the Department of Computer Science.</p>
                         </div>
                     </div>
 
                     <div class="honor-item">
-                        <div class="honor-year"><span class="year-highlight"><span data-lang="en">Aug. 2025</span><span data-lang="zh">2025年8月</span></span></div>
+                        <div class="honor-year"><span class="year-highlight">Aug. 2025</span></div>
                         <div class="honor-content">
                             <h3><a href="https://scholars.cityu.edu.hk/en/prizes/institutional-research-tuition-scholarship-531/"
-                                    target="_blank"><span data-lang="en">Research Tuition Scholarship</span><span data-lang="zh">研究学费奖学金</span></a></h3>
-                            <p><span data-lang="en">City University of Hong Kong</span><span data-lang="zh">香港城市大学</span></p>
+                                    target="_blank">Research Tuition Scholarship</a></h3>
+                            <p>City University of Hong Kong</p>
                         </div>
                     </div>
                     <div class="honor-item">
-                        <div class="honor-year"><span class="year-highlight"><span data-lang="en">Nov. 2024</span><span data-lang="zh">2024年11月</span></span></div>
+                        <div class="honor-year"><span class="year-highlight">Nov. 2024</span></div>
                         <div class="honor-content">
-                            <h3><span data-lang="en">IEEE ComSoc Student Travel Grant</span><span data-lang="zh">IEEE ComSoc 学生差旅资助</span></h3>
-                            <p><span data-lang="en">IEEE Communications Society</span><span data-lang="zh">IEEE 通信学会</span></p>
-                        </div>
-                    </div>
-                    <div class="honor-item">
-                        <div class="honor-year"><span class="year-highlight">2023</span></div>
-                        <div class="honor-content">
-                            <h3><span data-lang="en">Institutional Research Tuition Grant</span><span data-lang="zh">校级研究学费资助</span></h3>
-                            <p><span data-lang="en">City University of Hong Kong</span><span data-lang="zh">香港城市大学</span></p>
-                            <p><span data-lang="en">HK$170,000 to cover part of tuition fees during PhD.</span><span data-lang="zh">17 万港元，用于支付博士期间部分学费。</span></p>
+                            <h3>IEEE ComSoc Student Travel Grant</h3>
+                            <p>IEEE Communications Society</p>
                         </div>
                     </div>
                     <div class="honor-item">
                         <div class="honor-year"><span class="year-highlight">2023</span></div>
                         <div class="honor-content">
-                            <h3><span data-lang="en">InnoHK Award Funding</span><span data-lang="zh">InnoHK 资助</span></h3>
-                            <p><span data-lang="en">The Government of the Hong Kong Special Administrative Region</span><span data-lang="zh">香港特别行政区政府</span></p>
-                            <p><span data-lang="en">Around HK$900,000 to support research and PhD career.</span><span data-lang="zh">约 90 万港元，支持科研与博士生涯。</span></p>
+                            <h3>Institutional Research Tuition Grant</h3>
+                            <p>City University of Hong Kong</p>
+                            <p>HK$170,000 to cover part of tuition fees during PhD.</p>
                         </div>
                     </div>
                     <div class="honor-item">
-                        <div class="honor-year"><span class="year-highlight"><span data-lang="en">Dec. 2021</span><span data-lang="zh">2021年12月</span></span></div>
+                        <div class="honor-year"><span class="year-highlight">2023</span></div>
                         <div class="honor-content">
-                            <h3><span data-lang="en">National Scholarship</span><span data-lang="zh">国家奖学金</span></h3>
-                            <p><span data-lang="en">Ministry of Education of the People's Republic of China</span><span data-lang="zh">中华人民共和国教育部</span></p>
-                            <p><span data-lang="en">The highest national honors for undergraduate students in China.</span><span data-lang="zh">中国本科生的最高国家级荣誉。</span></p>
+                            <h3>InnoHK Award Funding</h3>
+                            <p>The Government of the Hong Kong Special Administrative Region</p>
+                            <p>Around HK$900,000 to support research and PhD career.</p>
+                        </div>
+                    </div>
+                    <div class="honor-item">
+                        <div class="honor-year"><span class="year-highlight">Dec. 2021</span></div>
+                        <div class="honor-content">
+                            <h3>National Scholarship</h3>
+                            <p>Ministry of Education of the People's Republic of China</p>
+                            <p>The highest national honors for undergraduate students in China.</p>
                         </div>
                     </div>
                     <div class="honor-item">
                         <div class="honor-year"><span class="year-highlight">2020</span></div>
                         <div class="honor-content">
-                            <h3><span data-lang="en">Example of Scientific Research Innovation, Top 1%</span><span data-lang="zh">科研创新榜样，前 1%</span></h3>
-                            <p><span data-lang="en">Beijing Institute of Technology</span><span data-lang="zh">北京理工大学</span></p>
+                            <h3>Example of Scientific Research Innovation, Top 1%</h3>
+                            <p>Beijing Institute of Technology</p>
                         </div>
                     </div>
                     <div class="honor-item">
                         <div class="honor-year"><span class="year-highlight">2018-2021</span></div>
                         <div class="honor-content">
-                            <h3><span data-lang="en">First Class Academic Scholarship, 4 times</span><span data-lang="zh">一等学业奖学金（4 次）</span></h3>
-                            <p><span data-lang="en">Beijing Institute of Technology</span><span data-lang="zh">北京理工大学</span></p>
+                            <h3>First Class Academic Scholarship, 4 times</h3>
+                            <p>Beijing Institute of Technology</p>
                         </div>
                     </div>
                     <div class="honor-item">
                         <div class="honor-year"><span class="year-highlight">2018-2021</span></div>
                         <div class="honor-content">
-                            <h3><span data-lang="en">Excellent Student of Beijing Institute of Technology, 3 times</span><span data-lang="zh">北京理工大学优秀学生（3 次）</span></h3>
-                            <p><span data-lang="en">Beijing Institute of Technology</span><span data-lang="zh">北京理工大学</span></p>
+                            <h3>Excellent Student of Beijing Institute of Technology, 3 times</h3>
+                            <p>Beijing Institute of Technology</p>
                         </div>
                     </div>
                 </div>
@@ -440,10 +391,10 @@
 
         <section id="services" class="section">
             <div class="container">
-                <h2 class="section-title"><span data-lang="en">Services</span><span data-lang="zh">学术服务</span></h2>
+                <h2 class="section-title">Services</h2>
                 <div class="services-content">
                     <div class="service-category">
-                        <h3><span data-lang="en">Conference Technical Program Committee & Reviewer</span><span data-lang="zh">会议技术程序委员会与审稿人</span></h3>
+                        <h3>Conference Technical Program Committee & Reviewer</h3>
                         <ul class="service-list">
                             <li>ICML</li>
                             <li>ICLR</li>
@@ -461,7 +412,7 @@
                     </div>
 
                     <div class="service-category">
-                        <h3><span data-lang="en">Journal Reviewer</span><span data-lang="zh">期刊审稿人</span></h3>
+                        <h3>Journal Reviewer</h3>
                         <ul class="service-list">
                             <li>ACM Computing Surveys</li>
                             <li>IEEE TMC</li>
@@ -480,14 +431,14 @@
                     </div>
 
                     <div class="service-category">
-                        <h3><span data-lang="en">Teaching Assistant</span><span data-lang="zh">助教</span></h3>
+                        <h3>Teaching Assistant</h3>
                         <ul class="service-list">
-                            <li><span data-lang="en">Cloud Computing, 2026 Spring</span><span data-lang="zh">云计算，2026 春</span></li>
-                            <li><span data-lang="en">Cloud Computing: Theory and Practice, 2026 Spring</span><span data-lang="zh">云计算：理论与实践，2026 春</span></li>
-                            <li><span data-lang="en">Info Security for eCommerce, 2025 Fall</span><span data-lang="zh">电子商务信息安全，2025 秋</span></li>
-                            <li><span data-lang="en">Cloud Computing, 2025 Spring</span><span data-lang="zh">云计算，2025 春</span></li>
-                            <li><span data-lang="en">Computer Networks, 2024 Fall</span><span data-lang="zh">计算机网络，2024 秋</span></li>
-                            <li><span data-lang="en">Cloud Computing: Theory and Practice, 2024 Spring</span><span data-lang="zh">云计算：理论与实践，2024 春</span></li>
+                            <li>Cloud Computing, 2026 Spring</li>
+                            <li>Cloud Computing: Theory and Practice, 2026 Spring</li>
+                            <li>Info Security for eCommerce, 2025 Fall</li>
+                            <li>Cloud Computing, 2025 Spring</li>
+                            <li>Computer Networks, 2024 Fall</li>
+                            <li>Cloud Computing: Theory and Practice, 2024 Spring</li>
                         </ul>
                     </div>
                 </div>
@@ -539,7 +490,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; <span id="current-year"></span> Senkang Forest Hu. <span data-lang="en">All rights reserved.</span><span data-lang="zh">版权所有。</span></p>
+            <p>&copy; <span id="current-year"></span> Senkang Forest Hu. All rights reserved.</p>
         </div>
     </footer>
 
@@ -589,7 +540,67 @@
                 }
             }
 
-            // KaiTi font wrapping for Chinese text is handled by applyKaiFont() in script.js.
+            // Apply KaiTi font to all Chinese characters that are not already wrapped in .kai-font
+            function applyKaiFont() {
+                const textNodes = [];
+                const chineseRegex = /[\u4e00-\u9fff]+/;
+
+                // Recursive function to get all text nodes
+                function getTextNodes(node) {
+                    if (node.nodeType === 3) { // Text node
+                        if (chineseRegex.test(node.nodeValue)) {
+                            textNodes.push(node);
+                        }
+                    } else if (node.nodeType === 1 && node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') { // Element node
+                        // Skip if the node already has the kai-font class or is a parent of one
+                        if (!node.classList || !node.classList.contains('kai-font')) {
+                            for (let i = 0; i < node.childNodes.length; i++) {
+                                getTextNodes(node.childNodes[i]);
+                            }
+                        }
+                    }
+                }
+
+                getTextNodes(document.body);
+
+                // Process text nodes containing Chinese characters
+                textNodes.forEach(textNode => {
+                    const text = textNode.nodeValue;
+                    const parts = [];
+                    let lastIndex = 0;
+
+                    // Find all Chinese character sequences
+                    text.replace(/([\u4e00-\u9fff]+)/g, (match, p1, offset) => {
+                        // Add text before the match
+                        if (offset > lastIndex) {
+                            parts.push(document.createTextNode(text.substring(lastIndex, offset)));
+                        }
+
+                        // Create span for Chinese characters
+                        const span = document.createElement('span');
+                        span.className = 'kai-font';
+                        span.textContent = p1;
+                        parts.push(span);
+
+                        lastIndex = offset + match.length;
+                    });
+
+                    // Add remaining text
+                    if (lastIndex < text.length) {
+                        parts.push(document.createTextNode(text.substring(lastIndex)));
+                    }
+
+                    // Replace original text node with processed parts
+                    if (parts.length > 0) {
+                        const fragment = document.createDocumentFragment();
+                        parts.forEach(part => fragment.appendChild(part));
+                        textNode.parentNode.replaceChild(fragment, textNode);
+                    }
+                });
+            }
+
+            // Run the function to apply KaiTi font to Chinese characters
+            applyKaiFont();
         });
     </script>
 </body>
