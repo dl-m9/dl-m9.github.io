@@ -779,18 +779,18 @@ header .contact-info a:hover {
 
 header .contact-info i {
     color: currentColor;
-    font-size: 1.35rem;
+    font-size: 1.8rem;
     line-height: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 1.35rem;
-    height: 1.35rem;
+    width: 1.8rem;
+    height: 1.8rem;
 }
 
 header .icon-svg {
-    width: 1.35rem;
-    height: 1.35rem;
+    width: 1.8rem;
+    height: 1.8rem;
     display: block;
     color: currentColor;
     fill: none;
