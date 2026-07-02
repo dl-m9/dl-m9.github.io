@@ -2251,6 +2251,12 @@ nav {
     top: -2px;
 }
 
+.corresponding-icon {
+    color: var(--primary-color);
+    font-size: 0.85em;
+    margin-right: 3px;
+}
+
 .cofirst {
     color: var(--primary-color);
     font-weight: bold;
