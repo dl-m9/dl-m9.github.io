@@ -1,11 +1,13 @@
 [
   {
     "date": "Jul. 2026",
+    "category": "Award",
     "title": "Goertek Scholarships Awarded",
     "content": "Senkang was selected as a recipient of the <strong>Goertek Scholarships</strong> for the 2025/26 academic year, sponsored by Goertek Inc."
   },
   {
     "date": "Jun. 2026",
+    "category": "Media",
     "title": "Research Featured by CCTV, China News, and China Daily",
     "content": "Major media outlets reported CityUHK's multi-agent intelligence research. The coverage highlighted Senkang's work on multi-agent collaborative perception and edge video analytics, spanning robust cross-domain perception for connected autonomous driving and efficient distributed video analytics.",
     "links": [
@@ -33,6 +35,7 @@
   },
   {
     "date": "Apr. 2026",
+    "category": "Publication",
     "title": "Paper Accepted by ICML'26",
     "content": "One first-author paper, <strong>Optimizing Agentic Reasoning with Retrieval via Synthetic Semantic Information Gain Reward</strong>, was accepted by The 43rd International Conference on Machine Learning (ICML 2026), see you in Seoul, South Korea. 🇰🇷🇰🇷🇰🇷",
     "links": [
@@ -52,16 +55,19 @@
   },
   {
     "date": "Mar. 2026",
+    "category": "Career",
     "title": "Start a New Journey in Oxford",
     "content": "Senkang started a new journey as a Visiting PhD at the Department of Computer Science, University of Oxford, working on LLM agentic RL, self-evolution, and game theory."
   },
   {
     "date": "Feb. 2026",
+    "category": "Publication",
     "title": "Three Papers Accepted by CVPR'26",
     "content": "Three papers were accepted by CVPR 2026, including 2 main conference papers and 1 Findings paper. See you in Denver, USA. 🇺🇸🇺🇸🇺🇸"
   },
   {
     "date": "Feb. 2026",
+    "category": "Talk",
     "title": "Invited Talk at <a href=\"https://www.slai.edu.cn/\" target=\"_blank\">SLAI</a>",
     "content": "Senkang gave an invited presentation at the <strong>Agentic Intelligence for Human-AI Society Symposium</strong> at Shenzhen Loop Area Institute (SLAI), featuring his recent work on Agentic RL, <strong>Optimizing Agentic Reasoning with Retrieval via Synthetic Semantic Information Gain Reward</strong>.",
     "links": [
@@ -81,11 +87,13 @@
   },
   {
     "date": "Jan. 2026",
+    "category": "Talk",
     "title": "Invited Talk at PolyU",
     "content": "Senkang gave an invited talk at The Hong Kong Polytechnic University (PolyU), titled <strong>Toward Efficient Agentic Reasoning and Task Adaptation</strong>."
   },
   {
     "date": "Dec. 2025",
+    "category": "Publication",
     "title": "Paper Accepted by TMC",
     "content": "One first-author paper, <strong>CP-uniGuard: A Unified, Probability-Agnostic, and Adaptive Framework for Malicious Agent Detection and Defense in Multi-Agent Embodied Perception Systems</strong>, was accepted by IEEE Transactions on Mobile Computing (TMC).",
     "links": [
@@ -105,21 +113,25 @@
   },
   {
     "date": "Dec. 2025",
+    "category": "Talk",
     "title": "Invited Talk at NJU",
     "content": "Senkang gave an invited talk at the School of Intelligence Science and Technology, Nanjing University (NJU)."
   },
   {
     "date": "Dec. 2025",
+    "category": "Award",
     "title": "Best Paper Award",
     "content": "Our paper <strong>UAV-enabled Computing Power Networks: Task Completion Probability Analysis</strong> received the <strong>Best Paper Award</strong> at IEEE GLOBECOM 2025."
   },
   {
     "date": "Nov. 2025",
+    "category": "Award",
     "title": "IEEE ComSoc Student Grant Award",
     "content": "Senkang was awarded the IEEE ComSoc Student Grant to support his conference travel."
   },
   {
     "date": "Sep. 2025",
+    "category": "Publication",
     "title": "Paper Accepted by NeurIPS'25",
     "content": "One first-author paper, <strong>Distribution-Aligned Decoding for Efficient LLM Task Adaptation</strong>, was accepted by NeurIPS 2025. See you in San Diego, USA. 🇺🇸🇺🇸🇺🇸",
     "links": [
@@ -139,6 +151,7 @@
   },
   {
     "date": "Aug. 2025",
+    "category": "Award",
     "title": "Two Scholarships Awarded",
     "content": "Senkang was awarded <strong>Chow Yei Ching School of Graduate Studies (CYCSGS) Scholarship</strong> (<strong>10 awardees</strong> university-wide and the <strong>sole awardee</strong> in the Department of Computer Science) and <strong>Research Tuition Scholarship (RTS)</strong>! Congratulations! 🎉",
     "links": [
@@ -154,6 +167,7 @@
   },
   {
     "date": "Jul. 2025",
+    "category": "Publication",
     "title": "Three Papers Accepted by GLOBECOM'25",
     "content": "Three papers were accepted by IEEE GLOBECOM 2025, including one first-author paper, <strong>Task-Aware Parameter-Efficient Fine-Tuning of Large Pre-Trained Models at the Edge</strong>. See you in Taipei.",
     "links": [
@@ -165,6 +179,7 @@
   },
   {
     "date": "Apr. 2025",
+    "category": "Publication",
     "title": "Paper Accepted by TMC",
     "content": "One first-author paper, <strong>AgentsCoMerge: Large Language Model Empowered Collaborative Decision Making for Ramp Merging</strong>, was accepted by IEEE Transactions on Mobile Computing (TMC).",
     "links": [
@@ -176,6 +191,7 @@
   },
   {
     "date": "Apr. 2025",
+    "category": "Publication",
     "title": "Paper Accepted by WCM",
     "content": "One first-author paper, <strong>Collaborative Perception for Connected and Autonomous Driving: Challenges, Possible Solutions and Opportunities</strong>, was accepted by IEEE Wireless Communications Magazine (WCM).",
     "links": [
@@ -187,6 +203,7 @@
   },
   {
     "date": "Mar. 2025",
+    "category": "Others",
     "title": "New Project Launched: <a href='https://github.com/dl-m9/Multi-Agent-Embodied-Autonomous-Driving' target='_blank'>Multi-Agent Embodied Autonomous Driving</a>",
     "content": "We launched a new project on Multi-Agent Embodied Autonomous Driving. The repository continuously collects recent papers in this area and serves as a curated resource for the community.",
     "links": [
@@ -198,11 +215,13 @@
   },
   {
     "date": "Feb. 2025",
+    "category": "Career",
     "title": "PhD Qualification Success",
     "content": "Senkang passed the PhD Qualifying Examination (QE)! He is now a PhD candidate! 🎉🎉🎉"
   },
   {
     "date": "Jan. 2025",
+    "category": "Publication",
     "title": "Paper Accepted by ICRA'25",
     "content": "One co-authored paper, <strong>Directed-CP: Directed Collaborative Perception for Connected and Autonomous Vehicles via Proactive Attention</strong>, was accepted by ICRA 2025.",
     "links": [
@@ -218,11 +237,13 @@
   },
   {
     "date": "Jan. 2025",
+    "category": "Publication",
     "title": "AAAI'25 Oral Presentation",
     "content": "Our paper accepted by AAAI'25 was selected for Oral Presentation! Congratulations again! 🎉"
   },
   {
     "date": "Dec. 2024",
+    "category": "Publication",
     "title": "Paper Accepted by ToN",
     "content": "One co-authored paper was accepted by IEEE/ACM Transactions on Networking (ToN).",
     "links": [
@@ -238,6 +259,7 @@
   },
   {
     "date": "Dec. 2024",
+    "category": "Publication",
     "title": "Paper Accepted by AAAI'25",
     "content": "Congratulations! 🎉 One first-author paper entitled <strong>CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception</strong> was accepted by The 39th Annual AAAI Conference on Artificial Intelligence (AAAI'25), see you in Philadelphia, USA 🇺🇸!",
     "links": [
@@ -257,6 +279,7 @@
   },
   {
     "date": "Nov. 2024",
+    "category": "Publication",
     "title": "Paper Accepted by IEEE TITS",
     "content": "One paper was accepted by IEEE Transactions on Intelligent Transportation Systems (TITS).",
     "links": [
@@ -268,41 +291,49 @@
   },
   {
     "date": "Nov. 2024",
+    "category": "Award",
     "title": "IEEE ComSoc Student Grant Award",
     "content": "Senkang was awarded the IEEE ComSoc Student Grant to support his conference travel."
   },
   {
     "date": "Aug. 2024",
+    "category": "Publication",
     "title": "Paper Accepted by IEEE TMC",
     "content": "One paper was accepted by IEEE Transactions on Mobile Computing (TMC)."
   },
   {
     "date": "Jul. 2024",
+    "category": "Publication",
     "title": "Two Papers Accepted by GLOBECOM'24",
     "content": "Two papers were accepted by GLOBECOM'24, see you in Cape Town, South Africa 🇿🇦!"
   },
   {
     "date": "Sep. 2023",
+    "category": "Award",
     "title": "Institutional Research Tuition Grant",
     "content": "Senkang was awarded the Institutional Research Tuition Grant, nearly HK$170,000."
   },
   {
     "date": "Jul. 2023",
+    "category": "Career",
     "title": "Relocation to Hong Kong",
     "content": "Congratulations to Senkang! 🎉 Finally moved to Hong Kong 🇭🇰🇭🇰🇭🇰 to start his new career!"
   },
   {
     "date": "Jun. 2023",
+    "category": "Award",
     "title": "InnoHK Award Funding",
     "content": "Thanks to Prof. Fang's strong support, Senkang received the InnoHK Award Funding, around HK$900,000 from the Government of the Hong Kong Special Administrative Region to support his research and PhD career."
   },
   {
     "date": "Jun. 2022",
+    "category": "Career",
     "title": "Graduation from BIT",
     "content": "Senkang graduated from Beijing Institute of Technology. Thanks to all the professors, senior students and friends who helped him in the past four years."
   },
   {
     "date": "Dec. 2021",
+    "category": "Award",
     "title": "National Scholarship Award",
     "content": "Senkang was awarded the National Scholarship for ranking in the top 1% of his department, one of the highest honors for undergraduate students in China."
   }

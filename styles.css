@@ -1195,6 +1195,10 @@ nav {
     margin-top: 1rem;
 }
 
+.news-filter-container {
+    margin: 0.5rem 0 1.4rem;
+}
+
 .news-item {
     display: flex;
     align-items: baseline;
@@ -1271,6 +1275,18 @@ nav {
     font-size: 1.0rem;
     margin-bottom: 0.35rem;
     color: var(--text-color);
+}
+
+.news-category {
+    color: var(--primary-color);
+    font-size: inherit;
+    font-weight: 700;
+}
+
+.news-category-separator {
+    color: var(--light-text);
+    font-size: inherit;
+    font-weight: 600;
 }
 
 .news-content p {

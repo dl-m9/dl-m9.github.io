@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const allNewsSection = document.getElementById('all-news');
             if (allNewsSection) {
                 // On all-news page - show all news items
-                renderNewsItems(data, 'all-news-container');
+                renderNewsFilters(data, 'news-filter-controls', 'all-news-container');
             }
         })
         .catch(error => {
@@ -730,13 +730,22 @@ function renderNewsItems(newsData, containerId) {
         // Create the title element
         const titleElement = document.createElement('h3');
 
-        // Check if title contains HTML (like '<a href=')
-        if (newsItem.title && newsItem.title.includes('<a href=')) {
-            // Parse HTML in title with Chinese characters wrapped
-            titleElement.innerHTML = wrapChineseWithKaiFont(newsItem.title);
-        } else {
-            titleElement.innerHTML = wrapChineseWithKaiFont(newsItem.title);
+        if (newsItem.category) {
+            const categoryElement = document.createElement('span');
+            categoryElement.className = 'news-category';
+            categoryElement.innerHTML = wrapChineseWithKaiFont(newsItem.category);
+            titleElement.appendChild(categoryElement);
+
+            const separatorElement = document.createElement('span');
+            separatorElement.className = 'news-category-separator';
+            separatorElement.textContent = ' | ';
+            titleElement.appendChild(separatorElement);
         }
+
+        const titleTextElement = document.createElement('span');
+        titleTextElement.className = 'news-title-text';
+        titleTextElement.innerHTML = wrapChineseWithKaiFont(newsItem.title || '');
+        titleElement.appendChild(titleTextElement);
 
         contentElement.appendChild(titleElement);
 
@@ -784,3 +793,56 @@ function renderNewsItems(newsData, containerId) {
         container.appendChild(newsElement);
     });
 } 
+
+function renderNewsFilters(newsData, controlsId, containerId) {
+    const controls = document.getElementById(controlsId);
+    if (!controls) {
+        renderNewsItems(newsData, containerId);
+        return;
+    }
+
+    const preferredOrder = ['Publication', 'Award', 'Talk', 'Media', 'Career', 'Others'];
+    const categories = Array.from(new Set(newsData.map(item => item.category).filter(Boolean)));
+    const orderedCategories = [
+        ...preferredOrder.filter(category => categories.includes(category)),
+        ...categories
+            .filter(category => !preferredOrder.includes(category))
+            .sort((a, b) => a.localeCompare(b))
+    ];
+
+    controls.innerHTML = '';
+
+    const filterGroup = document.createElement('div');
+    filterGroup.className = 'filter-group news-filter-group';
+
+    const createFilterButton = (label, value, active = false) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `filter-btn news-filter-btn${active ? ' active' : ''}`;
+        button.setAttribute('data-news-filter', value);
+        button.textContent = label;
+        return button;
+    };
+
+    filterGroup.appendChild(createFilterButton('All', 'all', true));
+    orderedCategories.forEach(category => {
+        filterGroup.appendChild(createFilterButton(category, category));
+    });
+
+    controls.appendChild(filterGroup);
+    renderNewsItems(newsData, containerId);
+
+    filterGroup.querySelectorAll('.news-filter-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            filterGroup.querySelectorAll('.news-filter-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            const selectedCategory = button.getAttribute('data-news-filter');
+            const filteredNews = selectedCategory === 'all'
+                ? newsData
+                : newsData.filter(item => item.category === selectedCategory);
+
+            renderNewsItems(filteredNews, containerId);
+        });
+    });
+}
