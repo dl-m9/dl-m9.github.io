@@ -1,0 +1,61 @@
+category,company,region,positioning,evidence_tier,official_entry,screening_note
+materials_chemistry,XtalPi,China/Hong Kong,AI+physics+robotics R&D platform,Tier 1,https://ir.xtalpi.com/en/,Listed company and project-level disclosures
+materials_chemistry,DP Technology,China,AI for Science tools and services,Tier 1,https://www.dp.tech/en,Science-as-a-Service competitor
+materials_chemistry,Citrine Informatics,United States,Materials informatics SaaS,Tier 1,https://citrine.io/,Customer case claims need project-level validation
+materials_chemistry,CuspAI,United Kingdom,Generative materials design,Tier 2,https://cusp.ai/,Verify customer deployments and feedback loop
+materials_chemistry,Periodic Labs,United States,AI-driven science and automated labs,Tier 2,https://periodic.com/,Verify commercial model and lab ownership
+materials_chemistry,Orbital Materials,United Kingdom,AI-enabled materials discovery,Tier 2,https://www.orbitalmaterials.com/,Verify target material and paid projects
+materials_chemistry,Kebotix,United States,Materials discovery platform,Tier 2,https://www.kebotix.com/,Verify current product and customers
+materials_chemistry,MaterialsZone,Israel,Materials informatics platform,Tier 2,https://materials.zone/,Verify integration and revenue model
+materials_chemistry,Aionics,United States,Battery materials and electrolyte optimization,Tier 2,https://www.aionics.io/,Close analog for battery design partner thesis
+materials_chemistry,Atinary,Switzerland,Self-driving lab software,Tier 2,https://www.atinary.com/,Verify automation integrations and customer case
+materials_chemistry,Polaron,United Kingdom,AI for advanced materials,Tier 2,https://www.polaron.ai/,Verify vertical focus and commercial traction
+materials_chemistry,NobleAI,United States,Materials and chemicals AI,Tier 2,https://www.noble.ai/,Verify enterprise deployments
+molecular_biology,Generate Biomedicines,United States,Generative protein therapeutics,Tier 2,https://generatebiomedicines.com/,Verify partnership economics and clinical pipeline
+molecular_biology,Cradle,Netherlands/Switzerland,AI protein engineering,Tier 1,https://www.cradle.bio/,Funding verified and product claims require task-level review
+molecular_biology,Profluent,United States,AI protein design,Tier 2,https://www.profluent.bio/,Verify data loop and commercialization
+molecular_biology,EvolutionaryScale,United States,Biological foundation models,Tier 2,https://www.evolutionaryscale.ai/,Foundation model provider not direct experiment-decision analog
+molecular_biology,Basecamp Research,United States,Biodiversity data and protein discovery,Tier 2,https://www.basecamp-research.com/,Verify paid customers and wet-lab strategy
+molecular_biology,Arzeda,United States,Computational protein design,Tier 2,https://arzeda.com/,Verify project economics
+molecular_biology,Absci,United States,AI biologics discovery,Tier 2,https://www.absci.com/,Public company and partnership diligence needed
+molecular_biology,Ginkgo Bioworks,United States,Cell programming platform,Tier 2,https://www.ginkgobioworks.com/,Public company but not direct Agent competitor
+molecular_biology,Enveda Biosciences,United States,AI and natural-product drug discovery,Tier 2,https://www.envedabio.com/,Verify validation and partner model
+molecular_biology,1910 Genetics,United States,Multimodal AI drug discovery,Tier 2,https://www.1910genetics.com/,Verify pipeline ownership and services mix
+molecular_biology,PostEra,United Kingdom,Machine learning drug discovery,Tier 2,https://postera.ai/,Verify partnership model and data loop
+molecular_biology,LabGenius,United Kingdom,ML-guided antibody discovery,Tier 2,https://labgenius.com/,Verify closed-loop laboratory model
+drug_discovery,Insilico Medicine,China/United States,Generative AI drug discovery,Tier 1,https://insilico.com/,Listed company with company-disclosed clinical and revenue evidence
+drug_discovery,Recursion,United States,Data-driven TechBio platform,Tier 1,https://www.recursion.com/,Public company and merger disclosures
+drug_discovery,Isomorphic Labs,United Kingdom/United States,AI drug design,Tier 1,https://www.isomorphiclabs.com/,Partnership values are milestone contingent
+drug_discovery,Schrodinger,United States,Physics-based drug discovery software,Tier 2,https://www.schrodinger.com/,Public incumbent and business-model benchmark
+drug_discovery,Valo Health,Finland/United States,AI-enabled drug discovery,Tier 2,https://www.valohealth.com/,Verify current platform and pipeline scope
+drug_discovery,Atomwise,United States,AI small-molecule discovery,Tier 2,https://www.atomwise.com/,Verify current partner and clinical evidence
+drug_discovery,Exscientia,United Kingdom,AI drug design,Tier 1,https://www.exscientia.ai/,Historical comparable acquired by Recursion in 2024
+drug_discovery,Iktos,France,AI drug design and retrosynthesis,Tier 2,https://iktos.ai/,Software and service comparable
+drug_discovery,BenevolentAI,United Kingdom,AI drug discovery,Tier 2,https://www.benevolent.com/,Verify post-restructuring status
+drug_discovery,Relay Therapeutics,United States,Computational drug discovery,Tier 2,https://relaytx.com/,Public company and precision-medicine benchmark
+drug_discovery,Verge Genomics,United States,AI drug discovery,Tier 2,https://www.vergegenomics.com/,Verify pipeline data and partner model
+drug_discovery,Insitro,United States,Machine learning drug discovery,Tier 2,https://insitro.com/,Data-generation and partnership comparable
+lab_automation,Automata,United Kingdom,AI-ready modular lab automation,Tier 1,https://www.automata.tech/,Funding and Danaher partnership publicly announced
+lab_automation,Opentrons,United States,Open liquid-handling automation,Tier 1,https://opentrons.com/,Protocol ecosystem and customer stories
+lab_automation,Emerald Cloud Lab,United States,Remote cloud laboratory,Tier 2,https://www.emeraldcloudlab.com/,Verify pricing and API integration model
+lab_automation,Strateos,United States,Remote robotic laboratory,Tier 2,https://strateos.com/,Verify current operating model
+lab_automation,Arctoris,United Kingdom,Robotic biology laboratory,Tier 2,https://arctoris.com/,Verify partner and throughput claims
+lab_automation,Synthace,United Kingdom,Experiment design and automation software,Tier 2,https://www.synthace.com/,Direct workflow software comparable
+lab_automation,Culture Biosciences,United States,Cloud bioreactor platform,Tier 2,https://www.culturebiosciences.com/,Verify feedback and data rights model
+lab_automation,SPT Labtech,United Kingdom,Life-science automation,Tier 2,https://www.sptlabtech.com/,Instrument integration competitor
+lab_automation,Tecan,Switzerland,Lab automation,Tier 2,https://www.tecan.com/,Incumbent integration partner candidate
+lab_automation,Hamilton,United States/Switzerland,Lab automation,Tier 2,https://www.hamiltoncompany.com/,Incumbent integration partner candidate
+lab_automation,Biosero,United States,Lab automation software,Tier 2,https://www.biosero.com/,Workflow orchestration comparable
+lab_automation,LabWare,United States,LIMS and laboratory informatics,Tier 2,https://www.labware.com/,Data-system integration incumbent
+scientific_agents,FutureHouse,United States,Scientific agents and benchmarks,Tier 1,https://www.futurehouse.org/,Technical and demand signal with separate commercial spinout
+scientific_agents,Edison Scientific,United States,Commercial AI Scientist platform,Tier 1,https://www.edisonscientific.com/,Verify commercial pricing and access at outreach time
+scientific_agents,Causaly,United Kingdom,Life-science evidence graph,Tier 2,https://www.causaly.com/,Evidence and knowledge workflow comparable
+scientific_agents,Elicit,United States,Research workflow agent,Tier 2,https://elicit.com/,General research workflow competitor
+scientific_agents,Consensus,United States,Scientific search and synthesis,Tier 2,https://consensus.app/,General literature layer competitor
+scientific_agents,scite,United States,Citation context and evidence,Tier 2,https://scite.ai/,Evidence-audit component comparable
+scientific_agents,SciSpace,India/United States,Research assistant,Tier 2,https://scispace.com/,General research workflow competitor
+scientific_agents,Iris.ai,Norway,Scientific knowledge discovery,Tier 2,https://iris.ai/,Literature and knowledge workflow comparable
+scientific_agents,Undermind,United States,Scientific literature search,Tier 2,https://www.undermind.ai/,Literature specialist comparable
+scientific_agents,BenchSci,Canada,Life-science evidence search,Tier 2,https://www.benchsci.com/,Life-science research workflow comparable
+scientific_agents,ResearchRabbit,United States,Literature discovery,Tier 2,https://www.researchrabbit.ai/,Discovery layer competitor
+scientific_agents,LatchBio,United States,Bioinformatics compute platform,Tier 2,https://www.latch.bio/,Data and workflow integration comparable
