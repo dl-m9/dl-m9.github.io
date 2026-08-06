@@ -1512,7 +1512,7 @@ nav {
 
 .research-areas {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.2rem;
     margin-top: 2rem;
 }
@@ -1534,6 +1534,12 @@ nav {
     .research-areas {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .research-area:last-child {
+        grid-column: 1 / -1;
+        width: calc((100% - 1.2rem) / 2);
+        justify-self: center;
+    }
 }
 
 /* 移动端优化：Research区域全宽显示 */
@@ -1549,6 +1555,8 @@ nav {
     }
 
     .research-area {
+        grid-column: auto;
+        width: auto;
         min-height: auto;
         padding: 1.5rem;
     }
@@ -1592,6 +1600,38 @@ nav {
     color: var(--light-text);
     line-height: 1.65;
     margin-bottom: 0;
+}
+
+.research-subtopics {
+    list-style: none;
+    margin: 1.15rem 0 0;
+    padding: 1rem 0 0;
+    border-top: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.research-subtopics li {
+    position: relative;
+    padding-left: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--text-color);
+}
+
+.research-subtopics li + li {
+    margin-top: 0.55rem;
+}
+
+.research-subtopics li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.52em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--primary-color);
 }
 
 .research-list {
