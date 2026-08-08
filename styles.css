@@ -1659,23 +1659,22 @@ nav {
 
 .research-subtopics {
     list-style: none;
-    margin: 1.15rem 0 0;
-    padding: 1rem 0 0;
-    border-top: 1px solid rgba(37, 99, 235, 0.1);
+    margin: 0.9rem 0 0;
+    padding: 0;
 }
 
 .research-subtopics li {
     position: relative;
     padding-left: 1rem;
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 600;
-    line-height: 1.45;
-    color: var(--text-color);
+    font-size: 0.92rem;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--light-text);
 }
 
 .research-subtopics li + li {
-    margin-top: 0.55rem;
+    margin-top: 0.3rem;
 }
 
 .research-subtopics li::before {
