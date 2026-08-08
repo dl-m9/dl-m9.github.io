@@ -971,6 +971,9 @@ nav {
     .news-date {
         margin-right: 0;
         margin-bottom: 1rem;
+        width: 100%;
+        min-width: 100%;
+        text-align: center;
     }
 
     .service-list {
@@ -1474,6 +1477,9 @@ nav {
     .news-date {
         margin-right: 0;
         margin-bottom: 1rem;
+        width: 100%;
+        min-width: 100%;
+        text-align: center;
     }
 
     .blog-grid {
@@ -1537,8 +1543,8 @@ nav {
 
     .research-area:last-child {
         grid-column: 1 / -1;
-        width: calc((100% - 1.2rem) / 2);
-        justify-self: center;
+        width: 100%;
+        justify-self: stretch;
     }
 }
 
@@ -1547,6 +1553,7 @@ nav {
     .vision-statement {
         font-size: 1.35rem;
         text-align: left;
+        line-height: 1.45;
     }
 
     .research-areas {
@@ -1559,6 +1566,54 @@ nav {
         width: auto;
         min-height: auto;
         padding: 1.5rem;
+    }
+
+    .research-area:hover {
+        transform: none;
+        box-shadow: var(--shadow-md);
+    }
+
+    .research-kicker {
+        justify-content: flex-start;
+        gap: 0.6rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* 超小屏优化 */
+@media (max-width: 480px) {
+    .vision-statement {
+        font-size: 1.2rem;
+    }
+
+    .research-areas {
+        gap: 1.2rem;
+    }
+
+    .research-area {
+        padding: 1.25rem;
+        border-radius: 12px;
+    }
+
+    .research-kicker i {
+        font-size: 1.5rem;
+    }
+
+    .research-kicker span {
+        font-size: 0.92rem;
+    }
+
+    .research-area h3 {
+        font-size: 1rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .research-area p {
+        font-size: 0.9rem;
+    }
+
+    .research-subtopics li {
+        font-size: 0.82rem;
     }
 }
 
@@ -1794,13 +1849,22 @@ nav {
     }
 
     .edu-content-wrapper {
+        flex-direction: column;
+        align-items: center;
         gap: 1rem;
+        text-align: left;
     }
 
     .edu-logo {
         width: 60px;
         height: 60px;
         padding: 0;
+        margin: 0 auto;
+    }
+
+    .edu-content-right {
+        align-items: flex-start;
+        width: 100%;
     }
 
     .edu-school-name {
@@ -2320,7 +2384,7 @@ nav {
 
 /* Footer */
 footer {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    background: #2c3e50;
     color: rgba(255, 255, 255, 0.8);
     padding: 3rem 0;
     margin-top: 4rem;
@@ -2424,6 +2488,9 @@ footer {
     .honor-year {
         margin-bottom: 0.75rem;
         margin-right: 0;
+        width: 100%;
+        min-width: 100%;
+        text-align: center;
     }
 
     /* 优化Education section在移动端的间距 */
@@ -2891,14 +2958,20 @@ footer {
 }
 
 /* Visitors Section */
-.visitors-section {
+.visitor-counter-section {
     padding: 3rem 0;
-    border-bottom: 1px solid var(--border-color);
     text-align: center;
 }
 
-.visitors-section .section-title {
-    margin: 0 auto 2rem;
+.visitor-counter-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+footer.home-footer {
+    margin-top: 0;
 }
 
 /* Publication section titles */
