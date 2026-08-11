@@ -749,8 +749,7 @@ nav {
     line-height: 60px;
     font-size: 0.82rem;
     font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
     position: relative;
     color: rgba(226, 232, 240, 0.86);
 }
