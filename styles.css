@@ -1230,7 +1230,6 @@ nav {
     width: 140px;
     font-size: 1.05rem;
     font-weight: 700;
-    font-family: 'Playfair Display', Georgia, serif;
     color: var(--primary-color);
     margin-right: 18px;
     flex-shrink: 0;
