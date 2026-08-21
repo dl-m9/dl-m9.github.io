@@ -1,6 +1,9 @@
 # OMC
 .omc/
 
+# WorkBuddy
+.workbuddy/
+
 # Claude
 .claude/
 
