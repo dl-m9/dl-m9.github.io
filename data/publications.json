@@ -376,6 +376,25 @@
     ]
   },
   {
+    "title": "Mobility Helps Learning: Unsupervised Model Adaptation for Object Recognition via Movement",
+    "authors": "Yanan Ma, Yihang Tao, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Xianhao Chen, Yuguang Fang",
+    "type": "accepted",
+    "venue": "The 40th Annual Conference on Neural Information Processing Systems, Sydney, Australia, December 2026.",
+    "year": "2026",
+    "isFirstAuthor": false,
+    "categories": ["others"],
+    "tags": [
+      {
+        "text": "NeurIPS'26",
+        "class": "venue-tag"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
     "title": "V2XCrafter: Learning to Generate Driving Scene Across Agents",
     "authors": "Yihang Tao, Yu Guo, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Zihan Fang, Sam Kwong, Yuguang Fang",
     "type": "preprint",
