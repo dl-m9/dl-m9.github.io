@@ -347,6 +347,10 @@
         "text": "PDF",
         "class": "code-tag",
         "link": "https://arxiv.org/abs/2606.02304"
+      },
+      {
+        "text": "CCF-B",
+        "class": "ccf-tag"
       }
     ]
   },
