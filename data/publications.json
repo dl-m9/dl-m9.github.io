@@ -332,7 +332,7 @@
   },
   {
     "title": "Unified Context Evolution for LLM Agents",
-    "authors": "Zixuan Zhu, Yitong Hu, Yong Dai, Junfeng Fang, Chunyang Jiang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yuzhi Zhao",
+    "authors": "Zixuan Zhu, Yitong Hu, Yong Dai, Junfeng Fang, Chunyang Jiang, <strong><u>Senkang \"Forest\" Hu</u></strong><span style=\"white-space: nowrap;\">&nbsp;<i class=\"fas fa-envelope corresponding-icon\" style=\"margin-right: 0;\" aria-hidden=\"true\"></i>,</span> Yuzhi Zhao",
     "type": "accepted",
     "venue": "The 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP), 2026.",
     "year": "2026",
@@ -356,7 +356,7 @@
   },
   {
     "title": "Skill-Conditioned Gated Self-Distillation for LLM Reasoning",
-    "authors": "Jiazhen Huang, Xiao Chen, Xiao Luo, Yong Dai, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yuzhi Zhao",
+    "authors": "Jiazhen Huang, Xiao Chen, Xiao Luo, Yong Dai, <strong><u>Senkang \"Forest\" Hu</u></strong><span style=\"white-space: nowrap;\">&nbsp;<i class=\"fas fa-envelope corresponding-icon\" style=\"margin-right: 0;\" aria-hidden=\"true\"></i>,</span> Yuzhi Zhao",
     "type": "accepted",
     "venue": "The 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP), 2026.",
     "year": "2026",
