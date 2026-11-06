@@ -109,6 +109,55 @@
     ]
   },
   {
+    "title": "Unified Context Evolution for LLM Agents",
+    "authors": "Zixuan Zhu, Yitong Hu, Yong Dai, Junfeng Fang, Chunyang Jiang, <strong><u>Senkang \"Forest\" Hu</u></strong><span style=\"white-space: nowrap;\">&nbsp;<i class=\"fas fa-envelope corresponding-icon\" style=\"margin-right: 0;\" aria-hidden=\"true\"></i>,</span> Yuzhi Zhao",
+    "type": "accepted",
+    "venue": "The 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP), 2026.",
+    "year": "2026",
+    "isFirstAuthor": true,
+    "categories": ["intelligence"],
+    "tags": [
+      {
+        "text": "EMNLP'26",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2606.02304"
+      },
+      {
+        "text": "CCF-B",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "Skill-Conditioned Gated Self-Distillation for LLM Reasoning",
+    "authors": "Jiazhen Huang, Xiao Chen, Xiao Luo, Yong Dai, <strong><u>Senkang \"Forest\" Hu</u></strong><span style=\"white-space: nowrap;\">&nbsp;<i class=\"fas fa-envelope corresponding-icon\" style=\"margin-right: 0;\" aria-hidden=\"true\"></i>,</span> Yuzhi Zhao",
+    "type": "accepted",
+    "venue": "The 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP), 2026.",
+    "year": "2026",
+    "isFirstAuthor": true,
+    "categories": ["intelligence"],
+    "tags": [
+      {
+        "text": "EMNLP'26 Findings",
+        "class": "venue-tag"
+      },
+      {
+        "text": "PDF",
+        "class": "code-tag",
+        "link": "https://arxiv.org/abs/2605.28791"
+      },
+      {
+        "text": "Code",
+        "class": "code-tag",
+        "link": "https://github.com/walawalagoose/SGSD"
+      }
+    ]
+  },
+  {
     "title": "Learning Mutual View Information Graph for Adaptive Adversarial Collaborative Perception",
     "authors": "Yihang Tao, <strong><u>Senkang \"Forest\" Hu</u></strong>, Haonan An, Zhengru Fang, Hangcheng Cao, Yuguang Fang",
     "type": "accepted",
@@ -281,8 +330,6 @@
       }
     ]
   },
-  
-  
   {
     "title": "CP-Guard+: A New Paradigm for Malicious Agent Detection and Defense in Collaborative Perception",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Zihang Fang, Guowen Xu, Yiqin Deng, Sam Kwong, Yuguang Fang",
@@ -327,55 +374,6 @@
         "text": "PDF",
         "class": "code-tag",
         "link": "https://arxiv.org/abs/2605.05810"
-      }
-    ]
-  },
-  {
-    "title": "Unified Context Evolution for LLM Agents",
-    "authors": "Zixuan Zhu, Yitong Hu, Yong Dai, Junfeng Fang, Chunyang Jiang, <strong><u>Senkang \"Forest\" Hu</u></strong><span style=\"white-space: nowrap;\">&nbsp;<i class=\"fas fa-envelope corresponding-icon\" style=\"margin-right: 0;\" aria-hidden=\"true\"></i>,</span> Yuzhi Zhao",
-    "type": "accepted",
-    "venue": "The 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP), 2026.",
-    "year": "2026",
-    "isFirstAuthor": true,
-    "categories": ["intelligence"],
-    "tags": [
-      {
-        "text": "EMNLP'26",
-        "class": "venue-tag"
-      },
-      {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "https://arxiv.org/abs/2606.02304"
-      },
-      {
-        "text": "CCF-B",
-        "class": "ccf-tag"
-      }
-    ]
-  },
-  {
-    "title": "Skill-Conditioned Gated Self-Distillation for LLM Reasoning",
-    "authors": "Jiazhen Huang, Xiao Chen, Xiao Luo, Yong Dai, <strong><u>Senkang \"Forest\" Hu</u></strong><span style=\"white-space: nowrap;\">&nbsp;<i class=\"fas fa-envelope corresponding-icon\" style=\"margin-right: 0;\" aria-hidden=\"true\"></i>,</span> Yuzhi Zhao",
-    "type": "accepted",
-    "venue": "The 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP), 2026.",
-    "year": "2026",
-    "isFirstAuthor": true,
-    "categories": ["intelligence"],
-    "tags": [
-      {
-        "text": "EMNLP'26 Findings",
-        "class": "venue-tag"
-      },
-      {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "https://arxiv.org/abs/2605.28791"
-      },
-      {
-        "text": "Code",
-        "class": "code-tag",
-        "link": "https://github.com/walawalagoose/SGSD"
       }
     ]
   },
@@ -436,7 +434,6 @@
       }
     ]
   },
-  
   {
     "title": "Task-Aware Parameter-Efficient Fine-Tuning of Large Pre-Trained Models at the Edge",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Yihang Tao, Zhengru Fang, Zihan Fang, Yiqin Deng, Sam Kwong, Yuguang Fang",
@@ -571,7 +568,6 @@
       }
     ]
   },
-  
   {
     "title": "UAV-enabled Computing Power Networks: Task Completion Probability Analysis",
     "authors": "Yiqin Deng, Zhengru Fang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yanan Ma, Haixia Zhang, and Yuguang Fang",
@@ -596,7 +592,6 @@
       }
     ]
   },
-  
   {
     "title": "Task-Oriented Communications for Visual Navigation with Edge-Aerial Collaboration",
     "authors": "Zhengru Fang, Zhenghao Liu, Jingjing Wang, <strong><u>Senkang \"Forest\" Hu</u></strong>, Yu Guo, Yiqin Deng, and Yuguang Fang",
@@ -626,7 +621,6 @@
       }
     ]
   },
-  
   {
     "title": "CP-Guard: Malicious Agent Detection and Defense in Collaborative Bird's Eye View Perception",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong><span class=\"cofirst\">*</span>, Yihang Tao<span class=\"cofirst\">*</span>, Guowen Xu, Yiqin Deng, Xianhao Chen, Yuguang Fang, Sam Kwong",
