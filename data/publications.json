@@ -336,7 +336,7 @@
     "type": "accepted",
     "venue": "The 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP), 2026.",
     "year": "2026",
-    "isFirstAuthor": false,
+    "isFirstAuthor": true,
     "categories": ["intelligence"],
     "tags": [
       {
@@ -360,7 +360,7 @@
     "type": "accepted",
     "venue": "The 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP), 2026.",
     "year": "2026",
-    "isFirstAuthor": false,
+    "isFirstAuthor": true,
     "categories": ["intelligence"],
     "tags": [
       {
