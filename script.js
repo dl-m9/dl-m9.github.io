@@ -271,7 +271,8 @@ function loadBlogNotes() {
         .then(response => response.json())
         .then(data => {
             if (blogContainer) {
-                renderBlogNotes(data.slice(0, 3), blogContainer);
+                // Entries marked hideOnHome only appear on the all-blogs page
+                renderBlogNotes(data.filter(item => !item.hideOnHome).slice(0, 3), blogContainer);
             }
             if (allBlogContainer) {
                 renderBlogNotes(data, allBlogContainer);
