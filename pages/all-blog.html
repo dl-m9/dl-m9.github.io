@@ -2,70 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Blogs - Senkang Forest Hu</title>
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .kai-font {
-            font-family: KaiTi, STKaiti, "楷体", serif;
-        }
-    </style>
+    <title>Blog - Senkang Forest Hu</title>
+    <link rel="canonical" href="https://dl-m9.github.io/blog/">
+    <meta http-equiv="refresh" content="0; url=https://dl-m9.github.io/blog/">
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <ul class="nav-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="#" class="active">All Blogs</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <main>
-        <section id="all-blogs" class="section">
-            <div class="container">
-                <h2 class="section-title">All Blogs & Notes</h2>
-                <div class="filter-container blog-filter-container">
-                    <div class="filter-group">
-                        <button class="filter-btn blog-year-filter-btn active" data-blog-year="all">All</button>
-                        <button class="filter-btn blog-year-filter-btn" data-blog-year="2026">2026</button>
-                        <button class="filter-btn blog-year-filter-btn" data-blog-year="2025">2025</button>
-                        <button class="filter-btn blog-year-filter-btn" data-blog-year="2024">2024</button>
-                    </div>
-                </div>
-                <div id="all-blog-container" class="blog-grid">
-                    <!-- Blog notes will be dynamically loaded here from blogs.json -->
-                </div>
-                <div class="back-to-home">
-                    <a href="../index.html" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to Homepage</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; <span id="copyright-year"></span> Senkang Forest Hu. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        document.getElementById('copyright-year').textContent = new Date().getFullYear();
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelector('.nav-links');
-            if (navLinks) {
-                const checkScrollable = () => {
-                    const isScrollable = navLinks.scrollWidth > navLinks.clientWidth;
-                    document.querySelector('nav .container').classList.toggle('has-scroll', isScrollable);
-                };
-
-                checkScrollable();
-                window.addEventListener('resize', checkScrollable);
-            }
-        });
-    </script>
-    <script src="../script.js?v=20261111-1"></script>
+    <p>This page has moved to <a href="https://dl-m9.github.io/blog/">https://dl-m9.github.io/blog/</a>.</p>
 </body>
 </html>
