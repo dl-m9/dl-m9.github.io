@@ -1,0 +1,1 @@
+/* empty css            */var e={font:`IBM Plex Sans`,bg:`#ffffff`,ink:`#16181d`,muted:`#6b7079`,line:`#8a909b`,bar:`#d9dce2`,accent:`#2457d6`,accentInk:`#2457d6`,radius:3};export{e as t};

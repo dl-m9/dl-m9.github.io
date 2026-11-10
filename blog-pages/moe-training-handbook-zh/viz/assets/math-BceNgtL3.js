@@ -1,0 +1,1 @@
+function e(e){return()=>(e=e*1664525+1013904223>>>0)/2**32}var t=e=>{let t=Math.max(...e),n=e.map(e=>Math.exp(e-t)),r=n.reduce((e,t)=>e+t);return n.map(e=>e/r)};function n(e,t,n,r=.3){let i=e%(t*n),a=Math.floor(i/n),o=i-a*n,s=Math.min(1,Math.max(0,(o-(n-r))/r));return{i:a,j:(a+1)%t,w:s*s*(3-2*s)}}export{e as n,t as r,n as t};

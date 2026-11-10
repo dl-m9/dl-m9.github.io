@@ -1,0 +1,1350 @@
+<!doctype html>
+<!-- The headline: one training step on 1,024 GPUs as an isometric city of the four pipeline stages, its schedule in
+     a card under it; "Build it from one GPU" tours the same city from a single GPU up. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One training step on 1,024 GPUs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff; --ink: #16181d; --muted: #6b7079; --line: #8a909b; --faint: #e3e6ea; --idle: #eceef1;
+  --fwd: #aab1bc; --bwd: #4f5866; --nv: #2457d6; --net: #d17f00; --nv-text: #2457d6; --net-text: #9a5d00;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --bg: #111214; --ink: #e8eaed; --muted: #9aa0a9; --line: #6b717b; --faint: #2a2d32; --idle: #1e2024;
+    --fwd: #5d6673; --bwd: #a6aebb; --nv: #6893f5; --net: #e69a22; --nv-text: #8fb0ff; --net-text: #f0b04a;
+    color-scheme: dark;
+  }
+}
+:root.dark {
+  --bg: #111214; --ink: #e8eaed; --muted: #9aa0a9; --line: #6b717b; --faint: #2a2d32; --idle: #1e2024;
+  --fwd: #5d6673; --bwd: #a6aebb; --nv: #6893f5; --net: #e69a22; --nv-text: #8fb0ff; --net-text: #f0b04a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); }
+body { font: 400 13px/1.4 "IBM Plex Sans", -apple-system, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+.fig { max-width: 840px; margin: 0 auto; padding: 16px 16px 12px; position: relative; }
+button.play { appearance: none; border: 1px solid var(--faint); background: var(--bg); color: var(--ink); width: 30px; height: 30px; border-radius: 4px; cursor: pointer; display: inline-grid; place-items: center; padding: 0; }
+button.play:hover { border-color: var(--line); }
+button.play svg { width: 12px; height: 12px; fill: currentColor; }
+#tip { max-width: 300px; }
+.tip { position: absolute; pointer-events: none; background: var(--bg); color: var(--ink); border: 1px solid var(--faint); border-radius: 4px; padding: 6px 8px; font-size: 12px; line-height: 1.45; max-width: 260px; display: none; z-index: 5; }
+.tip b { font-weight: 600; }
+.tip .m { color: var(--muted); }
+canvas { display: block; touch-action: none; }
+.wrap { display: grid; grid-template-columns: auto minmax(220px, 1fr); gap: 0 28px; align-items: start; }
+@media (max-width: 671px) { .wrap { grid-template-columns: 1fr; } .panel { margin-top: 6px; } }
+.panel { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.kick { color: var(--muted); font-size: 13px; }
+.now { font-size: 30px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+.phase { color: var(--muted); font-size: 13px; min-height: 36px; }
+.key { display: grid; gap: 5px; font-size: 12px; color: var(--muted); }
+@media (max-width: 671px) { .key { grid-template-columns: 1fr 1fr; } .phase { min-height: 0; } }
+.key span { display: flex; align-items: center; gap: 8px; }
+.key i { flex: none; width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+.key i.dot { border-radius: 50%; width: 8px; height: 8px; margin: 0 1.5px; }
+.sub { font-size: 16px; font-weight: 600; line-height: 1.4; color: var(--ink); min-height: 2.8em; margin: 16px auto 0; max-width: 540px; text-align: center; }
+/* D and E: darker compute cells in dark mode so the light of the particles stands out */
+@media (prefers-color-scheme: dark) { :root:not(.light) { --fwd: #3f4651; --bwd: #737c89; --idle: #1b1d21; } }
+:root.dark { --fwd: #3f4651; --bwd: #737c89; --idle: #1b1d21; }
+
+
+/* hue says direction (forward blue, backward orange); shade says kind: light fill = compute, mid = tokens inside a node,
+   dark = traffic between nodes (pipeline sends and the sync among copies); idle and the optimizer step stay neutral */
+:root { --fwd: #87b7f5; --bwd: #ec9d81; --fwd-nv: #3b86e4; --bwd-nv: #d35e2f; /* the tour, from the micro-batch ramps */ --fwd-net: #173d96; --bwd-net: #8f3f00; }
+@media (prefers-color-scheme: dark) { :root:not(.light) { --fwd: #2d4b7c; --bwd: #7d4c22; --fwd-nv: #6f9dff; --bwd-nv: #f29a3d; --fwd-net: #b3cbff; --bwd-net: #ffc88f; } }
+:root.dark { --fwd: #2d4b7c; --bwd: #7d4c22; --fwd-nv: #6f9dff; --bwd-nv: #f29a3d; --fwd-net: #b3cbff; --bwd-net: #ffc88f; }
+
+#strip { transition: opacity .5s; }
+@media (min-width: 672px) { #fig > .cvwrap { grid-column: 1; grid-row: 1; } #fig > .panel { grid-column: 2; grid-row: 1; } #fig > #strip { grid-column: 1 / -1; grid-row: 2; margin-top: 14px; } }
+#strip.off { opacity: 0; pointer-events: none; }
+.now { min-height: 30px; }
+.now:empty { display: none; }
+.phase, .kick { display: none; }
+.run { display: grid; gap: 4px; min-height: 250px; align-content: start; } /* fixed slot: the panel does not move when the card turns into the legend */
+.g { display: inline-block; width: 10px; height: 10px; border-radius: 2px; transform: translateY(1px); box-sizing: border-box; }
+.g.dot { border-radius: 50%; width: 9px; height: 9px; }
+.g.send { border-radius: 0; width: 14px; height: 10px; overflow: visible; }
+
+/* header mode: the title, the city, then the schedule card; "Build it from one GPU" runs the tour in place */
+#hroot { position: relative; max-width: 1280px; margin: 0 auto; overflow: hidden; -webkit-user-select: none; user-select: none; }
+#ititle { margin: 0; padding: 24px 16px 0; font: 600 28px/1.1 "IBM Plex Sans", -apple-system, "Helvetica Neue", Arial, sans-serif; letter-spacing: -0.015em; text-align: center; }
+#ititle + .fig { padding-top: 0; }
+.notitle #ititle { display: none; }
+.notitle #ititle + .fig { padding-top: 12px; }
+@media (max-width: 699px) { #ititle { padding-top: 16px; font-size: 22px; text-align: left; } }
+/* the reading hint: a quiet link at the right end of the row over the card; it opens a small card above it */
+#ihelp { position: relative; flex: none; z-index: 4; pointer-events: auto; }
+#ihelp button { appearance: none; display: inline-flex; align-items: center; gap: 6px; border: 0; background: none; padding: 4px 0; font: 400 12px/1 "IBM Plex Sans", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  color: color-mix(in srgb, var(--ink) 55%, transparent); cursor: help; }
+#ihelp button:hover, #ihelp.on button { color: var(--ink); }
+#ihelp svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; }
+#ihelptip { position: absolute; bottom: calc(100% + 8px); left: 0; width: min(340px, calc(100vw - 24px)); box-sizing: border-box; padding: 12px 14px; border-radius: 6px; overflow-y: auto; overscroll-behavior: contain;
+  background: var(--bg); border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); box-shadow: 0 8px 28px rgba(0,0,0,.14);
+  font: 400 12.5px/1.5 "IBM Plex Sans", -apple-system, "Helvetica Neue", Arial, sans-serif; color: var(--ink); text-align: left;
+  opacity: 0; visibility: hidden; transform: translateY(4px); transition: opacity .18s ease, transform .18s ease, visibility 0s .18s; pointer-events: none; }
+#ihelp.right #ihelptip { left: auto; right: 0; }
+#ihelp.down #ihelptip { bottom: auto; top: calc(100% + 8px); transform: translateY(-4px); }
+#ihelptip > b { display: block; font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+#ihelptip p.lead { margin: 0 0 10px; font-size: 12.5px; color: color-mix(in srgb, var(--ink) 78%, transparent); } /* what the figure is, then its key */
+#ihelptip ul { list-style: none; margin: 0; padding: 10px 0 0; border-top: 1px solid color-mix(in srgb, var(--ink) 10%, transparent); display: grid; gap: 4px; }
+#ihelptip li { display: grid; grid-template-columns: 16px 1fr; gap: 8px; align-items: center; color: color-mix(in srgb, var(--ink) 78%, transparent); }
+#ihelptip li b { font-weight: 600; color: var(--ink); }
+#ihelptip p { margin: 8px 0 0; font-size: 11.5px; color: var(--muted); }
+/* the key's swatches, in the figure's colours (set on open from the same helpers as the key) */
+#ihelptip .sw { justify-self: center; width: 12px; height: 12px; border-radius: 2.5px; }
+#ihelptip .sw.f { background: var(--sw-f); } #ihelptip .sw.b { background: var(--sw-b); } #ihelptip .sw.fb { background: var(--sw-fb); }
+#ihelptip .sw.gpu { background: var(--sw-idle); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 22%, transparent); }
+#ihelptip .sw.sum { background: var(--sw-sum); }
+#ihelptip .sw.idle { background: var(--sw-idle) repeating-linear-gradient(135deg, transparent 0 2px, var(--sw-hatch) 2px 2.8px); }
+#ihelptip .sw.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink); }
+#ihelptip .sw.lens { background: none; border: 1px solid var(--muted); border-radius: 3px; width: 13px; height: 13px; }
+#ihelptip svg.sw { width: 16px; height: 10px; border-radius: 0; stroke: var(--sw-net); fill: var(--sw-net); }
+#ihelp:hover #ihelptip, #ihelp:focus-within #ihelptip, #ihelp.on #ihelptip { opacity: 1; visibility: visible; transform: none; transition: opacity .18s ease, transform .18s ease; pointer-events: auto; }
+
+/* ---- the tour's slider: a track filled to the tour clock, a thumb, a tick at each chapter's start ---- */
+#tscrub { position: relative; display: block; height: 16px; cursor: pointer; touch-action: none; }
+#tscrub i { position: absolute; display: block; }
+#tscrub .tr, #tscrub .fl { left: 0; top: 7px; height: 2px; border-radius: 1px; }
+#tscrub .tr { right: 0; background: var(--faint); }
+#tscrub .fl { width: 0; background: var(--ink); }
+#tscrub .tk { top: 4px; width: 2px; height: 8px; margin-left: -1px; border-radius: 1px; background: var(--line); }
+#tscrub .th { top: 2px; left: 0; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--ink); }
+#tscrub:focus { outline: none; }
+.kbd #tscrub:focus-visible { outline: 2px solid color-mix(in srgb, var(--ink) 40%, transparent); outline-offset: 3px; border-radius: 6px; } /* keyboard focus only (.kbd: the last input was a key) */
+
+/* ---- the schedule card ---- */
+#fig.wrap { grid-template-columns: minmax(0, 1fr); }
+#fig.fig { max-width: none; } /* the city spans the header; the card stays 840px wide */
+@media (min-width: 672px) { #fig > .cvwrap { grid-column: 1; grid-row: 1; justify-self: center; } #fig > #trow, #fig > #scard { grid-column: 1; width: min(840px, calc(100% + 32px)); justify-self: center; } #fig > #trow { grid-row: 2; } #fig > #scard { grid-row: 3; } }
+#scard { position: relative; box-sizing: border-box; padding: 22px 22px 0; margin-top: 16px; }
+#strip { position: absolute; left: 0; top: -8px; }
+#scard .sub, #sgap { position: relative; pointer-events: none; }
+#scard .shead { position: relative; }
+.shead { display: flex; align-items: center; gap: 12px; height: 24px; margin-bottom: 6px; }
+#sphase { font: 600 18px/1.2 "IBM Plex Sans", -apple-system, "Helvetica Neue", Arial, sans-serif; letter-spacing: -.005em; color: var(--ink); }
+.stour { margin-left: auto; display: flex; align-items: center; gap: 10px; pointer-events: auto; }
+#scard #tscrub { width: 150px; }
+#scard .sub { font-size: 14.5px; font-weight: 400; line-height: 1.5; color: color-mix(in srgb, var(--ink) 78%, var(--bg)); text-align: left; max-width: none; margin: 0; min-height: 1.45em; text-wrap: pretty; }
+/* the row over the card: the reading hint on its right; the tour's caption floats centred above it, over the field's
+   foot (each caption over the one fading out), haloed in the page's colour, adding no height */
+#trow { position: relative; display: flex; justify-content: flex-end; margin-top: 8px; }
+#tcap { position: absolute; left: 50%; bottom: 14px; z-index: 3; transform: translate(-50%, var(--dy, 0px)); transition: transform .3s ease; width: max-content; max-width: min(560px, calc(100% - 280px));
+  display: grid; justify-items: center; font: 500 16px/1.4 "IBM Plex Sans", -apple-system, "Helvetica Neue", Arial, sans-serif; color: var(--ink); text-align: center; pointer-events: none; text-wrap: balance;
+  text-shadow: 0 0 2px var(--bg), 0 0 4px var(--bg), 0 0 8px var(--bg), 1px 0 var(--bg), -1px 0 var(--bg), 0 1px var(--bg), 0 -1px var(--bg); } /* --dy: lifted off its subject */
+#tcap > span { grid-area: 1 / 1; }
+#tcap b { font-weight: 600; text-decoration: underline dotted 1px color-mix(in srgb, var(--muted) 80%, transparent); text-underline-offset: 3px; }
+/* words naming what travels, in the colour it is drawn in: forward blue, backward orange (darkened to read as text) */
+#tcap .kf { --k: color-mix(in srgb, var(--fwd-nv) 80%, #000); } #tcap .kb { --k: color-mix(in srgb, var(--bwd-nv) 80%, #000); }
+:root.dark #tcap .kf { --k: var(--fwd-nv); } :root.dark #tcap .kb { --k: var(--bwd-nv); }
+@media (prefers-color-scheme: dark) { :root:not(.light) #tcap .kf { --k: var(--fwd-nv); } :root:not(.light) #tcap .kb { --k: var(--bwd-nv); } }
+#tcap .kf, #tcap .kb { color: var(--k); font-weight: 600; text-decoration-color: color-mix(in srgb, var(--k) 70%, transparent); }
+#sgap { height: 198px; }
+#scard #play { flex: none; width: 30px; height: 30px; margin: -3px 0; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent); } /* the header row's right end, its 24 px kept */
+#scard #play svg { width: 10px; height: 10px; }
+.sfoot { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 0 18px; min-height: 36px; } /* over the strip's canvas */
+#scard .run { display: flex; flex-wrap: wrap; gap: 8px 22px; min-height: 0; font-size: 12px; color: var(--muted); }
+#scard .run .kg { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+#scard .run .ki { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; transition: opacity .3s; }
+#scard .run .ki.dim { opacity: .35; }
+#scard .run .ki { cursor: help; border-radius: 3px; }
+#scard .run .ki:focus { outline: none; }
+.kbd #scard .run .ki:focus-visible { outline: 2px solid color-mix(in srgb, var(--ink) 40%, transparent); outline-offset: 2px; }
+#ktip { max-width: 240px; } /* the key's tooltip, as the GPU's */
+#scard .run .g.sq { width: 12px; height: 12px; border-radius: 2.5px; }
+#scard .run .pc { font: 500 11px/1 "IBM Plex Mono", ui-monospace, Menlo, monospace; color: var(--ink); margin-left: -3px; }
+#scard .run .g { transform: none; }
+.sact { display: flex; align-items: center; gap: 10px; flex: none; }
+#tourGo { appearance: none; display: inline-flex; align-items: center; gap: 8px; font: 600 13px/1 "IBM Plex Sans", -apple-system, "Helvetica Neue", Arial, sans-serif; color: var(--bg); background: var(--ink);
+  border: 0; border-radius: 999px; padding: 10px 15px 10px 13px; box-shadow: 0 1px 2px rgba(0,0,0,.14), 0 6px 18px rgba(0,0,0,.12); cursor: pointer; transition: transform .15s ease, box-shadow .15s ease; }
+#tourGo:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(0,0,0,.16), 0 10px 24px rgba(0,0,0,.16); }
+#tourGo:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+#tourGo .lbl { display: grid; } /* as wide as its longer label, so the foot does not move */
+#tourGo .lbl > span { grid-area: 1 / 1; }
+#tourGo .lbl > span:last-child, #tourGo.back .lbl > span:first-child { visibility: hidden; }
+#tourGo.back .lbl > span:last-child { visibility: visible; }
+#tourGo svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.stour.off { visibility: hidden; } /* the tour's chapters, shown while it runs */
+/* folded (the default): the city and one row of controls under it; unfolded (#hroot.open): the schedule card */
+#sfold { appearance: none; display: inline-flex; align-items: center; gap: 6px; border: 0; background: none; padding: 6px 2px; cursor: pointer; white-space: nowrap;
+  font: 400 13px/1 "IBM Plex Sans", -apple-system, "Helvetica Neue", Arial, sans-serif; color: color-mix(in srgb, var(--ink) 70%, transparent); }
+#sfold:hover { color: var(--ink); }
+#sfold:focus-visible { outline: 2px solid color-mix(in srgb, var(--ink) 40%, transparent); outline-offset: 2px; border-radius: 4px; }
+#sfold svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 1.6; transition: transform .2s ease; }
+#sfold .lbl { display: grid; } #sfold .lbl > span { grid-area: 1 / 1; } /* as wide as its longer label */
+#sfold .lbl > span:last-child, .open #sfold .lbl > span:first-child { visibility: hidden; }
+.open #sfold .lbl > span:last-child { visibility: visible; }
+.open #sfold svg { transform: rotate(180deg); }
+#hroot:not(.open) #strip, #hroot:not(.open) #scard .sub, #hroot:not(.open) #sgap, #hroot:not(.open) #scard .run { display: none; }
+#hroot:not(.open) #scard { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; padding: 0 22px; margin-top: 4px; } /* as the open card's text, so nothing shifts sideways */
+#hroot:not(.open) #scard .shead { flex: 1 1 0; margin: 0; min-width: 0; padding-bottom: 14px; height: auto; }
+#hroot:not(.open) #scard .sfoot { padding: 0 0 14px; min-height: 0; margin-left: auto; }
+#sphase, #ihelp button, #tourGo { white-space: nowrap; }
+@media (min-width: 672px) { #hroot:not(.open) .stour { flex: 0 1 150px; min-width: 0; } #hroot:not(.open) #scard #tscrub { width: 100%; } } /* one row at any width: the scrubber gives way to long phase names */
+@media (max-width: 671px) { #ihelptip li.ln { display: none; } /* the lens shows on wide layouts only */ .shead { flex-wrap: wrap; height: auto; row-gap: 10px; } #scard #play { margin-left: auto; } #tcap { max-width: calc(100% - 64px); } .stour { order: 3; flex: 1 0 100%; margin-left: 0; } #scard #tscrub { width: 100%; } #ihelp .hl { display: none; } .sfoot { flex-direction: column; align-items: stretch; } .sact { justify-content: flex-end; flex-wrap: wrap; gap: 10px 6px; } #sphase { font-size: 16px; } #scard .sub { font-size: 14px; }
+  #hroot:not(.open) #scard { padding: 0 6px; } #hroot:not(.open) #scard .shead { flex-basis: 100%; } #hroot:not(.open) .stour.off { display: none; } /* folded: the phase and play, the tour's scrubber only while it runs, then the buttons */ }
+</style>
+</head>
+<body>
+<div id="hroot">
+  <div id="full">
+  <h2 id="ititle">The Ultimate MoE Training Handbook</h2>
+<div class="fig wrap" id="fig">
+  <div class="cvwrap"><canvas id="cv" aria-label="The 1,024 GPUs of the cluster as an isometric city of four pipeline stages, running one training step"></canvas></div>
+  <div id="trow"><div id="tcap" aria-live="polite"><span></span><span aria-hidden="true"></span></div>
+    <div id="ihelp" class="right">
+      <button type="button" aria-label="How to read this" aria-expanded="false" aria-describedby="ihelptip"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="6"/><path d="M7 6.2v3.6M7 4.2v.1"/></svg><span class="hl">How to read this</span></button>
+      <div id="ihelptip" role="tooltip">
+        <b>How to read this</b>
+        <p class="lead">One training step of a 45-layer MoE on 1,024 GPUs, drawn as a city: 4 pipeline stages, each 64 nodes of 4 GPUs.</p>
+        <ul>
+          <li><i class="sw gpu"></i><span><b>A square</b> is a GPU: 4 per node, 64 nodes per stage</span></li>
+          <li><i class="sw f"></i><span><b>Blue</b>: a micro-batch's forward pass</span></li>
+          <li><i class="sw b"></i><span><b>Orange</b>: its backward pass</span></li>
+          <li><i class="sw fb"></i><span><b>Blue and orange</b>: one of each at once</span></li>
+          <li><i class="sw sum"></i><span><b>Grey</b>: summing gradients, then the optimizer</span></li>
+          <li><i class="sw dot"></i><span><b>A dot</b>: a token to its experts and back</span></li>
+          <li><svg class="sw" viewBox="0 0 16 10" aria-hidden="true"><path d="M3.5 5h9" stroke-width="1.5"/><circle cx="3.5" cy="5" r="2.2"/><circle cx="12.5" cy="5" r="2.2"/></svg><span><b>A line</b>: activations or gradients, stage to stage</span></li>
+          <li><i class="sw idle"></i><span><b>Hatched</b>: idle time, the pipeline bubble</span></li>
+          <li class="ln"><i class="sw lens"></i><span><b>The lens</b>: one node up close, the micro-batches it runs</span></li>
+        </ul>
+        <p>Drag the schedule to scrub. Simulated timings.</p>
+      </div>
+    </div></div>
+  <div id="scard">
+    <canvas id="strip"></canvas>
+    <div class="shead"><span id="sphase"></span>
+      <span class="stour" id="stour"><span id="tscrub" role="slider" tabindex="0" aria-label="Tour position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i class="tr"></i><i class="fl"></i><i class="th"></i></span></span>
+      <button class="play" id="play" aria-label="Play or pause"></button></div>
+    <div class="sub" id="sub" aria-live="polite"></div>
+    <div id="sgap"></div>
+    <div class="sfoot"><div class="run" id="run"></div>
+      <div class="sact" id="sact"><button type="button" id="sfold" aria-expanded="false" aria-controls="scard"><span class="lbl"><span>Show the schedule</span><span>Hide the schedule</span></span><svg viewBox="0 0 10 10"><path d="M1.5 3.5 5 7l3.5-3.5"/></svg></button>
+        <button type="button" id="tourGo"><svg viewBox="0 0 12 12"><path d="M7 1h4v4M11 1 6.5 5.5M5 11H1V7M1 11l4.5-4.5"/></svg><span class="lbl"><span>Build it from one GPU</span><span>Back to the step</span></span></button></div></div>
+  </div>
+  <div class="tip" id="tip"></div>
+  <div class="tip" id="ktip" role="tooltip"></div>
+</div>
+
+  </div>
+</div>
+<script>
+// Shared core: data, schedule lookups, theme colors, player. Inlined into each concept.
+// D: the Alps 256-node run's log (256 nodes x 4 GPUs, PP4, EP4,
+// 128 experts, Muon); the stage schedule is a simplified, non-interleaved one with fewer micro-batches, its timings illustrative.
+const D = {"optimizer":"Muon","about":"One training step of a 45-layer MoE on 1,024 GH200 GPUs (Alps), scheduled as Megatron runs --overlap-moe-expert-parallel-comm with two virtual stages per rank. Simulated schedule, illustrative timings. Times in seconds.","hardware":{"nodes":256,"gpusPerNode":4,"gpu":"GH200 (H100 + Grace CPU)","intraNode":"NVLink, every GPU pair directly connected","nicPerGpu":"one Slingshot-11 NIC, 200 Gb/s","fabric":"Slingshot dragonfly (switch placement varies per job)"},"model":{"layers":45,"hidden":2048,"experts":128,"topk":7,"sharedExperts":1,"expertWidth":768,"seq":4096,"vocab":131072},"parallelism":{"tp":1,"pp":4,"ep":4,"dp":256,"expertDp":64,"microBatch":2,"globalBatch":4096,"microbatchesPerPipeline":8,"rankOrder":"EP fastest (the 4 GPUs of one node form one expert group, 32 experts each), then DP (256 GPUs per stage = 64 nodes), PP slowest (4 stages)","layersPerStage":[[[1,6],[25,29]],[[7,12],[30,35]],[[13,18],[36,41]],[[19,24],[42,45]]],"notes":"interleaved: each stage holds two chunks of layers; stage 1 also holds the embedding, stage 4 the LM head","vpp":2},"step":{"total":1.797498,"tokensPerStep":16777216,"tokensPerSecond":9333649,"pipelineIdleFraction":0.265493},"perLayer":{"forward":[{"kind":"compute","op":"attention","profile":"TEDotProductAttention (cuDNN flash attention) + QKV and output GEMMs","moves":null,"start":0,"end":0.001364},{"kind":"compute","op":"router and permute","profile":"fused_topk_with_score_function, _permute_kernel","moves":null,"start":0.001364,"end":0.001515},{"kind":"all-to-all","op":"dispatch all-to-all","profile":"ncclDevKernel_SendRecv (all-to-all in the EP group)","moves":"token hidden states, one copy per chosen expert (top-7), to the GPU holding that expert, over NVLink","start":0.001515,"end":0.002229},{"kind":"compute","op":"experts","profile":"GroupedLinear (TE grouped GEMM)","moves":null,"start":0.002229,"end":0.004407},{"kind":"all-to-all","op":"combine all-to-all","profile":"ncclDevKernel_SendRecv (all-to-all in the EP group)","moves":"expert outputs back to the token's GPU, over NVLink","start":0.004407,"end":0.00512},{"kind":"compute","op":"unpermute","profile":"_unpermute_kernel (weighted sum of the 7 expert outputs)","moves":null,"start":0.00512,"end":0.005272}],"backward":[{"kind":"all-to-all","op":"combine all-to-all, backward","profile":"ncclDevKernel_SendRecv","moves":"output gradients to the GPUs holding the experts, over NVLink","start":0,"end":0.000713},{"kind":"compute","op":"experts, backward","profile":"GroupedLinear backward (TE grouped GEMM)","moves":null,"start":0.000713,"end":0.00507},{"kind":"all-to-all","op":"dispatch all-to-all, backward","profile":"ncclDevKernel_SendRecv","moves":"input gradients back to the token's GPU, over NVLink","start":0.00507,"end":0.005783},{"kind":"compute","op":"router and permute, backward","profile":"_permute_kernel backward, fused_topk backward","moves":null,"start":0.005783,"end":0.005935},{"kind":"compute","op":"attention, backward","profile":"cuDNN flash attention backward + GEMMs","moves":null,"start":0.005935,"end":0.009414}],"note":"one MoE layer for one microbatch on one GPU: attention, route/permute, dispatch all-to-all, experts, combine all-to-all, unpermute; the all-to-all stays inside the node (NVLink)"},"stages":[{"stage":1,"compute":[{"pass":"forward","microbatch":1,"chunk":1,"start":0.013866,"end":0.045497,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":2,"chunk":1,"start":0.045497,"end":0.077128,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":3,"chunk":1,"start":0.077128,"end":0.108759,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":4,"chunk":1,"start":0.108759,"end":0.14039,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":1,"chunk":2,"start":0.14653,"end":0.172889,"layers":5,"allToAllShare":0.270663},{"pass":"forward","microbatch":2,"chunk":2,"start":0.178161,"end":0.20452,"layers":5,"allToAllShare":0.270663},{"pass":"forward","microbatch":3,"chunk":2,"start":0.209792,"end":0.236151,"layers":5,"allToAllShare":0.270663},{"pass":"forward","microbatch":4,"chunk":2,"start":0.241423,"end":0.267782,"layers":5,"allToAllShare":0.270663},{"pass":"forward","microbatch":5,"chunk":1,"start":0.267782,"end":0.299413,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":6,"chunk":1,"start":0.299413,"end":0.331044,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":7,"chunk":1,"start":0.331044,"end":0.362675,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":8,"chunk":1,"start":0.517267,"end":0.590001,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":1,"chunk":2,"start":0.517267,"end":0.590001,"layers":5,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":5,"chunk":2,"start":0.598872,"end":0.666877,"layers":5,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":2,"chunk":2,"start":0.598872,"end":0.666877,"layers":5,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":6,"chunk":2,"start":0.683548,"end":0.751553,"layers":5,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":3,"chunk":2,"start":0.683548,"end":0.751553,"layers":5,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":7,"chunk":2,"start":0.765154,"end":0.833159,"layers":5,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":4,"chunk":2,"start":0.765154,"end":0.833159,"layers":5,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":8,"chunk":2,"start":0.84983,"end":0.926706,"layers":5,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":1,"chunk":1,"start":0.84983,"end":0.926706,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"backward","microbatch":2,"chunk":1,"start":0.931436,"end":0.987917,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":3,"chunk":1,"start":1.016112,"end":1.072593,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":4,"chunk":1,"start":1.072593,"end":1.129075,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":5,"chunk":2,"start":1.157269,"end":1.204337,"layers":5,"allToAllShare":0.151579},{"pass":"backward","microbatch":6,"chunk":2,"start":1.213751,"end":1.260819,"layers":5,"allToAllShare":0.151579},{"pass":"backward","microbatch":7,"chunk":2,"start":1.293883,"end":1.340951,"layers":5,"allToAllShare":0.151579},{"pass":"backward","microbatch":8,"chunk":2,"start":1.350365,"end":1.397433,"layers":5,"allToAllShare":0.151579},{"pass":"backward","microbatch":5,"chunk":1,"start":1.406846,"end":1.463328,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":6,"chunk":1,"start":1.463328,"end":1.519809,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":7,"chunk":1,"start":1.519809,"end":1.576291,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":8,"chunk":1,"start":1.576291,"end":1.632772,"layers":6,"allToAllShare":0.151579}],"sync":[{"kind":"parameter all-gather","start":0,"end":0.152527},{"kind":"optimizer step","start":1.785498,"end":1.797498},{"kind":"gradient reduce-scatter","start":1.632772,"end":1.785298,"chunk":1},{"kind":"gradient reduce-scatter","start":1.397433,"end":1.549959,"chunk":2}]},{"stage":2,"compute":[{"pass":"forward","microbatch":1,"chunk":1,"start":0.047032,"end":0.078663,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":2,"chunk":1,"start":0.078663,"end":0.110294,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":3,"chunk":1,"start":0.110294,"end":0.141925,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":4,"chunk":1,"start":0.141925,"end":0.173556,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":1,"chunk":2,"start":0.174424,"end":0.206055,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":2,"chunk":2,"start":0.206055,"end":0.237686,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":3,"chunk":2,"start":0.237686,"end":0.269317,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":4,"chunk":2,"start":0.269317,"end":0.300948,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":5,"chunk":1,"start":0.300948,"end":0.332579,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":6,"chunk":1,"start":0.434126,"end":0.515732,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":1,"chunk":2,"start":0.434126,"end":0.515732,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":7,"chunk":1,"start":0.515732,"end":0.597337,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":2,"chunk":2,"start":0.515732,"end":0.597337,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":8,"chunk":1,"start":0.600407,"end":0.682013,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":3,"chunk":2,"start":0.600407,"end":0.682013,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":5,"chunk":2,"start":0.682013,"end":0.763619,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":4,"chunk":2,"start":0.682013,"end":0.763619,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":6,"chunk":2,"start":0.766689,"end":0.848295,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":1,"chunk":1,"start":0.766689,"end":0.848295,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":7,"chunk":2,"start":0.848295,"end":0.929901,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":2,"chunk":1,"start":0.848295,"end":0.929901,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":8,"chunk":2,"start":0.932971,"end":1.014577,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":3,"chunk":1,"start":0.932971,"end":1.014577,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"backward","microbatch":4,"chunk":1,"start":1.014577,"end":1.071058,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":5,"chunk":2,"start":1.099253,"end":1.155734,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":6,"chunk":2,"start":1.155734,"end":1.212216,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":7,"chunk":2,"start":1.235867,"end":1.292348,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":8,"chunk":2,"start":1.292348,"end":1.34883,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":5,"chunk":1,"start":1.34883,"end":1.405311,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":6,"chunk":1,"start":1.405311,"end":1.461793,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":7,"chunk":1,"start":1.461793,"end":1.518274,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":8,"chunk":1,"start":1.518274,"end":1.574756,"layers":6,"allToAllShare":0.151579}],"sync":[{"kind":"parameter all-gather","start":0,"end":0.138612},{"kind":"optimizer step","start":1.785498,"end":1.797498},{"kind":"gradient reduce-scatter","start":1.574756,"end":1.713368,"chunk":1},{"kind":"gradient reduce-scatter","start":1.34883,"end":1.487442,"chunk":2}]},{"stage":3,"compute":[{"pass":"forward","microbatch":1,"chunk":1,"start":0.080198,"end":0.111829,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":2,"chunk":1,"start":0.111829,"end":0.14346,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":3,"chunk":1,"start":0.14346,"end":0.175091,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":4,"chunk":1,"start":0.175091,"end":0.206722,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":1,"chunk":2,"start":0.20759,"end":0.239221,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":2,"chunk":2,"start":0.239221,"end":0.270852,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":3,"chunk":2,"start":0.270852,"end":0.302483,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":4,"chunk":2,"start":0.350985,"end":0.432591,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":1,"chunk":2,"start":0.350985,"end":0.432591,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":5,"chunk":1,"start":0.432591,"end":0.514197,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":2,"chunk":2,"start":0.432591,"end":0.514197,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":6,"chunk":1,"start":0.517267,"end":0.598872,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":3,"chunk":2,"start":0.517267,"end":0.598872,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":7,"chunk":1,"start":0.598872,"end":0.680478,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":4,"chunk":2,"start":0.598872,"end":0.680478,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":8,"chunk":1,"start":0.683548,"end":0.765154,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":1,"chunk":1,"start":0.683548,"end":0.765154,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":5,"chunk":2,"start":0.765154,"end":0.84676,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":2,"chunk":1,"start":0.765154,"end":0.84676,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":6,"chunk":2,"start":0.84983,"end":0.931436,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":3,"chunk":1,"start":0.84983,"end":0.931436,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":7,"chunk":2,"start":0.931436,"end":1.013042,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":4,"chunk":1,"start":0.931436,"end":1.013042,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":8,"chunk":2,"start":1.016112,"end":1.097718,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":5,"chunk":2,"start":1.016112,"end":1.097718,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"backward","microbatch":6,"chunk":2,"start":1.097718,"end":1.154199,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":7,"chunk":2,"start":1.17785,"end":1.234332,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":8,"chunk":2,"start":1.234332,"end":1.290813,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":5,"chunk":1,"start":1.290813,"end":1.347295,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":6,"chunk":1,"start":1.347295,"end":1.403776,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":7,"chunk":1,"start":1.403776,"end":1.460258,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":8,"chunk":1,"start":1.460258,"end":1.516739,"layers":6,"allToAllShare":0.151579}],"sync":[{"kind":"parameter all-gather","start":0,"end":0.138612},{"kind":"optimizer step","start":1.785498,"end":1.797498},{"kind":"gradient reduce-scatter","start":1.516739,"end":1.655351,"chunk":1},{"kind":"gradient reduce-scatter","start":1.290813,"end":1.429425,"chunk":2}]},{"stage":4,"compute":[{"pass":"forward","microbatch":1,"chunk":1,"start":0.113364,"end":0.144995,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":2,"chunk":1,"start":0.144995,"end":0.176626,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":3,"chunk":1,"start":0.176626,"end":0.208257,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":4,"chunk":1,"start":0.208257,"end":0.239888,"layers":6,"allToAllShare":0.270663},{"pass":"forward","microbatch":1,"chunk":2,"start":0.240756,"end":0.269988,"layers":4,"allToAllShare":0.270663},{"pass":"forward","microbatch":2,"chunk":2,"start":0.272387,"end":0.34945,"layers":4,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":1,"chunk":2,"start":0.272387,"end":0.34945,"layers":4,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":3,"chunk":2,"start":0.34945,"end":0.426513,"layers":4,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":2,"chunk":2,"start":0.34945,"end":0.426513,"layers":4,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":4,"chunk":2,"start":0.434126,"end":0.511188,"layers":4,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":3,"chunk":2,"start":0.434126,"end":0.511188,"layers":4,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":5,"chunk":1,"start":0.515732,"end":0.594947,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":4,"chunk":2,"start":0.515732,"end":0.594947,"layers":4,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":6,"chunk":1,"start":0.600407,"end":0.682013,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":1,"chunk":1,"start":0.600407,"end":0.682013,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":7,"chunk":1,"start":0.682013,"end":0.763619,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":2,"chunk":1,"start":0.682013,"end":0.763619,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":8,"chunk":1,"start":0.766689,"end":0.848295,"layers":6,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":3,"chunk":1,"start":0.766689,"end":0.848295,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":5,"chunk":2,"start":0.848295,"end":0.927749,"layers":4,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":4,"chunk":1,"start":0.848295,"end":0.927749,"layers":6,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":6,"chunk":2,"start":0.932971,"end":1.010034,"layers":4,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":5,"chunk":2,"start":0.932971,"end":1.010034,"layers":4,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":7,"chunk":2,"start":1.014577,"end":1.091639,"layers":4,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":6,"chunk":2,"start":1.014577,"end":1.091639,"layers":4,"allToAllShare":0.151579,"paired":true},{"pass":"forward","microbatch":8,"chunk":2,"start":1.099253,"end":1.176315,"layers":4,"allToAllShare":0.270663,"paired":true},{"pass":"backward","microbatch":7,"chunk":2,"start":1.099253,"end":1.176315,"layers":4,"allToAllShare":0.151579,"paired":true},{"pass":"backward","microbatch":8,"chunk":2,"start":1.176315,"end":1.23026,"layers":4,"allToAllShare":0.151579},{"pass":"backward","microbatch":5,"chunk":1,"start":1.23026,"end":1.286741,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":6,"chunk":1,"start":1.286741,"end":1.343223,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":7,"chunk":1,"start":1.343223,"end":1.399704,"layers":6,"allToAllShare":0.151579},{"pass":"backward","microbatch":8,"chunk":1,"start":1.399704,"end":1.456186,"layers":6,"allToAllShare":0.151579}],"sync":[{"kind":"parameter all-gather","start":0,"end":0.140976},{"kind":"optimizer step","start":1.785498,"end":1.797498},{"kind":"gradient reduce-scatter","start":1.456186,"end":1.597161,"chunk":1},{"kind":"gradient reduce-scatter","start":1.23026,"end":1.371235,"chunk":2}]}],"pipelineSends":[{"fromStage":1,"toStage":2,"start":0.045497,"end":0.047032,"dir":"forward","microbatch":1},{"fromStage":1,"toStage":2,"start":0.077128,"end":0.078663,"dir":"forward","microbatch":2},{"fromStage":2,"toStage":3,"start":0.078663,"end":0.080198,"dir":"forward","microbatch":1},{"fromStage":1,"toStage":2,"start":0.108759,"end":0.110294,"dir":"forward","microbatch":3},{"fromStage":2,"toStage":3,"start":0.110294,"end":0.111829,"dir":"forward","microbatch":2},{"fromStage":3,"toStage":4,"start":0.111829,"end":0.113364,"dir":"forward","microbatch":1},{"fromStage":1,"toStage":2,"start":0.14039,"end":0.141925,"dir":"forward","microbatch":4},{"fromStage":2,"toStage":3,"start":0.141925,"end":0.14346,"dir":"forward","microbatch":3},{"fromStage":3,"toStage":4,"start":0.14346,"end":0.144995,"dir":"forward","microbatch":2},{"fromStage":4,"toStage":1,"start":0.144995,"end":0.14653,"dir":"forward","microbatch":1},{"fromStage":1,"toStage":2,"start":0.172889,"end":0.174424,"dir":"forward","microbatch":1},{"fromStage":2,"toStage":3,"start":0.173556,"end":0.175091,"dir":"forward","microbatch":4},{"fromStage":3,"toStage":4,"start":0.175091,"end":0.176626,"dir":"forward","microbatch":3},{"fromStage":4,"toStage":1,"start":0.176626,"end":0.178161,"dir":"forward","microbatch":2},{"fromStage":1,"toStage":2,"start":0.20452,"end":0.206055,"dir":"forward","microbatch":2},{"fromStage":2,"toStage":3,"start":0.206055,"end":0.20759,"dir":"forward","microbatch":1},{"fromStage":3,"toStage":4,"start":0.206722,"end":0.208257,"dir":"forward","microbatch":4},{"fromStage":4,"toStage":1,"start":0.208257,"end":0.209792,"dir":"forward","microbatch":3},{"fromStage":1,"toStage":2,"start":0.236151,"end":0.237686,"dir":"forward","microbatch":3},{"fromStage":2,"toStage":3,"start":0.237686,"end":0.239221,"dir":"forward","microbatch":2},{"fromStage":3,"toStage":4,"start":0.239221,"end":0.240756,"dir":"forward","microbatch":1},{"fromStage":4,"toStage":1,"start":0.239888,"end":0.241423,"dir":"forward","microbatch":4},{"fromStage":1,"toStage":2,"start":0.267782,"end":0.269317,"dir":"forward","microbatch":4},{"fromStage":2,"toStage":3,"start":0.269317,"end":0.270852,"dir":"forward","microbatch":3},{"fromStage":3,"toStage":4,"start":0.270852,"end":0.272387,"dir":"forward","microbatch":2},{"fromStage":1,"toStage":2,"start":0.299413,"end":0.300948,"dir":"forward","microbatch":5},{"fromStage":2,"toStage":3,"start":0.300948,"end":0.302483,"dir":"forward","microbatch":4},{"fromStage":3,"toStage":4,"start":0.302483,"end":0.304018,"dir":"forward","microbatch":3},{"fromStage":1,"toStage":2,"start":0.331044,"end":0.332579,"dir":"forward","microbatch":6},{"fromStage":2,"toStage":3,"start":0.332579,"end":0.334114,"dir":"forward","microbatch":5},{"fromStage":4,"toStage":3,"start":0.34945,"end":0.350985,"dir":"backward","microbatch":1},{"fromStage":1,"toStage":2,"start":0.362675,"end":0.36421,"dir":"forward","microbatch":7},{"fromStage":4,"toStage":3,"start":0.426513,"end":0.428048,"dir":"backward","microbatch":2},{"fromStage":3,"toStage":4,"start":0.432591,"end":0.434126,"dir":"forward","microbatch":4},{"fromStage":3,"toStage":2,"start":0.432591,"end":0.434126,"dir":"backward","microbatch":1},{"fromStage":4,"toStage":3,"start":0.511188,"end":0.512723,"dir":"backward","microbatch":3},{"fromStage":3,"toStage":4,"start":0.514197,"end":0.515732,"dir":"forward","microbatch":5},{"fromStage":3,"toStage":2,"start":0.514197,"end":0.515732,"dir":"backward","microbatch":2},{"fromStage":2,"toStage":3,"start":0.515732,"end":0.517267,"dir":"forward","microbatch":6},{"fromStage":2,"toStage":1,"start":0.515732,"end":0.517267,"dir":"backward","microbatch":1},{"fromStage":1,"toStage":2,"start":0.590001,"end":0.591536,"dir":"forward","microbatch":8},{"fromStage":1,"toStage":4,"start":0.590001,"end":0.591536,"dir":"backward","microbatch":1},{"fromStage":4,"toStage":1,"start":0.594947,"end":0.596482,"dir":"forward","microbatch":5},{"fromStage":4,"toStage":3,"start":0.594947,"end":0.596482,"dir":"backward","microbatch":4},{"fromStage":2,"toStage":3,"start":0.597337,"end":0.598872,"dir":"forward","microbatch":7},{"fromStage":2,"toStage":1,"start":0.597337,"end":0.598872,"dir":"backward","microbatch":2},{"fromStage":3,"toStage":4,"start":0.598872,"end":0.600407,"dir":"forward","microbatch":6},{"fromStage":3,"toStage":2,"start":0.598872,"end":0.600407,"dir":"backward","microbatch":3},{"fromStage":1,"toStage":2,"start":0.666877,"end":0.668412,"dir":"forward","microbatch":5},{"fromStage":1,"toStage":4,"start":0.666877,"end":0.668412,"dir":"backward","microbatch":2},{"fromStage":3,"toStage":4,"start":0.680478,"end":0.682013,"dir":"forward","microbatch":7},{"fromStage":3,"toStage":2,"start":0.680478,"end":0.682013,"dir":"backward","microbatch":4},{"fromStage":2,"toStage":3,"start":0.682013,"end":0.683548,"dir":"forward","microbatch":8},{"fromStage":2,"toStage":1,"start":0.682013,"end":0.683548,"dir":"backward","microbatch":3},{"fromStage":4,"toStage":1,"start":0.682013,"end":0.683548,"dir":"forward","microbatch":6},{"fromStage":4,"toStage":3,"start":0.682013,"end":0.683548,"dir":"backward","microbatch":1},{"fromStage":1,"toStage":2,"start":0.751553,"end":0.753088,"dir":"forward","microbatch":6},{"fromStage":1,"toStage":4,"start":0.751553,"end":0.753088,"dir":"backward","microbatch":3},{"fromStage":2,"toStage":3,"start":0.763619,"end":0.765154,"dir":"forward","microbatch":5},{"fromStage":2,"toStage":1,"start":0.763619,"end":0.765154,"dir":"backward","microbatch":4},{"fromStage":4,"toStage":1,"start":0.763619,"end":0.765154,"dir":"forward","microbatch":7},{"fromStage":4,"toStage":3,"start":0.763619,"end":0.765154,"dir":"backward","microbatch":2},{"fromStage":3,"toStage":4,"start":0.765154,"end":0.766689,"dir":"forward","microbatch":8},{"fromStage":3,"toStage":2,"start":0.765154,"end":0.766689,"dir":"backward","microbatch":1},{"fromStage":1,"toStage":2,"start":0.833159,"end":0.834694,"dir":"forward","microbatch":7},{"fromStage":1,"toStage":4,"start":0.833159,"end":0.834694,"dir":"backward","microbatch":4},{"fromStage":3,"toStage":4,"start":0.84676,"end":0.848295,"dir":"forward","microbatch":5},{"fromStage":3,"toStage":2,"start":0.84676,"end":0.848295,"dir":"backward","microbatch":2},{"fromStage":2,"toStage":3,"start":0.848295,"end":0.84983,"dir":"forward","microbatch":6},{"fromStage":2,"toStage":1,"start":0.848295,"end":0.84983,"dir":"backward","microbatch":1},{"fromStage":4,"toStage":1,"start":0.848295,"end":0.84983,"dir":"forward","microbatch":8},{"fromStage":4,"toStage":3,"start":0.848295,"end":0.84983,"dir":"backward","microbatch":3},{"fromStage":1,"toStage":2,"start":0.926706,"end":0.928241,"dir":"forward","microbatch":8},{"fromStage":4,"toStage":3,"start":0.927749,"end":0.929284,"dir":"backward","microbatch":4},{"fromStage":2,"toStage":3,"start":0.929901,"end":0.931436,"dir":"forward","microbatch":7},{"fromStage":2,"toStage":1,"start":0.929901,"end":0.931436,"dir":"backward","microbatch":2},{"fromStage":3,"toStage":4,"start":0.931436,"end":0.932971,"dir":"forward","microbatch":6},{"fromStage":3,"toStage":2,"start":0.931436,"end":0.932971,"dir":"backward","microbatch":3},{"fromStage":4,"toStage":3,"start":1.010034,"end":1.011569,"dir":"backward","microbatch":5},{"fromStage":3,"toStage":4,"start":1.013042,"end":1.014577,"dir":"forward","microbatch":7},{"fromStage":3,"toStage":2,"start":1.013042,"end":1.014577,"dir":"backward","microbatch":4},{"fromStage":2,"toStage":3,"start":1.014577,"end":1.016112,"dir":"forward","microbatch":8},{"fromStage":2,"toStage":1,"start":1.014577,"end":1.016112,"dir":"backward","microbatch":3},{"fromStage":2,"toStage":1,"start":1.071058,"end":1.072593,"dir":"backward","microbatch":4},{"fromStage":4,"toStage":3,"start":1.091639,"end":1.093174,"dir":"backward","microbatch":6},{"fromStage":3,"toStage":4,"start":1.097718,"end":1.099253,"dir":"forward","microbatch":8},{"fromStage":3,"toStage":2,"start":1.097718,"end":1.099253,"dir":"backward","microbatch":5},{"fromStage":3,"toStage":2,"start":1.154199,"end":1.155734,"dir":"backward","microbatch":6},{"fromStage":2,"toStage":1,"start":1.155734,"end":1.157269,"dir":"backward","microbatch":5},{"fromStage":4,"toStage":3,"start":1.176315,"end":1.17785,"dir":"backward","microbatch":7},{"fromStage":1,"toStage":4,"start":1.204337,"end":1.205872,"dir":"backward","microbatch":5},{"fromStage":2,"toStage":1,"start":1.212216,"end":1.213751,"dir":"backward","microbatch":6},{"fromStage":4,"toStage":3,"start":1.23026,"end":1.231795,"dir":"backward","microbatch":8},{"fromStage":3,"toStage":2,"start":1.234332,"end":1.235867,"dir":"backward","microbatch":7},{"fromStage":1,"toStage":4,"start":1.260819,"end":1.262354,"dir":"backward","microbatch":6},{"fromStage":4,"toStage":3,"start":1.286741,"end":1.288276,"dir":"backward","microbatch":5},{"fromStage":3,"toStage":2,"start":1.290813,"end":1.292348,"dir":"backward","microbatch":8},{"fromStage":2,"toStage":1,"start":1.292348,"end":1.293883,"dir":"backward","microbatch":7},{"fromStage":1,"toStage":4,"start":1.340951,"end":1.342486,"dir":"backward","microbatch":7},{"fromStage":4,"toStage":3,"start":1.343223,"end":1.344758,"dir":"backward","microbatch":6},{"fromStage":3,"toStage":2,"start":1.347295,"end":1.34883,"dir":"backward","microbatch":5},{"fromStage":2,"toStage":1,"start":1.34883,"end":1.350365,"dir":"backward","microbatch":8},{"fromStage":1,"toStage":4,"start":1.397433,"end":1.398968,"dir":"backward","microbatch":8},{"fromStage":4,"toStage":3,"start":1.399704,"end":1.401239,"dir":"backward","microbatch":7},{"fromStage":3,"toStage":2,"start":1.403776,"end":1.405311,"dir":"backward","microbatch":6},{"fromStage":2,"toStage":1,"start":1.405311,"end":1.406846,"dir":"backward","microbatch":5},{"fromStage":4,"toStage":3,"start":1.456186,"end":1.457721,"dir":"backward","microbatch":8},{"fromStage":3,"toStage":2,"start":1.460258,"end":1.461793,"dir":"backward","microbatch":7},{"fromStage":2,"toStage":1,"start":1.461793,"end":1.463328,"dir":"backward","microbatch":6},{"fromStage":3,"toStage":2,"start":1.516739,"end":1.518274,"dir":"backward","microbatch":8},{"fromStage":2,"toStage":1,"start":1.518274,"end":1.519809,"dir":"backward","microbatch":7},{"fromStage":2,"toStage":1,"start":1.574756,"end":1.576291,"dir":"backward","microbatch":8}],"networkTraffic":{"pipelineForward":{"profile":"ncclDevKernel_SendRecv (point-to-point)","moves":"activations: the hidden states of one micro-batch (8,192 tokens x 2048, bf16, 33.5 MB per GPU), from a GPU to the same-position GPU of the next stage"},"pipelineBackward":{"profile":"ncclDevKernel_SendRecv (point-to-point)","moves":"activation gradients for the same micro-batch, back to the previous stage"},"parameterAllGather":{"profile":"ncclDevKernel_AllGather","moves":"updated parameters (bf16), so every data-parallel copy holds the full weights of its stage; at the start of the step"},"gradientReduceScatter":{"profile":"ncclDevKernel_ReduceScatter","moves":"parameter gradients (fp32), summed across data-parallel copies; during the last backward passes and after"},"optimizer":{"profile":"distributed optimizer step (Muon), no communication","moves":null}},"syncScope":"gradient sync of a stage: expert gradients among the 64 GPUs holding the same experts (one per node of the stage), attention gradients among all 256 GPUs of the stage, over the NICs; pipeline sends go GPU to GPU between consecutive stages over the NICs","lossTimes":[0.269988,0.34945,0.426513,0.511188,0.927749,1.010034,1.091639,1.176315]};
+const TOTAL = D.step.total;
+const ST = D.stages;
+const NS = ST.length;                       // 4 pipeline stages
+const NODES = D.hardware.nodes;             // 256
+const GPN = D.hardware.gpusPerNode;         // 4
+const NPS = NODES / NS;                     // 64 nodes per stage
+const SEND_VIS = 0.03; // a 1.5 ms send lands on time (its end, when the next stage starts) and lingers 30 ms of step time
+const IDLE = ST.map(s => 1 - s.compute.reduce((a, c) => a + c.end - c.start, 0) / TOTAL);
+console.assert(Math.abs(IDLE.reduce((a, b) => a + b) / NS - D.step.pipelineIdleFraction) < 1e-4, 'idle mean');
+const FIRST_BWD = Math.min(...ST.flatMap(s => s.compute.filter(c => c.pass === 'backward').map(c => c.start)));
+const OPT = ST[0].sync.find(x => x.kind === 'optimizer step');
+
+function passAt(s, t) { for (const c of ST[s].compute) if (t >= c.start && t < c.end) return c; return null; }
+function syncAt(s, t) { return ST[s].sync.filter(x => t >= x.start && t < x.end && x.kind !== 'optimizer step'); }
+function passBack(s, t, d) { const u = t - d; return t >= OPT.start && u < OPT.start ? null : passAt(s, Math.max(0, u)); }
+function optAt(t) { return t >= OPT.start && t <= OPT.end + 1e-9; }
+function sendsAt(t) { // u: travel (1 = landed), fade: 1 until it lands, then down to 0 over SEND_VIS
+  return D.pipelineSends.filter(p => t >= p.start && t < p.end + SEND_VIS)
+    .map(p => ({ ...p, u: clamp01((t - p.start) / (p.end - p.start)), fade: 1 - clamp01((t - p.end) / SEND_VIS) }));
+}
+
+// theme: CSS variables, re-read when the scheme changes
+const C = {};
+function readTheme() {
+  const cs = getComputedStyle(document.documentElement);
+  for (const k of ['bg', 'ink', 'muted', 'line', 'faint', 'idle', 'fwd', 'bwd', 'nv', 'net', 'nvText', 'netText'])
+    C[k] = cs.getPropertyValue('--' + k.replace(/[A-Z]/g, m => '-' + m.toLowerCase())).trim();
+}
+(function initTheme() {
+  const q = new URLSearchParams(location.search).get('theme');
+  if (q) document.documentElement.classList.add(q);
+  const bw = new URLSearchParams(location.search).get('bwd');   // colour preview, e.g. ?bwd=8e6bb0
+  if (bw) document.documentElement.style.setProperty('--bwd', '#' + bw.replace('#', ''));
+  readTheme();
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', readTheme);
+})();
+
+// canvas sized to its CSS box at device pixel ratio
+function fitCanvas(cv, w, h) {
+  const r = window.devicePixelRatio || 1;
+  if (cv.width !== Math.round(w * r) || cv.height !== Math.round(h * r)) {
+    cv.width = Math.round(w * r); cv.height = Math.round(h * r);
+    cv.style.width = w + 'px'; cv.style.height = h + 'px';
+  }
+  const g = cv.getContext('2d'); g.setTransform(r, 0, 0, r, 0, 0); return g;
+}
+const FONT = '"IBM Plex Sans", -apple-system, "Helvetica Neue", Arial, sans-serif';
+function font(px, w = 400) { return `${w} ${px}px ${FONT}`; }
+// Shared by D and E: smoothed per-stage state colors, particle sprites, the schedule strip, the side panel.
+const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hexRgb = h => { h = h.replace('#', ''); return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)); };
+const mix = (a, b, u) => a.map((v, i) => v + (b[i] - v) * u);
+const rgb = c => `rgb(${c[0] | 0},${c[1] | 0},${c[2] | 0})`;
+const isDark = () => hexRgb(C.bg)[0] < 80;
+// a stage's fill, averaged over the last 12 ms of step time so a change of pass fades instead of snapping
+// soft round sprite per color, drawn with 'lighter' in dark mode so overlapping particles bloom
+const SPR = {};
+function sprite(col, r) {
+  const key = col + r + isDark();
+  if (SPR[key]) return SPR[key];
+  const s = Math.ceil(r * 4), cv = document.createElement('canvas'); cv.width = cv.height = s * 2;
+  const g = cv.getContext('2d'), gr = g.createRadialGradient(s, s, 0, s, s, s), [R, G, B] = hexRgb(col);
+  gr.addColorStop(0, `rgba(${R},${G},${B},1)`); gr.addColorStop(0.22, `rgba(${R},${G},${B},0.9)`);
+  gr.addColorStop(0.45, `rgba(${R},${G},${B},${isDark() ? 0.1 : 0.07})`); gr.addColorStop(1, `rgba(${R},${G},${B},0)`);
+  g.fillStyle = gr; g.fillRect(0, 0, s * 2, s * 2);
+  return (SPR[key] = cv);
+}
+function particle(g, col, x0, y0, x1, y1, r, alpha) { // a token: a fading trail and a soft round head
+  if (alpha <= 0.01) return;
+  g.globalAlpha = alpha * 0.45; g.strokeStyle = col; g.lineWidth = r; g.lineCap = 'round';
+  g.beginPath(); g.moveTo(x0, y0); g.lineTo(x1, y1); g.stroke();
+  g.globalAlpha = alpha; const sp = sprite(col, r); g.drawImage(sp, x1 - sp.width / 2, y1 - sp.height / 2);
+}
+const clamp01 = v => Math.max(0, Math.min(1, v));
+const easeIO = u => u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+const hash = n => { n = (n ^ 61) ^ (n >>> 16); n = n + (n << 3); n = n ^ (n >>> 4); n = Math.imul(n, 0x27d4eb2d); return ((n ^ (n >>> 15)) >>> 0) / 4294967296; };
+
+// micro-batch 1's path, edge to edge between its blocks and over the rest, so no block hides it
+function mbPath(g, pts, h) { // pts[pass]: [start, centre x, centre y, x, y, width]
+  for (const k of ['forward', 'backward']) { const q = pts[k].sort((a, b) => a[0] - b[0]); g.setLineDash(k === 'forward' ? [] : [3, 2]); g.beginPath();
+    for (let i = 1; i < q.length; i++) { const [, x0, y0, , , w0] = q[i - 1], [, x1, y1, , , w1] = q[i], dx = x1 - x0, dy = y1 - y0;
+      const u = w => Math.min(dx ? w / 2 / Math.abs(dx) : 1, dy ? h / 2 / Math.abs(dy) : 1), a = u(w0), b = 1 - u(w1); // where the line leaves and enters a block
+      if (a < b) { g.moveTo(x0 + dx * a, y0 + dy * a); g.lineTo(x0 + dx * b, y0 + dy * b); } }
+    g.stroke(); }
+  g.setLineDash([]);
+}
+// a block's number over micro-batch 1's path: a halo in the block's own shade keeps the path off the digit
+// the schedule as the banner draws it: a card (its caret up to the field), 4 lanes of a forward and a backward row with the
+// current phase picked out, an axis in step seconds, the playhead and its handle, a rule, then the key; the figure adds each
+// stage's syncs in the gaps and micro-batch 1's path. The canvas spans the card and the caret above it
+const SC = { ip: 22, lm: 62, lh: 13, gp: 6, top: 8 };
+const LNAME = ['Filling the pipeline', 'The second lap', 'The first backward', 'Steady state', 'Draining', 'Gradient sync', 'Optimizer step']; // LSUB's phases
+const MONO_F = '"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace';
+const hexA = (h, a) => { const [r, g2, b] = hexRgb(h); return `rgba(${r},${g2},${b},${a})`; };
+let SCARET = null;
+// a stage's bubble: time before the optimizer with no pass and no gradient sum; a gap under GAP between two passes is not one
+let BUBBLES_ = null; // built on first use: this runs before GAP is declared
+const bubbles = () => BUBBLES_ || (BUBBLES_ = ST.map(S => { const busy = [...S.compute, ...S.sync.filter(q => q.kind === 'gradient reduce-scatter')].map(q => [q.start, q.end]).sort((a, b) => a[0] - b[0]);
+  const r = []; let x = 0; for (const [a, b] of busy) { if (a - x > (x > 0 ? GAP : 1e-6)) r.push([x, Math.min(a, OPT.start)]); x = Math.max(x, b); }
+  if (OPT.start - x > 1e-6) r.push([x, OPT.start]); return r.filter(([a, b]) => b > a); }));
+let SHARE_P = null; // each stage's share of the step: hatched, and spent moving tokens to their experts and back
+const sharesP = () => SHARE_P || (SHARE_P = { idle: bubbles().flat().reduce((n, [a, b]) => n + b - a, 0) / (NS * TOTAL),
+  tok: ST.reduce((n, S) => n + S.compute.reduce((k, c) => k + (c.end - c.start) * c.allToAllShare, 0), 0) / (NS * TOTAL) });
+const pctP = v => `${Math.round(v * 100)}%`, TOK_INK_P = [22, 24, 29];
+const inBubble = t => ST.some((_, s) => bubbles()[s].some(([a, b]) => t >= a && t < b));
+function hatchP(g, x0, x1, y, h, col) { // diagonal hatching on one grid, so neighbouring spans line up
+  if (x1 - x0 < 1) return; g.save(); g.beginPath(); g.rect(x0, y, x1 - x0, h); g.clip(); g.strokeStyle = col; g.lineWidth = 1; g.beginPath();
+  for (let x = Math.floor((x0 - h) / 4) * 4; x < x1; x += 4) { g.moveTo(x, y + h); g.lineTo(x + h, y); } g.stroke(); g.restore(); }
+function drawStrip(cv, t, W, opt = {}) { // opt.reveal: per-lane share drawn so far
+  const card = cv.parentElement, gap = document.getElementById('sgap'), dark = isDark(), { ip, lm, lh, gp, top } = SC;
+  const sh = 2 * lh + 1, lanes = NS * (sh + gp) - gp, y0 = top + gap.offsetTop + 30, axisY = y0 + lanes + 16, footY = axisY + 26, H = top + card.offsetHeight;
+  const g = fitCanvas(cv, W, H); g.clearRect(0, 0, W, H);
+  const lx = ip + lm, rx = W - ip, sw = rx - lx, tx = v => lx + v / TOTAL * sw, idle = dark ? '#272a30' : '#eceef1', pts = { forward: [], backward: [] }, nums = [];
+  const live = !opt.reveal && holdAt == null, ph = phaseOf(LSUB, t), pa = LSUB[ph][0], pb = LSUB[ph + 1] ? LSUB[ph + 1][0] : TOTAL, shown = opt.reveal ? Math.min(...opt.reveal) : 1;
+  const dimA = u => 0.35 + 0.65 * u; // labels, axis and key, dimmed until the lanes are drawn
+  const l = 0.5, tp = top + 0.5, r = W - 0.5, b = H - 0.5, k = Math.round(SCARET ?? W / 2) + 0.5, R = 10, Q = 7;
+  g.lineWidth = 1; g.fillStyle = inkA(dark ? 0.035 : 0.022); g.strokeStyle = inkA(dark ? 0.11 : 0.09);
+  g.beginPath(); g.moveTo(l + R, tp); g.lineTo(k - Q, tp); g.lineTo(k, tp - Q); g.lineTo(k + Q, tp); g.arcTo(r, tp, r, b, R); g.arcTo(r, b, l, b, R); g.arcTo(l, b, l, tp, R); g.arcTo(l, tp, r, tp, R);
+  g.closePath(); g.fill(); g.stroke();
+  g.beginPath(); g.moveTo(18, footY + 0.5); g.lineTo(W - 18, footY + 0.5); g.stroke();
+  g.textBaseline = 'middle';
+  ST.forEach((S, s) => {
+    const y = y0 + s * (sh + gp), rv = opt.reveal ? opt.reveal[s] : 1, edge = lx + sw * rv;
+    g.globalAlpha = dimA(Math.min(1, rv / 0.2)); g.font = font(12, 600); g.textAlign = 'right'; g.fillStyle = C.ink; g.fillText('stage ' + (s + 1), lx - 10, y + sh / 2); g.globalAlpha = 1;
+    g.fillStyle = idle; g.beginPath(); g.roundRect(lx, y, sw, sh, 3); g.fill(); // before the tour reaches the schedule, its empty lanes wait
+    if (rv <= 0) return;
+    g.save(); g.beginPath(); g.rect(0, y - 1, edge, sh + gp + 1); g.clip();
+    if (live) { g.fillStyle = inkA(dark ? 0.07 : 0.05); g.fillRect(tx(pa), y, tx(pb) - tx(pa), sh); }
+    for (const [a, b] of bubbles()[s]) hatchP(g, tx(a), tx(b), y, sh, hexA(C.muted, (dark ? 0.3 : 0.34) + 0.45 * (opt.wait || 0))); // the bubble, stronger at the end hold
+    g.fillStyle = rgb(mix(hexRgb(idle), hexRgb(C.muted), 0.5)); // its gradient sums, the grey of a summing GPU
+    for (const q of S.sync) if (q.kind === 'gradient reduce-scatter') { g.beginPath(); g.roundRect(tx(q.start) + 0.5, y, Math.max(1, tx(q.end) - tx(q.start) - 1), sh, 2.5); g.fill(); }
+    for (const cb of S.compute) {
+      const bx = tx(cb.start) + 0.5, bw = Math.max(1, tx(cb.end) - tx(cb.start) - 1), by = y + (cb.pass === 'forward' ? 0 : lh + 1);
+      g.fillStyle = shade(cb); g.beginPath(); g.roundRect(bx, by, bw, lh, 2.5); g.fill();
+      const ah = Math.max(1.5, Math.round(lh * cb.allToAllShare * 2) / 2); // its all-to-alls, as thick as their share of the block
+      g.fillStyle = rgb(mix(hexRgb(shade(cb)), TOK_INK_P, 0.45)); g.beginPath(); g.roundRect(bx, by + lh - ah, bw, ah, [0, 0, 2.5, 2.5]); g.fill();
+      if (bw >= lh * 0.8 && bx + bw / 2 < edge) nums.push([String(cb.microbatch), bx + bw / 2, by + lh / 2 + 0.5, shade(cb)]);
+      if (cb.microbatch === 1) pts[cb.pass].push([cb.start, bx + bw / 2, by + lh / 2, bx, by, bw]);
+    }
+    g.restore();
+  });
+  g.globalAlpha = shown; g.fillStyle = hexA(C.muted, 0.5); g.fillRect(tx(OPT.start), y0, Math.max(1.5, tx(OPT.end) - tx(OPT.start)), lanes);
+  // micro-batch 1's path joins lanes, so while they draw themselves it waits until all are nearly drawn (else it dangles)
+  const pathA = opt.reveal ? clamp01((shown - 0.9) / 0.1) : 1;
+  g.strokeStyle = C.ink; g.lineWidth = 1; g.globalAlpha = pathA; mbPath(g, pts, lh); g.globalAlpha = 1;
+  g.font = font(lh - 5, 600); g.textAlign = 'center'; g.lineWidth = 3; g.lineJoin = 'round';
+  for (const [n, x, y, bg] of nums) { g.strokeStyle = bg; g.strokeText(n, x, y); g.fillStyle = onShade(+n); g.fillText(n, x, y); }
+  g.lineJoin = 'miter'; g.strokeStyle = C.ink; g.lineWidth = 1.3; g.globalAlpha = pathA;
+  for (const kk of ['forward', 'backward']) for (const q of pts[kk]) { g.beginPath(); g.roundRect(q[3], q[4], q[5], lh, 2.5); g.stroke(); }
+  g.globalAlpha = 1;
+  if (live) { g.globalAlpha = dark ? 0.55 : 0.6; g.fillStyle = C.bg; g.fillRect(tx(t), y0 - 1, rx - tx(t) + 1, lanes + 2); g.globalAlpha = 1; }
+  // the axis, in step seconds, with the current phase's span on it
+  g.globalAlpha = dimA(shown); g.font = `400 11px ${MONO_F}`; g.fillStyle = C.muted; g.strokeStyle = hexA(C.muted, 0.6); g.lineWidth = 1;
+  for (let v = 0; v <= TOTAL + 1e-9; v += 0.25) { const x = Math.round(tx(v)) + 0.5, major = Math.abs(v * 2 - Math.round(v * 2)) < 1e-6;
+    g.beginPath(); g.moveTo(x, axisY - 9); g.lineTo(x, axisY - (major ? 4 : 6)); g.stroke();
+    if (major && tx(TOTAL) - x > 62) { g.textAlign = v === 0 ? 'left' : 'center'; g.fillText(v === 0 ? '0 s' : `${v.toFixed(1)} s`, v === 0 ? x - 0.5 : x, axisY + 4); } }
+  g.textAlign = 'right'; g.fillText(`${TOTAL.toFixed(2)} s`, rx, axisY + 4);
+  if (live) { g.fillStyle = inkA(0.6); g.beginPath(); g.roundRect(tx(pa), axisY - 13, Math.max(3, tx(pb) - tx(pa)), 2.5, 1.25); g.fill(); }
+  if (!opt.reveal) { const px = Math.round(tx(t)); g.fillStyle = C.ink; g.fillRect(px - 0.75, y0 - 8, 1.5, lanes + 12);
+    g.beginPath(); g.arc(px, y0 - 9, 5.5, 0, 7); g.fill(); g.fillStyle = C.bg; g.beginPath(); g.arc(px, y0 - 9, 2, 0, 7); g.fill(); }
+  g.globalAlpha = 1;
+  return { lx, sw, band: [y0 - 18, axisY + 10] };
+}
+const keyTip = k => ({ // what each item of the key stands for, one line (its tooltip)
+  fwd: 'Blue: a stage runs a micro-batch forward; the shade and number say which one.',
+  bwd: 'Orange: a stage runs a micro-batch backward, in the same shades.',
+  both: 'Blue and orange together: a GPU runs one micro-batch forward and another backward at once.',
+  band: `The dark band under each block: moving tokens to their experts and back, ${pctP(sharesP().tok)} of the step.`,
+  idle: `Hatched: a stage runs no pass, the pipeline bubble, ${pctP(sharesP().idle)} of the step.`,
+  tok: "Dots on the field: tokens going to the experts they picked on their node's GPUs, and back.",
+  send: 'Lines between the stages: activations to the next stage, gradients back to the previous.',
+  sum: "Grey: a stage's copies sum their gradients once its backwards are done.",
+  opt: 'The optimizer updates every weight on every GPU, at the end of the step.' })[k];
+function legendRow(t, off) { // the foot's key, lit while each thing happens somewhere
+  const any = f => ST.some((_, s) => f(s)), pass = p => any(s => ST[s].compute.some(c => c.pass === p && t >= c.start && t < c.end));
+  const sends = sendsAt(t), sy = kind => any(s => syncAt(s, t).some(y => y.kind === kind)), both = any(s => { const q = passesAt(s, t); return q.f && q.b; });
+  const sq = (bg, extra = '') => `<i class="g sq" style="background:${bg}${extra}"></i>`, idle = isDark() ? '#272a30' : '#eceef1';
+  const it = (html, dim, k) => `<span class="ki${off || dim ? ' dim' : ''}" tabindex="0" data-k="${k}" aria-describedby="ktip">${html}</span>`;
+  const bwdSend = sends.length && sends.every(p => p.dir === 'backward');
+  return `<span class="kg">${it(sq(RAMP_F[4]) + 'forward', !pass('forward'), 'fwd')}${it(sq(RAMP_B[4]) + 'backward', !pass('backward'), 'bwd')}`
+    + `${it(sq(pairCss(RAMP_F[4], RAMP_B[4])) + 'both', !both, 'both')}`
+    + `${it(sq(RAMP_F[4], `;box-shadow:inset 0 -4px 0 ${rgb(mix(hexRgb(RAMP_F[4]), TOK_INK_P, 0.45))}`) + `moving tokens <b class="pc">${pctP(sharesP().tok)}</b>`, !pass('forward') && !pass('backward'), 'band')}`
+    + `${it(sq(idle, `;background-image:repeating-linear-gradient(135deg,transparent 0 2px,${hexA(C.muted, 0.75)} 2px 2.8px)`) + `idle <b class="pc">${pctP(sharesP().idle)}</b>`, holdAt == null && !inBubble(t), 'idle')}</span>`
+    + `<span class="kg">${it(`${glyph('dot', C.ink)}tokens`, !pass('forward') && !pass('backward'), 'tok')}`
+    + `${it(`${sendGlyph(bwdSend ? V.bwdnet : V.fwdnet)}stage to stage`, !sends.length, 'send')}`
+    + `${it(sq(rgb(mix(hexRgb(idle), hexRgb(C.muted), 0.5))) + 'gradient sums', !sy('gradient reduce-scatter'), 'sum')}`
+    + `${it(`${glyph('', C.muted)}optimizer`, !optAt(t), 'opt')}</span>`;
+}
+function setRun(run, html) { // the key, its items updated in place so a focused or hovered one keeps its focus and tooltip
+  const tp = document.createElement('template'); tp.innerHTML = html;
+  const now = run.querySelectorAll('.ki'), nx = tp.content.querySelectorAll('.ki');
+  if (!nx.length || now.length !== nx.length) { run.innerHTML = html; return; }
+  nx.forEach((n, i) => { const o = now[i]; if (o.className !== n.className) o.className = n.className; if (o.innerHTML !== n.innerHTML) o.innerHTML = n.innerHTML; });
+}
+function placeCardUi() { // the caret under the field
+  const card = document.getElementById('scard'), cw = fig.querySelector('.cvwrap');
+  SCARET = L && L.wide ? cw.offsetLeft + cw.offsetWidth / 2 - card.offsetLeft : null;
+}
+function wireStrip(cv, P, geo) {
+  let drag = false;
+  const seek = e => { const r = cv.getBoundingClientRect(), g = geo(); P.playing = false; P.seek((e.clientX - r.left - g.lx) / g.sw * TOTAL); };
+  const inBand = e => { const b = (geo() || {}).band, y = e.clientY - cv.getBoundingClientRect().top; return !b || (y >= b[0] && y <= b[1]); };
+  cv.addEventListener('pointerdown', e => { if (!inBand(e)) return; drag = true; cv.setPointerCapture(e.pointerId); seek(e); });
+  cv.addEventListener('pointermove', e => { if (drag) seek(e); else cv.style.cursor = inBand(e) ? 'ew-resize' : ''; });
+  cv.addEventListener('pointerup', () => { drag = false; });
+}
+const PLAY = '<svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z"/></svg>', PAUSE = '<svg viewBox="0 0 12 12"><path d="M2 1h3v10H2zM7 1h3v10H7z"/></svg>';
+
+
+
+const cv = document.getElementById('cv'), strip = document.getElementById('strip'), fig = document.getElementById('fig'), tip = document.getElementById('tip');
+let L = null, SG = null;
+const QPOS = [[0, 0], [1, 0], [1, 1], [0, 1]];  // stages as quadrants, pipeline order 1 2 / 4 3
+// a token of node GPU k0 goes to an expert on another GPU of its node (dispatch) and comes back (combine), then again
+const trip = (id, now) => { const v = now * 1.3 + hash(id + 1) * 4, m = Math.floor(v), k0 = Math.floor(hash(id) * 4) % 4,
+  k1 = (k0 + 1 + Math.floor(hash(id * 7 + (m >> 1)) * 3)) % 4; return m % 2 ? [k1, k0, v - m] : [k0, k1, v - m]; };
+const PL = D.perLayer;
+const V = {}; // the direction palette, re-read each frame so a scheme change applies
+function readV() { const cs = getComputedStyle(document.documentElement); for (const k of ['fwd-nv', 'bwd-nv', 'fwd-net', 'bwd-net']) V[k.replace('-', '')] = cs.getPropertyValue('--' + k).trim(); }
+
+// ---- the build, in content seconds u (the tour clock adds the pauses, see PAUSES) ----
+const SKIP = 0.6; // the jump over the other 44 layers, between this layer's forward and its backward
+const B = { gpu1: 0.05, node: 1.4, tok: 3.6, bwd: 8.7 + SKIP }; // GPU 1 drops in as the tour starts
+// the loss: the token beat's forward ends, the tokens leave for the other layers (the loss is computed on the last
+// stage), and come back with their gradients for this layer's backward
+const LOSS = [7.95, 8.65 + SKIP];
+// uneven load (illustrative): 6 tokens per GPU, routed with popular experts on GPU 3; each GPU's experts run for a time
+// that grows with the copies it received, and the combine waits for the busiest GPU
+const UE0 = 11.45 + SKIP, UE_D = [11.75 + SKIP, 12.35 + SKIP], UE_X = 12.35 + SKIP;
+function rng(seed) { return () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296); }
+const UPICKS = (() => { const r = rng(11), out = [];
+  for (let k = 0; k < GPN; k++) for (let i = 0; i < 6; i++) { const set = new Set();
+    while (set.size < 7) { const hot = r() < 0.3, e = hot ? 64 + Math.floor(r() * 8) : Math.floor(r() * 128); set.add(e); }
+    out.push({ k, i, picks: [...set] }); }
+  return out; })();
+const UCOPIES = (() => { const n = {}; return UPICKS.flatMap(t => t.picks.map(e => ({ t, e, n: (n[e] = (n[e] || 0) + 1) - 1 }))); })();
+const ULOAD = [0, 1, 2, 3].map(k => UCOPIES.filter(c => Math.floor(c.e / 32) === k).length);
+const UDUR = ULOAD.map(l => 0.4 + 1.0 * l / Math.max(...ULOAD));
+const UE_C = [UE_X + Math.max(...UDUR) + 0.1, UE_X + Math.max(...UDUR) + 0.65];
+B.stage = UE_C[1] + 0.3;
+// the stage beat: node 1 copies itself by doubling (1, 2, 4 ... 64 nodes) while the camera pulls back to keep the copies
+// in frame; then every GPU loads its own tokens; then all 64 nodes compute, their all-to-alls staying inside each node
+const DBL = 0.34, D0 = B.stage + 0.1, DE = D0 + 6 * DBL, LD0 = DE + 0.2, LDS = 0.4;
+B.load = LD0; B.a2a = LD0 + LDS + 0.6; B.pipe = B.a2a + 1.4;
+B.pay = B.pipe + 6.1; // the wrap from stage 4 back to stage 1 lands at B.pipe + 5.65
+// the hand-off: the field empties, the schedule draws itself one stage at a time while that stage's quadrant is outlined,
+// the clock reads 0.00 s, then the real step starts from that empty state
+B.hand = B.pay + 1.2; B.step = B.hand + 1.9;
+const LANE = s => B.hand + 0.45 + s * 0.3;
+const RATE = 1 / 9;
+// every GPU reads its own micro-batch, so each GPU of node 1 starts with its own token; each token's 7 experts are
+// illustrative picks (1 or 2 on its own GPU, the rest on the other three), all 28 distinct so the paths stay readable
+const TPICKS = [[5, 40, 51, 77, 90, 101, 120], [12, 25, 44, 70, 83, 109, 125], [2, 19, 36, 58, 66, 88, 115], [9, 30, 47, 61, 73, 98, 112]];
+// the token beat's moments, in content seconds: the rows drop in one GPU after the other as the node's caption ends;
+// the router draws a leader from each followed token to each of its picks, which light up as it lands
+const TOK_IN = 3.15, tokIn = (k, i) => TOK_IN + [0, 1, 3, 2][k] * 0.05 + i * 0.03, TOK_DROP = 0.3;
+const pickAt = i => 4.5 + i * 0.045, LEAD = 0.25;
+const PICK_AT = {}; TPICKS.forEach(ps => ps.forEach((e, i) => { PICK_AT[e] = pickAt(i) + LEAD; }));
+const FIRST_FWD = ST.map(S => Math.min(...S.compute.filter(c => c.pass === 'forward').map(c => c.start)));
+const FIRST_IN = ST.map((S, s) => s === 0 ? FIRST_FWD[0] : Math.min(...D.pipelineSends.filter(p => p.toStage === s + 1).map(p => p.end)));
+const OPS = [ // [start, end, perLayer entry]
+  [3.6, 4.4, PL.forward[0]], [4.4, 5.0, PL.forward[1]], [5.0, 5.9, PL.forward[2]], [5.9, 6.7, PL.forward[3]],
+  [6.7, 7.5, PL.forward[4]], [7.5, 7.9, PL.forward[5]],
+  ...[[8.7, 9.3], [9.3, 9.9], [9.9, 10.5], [10.5, 10.75], [10.75, 11.3]].map(([a, e], i) => [a + SKIP, e + SKIP, PL.backward[i]]),
+];
+const AWAY = [OPS[5][1] + 0.1, LOSS[0] + 0.3 + SKIP]; // the tokens fade out after the sum and come back from the other layers
+const FLIP = AWAY[1]; // back, the followed tokens turn orange: the gradient from the loss
+// the pipeline beat: stage 1 computes, activations stream to stage 2, which starts as they land, and so on; the rest wait
+const SEND = s => B.pipe + 1.3 + s * 1.2;   // send from stage s to s+1 starts (0-based s)
+const SEND_DUR = 0.75, STAGGER = 0.3;
+const arrive = (s, j, k) => SEND(s - 1) + (STAGGER * hash(s * 4096 + j * 4 + k) + (1 - STAGGER)) * SEND_DUR; // when GPU (s,j,k) receives
+const MINPH = 2.2; // step seconds per screen second; a phase lasts at least MINPH s on screen
+const readT = (q, extra = 0, min = MINPH) => Math.max(min, (q[1].split(' ').length + extra) * 0.25); // 250 ms a word, extra: words read beside it
+// the tour's captions, over the field's empty top left, one at a time and true to the frame: [u it shows from, u the
+// build pauses at, its text with the [words] naming what the field picks out, what it picks out]; the tour clock x runs
+// the build's content time u and stops it at each caption's pause, long enough to read it (SETTLE at least)
+const HOT = ULOAD.indexOf(Math.max(...ULOAD)), SETTLE = 0.4;
+const CAPS = [
+  [0, 1.29, `This is [one GPU]. It holds ${D.model.experts / GPN} of the ${D.model.experts} experts.`, 'gpu1'], // before the camera pulls back
+  [1.3, 3.14, `${GPN} GPUs form [a node], linked by NVLink.`, 'node1', B.node + 0.5], // picked out once the camera has nearly framed it
+  [B.tok, OPS[0][1], 'Each GPU runs attention over [f:its own tokens].', 'lane'],
+  [OPS[1][0], OPS[1][1], `The router picks ${D.model.topk} experts for [f:one of them].`, 'token'],
+  [OPS[2][0], OPS[3][1], '{f:Copies} travel to those experts, which compute.', null], // dispatch and experts
+  [OPS[4][0], OPS[5][1], '{f:Results} travel back to the [f:token], weighted and summed.', 'token'], // combine and unpermute
+  [LOSS[0], OPS[6][0] - 0.02, `${D.model.layers - 1} layers later, the loss sends a {b:gradient} back to each [b:token].`, 'token', FLIP - 0.3], // held once it is back, orange
+  [OPS[6][0], OPS[10][0] + 0.35, 'The {b:backward pass} comes back through this layer, along the same path.', null],
+  [UE0, UE_D[1], `Routing is uneven: [GPU ${HOT + 1}] gets the most {f:copies}.`, 'hot'],
+  [UE_X, UE_C[1] - 0.05, `The node waits for [GPU ${HOT + 1}] before the combine.`, 'hot'],
+  [B.stage - 0.2, DE + 0.05, `[Stage 1] is ${NPS} nodes doing the same work.`, 'stage1', D0 + 2 * DBL], // once 4 copies are out
+  [B.load, B.a2a + 0.3, 'Each GPU runs its own micro-batch; {f:tokens} stay inside [each node].', 'node1'],
+  [B.pipe, SEND(2) + SEND_DUR, '{f:Activations} flow to stage 2, 3, then 4.', null],
+  [SEND(3), SEND(3) + SEND_DUR, 'Then [back to stage 1] for the second lap.', 'avenue'],
+  [B.pay, B.pay + 0.05, `${NS} stages x ${NPS} nodes x ${GPN} GPUs: ${(NODES * GPN).toLocaleString('en-US')} GPUs.`, null],
+  [B.hand, B.step - 1e-3, 'Next, one full step as Megatron schedules it.', null],
+].map(([u, up, txt, ref, ru = u], i, all) => { const plain = txt.replace(/[[\]{}]|\b[fb]:/g, ''), next = all[i + 1] ? all[i + 1][0] : B.step; // ru: when its highlight comes in
+  const kw = k => k ? ` class="k${k}"` : ''; // f: / b: colour a [picked out] or {plain} word forward or backward
+  const html = txt.replace(/\[(?:([fb]):)?(.+?)\]/g, (_, k, w) => `<b${kw(k)}>${w}</b>`).replace(/\{([fb]):(.+?)\}/g, (_, k, w) => `<span${kw(k)}>${w}</span>`);
+  return { u, up, ref, ru, plain, html, len: Math.max(SETTLE, readT([0, plain], 0, 2) - (next - u)) }; });
+const KN = [[0, 0]]; // [x, u] at each turn of the tour clock: content runs at 1, or stands still through a pause
+for (const c of CAPS) { const [x0, u0] = KN[KN.length - 1], x = x0 + c.up - u0; KN.push([x, c.up], [x + c.len, c.up]); }
+const INTRO = KN[KN.length - 1][0] + B.step - KN[KN.length - 1][1];
+const tourU = x => { let i = 0; while (i < KN.length - 1 && KN[i + 1][0] <= x) i++; const n = KN[i + 1]; return n && n[1] === KN[i][1] ? KN[i][1] : KN[i][1] + x - KN[i][0]; };
+const tourX = u => { let k = KN[0]; for (const q of KN) if (q[1] <= u) k = q; return k[0] + u - k[1]; }; // when content reaches u, after any pause there
+CAPS.forEach(c => { c.x = tourX(c.u); c.rx = tourX(c.ru); });
+// a highlight confirms what was just read: in once the caption has been up a moment and the build has paused for it,
+// yet early enough to stay up a while before the next caption
+CAPS.forEach((c, i) => { const next = CAPS[i + 1] ? CAPS[i + 1].x : INTRO; c.hx = Math.max(c.x, Math.min(Math.max(c.rx, c.x + 0.6, tourX(c.up) - c.len), next - 1.2)); });
+const capAt = x => CAPS.reduce((n, c, i) => x >= c.x ? i : n, 0); // the caption up at tour clock x
+const CHAPTERS = [['GPU', 0], ['token', tourX(B.tok)], ['stage', tourX(B.stage - 0.2)], ['pipeline', tourX(B.pipe)], ['1,024', tourX(B.pay)]]; // the tour then ends on the step
+const CHAP_SUB = ['One GPU, then its node.', 'One token per GPU, out to its experts and back.', `One stage: ${NPS} nodes.`, 'Four stages in a pipeline.', 'The whole cluster.']; // the card's line, a chapter at a time
+const sm = v => { v = clamp01(v); return v * v * (3 - 2 * v); };
+const win = (x, a, b, f = 0.25) => sm((x - a) / f) * (1 - sm((x - b) / f));
+
+// the city's proportions, in node pitches: the banner's map and the figure's are the same drawing
+const CITY = { gpu: 0.31, gi: 0.05, body: 0.72, span: 9.7, slab: 0.22, slabZ: 0.03, bodyZ: 0.2, topZ: 0.28, kz: 1.15 };
+function layout(W) {
+  const wide = W >= 640, F = wide ? Math.min(600, W) : W;
+  const p = F / (8 + CITY.span + 2 * CITY.slab), lab = 24; // a node pitch: two stages, their avenue and slabs span F
+  const c = CITY.gpu * p, gi = CITY.gi * p, node = 2 * c + gi, gn = p - node, qg = CITY.span * p - (8 * p - gn);
+  const Q = 8 * node + 7 * gn, x0 = (F - (2 * Q + qg)) / 2;
+  const blocks = QPOS.map(([a, b]) => ({ x: x0 + a * (Q + qg), y: lab + b * (Q + qg) }));
+  const Wc = Math.min(W - (wide ? 120 : 76), 780), Z = Wc / ((2 * Q + qg) * Math.SQRT2 * 0.6); // the city's slabs about as wide as the card under it, room left for the floor labels
+  return { W, F, wide, gi, gn, qg, lab, c, node, Q, blocks, H: 2 * lab + 2 * Q + qg, VW: W, VH: Math.round(Wc * 0.5 + (wide ? 90 : 50)), Z };
+}
+function gpuW(s, j, k) {
+  const b = L.blocks[s], nx = b.x + (j % 8) * (L.node + L.gn), ny = b.y + Math.floor(j / 8) * (L.node + L.gn);
+  return [nx + (k % 2) * (L.c + L.gi) + L.c / 2, ny + (k >> 1) * (L.c + L.gi) + L.c / 2];
+}
+// inside a GPU of node 1 (world units): its micro-batch, a row of 6 tokens across the top of its face, and below it the
+// 32 expert slots; the tour follows the first token of each row (its home)
+const lane = (k, i) => { const [x, y] = gpuW(0, 0, k); return [x - L.c * 0.36 + i * L.c * 0.144, y - L.c * 0.05]; };
+const home = k => lane(k, 0);
+function slotW(e) { const q = Math.floor(e / 32), le = e % 32, [x, y] = gpuW(0, 0, q); return [x - L.c * 0.35 + (le % 8) * L.c * 0.1, y + L.c * 0.1 + Math.floor(le / 8) * L.c * 0.1]; }
+
+function camKeys() {
+  const [g0x, g0y] = gpuW(0, 0, 0), [g3x, g3y] = gpuW(0, 0, 3), b = L.blocks[0];
+  const kBig = Math.min(L.F * 0.42, 230) / L.c, kNode = Math.min(L.F * 0.37, 190) / L.c, kStage = (L.F - 24) / L.Q;
+  return [[0, g0x, g0y, kBig], [B.node + 0.8, (g0x + g3x) / 2, (g0y + g3y) / 2, kNode], [B.stage + 1.2, b.x + L.Q / 2, b.y + L.Q / 2, kStage], [B.pipe + 1.0, L.F / 2, L.H / 2, 1]];
+}
+function copiesWH(x) { // the world extent of node 1's copies placed so far
+  const pitch = L.node + L.gn, box = n => [Math.min(n, 8) * pitch - L.gn, Math.ceil(n / 8) * pitch - L.gn];
+  let w = L.node, h = L.node;
+  for (let d = 0; d < 6; d++) {
+    const u = easeIO(clamp01((x - (D0 + d * DBL)) / DBL)); if (u <= 0) break;
+    const [w0, h0] = box(2 ** d), [w1, h1] = box(2 ** (d + 1)); w = w0 + (w1 - w0) * u; h = h0 + (h1 - h0) * u;
+  }
+  return [w, h];
+}
+function extentCam(x) { // fit the copies placed so far
+  const [w, h] = copiesWH(x), b = L.blocks[0], kNode = Math.min(L.F * 0.37, 190) / L.c;
+  return [0, b.x + w / 2, b.y + h / 2, Math.min(kNode, Math.min(L.F, L.H) * 0.86 / Math.max(w, h))];
+}
+function camera(x) {
+  let cur;
+  if (x < B.stage) {
+    const K = camKeys(); cur = K[0];
+    const u = sm((x - (K[1][0] - 0.9)) / 0.9);
+    if (u > 0) cur = [0, cur[1] + (K[1][1] - cur[1]) * u, cur[2] + (K[1][2] - cur[2]) * u, Math.exp(Math.log(cur[3]) + (Math.log(K[1][3]) - Math.log(cur[3])) * u)];
+  } else if (x < B.pipe) cur = extentCam(x);
+  else {
+    const a = extentCam(B.pipe), u = sm((x - B.pipe) / 1.1);
+    cur = [0, a[1] + (L.F / 2 - a[1]) * u, a[2] + (L.H / 2 - a[2]) * u, Math.exp(Math.log(a[3]) * (1 - u))];
+  }
+  const [, fx, fy, k] = cur;
+  return { k, S: (a, b) => [L.F / 2 + (a - fx) * k, L.H / 2 + (b - fy) * k], inv: (sx, sy) => [(sx - L.F / 2) / k + fx, (sy - L.H / 2) / k + fy] };
+}
+const nodeXYW = j => { const b = L.blocks[0]; return [b.x + (j % 8) * (L.node + L.gn), b.y + Math.floor(j / 8) * (L.node + L.gn)]; };
+function nodeOff(j, x) { // a copy slides out of the node it was copied from
+  if (j === 0) return [0, 0];
+  const d = Math.floor(Math.log2(j)), par = j - 2 ** d, e = easeIO(clamp01((x - (D0 + d * DBL)) / DBL));
+  const a = nodeXYW(par), b = nodeXYW(j), po = nodeOff(par, x);
+  return [(a[0] - b[0]) * (1 - e) + po[0], (a[1] - b[1]) * (1 - e) + po[1]];
+}
+let INTRO_X = null; // set while drawing the build, so positions follow the copies
+function gpuP(s, j, k) { const p = gpuW(s, j, k); if (INTRO_X == null || s !== 0 || INTRO_X > DE + 0.05) return p; const o = nodeOff(j, INTRO_X); return [p[0] + o[0], p[1] + o[1]]; }
+const LOAD = (j, k) => LD0 + hash(j * 4 + k + 7) * LDS;     // when GPU (stage 1, j, k) receives its own micro-batch
+const NODE_LOAD = j => Math.max(...[0, 1, 2, 3].map(k => LOAD(j, k)));
+const nodeDist = j => Math.hypot(j % 8, Math.floor(j / 8)) / Math.hypot(7, 7);
+// node 1 assembles: its body rises from the floor, then its GPUs fall into place one by one, each with a small bounce
+const DROP = 0.45, RISE = 0.35;
+const dropH = u => u < 0.62 ? 1 - (u / 0.62) ** 2 : 0.5 * (u - 0.62) / 0.38 * (1 - (u - 0.62) / 0.38); // height left, 1 to 0
+function appearAt(s, j, k) {
+  if (s === 0 && j === 0) return [B.gpu1, B.node + 0.35, B.node + 0.5, B.node + 0.65][k];
+  if (s === 0) return D0 + Math.floor(Math.log2(j)) * DBL;
+  return B.pipe + 0.1 + (s - 1) * 0.25 + nodeDist(j) * 0.4;
+}
+
+// ---- GPU fill during the build ----
+function opAt(x) { for (const o of OPS) if (x >= o[0] && x < o[1]) return o; return null; }
+function introFill(s, j, k, x) {
+  const I = ISO_IDLE(), F = hexRgb(C.fwd), Bk = hexRgb(C.bwd); // the tour idles in the banner's grey
+  let f = 0, b = 0;
+  if (s === 0 && j === 0) for (const [a, e, o] of OPS) {
+    if (o.kind !== 'compute') continue;
+    const first = a === OPS[0][0] || a === OPS[7][0], a0 = !first ? a : a === OPS[0][0] ? a + 0.25 + [0, 1, 3, 2][k] * 0.08 : a + [0, 3, 1, 2][k] * 0.08; // each pass's first compute sweeps round the node, the backward the other way
+    const bwd = o.op.includes('backward'), cont = OPS.some(([a2, , o2]) => a2 === e && o2.kind === 'compute' && o2.op.includes('backward') === bwd); // the next pass takes over: no dip at the seam
+    const w = sm((x - a0) / (first ? 0.3 : 0.15)) * (1 - sm((x - e - (cont ? 0.15 : 0)) / 0.15)); if (bwd) b = Math.max(b, w); else f = Math.max(f, w);
+  }
+  if (s === 0 && j === 0) f = Math.max(f, win(x, UE_X, UE_X + UDUR[k], 0.12));
+  const end = B.hand + 0.1;
+  if (s === 0) f = Math.max(f, win(x, LOAD(j, k) + 0.3, end, 0.3));
+  else f = Math.max(f, win(x, arrive(s, j, k), end, 0.12));
+  // stage 1 takes the wrapped activations into its second group of layers: a deeper blue from their arrival
+  const w2 = s === 0 ? win(x, SEND(3) + (STAGGER * hash(4 * 4096 + j * 4 + k) + (1 - STAGGER)) * SEND_DUR, end, 0.12) : 0;
+  return mix(mix(I, mix(F, hexRgb(RAMP_F[6]), w2), f), Bk, b);
+}
+
+// a flow mark, in screen points: a line from P0 to P1 with a dot at each end, in the current stroke and fill
+function dotLine(g, P0, P1, lw) {
+  const r = Math.max(1.5, lw * 1.6); g.lineWidth = lw; g.beginPath(); g.moveTo(...P0); g.lineTo(...P1); g.stroke();
+  for (const q of [P0, P1]) { g.beginPath(); g.arc(...q, r, 0, 7); g.fill(); }
+}
+const lerp2 = (A, Bp, u) => [A[0] + (Bp[0] - A[0]) * u, A[1] + (Bp[1] - A[1]) * u];
+
+// the figure drawn like the banner's city: the camera's flat view (the world, L.F x L.H) turned 45 degrees, squashed and
+// scaled into the view (L.VW x L.VH, the city as wide as the banner's), the stages as slabs, each node a body with its
+// four GPUs on top, names on the floor; the tour and the step share it, so nothing flattens on the way
+const ISOK = { kz: CITY.kz * Math.SQRT1_2 }; // the banner's KZ, per world unit
+let ISO = null;
+const FLAT_CAM = { k: 1, S: (a, b) => [a, b], inv: (a, b) => [a, b] };
+function isoCam(cam) {
+  const fx = L.F / 2, fy = L.H / 2, ox = L.VW / 2, oy = L.VH / 2, r = Math.SQRT1_2, z = L.Z * 0.6;
+  const a = z * r, b = -z * r, c = z * 0.5 * r, d = z * 0.5 * r, det = a * d - b * c, lift = cam.k * z * ISOK.kz;
+  const pitch = L.node + L.gn, zb = CITY.bodyZ * pitch, zt = CITY.topZ * pitch;
+  const fw = (px, py) => { const X = px - fx, Y = py - fy; return [ox + a * X + b * Y, oy + c * X + d * Y]; };
+  const P3 = (u, v, h) => { const q = fw(...cam.S(u, v)); return [q[0], q[1] - (h - zt * 0.5) * lift]; };
+  const inv = (qx, qy) => { const X = qx - ox, Y = qy + zt * 0.5 * lift - oy; return cam.inv(fx + (d * X - b * Y) / det, fy + (-c * X + a * Y) / det); };
+  return { k: cam.k, S: (u, v) => P3(u, v, zt), inv, P3, M: [a, b, c, d], z, zb, zt };
+}
+const ISO_IDLE = () => hexRgb(isDark() ? '#272a30' : '#eceef1');
+const toRgb = c => Array.isArray(c) ? c : c[0] === '#' ? hexRgb(c) : c.match(/[\d.]+/g).slice(0, 3).map(Number);
+function stepFills(t) { // the step's colour per stage, as the banner's city: pass shades, half grey while summing, grey at the optimizer
+  const idle = ISO_IDLE(), mu = hexRgb(C.muted);
+  const F = ST.map((_, s) => { if (optAt(t)) return mu; const ps = shownAt(s, t);
+    if (ps.f && ps.b) return { pair: [soften(shade(ps.f), GRID.soft), soften(shade(ps.b), GRID.soft)] }; // both passes: blue and orange side by side
+    if (ps.f || ps.b) return toRgb(soften(shade(ps.f || ps.b), GRID.soft));
+    return syncAt(s, t).some(y => y.kind === 'gradient reduce-scatter') ? mix(idle, mu, 0.5) : idle; });
+  return s => F[s];
+}
+function isoAt(g, px, py, fn) { // a flat mark (a slot, a frame) laid on the plane at a projected point
+  g.save(); g.translate(px, py); g.transform(ISO.M[0], ISO.M[2], ISO.M[1], ISO.M[3], 0, 0); fn(0, 0); g.restore();
+}
+function isoBox(g, x0, y0, x1, y1, z0, z1, T, hair) { // as the banner's box(): top, the two faces toward the viewer, edges
+  // drawn for every GPU of the city each frame: the top's corners projected once, the faces hang from them by the height
+  const P3 = ISO.P3, [ax, ay] = P3(x0, y0, z1), [bx, by] = P3(x1, y0, z1), [kx, ky] = P3(x1, y1, z1), [dx, dy] = P3(x0, y1, z1), h = P3(x1, y1, z0)[1] - ky;
+  if (T.pair) { // blue to orange across the top, left corner to right corner: one gradient per width, moved to each box
+    const w = Math.round((bx - dx) * 4) / 4; if (T.gw !== w) { T.gw = w; T.gg = pairGrad(g, 0, w, ...T.pair); }
+    g.save(); g.translate(dx, 0); g.beginPath(); g.moveTo(ax - dx, ay); g.lineTo(bx - dx, by); g.lineTo(kx - dx, ky); g.lineTo(0, dy); g.closePath(); g.fillStyle = T.gg; g.fill(); g.restore();
+  } else { g.beginPath(); g.moveTo(ax, ay); g.lineTo(bx, by); g.lineTo(kx, ky); g.lineTo(dx, dy); g.closePath(); g.fillStyle = T.top; g.fill(); }
+  g.beginPath(); g.moveTo(dx, dy); g.lineTo(kx, ky); g.lineTo(kx, ky + h); g.lineTo(dx, dy + h); g.closePath(); g.fillStyle = T.left; g.fill();
+  g.beginPath(); g.moveTo(kx, ky); g.lineTo(bx, by); g.lineTo(bx, by + h); g.lineTo(kx, ky + h); g.closePath(); g.fillStyle = T.right; g.fill();
+  if (!hair) return;
+  g.lineJoin = 'round'; g.lineWidth = hair * 0.8; g.strokeStyle = T.inner; g.beginPath(); g.moveTo(dx, dy); g.lineTo(kx, ky); g.lineTo(bx, by); g.moveTo(kx, ky); g.lineTo(kx, ky + h); g.stroke();
+  g.lineWidth = hair; g.strokeStyle = T.edge; g.beginPath(); g.moveTo(ax, ay); g.lineTo(bx, by); g.lineTo(bx, by + h); g.lineTo(kx, ky + h); g.lineTo(dx, dy + h); g.lineTo(dx, dy); g.closePath(); g.stroke();
+}
+let TONES = null;
+const GPU_TONES = new Map();
+function isoTones() { // the banner's tones, from the page and ink
+  const key = C.bg + C.ink; if (TONES && TONES.key === key) return TONES;
+  const dark = isDark(), ink = hexRgb(C.ink), bg = hexRgb(C.bg), tone = k => rgb(mix(bg, ink, k)), ia = a => `rgba(${ink.join(',')},${a})`;
+  const tones = (tp, l, r, e, i) => ({ top: tone(tp), left: tone(l), right: tone(r), edge: ia(e), inner: ia(i) });
+  return (TONES = { key, dark, ink, bg, ...(dark ? { node: tones(0.1, 0.065, 0.035, 0.32, 0.16), slab: tones(0.05, 0.035, 0.02, 0.18, 0.08), edge: 'rgba(0,0,0,.45)' }
+    : { node: tones(0.012, 0.07, 0.16, 0.62, 0.26), slab: tones(0.02, 0.045, 0.085, 0.28, 0.12), edge: ia(0.32) }),
+    shadow: dark ? 'rgba(0,0,0,.55)' : 'rgba(20,24,32,.10)', arrow: `rgba(${hexRgb(C.muted).join(',')},0.45)` });
+}
+function drawIsoScene(g, x, cs, fill = introFill, hi = 0, rf = null) { // hi: the return to stage 1's arrowhead, picked out (0 to 1); rf: the tour's highlight
+  const mark = ref => { if (rf && rf.ref === ref) drawRef(g, rf); }; // laid on its object as it is drawn, so whatever stands in front covers it
+  const T = isoTones(), pitch = L.node + L.gn, m0 = (1 - 2 * CITY.gpu - CITY.gi) / 2 * pitch, pad = (CITY.body - 2 * CITY.gpu - CITY.gi) / 2 * pitch, half = L.c / 2;
+  const ce = cs * ISO.z, hair = ce >= 6 ? (ce >= 12 ? 0.75 : 0.55) : 0, pu = pitch * ISO.k * ISO.z * Math.SQRT1_2, sz = CITY.slabZ * pitch; // ce: a GPU on screen, pu: the banner's a
+  const face = (c, n) => rgb(T.dark ? mix(c, T.bg, n * 0.24) : mix(c, T.ink, n * 0.13));
+  const tonesOf = col => { const top = rgb(col); let t = GPU_TONES.get(top); // a GPU's three faces, from its fill: a few colours for 1,024 GPUs
+    if (!t) { if (GPU_TONES.size > 4096) GPU_TONES.clear(); GPU_TONES.set(top, t = { top, left: face(col, 1), right: face(col, 2), edge: T.edge, inner: T.edge }); }
+    return t; };
+  const pairTones = ([cf, cb]) => { const k = cf + cb; let t = GPU_TONES.get(k); // its top blue to orange, its left face blue, its right face orange
+    if (!t) GPU_TONES.set(k, t = { pair: [cf, cb], left: face(hexRgb(cf), 1), right: face(hexRgb(cb), 2), edge: T.edge, inner: T.edge });
+    return t; };
+  if (GPU_TONES.key !== T.key) { GPU_TONES.clear(); GPU_TONES.key = T.key; }
+  const SA = ST.map((_, s) => s === 0 ? sm((x - (DE - 0.2)) / 0.5) : sm((x - (B.pipe + 0.1 + (s - 1) * 0.25)) / 0.5));
+  const cell = (s, u, v) => ISO.P3(L.blocks[s].x - m0 + u * pitch, L.blocks[s].y - m0 + v * pitch, 0); // the banner's (u, v) in stage s, on the floor
+  const tri = (s, pts) => { g.beginPath(); pts.forEach(([u, v], i) => i ? g.lineTo(...cell(s, u, v)) : g.moveTo(...cell(s, u, v))); g.fill(); };
+  g.save(); g.filter = `blur(${Math.max(2, pu * 0.4)}px)`; g.fillStyle = T.shadow;
+  for (let s = 0; s < NS; s++) if (SA[s] > 0) { g.globalAlpha = SA[s]; tri(s, [[0.2, 0.5], [8.7, 0.5], [8.7, 9], [0.2, 9]]); }
+  g.restore();
+  for (let s = 0; s < NS; s++) {
+    const b = L.blocks[s], sa = SA[s], e = m0 + CITY.slab * pitch;
+    if (sa > 0) { g.globalAlpha = sa; isoBox(g, b.x - e, b.y - e, b.x + L.Q + e, b.y + L.Q + e, 0, sz, T.slab, hair && 0.6); }
+    if (s === 0) mark('stage1');
+    for (let j = 0; j < NPS; j++) {
+      const n1 = s === 0 && j === 0, du = [0, 1, 2, 3].map(kk => clamp01((x - appearAt(s, j, kk)) / DROP)); // node 1's GPUs: how far down
+      const ga = [0, 1, 2, 3].map(kk => n1 ? sm(du[kk] / 0.12) : sm((x - appearAt(s, j, kk)) / (s ? 0.45 : 0.12)));
+      const ru = clamp01((x - B.node) / RISE), na = n1 ? sm(ru / 0.2) : ga[0]; if (na <= 0 && ga[0] <= 0) continue;
+      const [x0, y0] = gpuP(s, j, 0), [x3, y3] = gpuP(s, j, 3), [px, py] = ISO.S((x0 + x3) / 2, (y0 + y3) / 2);
+      if (px < -3 * ce || py < -3 * ce || px > L.VW + 3 * ce || py > L.VH + 3 * ce) continue;
+      if (na > 0) { const zb = n1 ? sz + (ISO.zb - sz) * (1 - (1 - ru) ** 3) : ISO.zb;
+        g.globalAlpha = na; isoBox(g, x0 - half - pad, y0 - half - pad, x3 + half + pad, y3 + half + pad, sz, zb, T.node, hair); }
+      if (n1) mark('node1');
+      for (let kk = 0; kk < 4; kk++) { if (ga[kk] <= 0) continue;
+        const [gx, gy] = gpuP(s, j, kk), col = fill(s, j, kk, x), dz = n1 ? dropH(du[kk]) * pitch * (kk ? 0.3 : 0.12) : 0; // GPU 1 falls a little, close up, the others from higher
+        g.globalAlpha = ga[kk]; isoBox(g, gx - half, gy - half, gx + half, gy + half, ISO.zb + dz, ISO.zt + dz, col.pair ? pairTones(col.pair) : tonesOf(col), hair);
+        if (n1 && kk === 0) mark('gpu1'); if (n1 && kk === HOT) mark('hot'); if (n1) gpuSlots(g, x, kk); }
+    }
+  }
+  // the order of the stages: a notched arrowhead on the ground of each avenue, 1 to 2 to 3 to 4, the return to 1 lighter
+  if (SA[NS - 1] > 0) { const m = 8 + (CITY.span - 8) / 2, d = CITY.span; g.fillStyle = T.arrow;
+    [[m, 4, 1, 0], [d + 4, m, 0, 1], [m, d + 4, -1, 0], [4, m, 0, -1]].forEach(([cu, cv, du, dv], i) => { const h = i === NS - 1 ? hi : 0, sc = 1 + 0.3 * h;
+      g.globalAlpha = SA[NS - 1] * (i === NS - 1 ? 0.55 + 0.45 * h : 1); g.fillStyle = h ? inkA(0.45 + 0.15 * h) : T.arrow; // darker and a little larger
+      tri(0, [[0.38, 0], [-0.3, 0.32], [-0.14, 0], [-0.3, -0.32]].map(([a, c]) => [cu + (du * a - dv * c) * sc, cv + (dv * a + du * c) * sc])); }); }
+  g.globalAlpha = 1;
+}
+const LAYERS = s => D.parallelism.layersPerStage[s].map(([a, b]) => `${a}-${b}`).join(', ');
+function floorLabel(g, s, b, top, al) { // the stage's name on the floor along its outer edge, as on the banner
+  const pitch = L.node + L.gn, m0 = (1 - 2 * CITY.gpu - CITY.gi) / 2 * pitch, u = ISO.z * Math.SQRT1_2, f = Math.max(8, Math.min(11.5, pitch * ISO.k * u * 0.62)) / u;
+  const [px, py] = ISO.P3(b.x - m0 + 0.15 * pitch, b.y - m0 + (top ? -1.15 : 9.15) * pitch, 0);
+  g.save(); g.globalAlpha = al; g.translate(px, py); g.transform(ISO.M[0], ISO.M[2], ISO.M[1], ISO.M[3], 0, 0); g.textAlign = 'left'; g.textBaseline = 'middle';
+  g.font = `500 ${f}px ${MONO_F}`; g.fillStyle = C.ink; g.fillText(`STAGE ${s + 1}`, 0, 0);
+  g.font = `400 ${f * 0.88}px ${MONO_F}`; g.fillStyle = C.muted; g.fillText(`layers ${LAYERS(s)}`, 0, (top ? -1 : 1) * f * 1.35);
+  g.restore();
+}
+function sendW(g, S, A, Bw, e, lw, col, al) { // a send at e along A to Bw (world), in the roofs' plane: a line from A to its head
+  g.globalAlpha = al; g.strokeStyle = g.fillStyle = col; dotLine(g, S(...A), S(...lerp2(A, Bw, e)), lw);
+}
+function drawStepMoves(g, t, now, S) {
+  const pitch = L.node + L.gn, pu = pitch * ISO.z * Math.SQRT1_2, tr = Math.max(0.8, pu * 0.05), lw = Math.max(1, pu * 0.05);
+  g.save(); g.globalCompositeOperation = 'source-over'; g.lineCap = 'round'; g.lineJoin = 'round'; g.fillStyle = g.strokeStyle = C.ink;
+  ST.forEach((Sg, s) => { const b = busy(s, t); if (!b) return; const q2 = passesAt(s, t), al = b * (q2.f && q2.b ? 0.4 : 0.55);
+    for (let j = 0; j < NPS; j++) for (let q = 0; q < 2; q++) { const [ka, kb, f] = trip(s * 4096 + j * 8 + q, now), A = S(...gpuW(s, j, ka)), Bp = S(...gpuW(s, j, kb));
+      const p0 = lerp2(A, Bp, easeIO(Math.max(0, f - 0.25))), p1 = lerp2(A, Bp, easeIO(f));
+      g.globalAlpha = al * 0.35; g.lineWidth = tr; g.beginPath(); g.moveTo(...p0); g.lineTo(...p1); g.stroke();
+      g.globalAlpha = al; g.beginPath(); g.arc(...p1, tr, 0, 7); g.fill(); } });
+  const mid = (s, j) => lerp2(gpuW(s, j, 0), gpuW(s, j, 3), 0.5); // a node's centre, in the world
+  for (const p of D.pipelineSends) { const u = (t - p.start) / SEND_VIS; if (u <= 0 || u >= 1) continue;
+    const sa = p.fromStage - 1, sb = p.toStage - 1, col = p.dir === 'backward' ? V.bwdnet : V.fwdnet;
+    for (let j = 0; j < NPS; j++) { const v = clamp01((u - STAGGER * hash(sb * 4096 + j)) / (1 - STAGGER)); if (v <= 0 || v >= 1) continue;
+      sendW(g, S, mid(sa, j), mid(sb, j), easeIO(v), lw, col, 0.85 * Math.min(1, v / 0.12, (1 - v) / 0.1)); } }
+  g.restore();
+}
+// the lens, as on the flat banner: one node magnified in the free corner left of the city, its four GPUs in the
+// city's fill, each labelled with the micro-batches it runs, dashed leaders to the node's roof; a hovered GPU's node
+// takes its place; wide layouts only, during the step, faded out in the end hold
+let LENS_A = 0;
+function drawLens(g, t, on, hv, fills) {
+  LENS_A += ((on && L.wide ? 1 : 0) - LENS_A) * 0.15; if (LENS_A < 0.02 || !fills) return;
+  const z = 30, gi = 3, nw = 2 * z + gi, pitch = L.node + L.gn, e = (CITY.body - CITY.gi) / 2 * pitch + 0.04 * pitch, [, b, , d] = ISO.M;
+  const roof = (s, j) => { const [x0, y0] = gpuW(s, j, 0), [x3, y3] = gpuW(s, j, 3), m = [(x0 + x3) / 2, (y0 + y3) / 2];
+    return [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([u, v]) => ISO.S(m[0] + u * e, m[1] + v * e)); };
+  // the lens's place: out of the city's upper-left edge, beside the first node of stage 4; n: that edge's outward
+  // normal on screen, square to world +y's image (b, d), toward world -x (isoCam's determinant is positive)
+  const R = ISO.S(...lerp2(gpuW(3, 0, 0), gpuW(3, 0, 3), 0.5)), nl = Math.hypot(d, b), n = [-d / nl, b / nl];
+  const eS = (1 - 2 * CITY.gpu - CITY.gi) / 2 * pitch + CITY.slab * pitch, Pe = ISO.S(L.blocks[3].x - eS, gpuW(3, 0, 0)[1]);
+  const hb = nw / 2 + 3, out = (Pe[0] - R[0]) * n[0] + (Pe[1] - R[1]) * n[1] + hb * (Math.abs(n[0]) + Math.abs(n[1])) + 18;
+  const cx = Math.max(hb + 6, Math.min(L.VW - hb - 6, R[0] + n[0] * out)), cy = Math.max(hb + 6, Math.min(L.VH - hb - 6, R[1] + n[1] * out));
+  const lx = Math.round(cx - nw / 2), ly = Math.round(cy - nw / 2), s = hv ? hv.s : 3, j = hv ? hv.j : 0, F = roof(s, j);
+  const box = [[lx - 3, ly - 3], [lx + nw + 3, ly - 3], [lx + nw + 3, ly + nw + 3], [lx - 3, ly + nw + 3]];
+  g.globalAlpha = LENS_A; g.strokeStyle = C.muted; g.lineWidth = 1; g.lineJoin = 'round';
+  g.beginPath(); F.forEach((q, i) => i ? g.lineTo(...q) : g.moveTo(...q)); g.closePath(); g.stroke();
+  const dx = (F[0][0] + F[2][0]) / 2 - cx, dy = (F[0][1] + F[2][1]) / 2 - cy, pv = q => q[0] * -dy + q[1] * dx; // the leaders: the two sides of the cone
+  const ext = (pts, sg) => pts.reduce((m, q) => sg * pv(q) > sg * pv(m) ? q : m);
+  g.setLineDash([3, 3]); g.beginPath(); for (const sg of [1, -1]) { g.moveTo(...ext(box, sg)); g.lineTo(...ext(F, sg)); } g.stroke(); g.setLineDash([]);
+  g.beginPath(); g.roundRect(lx - 3, ly - 3, nw + 6, nw + 6, 5); g.stroke();
+  const ps = optAt(t) ? { f: null, b: null } : shownAt(s, t), P_ = k => [lx + (k % 2) * (z + gi), ly + (k >> 1) * (z + gi)];
+  const tag = (q, x, y, al) => { g.font = font(11, 700); g.textAlign = al; g.textBaseline = 'middle'; g.fillStyle = onShade(q.microbatch);
+    g.fillText(`${q.microbatch} ${q.pass === 'forward' ? '→' : '←'}`, x, y); };
+  for (let k = 0; k < 4; k++) { const [x, y] = P_(k);
+    const fc = fills(s); g.fillStyle = fc.pair ? pairGrad(g, x, x + z, ...fc.pair) : rgb(fc); g.beginPath(); g.roundRect(x, y, z, z, 4); g.fill();
+    if (ps.f && ps.b) { tag(ps.f, x + 4, y + 9, 'left'); tag(ps.b, x + z - 4, y + z - 8, 'right'); }
+    else if (ps.f || ps.b) tag(ps.f || ps.b, x + z / 2, y + z / 2 + 0.5, 'center'); }
+  const lab = hv ? `node ${s * NPS + j + 1}, stage ${s + 1}` : 'one node, 4 GPUs';
+  g.font = font(12); g.fillStyle = C.muted; g.textAlign = 'left'; g.textBaseline = 'middle';
+  const lw = g.measureText(lab).width, H = cityHull(), inC = r => r[0] >= 4 && r[1] >= 4 && r[0] + r[2] <= L.VW - 4 && r[1] + r[3] <= L.VH - 4;
+  const sides = [[lx - 12 - lw, ly + nw / 2 - 8], [lx - 3, ly - 28], [lx - 3, ly + nw + 12], [lx + nw + 12, ly + nw / 2 - 8]].map(([u, v]) => [u, v, lw, 16]); // left, above, below, right
+  const r = sides.filter(inC).sort((p, q) => rectOnHull(H, p) - rectOnHull(H, q))[0] || sides[2]; g.fillText(lab, Math.max(4, r[0]), r[1] + 8); // the side with room, else the least covered
+  g.globalAlpha = 1;
+}
+
+// convex outlines on screen, so the lens's label keeps off the city
+const cross = (o, p, q) => (p[0] - o[0]) * (q[1] - o[1]) - (p[1] - o[1]) * (q[0] - o[0]);
+function hull(pts) {
+  const p = [...pts].sort((u, v) => u[0] - v[0] || u[1] - v[1]), lo = [], up = [];
+  for (const q of p) { while (lo.length > 1 && cross(lo[lo.length - 2], lo[lo.length - 1], q) <= 0) lo.pop(); lo.push(q); }
+  for (const q of p.reverse()) { while (up.length > 1 && cross(up[up.length - 2], up[up.length - 1], q) <= 0) up.pop(); up.push(q); }
+  return lo.slice(0, -1).concat(up.slice(0, -1));
+}
+const inHull = (H, q) => H.every((p, i) => cross(p, H[(i + 1) % H.length], q) >= 0);
+const rectOnHull = (H, r) => [0, 0.5, 1].reduce((n, u) => n + [0, 0.5, 1].filter(v => inHull(H, [r[0] + u * r[2], r[1] + v * r[3]])).length, 0) // of 9 samples
+  + H.filter(q => q[0] > r[0] && q[0] < r[0] + r[2] && q[1] > r[1] && q[1] < r[1] + r[3]).length;
+function cityHull() { // the city's outline on screen
+  const e = (1 - 2 * CITY.gpu - CITY.gi) / 2 * (L.node + L.gn) + CITY.slab * (L.node + L.gn), b0 = L.blocks[0], b2 = L.blocks[2], p = [];
+  for (const u of [b0.x - e, b2.x + L.Q + e]) for (const v of [b0.y - e, b2.y + L.Q + e]) for (const h of [0, ISO.zt]) p.push(ISO.P3(u, v, h));
+  return hull(p);
+}
+// what the caption's marked words name, picked out quietly: eased in over 350 ms from its hx (steady when the next
+// caption names the same thing), out over 200 ms before the next; { ref, al } at tour clock x
+function refAt(x) {
+  const i = capAt(x), c = CAPS[i], nx = CAPS[i + 1]; if (!c.ref) return { ref: null, al: 0 };
+  const was = i > 0 && CAPS[i - 1].ref === c.ref, stays = nx && nx.ref === c.ref, v = clamp01((x - c.hx) / 0.35);
+  return { ref: c.ref, al: (was ? 1 : 1 - (1 - v) ** 2) * (stays ? 1 : clamp01(((nx ? nx.x : INTRO) - x) / 0.2)) };
+}
+// the box of a highlighted GPU, node or stage at tour clock x: [u0, v0, u1, v1] (world), its top and bottom heights
+function refFace(ref, x) {
+  const pitch = L.node + L.gn, pad = (CITY.body - 2 * CITY.gpu - CITY.gi) / 2 * pitch, half = L.c / 2, sz = CITY.slabZ * pitch;
+  const gpu = q => { const [gx, gy] = gpuW(0, 0, q); return [gx - half, gy - half, gx + half, gy + half, ISO.zt, ISO.zb]; };
+  if (ref === 'gpu1') return gpu(0);
+  if (ref === 'hot') return gpu(HOT);
+  if (ref === 'node1') { const [x0, y0] = gpuP(0, 0, 0), [x3, y3] = gpuP(0, 0, 3); return [x0 - half - pad, y0 - half - pad, x3 + half + pad, y3 + half + pad, ISO.zb, sz]; } // its body
+  const b = L.blocks[0], [cw, ch] = copiesWH(tourU(x)), e = ((1 - 2 * CITY.gpu - CITY.gi) / 2 + CITY.slab * 0.6) * pitch; // out on the slab's rim, clear of the nodes
+  return [b.x - e, b.y - e, b.x + cw + e, b.y + ch + e, sz, sz]; // 'stage1': the ground of the copies so far
+}
+function refBounds(ref, x) { // where the highlight is on screen: [x0, y0, x1, y1]
+  const box = p => [Math.min(...p.map(q => q[0])), Math.min(...p.map(q => q[1])), Math.max(...p.map(q => q[0])), Math.max(...p.map(q => q[1]))];
+  if (ref === 'token' || ref === 'lane') { const pr = Math.min(6, Math.max(1.3, L.c * 0.17 * Math.sqrt(ISO.k))), r = Math.ceil(Math.round(Math.min(pr, 4.2) * 4) / 2 * 4) * 0.45,
+    [hx, hy] = ISO.S(...home(0)), [ex, ey] = ISO.S(...lane(0, ref === 'lane' ? 5 : 0));
+    return [Math.min(hx, ex) - r, Math.min(hy, ey) - r, Math.max(hx, ex) + r, Math.max(hy, ey) + r]; } // the glow's visible core
+  if (ref === 'avenue') { const q = [L.blocks[NS - 1], L.blocks[0]].map(bk => [bk.x + L.Q / 2, bk.y + L.Q / 2]), m = lerp2(q[0], q[1], 0.5), e = 0.5 * (L.node + L.gn);
+    return box([[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([u, v]) => ISO.P3(m[0] + u * e, m[1] + v * e, 0))); }
+  const [u0, v0, u1, v1, h, z0] = refFace(ref, x); return box([[u0, v0, h], [u1, v0, h], [u1, v1, h], [u0, v1, h], [u1, v1, z0], [u0, v1, z0]].map(q => ISO.P3(...q)));
+}
+// a GPU, a node or the stage: its top brightened and its silhouette inked, as its box is drawn, seen through this
+// frame's camera (the token and the avenue's arrowhead are picked out where they are drawn)
+function drawRef(g, { ref, al, xc }) {
+  if (al <= 0.01 || ref === 'token' || ref === 'lane' || ref === 'avenue') return;
+  const [u0, v0, u1, v1, h, z0] = refFace(ref, xc), P3 = ISO.P3;
+  const A = P3(u0, v0, h), Bq = P3(u1, v0, h), K = P3(u1, v1, h), Dd = P3(u0, v1, h), E = P3(u1, v1, z0), F = P3(u0, v1, z0), G = P3(u1, v0, z0);
+  const poly = pts => { g.beginPath(); pts.forEach((q, i) => i ? g.lineTo(...q) : g.moveTo(...q)); g.closePath(); };
+  g.globalAlpha = al; poly([A, Bq, K, Dd]); g.fillStyle = isDark() ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.55)'; g.fill();
+  poly(z0 < h ? [A, Bq, G, E, F, Dd] : [A, Bq, K, Dd]); g.lineJoin = 'miter'; g.strokeStyle = inkA(0.85); g.lineWidth = 4; g.stroke(); g.globalAlpha = 1;
+}
+// how far each caption drops into the gap over the card to keep off its own highlight, at this width (px; sampled
+// over its window through the camera of each moment, as the highlight is drawn)
+let CAPDY = [];
+function capDrops() {
+  const cap = document.getElementById('tcap'), [c0, c1] = cap.children, keep = [c0.innerHTML, c1.innerHTML, ISO, INTRO_X], cr = cv.getBoundingClientRect(); c1.innerHTML = '';
+  const row = document.getElementById('trow').getBoundingClientRect(), bot = row.bottom - 14 - cr.top, room = document.getElementById('scard').getBoundingClientRect().top - 12 - (row.bottom - 14); // clear of the card's caret
+  CAPDY = CAPS.map((c, i) => { if (!c.ref) return 0;
+    c0.innerHTML = c.html; const w = cap.offsetWidth, top = bot - cap.offsetHeight, x0 = cr.width / 2 - w / 2, x1 = cr.width / 2 + w / 2; let need = 0;
+    for (let x = c.x; x < (CAPS[i + 1] ? CAPS[i + 1].x : INTRO); x += 0.1) {
+      if (refAt(x).al <= 0.01) continue;
+      INTRO_X = tourU(x); ISO = isoCam(camera(INTRO_X)); const b = refBounds(c.ref, x); // the canvas clips what lies under it
+      if (b[0] < x1 && x0 < b[2]) need = Math.max(need, Math.min(b[3], cr.height) + 4 - top); }
+    return Math.round(Math.min(Math.max(0, need), Math.max(0, room))); });
+  [c0.innerHTML, c1.innerHTML, ISO, INTRO_X] = keep; c0.dataset.h = c1.dataset.h = ''; // redrawn on the next tick
+}
+function draw(t, now, xc) { // xc: the tour clock; x: the build's content time at it
+  const W = fig.clientWidth - 32;
+  if (!L || L.W !== W) L = layout(W);
+  const g = fitCanvas(cv, L.VW, L.VH); g.clearRect(0, 0, L.VW, L.VH);
+  const intro = xc < INTRO, x = intro ? tourU(xc) : B.step + xc - INTRO, IC = isoCam(intro ? camera(x) : FLAT_CAM), { k, S, inv } = IC;
+  ISO = IC;
+  HIT = HOV ? hitWorld(...inv(HOV.x, HOV.y)) : null; // labels show only for what the pointer (or a tap) is on
+  INTRO_X = intro ? x : null;
+  readV();
+  const cs = L.c * k, pr = Math.min(6, Math.max(1.3, L.c * 0.17 * Math.sqrt(k)));
+  // stage labels, on hover only
+  ST.forEach((Sg, s) => {
+    const al = intro ? sm((x - (s === 0 ? DE - 0.4 : B.pipe + 0.4)) / 0.6) : 1; if (al <= 0) return;
+    floorLabel(g, s, L.blocks[s], QPOS[s][1] === 0, al);
+  });
+  const fills = intro ? null : stepFills(t), ref = intro ? refAt(xc) : { ref: null, al: 0 };
+  drawIsoScene(g, intro ? x : 99, cs, fills || introFill, ref.ref === 'avenue' ? ref.al : 0, { ...ref, xc });
+  g.globalAlpha = 1;
+  if (intro) drawNodeMarks(g, x, S, cs);
+  const small = clamp01((44 - cs) / 16), off = 1 - sm((x - B.hand) / 0.35);
+  const ld = x >= B.stage ? 1 : small;
+  if (intro && ld > 0) drawInputs(g, S, cs, (s, j, kk) => s === 0 ? (x < B.stage ? 0 : [off * sm((x - LOAD(j, kk)) / 0.3), (1 - easeIO(clamp01((x - LOAD(j, kk)) / 0.3))) * -cs * 1.4]) : small * off * sm((x - arrive(s, j, kk)) / 0.15));
+  if (!intro && HIT && HIT.k != null) { const [hx, hy] = S(...gpuW(HIT.s, HIT.j, HIT.k)); g.strokeStyle = C.ink; g.lineWidth = 2 / ISO.z; isoAt(g, hx, hy, (ox, oy) => g.strokeRect(ox - cs / 2 - 2, oy - cs / 2 - 2, cs + 4, cs + 4)); }
+  // 9. each stage's input marks show until its first pass has started, not for the whole step
+  if (!intro) drawInputs(g, S, cs, s => clamp01((t - FIRST_IN[s] + 0.008) / 0.008) * (1 - clamp01((t - FIRST_IN[s] - 0.03) / 0.01)));
+  g.save(); if (isDark()) g.globalCompositeOperation = 'lighter';
+  const hop = (s, j, q, a, bwd, col) => { // col: the step's ink tokens (the tour keeps blue and orange)
+    const [ka, kb, f] = trip(s * 4096 + j * 8 + q, now), A = S(...gpuP(s, j, ka)), Bp = S(...gpuP(s, j, kb));
+    particle(g, col || (bwd ? V.bwdnv : V.fwdnv), ...lerp2(A, Bp, easeIO(Math.max(0, f - 0.22))), ...lerp2(A, Bp, easeIO(f)), pr, col ? a * 0.55 : a);
+  };
+  // a send: every GPU of one stage to the same-position GPU of the next (or previous), each a little apart in time
+  const sendSheet = (a, b, u, al, bwd) => {
+    const lw = Math.max(0.75, (L.node + L.gn) * ISO.k * ISO.z * Math.SQRT1_2 * 0.03);
+    for (let j = 0; j < NPS; j++) for (let kk = 0; kk < 4; kk++) {
+      const off = STAGGER * hash((b) * 4096 + j * 4 + kk), v = clamp01((u - off) / (1 - STAGGER)); if (v <= 0 || v >= 1) continue;
+      sendW(g, S, gpuW(a, j, kk), gpuW(b, j, kk), easeIO(v), lw, bwd ? V.bwdnet : V.fwdnet, al * Math.min(1, v / 0.15, (1 - v) / 0.1));
+    }
+  };
+  if ((ref.ref === 'token' || ref.ref === 'lane') && ref.al > 0.01) { const sp = sprite(intro && x >= FLIP ? V.bwdnv : V.fwdnv, Math.round(Math.min(pr, 4.2) * 4) / 2); // the token, or GPU 1's row, glowing softly
+    g.globalAlpha = ref.al * 0.6 * (intro ? 1 - win(x, AWAY[0], AWAY[1] - 0.2, 0.2) : 1); for (let i = 0; i < (ref.ref === 'lane' ? 6 : 1); i++) { const [hx, hy] = S(...lane(0, i)); g.drawImage(sp, hx - sp.width / 2, hy - sp.height / 2); } g.globalAlpha = 1; }
+  if (intro) { drawToken(g, x, S, pr); drawLoad(g, x, S, pr); drawLossBadge(g, x, S, cs); }
+  else drawStepMarks(g, t, S, now);
+  if (intro) {
+    for (let j = 0; j < NPS; j++) { // every node of the stage exchanges tokens while it computes
+      const a = win(x, NODE_LOAD(j) + 0.35, B.hand + 0.1, 0.35);
+      if (a > 0) hop(0, j, 0, a); if (a > 0 && x < B.pipe) hop(0, j, 1, a);
+    }
+    for (let s = 1; s < NS; s++) for (let j = 0; j < NPS; j += 1) { const a = win(x, SEND(s - 1) + SEND_DUR, B.hand + 0.1, 0.35); if (a > 0) hop(s, j, 0, a); }
+    for (let s = 0; s < NS; s++) { const u = (x - SEND(s)) / SEND_DUR; if (u > 0 && u < 1) sendSheet(s, (s + 1) % NS, u, 0.9, false); } // s = 3: the wrap to stage 1
+  } else {
+    drawStepMoves(g, t, now, S); // as the banner's city draws them
+  }
+  g.restore();
+  drawLens(g, t, !intro && holdAt == null, intro ? null : HIT, fills);
+  const sw = document.getElementById('scard').clientWidth;
+  if (isOpen()) SG = drawStrip(strip, intro ? 0 : t, sw, { wait: holdAt != null ? clamp01((performance.now() - holdAt) / 400) : 0, syncF: V.fwdnet, syncB: V.bwdnet, a2aF: V.fwdnv, a2aB: V.bwdnv, reveal: intro ? ST.map((_, s) => easeIO(clamp01((x - LANE(s)) / 0.45))) : null });
+  placeCardUi();
+  if (intro && x > B.hand) ST.forEach((Sg, s) => { // outline the quadrant whose schedule lane is being drawn
+    const a = win(x, LANE(s), LANE(s) + 0.3, 0.1); if (a <= 0) return;
+    const b = L.blocks[s], w = L.Q * k + 10, [cx, cy] = ISO.P3(b.x + L.Q / 2, b.y + L.Q / 2, 0);
+    g.globalAlpha = a; g.strokeStyle = C.ink; g.lineWidth = 1.5; isoAt(g, cx, cy, (ox, oy) => { g.beginPath(); g.roundRect(ox - w / 2, oy - w / 2, w, w, 6); g.stroke(); }); g.globalAlpha = 1;
+  });
+}
+function busy(s, t) { let n = 0; for (let q = 0; q < 6; q++) if (passBack(s, t, q * 0.0024)) n++; return n / 6; }
+
+// GPU q of node 1: its 32 expert slots, drawn with it so whatever stands in front covers them; through the token beat
+// each pick is marked from when its leader reaches it, through the uneven beat each expert used; darker while computing
+function gpuSlots(g, x, q) {
+  if (x > B.stage + 0.1) return;
+  const sl = clamp01((L.c * ISO.k - 60) / 30) * (x < UE0 ? sm((x - B.gpu1) / 0.2) : 1 - sm((x - (B.stage - 0.3)) / 0.3)), w = L.c * 0.07 * ISO.k;
+  if (sl <= 0) return;
+  for (let e = q * 32; e < q * 32 + 32; e++) {
+    const [px, py] = ISO.S(...slotW(e)); let st, a = sl;
+    if (x < UE0) { const picked = PICK_AT[e] != null && x >= PICK_AT[e]; st = picked && opAt(x)?.[2].op.startsWith('experts') ? 2 : picked ? 1 : 0;
+      a *= sm((x - appearAt(0, 0, q) - DROP - (e % 32) * 0.012) / 0.2); } // they fill in, row by row, once the GPU has landed
+    else { const used = UCOPIES.some(c => c.e === e); st = used && x >= UE_X && x < UE_X + UDUR[q] ? 2 : used ? 1 : 0; }
+    g.globalAlpha = a; slot(g, px, py, w, st);
+  }
+  g.globalAlpha = 1;
+}
+// one token per GPU followed through a layer: its row drops in, attention links it to the rest of its sequence, the
+// router picks 7 experts (leaders to them), the dispatch all-to-all sends a copy along each leader, experts, the combine
+// all-to-all brings them back and they are summed; the row fades off through the other layers, comes back orange with
+// the loss's gradient, and the gradients retrace the same path
+function drawToken(g, x, S, pr) {
+  if (x >= UE0) return; // drawLoad takes the rows over from here, as they are
+  const rr = Math.min(pr, 4.2) * 1.15, rl = Math.min(pr, 4) * 0.6, pitch = L.node + L.gn; // the followed token, the rest of its row
+  const at = (a, b) => clamp01((x - a) / (b - a)), o = i => OPS[i], P = (k, i) => slotW(TPICKS[k][i]);
+  const go = (A, Bp, u, i) => lerp2(A, Bp, easeIO(clamp01(u * 1.3 - i * 0.05))); // copy i of 7 along A to Bp, a little after copy i - 1
+  if (x < TOK_IN) return;
+  const col = x < FLIP ? V.fwdnv : V.bwdnv, settle = at(o(10)[1], UE0); // settle: the followed token rejoins its row for the next beat
+  const away = win(x, AWAY[0], AWAY[1] - 0.2, 0.2), ghost = 1 - 0.8 * away, lift = away * pitch * 0.05; // off through the other layers
+  const ring = (px, py, v, R0, R1, c, a) => { if (v <= 0 || v >= 1) return; const R = R0 + (R1 - R0) * easeIO(v); // a ripple on the face
+    g.globalAlpha = a * (1 - v); g.strokeStyle = c; g.lineWidth = 1.5; g.beginPath(); g.ellipse(px, py, R, R * 0.5, 0, 0, 7); g.stroke(); g.globalAlpha = 1; };
+  const arcs = (a, e, c) => { // attention: the followed token linked to each token of its row
+    for (let k = 0; k < GPN; k++) for (let i = 1; i < 6; i++) {
+      const al = sm((x - a - i * 0.05) / 0.15) * (1 - sm((x - e) / 0.12)); if (al <= 0) continue;
+      const A = S(...home(k)), Bq = S(...lane(k, i)), h = Math.hypot(Bq[0] - A[0], Bq[1] - A[1]) * 0.45;
+      g.globalAlpha = al * 0.6; g.strokeStyle = c; g.lineWidth = Math.max(0.8, rl * 0.4);
+      g.beginPath(); g.moveTo(...A); g.quadraticCurveTo((A[0] + Bq[0]) / 2, (A[1] + Bq[1]) / 2 - h, ...Bq); g.stroke();
+    }
+    g.globalAlpha = 1;
+  };
+  arcs(o(0)[0] + 0.3, o(1)[0] + 0.12, V.fwdnv); arcs(o(10)[0] + 0.05, o(10)[1] - 0.05, V.bwdnv);
+  // the router's leaders, gone as the copies travel them
+  const lead = 1 - at(o(2)[0], o(2)[1]);
+  if (lead > 0 && x > pickAt(0)) { g.save(); g.setLineDash([2, 3]); g.strokeStyle = C.ink; g.lineWidth = 1;
+    for (let k = 0; k < GPN; k++) for (let i = 0; i < 7; i++) { const u = easeIO(at(pickAt(i), pickAt(i) + LEAD)); if (u <= 0) continue;
+      const A = home(k); g.globalAlpha = lead * (k ? 0.12 : 0.5); // GPU 1's token, the one the caption names, the others' faint
+      g.beginPath(); g.moveTo(...S(...A)); g.lineTo(...S(...lerp2(A, P(k, i), u))); g.stroke(); }
+    g.restore(); }
+  for (let k = 0; k < GPN; k++) {
+    // the rest of the row: dropped in, dim while the first is followed, then alike for the next beat
+    for (let i = 1; i < 6; i++) { const u = at(tokIn(k, i), tokIn(k, i) + TOK_DROP); if (u <= 0) continue;
+      const [lx, ly] = lane(k, i), [px, py] = ISO.P3(lx, ly, ISO.zt + dropH(u) * pitch * 0.08 + lift); particle(g, col, px, py, px, py, rl, sm(u / 0.15) * (0.45 + 0.55 * settle) * ghost); }
+    const u0 = at(tokIn(k, 0), tokIn(k, 0) + TOK_DROP); if (u0 <= 0) continue;
+    const [hx, hy] = S(...home(k)), r1 = rr + (rl - rr) * settle;
+    ring(hx, hy, at(tokIn(k, 0) + TOK_DROP * 0.62, tokIn(k, 0) + TOK_DROP * 0.62 + 0.4), rl, rr * 4, col, 0.6); // it lands
+    ring(hx, hy, at(o(5)[0], o(5)[1] + 0.2), rr, rr * 4, col, 0.6); // the 7 results, summed
+    ring(hx, hy, at(FLIP - 0.4, FLIP), rr * 5, rr, C.ink, 0.5); // the loss's gradient, closing in on the token
+    ring(hx, hy, at(FLIP, FLIP + 0.4), rr, rr * 6, V.bwdnv, 0.8); // and the gradient it sends back
+    // the 7 copies: out to the picks and back, forward (dispatch, combine) and then backward (the same two moves reversed)
+    const leg = [[2, true], [3, true, 1], [4, false], [6, true], [7, true, 1], [8, false]].find(([n]) => x >= o(n)[0] && x < o(n + 1)[0]); // [op, outward, held]
+    if (!leg) { const [px, py] = ISO.P3(...home(k), ISO.zt + dropH(u0) * pitch * 0.08 + lift); particle(g, col, px, py, px, py, r1, sm(u0 / 0.15) * ghost); continue; }
+    const [n, out, held] = leg, u = held || at(o(n)[0], o(n)[1]);
+    for (let i = 0; i < 7; i++) { const a = out ? home(k) : P(k, i), b = out ? P(k, i) : home(k); // a short trail behind each moving copy
+      particle(g, col, ...S(...go(a, b, held ? u : Math.max(0, u - 0.12), i)), ...S(...go(a, b, u, i)), rr * 0.9, 1); }
+  }
+}
+
+// uneven load: many tokens, popular experts on GPU 3; it computes longest, the others wait, then the combine
+function drawLoad(g, x, S, pr) {
+  if (x < UE0 || x > B.stage + 0.1) return; // takes the rows and slots over from drawToken as they are, the tokens blue again: a new pass
+  const fade = 1 - sm((x - (B.stage - 0.3)) / 0.3), r = Math.min(pr, 4) * 0.6;
+  const at = c => { const [sx, sy] = slotW(c.e); return [sx + ((c.n % 3) - 1) * L.c * 0.026, sy + (Math.floor(c.n / 3) % 3 - 1) * L.c * 0.026]; };
+  const ud = easeIO(clamp01((x - UE_D[0]) / (UE_D[1] - UE_D[0]))), uc = easeIO(clamp01((x - UE_C[0]) / (UE_C[1] - UE_C[0])));
+  for (const c of UCOPIES) {
+    const H = lane(c.t.k, c.t.i), T = at(c), v = x < UE_C[0] ? ud : 1 - uc, d = 0.15;
+    const v0 = x < UE_C[0] ? easeIO(clamp01((x - UE_D[0]) / (UE_D[1] - UE_D[0]) - d)) : 1 - easeIO(clamp01((x - UE_C[0]) / (UE_C[1] - UE_C[0]) - d));
+    particle(g, V.fwdnv, ...S(...lerp2(H, T, v0)), ...S(...lerp2(H, T, v)), r, fade);
+  }
+  g.globalAlpha = 1;
+}
+const LOSS_STEP = ST[3].compute.filter(c => c.pass === 'forward' && ST[3].compute.some(b => b.pass === 'backward' && Math.abs(b.start - c.end) < 1e-4)).map(c => c.end);
+const LAST_BWD_S = ST.map(S => Math.max(...S.compute.filter(c => c.pass === 'backward').map(c => c.end)));
+const lossOn = t => Math.max(0, ...LOSS_STEP.map(e => win(t, e - 0.006, e + 0.014, 0.003)));
+const biasOn = (s, t) => win(t, LAST_BWD_S[s], LAST_BWD_S[s] + 0.03, 0.003);
+// the loss badge beside stage 4's name: a turn from forward (blue) into backward (orange)
+function lossBadge(g, S, a) {
+  if (a <= 0) return;
+  const b = L.blocks[3], [lx, ly] = S(b.x, b.y + L.Q), y = ly + 17;
+  g.font = font(13, 600); const x0 = lx + g.measureText('stage 4').width + 14, named = HIT && HIT.s === 3; // beside the stage name
+  g.globalAlpha = a; g.lineWidth = 2; g.lineCap = 'round';
+  g.strokeStyle = V.fwdnv; g.beginPath(); g.moveTo(x0, y - 9); g.lineTo(x0 + 10, y - 9); g.stroke();
+  g.strokeStyle = V.bwdnv; g.beginPath(); g.arc(x0 + 10, y - 4.5, 4.5, -Math.PI / 2, Math.PI / 2); g.lineTo(x0, y); g.stroke();
+  for (const [cx, cy, col] of [[x0, y - 9, V.fwdnv], [x0, y, V.bwdnv]]) { g.fillStyle = col; g.beginPath(); g.arc(cx, cy, 3.2, 0, 7); g.fill(); }
+  g.font = font(12, 600); g.fillStyle = C.ink; g.textAlign = 'left'; g.textBaseline = 'alphabetic'; if (named) g.fillText('loss', x0 + 20, y);
+  g.globalAlpha = 1;
+}
+function drawLossBadge(g, x, S, cs) {
+  // no loss badge in the pipeline beat: with two groups per stage, the first lap ends at layer 24, not at the loss
+  // the token beat's loss moment is told by the text line and the card; the tokens turning orange show it
+}
+// the step: the loss turn at stage 4, and the router-bias sync after each stage's last backward (a sweep across its copies)
+function drawStepMarks(g, t, S, now) {
+  lossBadge(g, S, lossOn(t));
+  ST.forEach((Sg, s) => {
+    const a = biasOn(s, t); if (a <= 0) return;
+    const b = L.blocks[s], u = clamp01((t - LAST_BWD_S[s]) / 0.03), xx = b.x + L.Q * easeIO(u);
+    g.globalAlpha = a * 0.85; g.strokeStyle = C.ink; g.lineWidth = 1.5; g.setLineDash([2, 3]);
+    g.beginPath(); g.moveTo(...S(xx, b.y - 3)); g.lineTo(...S(xx, b.y + L.Q + 3)); g.stroke(); g.setLineDash([]); g.globalAlpha = 1;
+  });
+}
+
+// each GPU's input, as a small mark in its corner: its own tokens (ink) on stage 1, received activations (amber) later
+function drawInputs(g, S, cs, show) {
+  const m = Math.min(5, Math.max(2, cs * 0.24));
+  ST.forEach((Sg, s) => {
+    g.fillStyle = C.ink; g.strokeStyle = C.ink; g.lineWidth = 1; // neutral: holding input is not activity
+    for (let j = 0; j < NPS; j++) for (let kk = 0; kk < 4; kk++) {
+      const v = show(s, j, kk), [a, dy] = Array.isArray(v) ? v : [v, 0]; if (a <= 0) continue;
+      const [px, py] = S(...gpuP(s, j, kk)), mm = m * (0.4 + 0.6 * a);
+      g.globalAlpha = a; isoAt(g, px, py, (ox, oy) => { if (s === 0) g.fillRect(ox + cs / 2 - mm - 1, oy - cs / 2 + 1 + dy, mm, mm); else g.strokeRect(ox + cs / 2 - mm - 0.5, oy - cs / 2 + 1.5 + dy, mm - 1, mm - 1); });
+    }
+  });
+  g.globalAlpha = 1;
+}
+
+// GPU names while they are big, and node 1's frame
+function drawNodeMarks(g, x, S, cs) {
+  const tx = clamp01((cs - 70) / 25);
+  if (tx > 0) for (let kk = 0; kk < 4; kk++) {
+    if (!HIT || HIT.s !== 0 || HIT.j !== 0 || HIT.k !== kk) continue; // a GPU's name and experts, on hover only
+    const al = tx * sm((x - appearAt(0, 0, kk) - 0.2) / 0.4) * (1 - sm((x - D0) / 0.3)); if (al <= 0) continue;
+    const [px, py] = S(...gpuW(0, 0, kk)), x0 = px - cs / 2 + 8, y0 = py - cs / 2 + 7;
+    g.globalAlpha = al; g.textAlign = 'left'; g.textBaseline = 'top';
+    g.font = font(13, 600); g.fillStyle = C.ink; g.fillText('GPU ' + (kk + 1), x0, y0);
+    g.font = font(11); g.fillStyle = C.muted; g.fillText(`experts ${kk * 32 + 1} to ${kk * 32 + 32}`, x0, y0 + 17);
+  }
+  const fr = sm((x - B.node - 0.6) / 0.4) * (1 - sm((x - B.stage - 0.2) / 0.5));
+  if (fr > 0) {
+    const [ax, ay] = S(...gpuW(0, 0, 0)), p = 6 + cs * 0.05;
+    g.globalAlpha = fr;
+    g.font = font(13, 600); g.fillStyle = C.ink; g.textAlign = 'left'; g.textBaseline = 'bottom'; if (HIT && HIT.s === 0 && HIT.j === 0) g.fillText('node 1', ax - cs / 2 - p, ay - cs / 2 - p - 5);
+  }
+  g.globalAlpha = 1;
+}
+
+// ---- sidebar ----
+const glyph = (cls, col) => `<i class="g ${cls}" style="background:${col};border-color:${col};color:${col}"></i>`;
+const sendGlyph = col => `<svg class="g send" viewBox="0 0 14 10" aria-hidden="true"><path d="M3 5h8" stroke="${col}" stroke-width="1.5"/><circle cx="3" cy="5" r="2.2" fill="${col}"/><circle cx="11" cy="5" r="2.2" fill="${col}"/></svg>`;
+// ---- clock and controls ----
+let clock = INTRO + (REDUCE ? 0.85 : 0) / RATE, playing = !REDUCE, last = null, holdAt = null, visible = true;
+const stepT = () => Math.max(0, Math.min(TOTAL, (clock - INTRO) * RATE));
+const scrub = document.getElementById('tscrub'), stourEl = document.getElementById('stour');
+const TOUR = ['1 GPU', 'Tokens and experts', 'One stage, 64 nodes', 'The pipeline, 4 stages', '1,024 GPUs']; // the tour, from the smallest scale up
+CHAPTERS.forEach(([, at], i) => { const k = document.createElement('i'); k.className = 'tk'; k.title = TOUR[i]; k.style.left = (at / INTRO * 100) + '%'; scrub.insertBefore(k, scrub.lastChild); });
+{ // the slider maps linearly to the tour clock; a drag pauses the tour, which plays on after it if it was playing
+  const to = v => { clock = Math.max(0, Math.min(INTRO - 1e-3, v)); holdAt = null; }; // INTRO itself would leave the tour
+  const at = e => { const r = scrub.getBoundingClientRect(); to(clamp01((e.clientX - r.left) / r.width) * INTRO); };
+  let drag = false, was = false;
+  scrub.addEventListener('pointerdown', e => { drag = true; was = playing; playing = false; scrub.setPointerCapture(e.pointerId); at(e); });
+  scrub.addEventListener('pointermove', e => { if (drag) at(e); });
+  for (const ev of ['pointerup', 'pointercancel']) scrub.addEventListener(ev, () => { if (drag) { drag = false; playing = was; } });
+  scrub.addEventListener('keydown', e => { const d = { ArrowLeft: -0.5, ArrowRight: 0.5, Home: -INTRO, End: INTRO }[e.key]; if (d == null) return;
+    e.preventDefault(); e.stopPropagation(); to(clock + d); }); } // not the page's ArrowRight (next chapter)
+const tourGo = document.getElementById('tourGo');
+tourGo.onclick = () => { clock = clock < INTRO ? INTRO : 0; holdAt = null; playing = true; }; // the tour from one GPU, or back to the step
+const hroot = document.getElementById('hroot'), sfold = document.getElementById('sfold');
+const isOpen = () => hroot.classList.contains('open');
+function setOpen(on) { // the schedule card, unfolded under the city (?open=1 starts so)
+  hroot.classList.toggle('open', on); sfold.setAttribute('aria-expanded', String(on)); reservedW = 0; dirty = true; }
+sfold.onclick = () => setOpen(!isOpen());
+const nextAt = () => (CHAPTERS.find(([, at]) => at > clock + 0.05) || [, INTRO])[1]; // the next part of the tour, or the step
+// a frame is drawn only when it would differ: the clock moved, the end hold's fade runs, or the pointer, the keys, the
+// size or the scheme changed (dirty); never off screen, and at most about 60 a second on faster displays
+let dirty = true, drawnKey = '', drawnAt = -1e9;
+for (const ev of ['pointermove', 'pointerdown', 'pointerup', 'pointerout', 'keydown', 'wheel', 'resize', 'focus'])
+  addEventListener(ev, () => { dirty = true; }, { capture: true, passive: true });
+document.fonts.ready.then(() => { dirty = true; });
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { dirty = true; });
+function frame(ms) {
+  requestAnimationFrame(frame);
+  const dt = last == null ? 0 : Math.min(0.1, (ms - last) / 1000); last = ms;
+  if (playing && visible) {
+    if (clock >= INTRO && stepT() >= TOTAL) { holdAt ??= ms; if (ms - holdAt > readT([0, END_SUB]) * 1000) { clock = INTRO; holdAt = null; } }
+    else clock += dt; // the tour's pauses are in its clock (PAUSES), so a recorder setting the clock sees them too
+  }
+  if (!visible || ms - drawnAt < 10) return;
+  const key = clock + '|' + (holdAt == null ? -1 : Math.min(1, (performance.now() - holdAt) / 400)) + '|' + playing;
+  if (!dirty && key === drawnKey) return;
+  dirty = false; drawnKey = key; drawnAt = ms;
+  draw(stepT(), REDUCE ? 0 : clock, clock); // its play clock, so nothing moves while paused
+  tickPanel();
+}
+let lastRun = '', reservedW = 0;
+document.fonts.ready.then(() => { reservedW = 0; });
+function reserveCard() { // the card's line and the key keep their tallest height at this width, so nothing under them moves
+  const sub = document.getElementById('sub'), run = document.getElementById('run'), keep = [sub.textContent, run.innerHTML];
+  sub.style.minHeight = run.style.minHeight = '';
+  let hs = 0, hr = 0;
+  for (const str of [...CHAP_SUB, END_SUB, ...LSUB.map(q => q[1])]) { sub.textContent = str; hs = Math.max(hs, sub.offsetHeight); }
+  run.innerHTML = legendRow(0, false); hr = run.offsetHeight; // the tour leaves the key's row empty
+  [sub.textContent, run.innerHTML] = keep;
+  sub.style.minHeight = hs + 'px'; run.style.minHeight = hr + 'px';
+}
+function tickPanel() {
+  const intro = clock < INTRO, t = stepT();
+  if (fig.clientWidth !== reservedW) { reservedW = fig.clientWidth; reserveCard(); capDrops(); dirty = true; } // the strip again, at the card's new height
+  const set = (id, v) => { const e = document.getElementById(id); if (e.textContent !== v) e.textContent = v; };
+  tourGo.classList.toggle('back', intro); stourEl.classList.toggle('off', !intro);
+  const u = intro ? tourU(clock) : B.step, hand = u >= B.hand, run = document.getElementById('run'), html = intro && !hand ? '' : legendRow(t, intro);
+  if (html !== lastRun) { setRun(run, html); lastRun = html; }
+  let cur = 0; CHAPTERS.forEach(([, at], i) => { if (clock >= at) cur = i; });
+  if (intro) { const p = (100 * clamp01(clock / INTRO)).toFixed(2) + '%'; scrub.querySelector('.fl').style.width = scrub.querySelector('.th').style.left = p;
+    scrub.setAttribute('aria-valuenow', Math.round(100 * clock / INTRO)); scrub.setAttribute('aria-valuetext', TOUR[cur]); }
+  set('sub', holdAt != null ? END_SUB : !intro ? LSUB[phaseOf(LSUB, t)][1] : CHAP_SUB[cur]); // the step: its narration, then its end hold
+  const cap = document.getElementById('tcap'), [c0, c1] = cap.children, ci = capAt(clock), fa = clamp01((clock - CAPS[ci].x) / 0.18), out = clamp01((INTRO - clock) / 0.3);
+  const cn = intro ? CAPS[ci].html : '', cp = intro && ci > 0 ? CAPS[ci - 1].html : ''; // the tour's caption crossfades in over the last, and out as the step starts (its row stays)
+  for (const [e, v] of [[c0, cn], [c1, cp]]) if (e.dataset.h !== v) { e.innerHTML = e.dataset.h = v; } // the source, as the parsed HTML may differ
+  c0.style.opacity = fa * out; c1.style.opacity = (1 - fa) * out; cap.style.setProperty('--dy', (intro ? CAPDY[ci] || 0 : 0) + 'px');
+  const ph = phaseOf(LSUB, t); // the card's header: the phase of the step, or the scale of the tour
+  set('sphase', holdAt != null ? 'Where the time goes' : !intro ? LNAME[ph] : hand ? 'One training step' : TOUR[cur]);
+  const b = document.getElementById('play'), h = playing ? PAUSE : PLAY; if (b.dataset.s !== h) { b.innerHTML = h; b.dataset.s = h; }
+}
+setOpen(new URLSearchParams(location.search).get('open') === '1');
+requestAnimationFrame(frame);
+new IntersectionObserver(es => { visible = es[0].isIntersecting; dirty = true; }).observe(document.body);
+document.getElementById('play').onclick = () => { playing = !playing; };
+addEventListener('keydown', e => {
+  if (e.code === 'Space') { e.preventDefault(); playing = !playing; }
+  if (e.code === 'ArrowRight' && clock < INTRO) { clock = nextAt(); holdAt = null; }
+});
+let HOV = null, HIT = null, lastPtr = 'mouse';
+function cvPt(e) { // a pointer event, in canvas points
+  const fr = cv.offsetParent.getBoundingClientRect();
+  return [e.clientX - fr.left - cv.offsetLeft, e.clientY - fr.top - cv.offsetTop];
+}
+function hitWorld(wx, wy) {
+  for (let s = 0; s < NS; s++) {
+    const b = L.blocks[s], lab = 26;
+    if (wx < b.x - 4 || wx > b.x + L.Q + 4 || wy < b.y - (QPOS[s][1] === 0 ? lab : 4) || wy > b.y + L.Q + (QPOS[s][1] === 0 ? 4 : lab)) continue;
+    const q = Math.max(0, Math.min(7, Math.floor((wx - b.x) / (L.node + L.gn)))), rr = Math.max(0, Math.min(7, Math.floor((wy - b.y) / (L.node + L.gn))));
+    const lx = wx - b.x - q * (L.node + L.gn), ly = wy - b.y - rr * (L.node + L.gn);
+    return { s, j: rr * 8 + q, k: (lx > L.c ? 1 : 0) + (ly > L.c ? 2 : 0) };
+  }
+  return null;
+}
+cv.addEventListener('pointerdown', e => { lastPtr = e.pointerType; if (e.pointerType !== 'mouse') { const [hx, hy] = cvPt(e); HOV = { x: hx, y: hy }; } });
+cv.addEventListener('click', () => { if (lastPtr !== 'mouse') return; if (clock < INTRO) { clock = nextAt(); playing = true; } });
+const SP = { seek: v => { clock = INTRO + Math.max(0, Math.min(TOTAL, v)) / RATE; holdAt = null; }, set playing(v) { playing = v; } };
+wireStrip(strip, SP, () => SG);
+window.__dStep = (v, play) => { clock = INTRO + v / RATE; holdAt = null; playing = play; };
+window.__dT = () => (clock >= INTRO ? stepT() : null);
+window.__B = { ...B, LOSS, UE0, UE_D, UE_X, UE_C, UDUR, ULOAD, SEND2: B.pipe + 1.3 + 2 * 1.2 };
+window.__intro = v => { playing = false; clock = v; }; // v: the tour clock (pauses included)
+window.__dTour = () => { clock = 0; holdAt = null; playing = true; }; // the tour from one GPU
+cv.addEventListener('pointermove', e => {
+  if (e.pointerType === 'mouse') { const [hx, hy] = cvPt(e); HOV = { x: hx, y: hy }; }
+  if (clock < INTRO) { tip.style.display = 'none'; cv.style.cursor = 'pointer'; return; }
+  cv.style.cursor = 'default';
+  const [x, y] = cvPt(e), fr = cv.offsetParent.getBoundingClientRect(), sx = e.clientX - fr.left, sy = e.clientY - fr.top;
+  const h = ISO && hitWorld(...ISO.inv(x, y)); // the GPU under the pointer, through the city's projection (as the lens and the outline)
+  if (!h) { tip.style.display = 'none'; return; }
+  tip.innerHTML = gpuInfo(h.s, h.j, h.k, stepT());
+  tip.style.display = 'block'; const w = tip.offsetWidth;
+  tip.style.left = (x + 16 + w < L.VW ? sx + 16 : sx - w - 16) + 'px'; tip.style.top = (sy + 14) + 'px';
+});
+cv.addEventListener('pointerleave', e => { tip.style.display = 'none'; if (e.pointerType === 'mouse') HOV = null; });
+window.__hover = (x, y) => { HOV = x == null ? null : { x, y }; dirty = true; };
+
+
+// ================= header mode =================
+if (new URLSearchParams(location.search).get('title') === '0') document.documentElement.classList.add('notitle');
+{ const h = document.getElementById('ihelp'), b = h.querySelector('button'), tp = document.getElementById('ihelptip'), root = document.getElementById('hroot');
+  const place = () => { // inside #hroot (it clips): as wide as there is room, above the button (over the field's empty foot), below only if it fits there and not above
+    const idle = isDark() ? '#272a30' : '#eceef1', sw = { f: RAMP_F[4], b: RAMP_B[4], fb: pairCss(RAMP_F[4], RAMP_B[4]), idle, sum: rgb(mix(hexRgb(idle), hexRgb(C.muted), 0.5)), hatch: hexA(C.muted, 0.75), net: V.fwdnet || C.ink };
+    for (const k in sw) tp.style.setProperty('--sw-' + k, sw[k]); // the key's colours, as legendRow draws them
+    const r0 = root.getBoundingClientRect(), m = 12; tp.style.maxHeight = ''; tp.style.width = Math.min(340, r0.width - 2 * m) + 'px';
+    const rb = h.getBoundingClientRect(), w = tp.offsetWidth, below = r0.bottom - rb.bottom - 8 - m, above = rb.top - r0.top - 8 - m, down = tp.scrollHeight > above && (tp.scrollHeight <= below || below > above);
+    h.classList.toggle('down', down); tp.style.maxHeight = Math.max(60, down ? below : above) + 'px';
+    tp.style.right = 'auto'; tp.style.left = (Math.max(r0.left + m, Math.min(r0.right - m - w, rb.right - w)) - rb.left) + 'px';
+  };
+  const set = on => { if (on) place(); h.classList.toggle('on', on); b.setAttribute('aria-expanded', String(on)); };
+  h.addEventListener('pointerenter', place); h.addEventListener('focusin', place); // hover and focus open it too (CSS)
+  window.__help = () => ({ root: root.getBoundingClientRect(), tip: tp.getBoundingClientRect() });
+  b.addEventListener('click', () => set(!h.classList.contains('on')));
+  document.addEventListener('pointerdown', e => { if (!h.contains(e.target)) set(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') set(false); }); }
+for (const [ev, on] of [['keydown', true], ['pointerdown', false]]) addEventListener(ev, () => document.documentElement.classList.toggle('kbd', on), true); // focus rings for keys only
+{ // the key's items: a line on what each stands for, in a small card over the item (under it without room), inside #hroot
+  const run = document.getElementById('run'), kt = document.getElementById('ktip'), root = document.getElementById('hroot');
+  let tm = null, cur = null;
+  const hide = () => { clearTimeout(tm); cur = null; kt.style.display = 'none'; };
+  const show = el => { if (cur === el) return; hide(); cur = el; kt.textContent = keyTip(el.dataset.k);
+    tm = setTimeout(() => { if (!el.isConnected) return hide(); kt.style.display = 'block';
+      const f = fig.getBoundingClientRect(), r = el.getBoundingClientRect(), r0 = root.getBoundingClientRect(), w = kt.offsetWidth, h = kt.offsetHeight;
+      const x = Math.max(r0.left + 8, Math.min(r0.right - 8 - w, r.left + r.width / 2 - w / 2)), y = r.top - h - 8 >= r0.top + 4 ? r.top - h - 8 : r.bottom + 8;
+      kt.style.left = (x - f.left) + 'px'; kt.style.top = (y - f.top) + 'px'; }, 120); };
+  run.addEventListener('pointerover', e => { const el = e.target.closest('.ki'); if (el) show(el); });
+  run.addEventListener('pointerout', e => { const el = e.target.closest('.ki'); if (el && !el.contains(e.relatedTarget)) hide(); });
+  run.addEventListener('focusin', e => { const el = e.target.closest('.ki'); if (el) show(el); });
+  run.addEventListener('focusout', hide);
+  addEventListener('keydown', e => { if (e.key === 'Escape') hide(); }); }
+
+
+// ===== overlap version: blue is a forward, orange a backward, and each micro-batch has its own shade (and number) =====
+// light ramps only (the dark steps read heavy): OKLCH lightness 0.88 down to 0.62, chroma 0.06 up to 0.16, at the hues
+// of the dataviz palette's blue (#2a78d6) and orange (#eb6834), so micro-batch k has the same lightness in both passes
+const RAMP_F = ['#bfdafe', '#accefc', '#9ac2f8', '#87b7f5', '#75abf1', '#639fed', '#4f92e8', '#3b86e4'];
+const RAMP_B = ['#fbcbba', '#f7bca7', '#f2ad94', '#ec9d81', '#e68e6e', '#e07e5a', '#da6e46', '#d35e2f'];
+const shade = c => (c.pass === 'forward' ? RAMP_F : RAMP_B)[(c.microbatch - 1) % 8];
+const onShade = m => '#16181d'; // number text: dark on every shade (all light)
+function passesAt(s, t) { // the forward and the backward a stage runs at t (a paired block has both)
+  const r = { f: null, b: null };
+  for (const c of ST[s].compute) if (t >= c.start && t < c.end) r[c.pass === 'forward' ? 'f' : 'b'] = c;
+  return r;
+}
+const GAP = 0.03; // step seconds: a stage idle for less than this between two passes keeps showing the last one
+function shownAt(s, t) {
+  const r = passesAt(s, t); if (r.f || r.b) return r;
+  let prev = null, next = false;
+  for (const c of ST[s].compute) { if (c.end <= t && t - c.end < GAP && (!prev || c.end > prev.end)) prev = c; if (c.start > t && c.start - t < GAP) next = true; }
+  if (!prev || !next) return r;
+  for (const c of ST[s].compute) if (Math.abs(c.end - prev.end) < 1e-9) r[c.pass === 'forward' ? 'f' : 'b'] = c; // a pair ends together
+  return r;
+}
+// the seam between a paired GPU's blue and orange, blended in OKLCH with the hue turning the warm way, so it never
+// greys as an sRGB blend does
+function hex2lab(h) {
+  const f = v => { v /= 255; return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
+  const [r, g, b] = [1, 3, 5].map(i => f(parseInt(h.slice(i, i + 2), 16)));
+  const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b), m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b), q = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+  return [0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * q, 1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * q, 0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * q];
+}
+function lch2css(L, C, H) {
+  const a = C * Math.cos(H), b = C * Math.sin(H);
+  const l = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3, m = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3, q = (L - 0.0894841775 * a - 1.2914855480 * b) ** 3;
+  const f = v => { v = Math.max(0, Math.min(1, v)); return Math.round(255 * (v <= 0.0031308 ? 12.92 * v : 1.055 * v ** (1 / 2.4) - 0.055)); };
+  return `rgb(${f(4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * q)},${f(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * q)},${f(-0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * q)})`;
+}
+function blendStops(cf, cb) { // blue (hue ~259 deg) to orange (~41 deg) the increasing way: violet, then pink
+  const [L1, a1, b1] = hex2lab(cf), [L2, a2, b2] = hex2lab(cb), C1 = Math.hypot(a1, b1), C2 = Math.hypot(a2, b2);
+  let h1 = Math.atan2(b1, a1), h2 = Math.atan2(b2, a2); if (h2 < h1) h2 += 2 * Math.PI;
+  return [0, 0.2, 0.4, 0.6, 0.8, 1].map(u => [u, lch2css(L1 + (L2 - L1) * u, C1 + (C2 - C1) * u + 0.02 * Math.sin(Math.PI * u), h1 + (h2 - h1) * u)]);
+}
+const hex = c => '#' + c.map(v => Math.round(v).toString(16).padStart(2, '0')).join('');
+const soften = (col, u) => u ? hex(mix(hexRgb(col), hexRgb(C.bg), u)) : col;
+// a GPU running both passes, left to right: its forward's blue, a short seam, its backward's orange (no violet fill)
+const SEAM = [0.38, 0.62], PAIR = {};
+const pairStops = (cf, cb) => PAIR[cf + cb] ??= [[0, cf], ...blendStops(cf, cb).map(([u, c]) => [SEAM[0] + (SEAM[1] - SEAM[0]) * u, c]), [1, cb]];
+const pairGrad = (g, x0, x1, cf, cb) => { const gr = g.createLinearGradient(x0, 0, x1, 0); for (const [u, c] of pairStops(cf, cb)) gr.addColorStop(u, c); return gr; };
+const pairCss = (cf, cb) => `linear-gradient(90deg, ${pairStops(cf, cb).map(([u, c]) => `${c} ${(u * 100).toFixed(1)}%`).join(', ')})`;
+// the grid's look: rounded GPUs in their pass's shade, a little paler than the schedule's
+const GRID = { r: 0.25, soft: 0.15, dots: 0.6 };
+const inkA = a => { const [r, g2, b] = hexRgb(C.ink); return `rgba(${r},${g2},${b},${a})`; };
+function slot(g, px, py, w, state) { // an expert's slot on its GPU's top: engraved, marked when a token picked it, ink while it computes
+  g.fillStyle = state === 2 ? C.ink : inkA(state === 1 ? 0.5 : isDark() ? 0.13 : 0.11);
+  isoAt(g, px, py, (ox, oy) => { g.beginPath(); g.roundRect(ox - w / 2, oy - w / 2, w, w, w * 0.28); g.fill(); });
+}
+function gpuInfo(s, j, k, t) { // the tooltip of one GPU: its place, its layers and experts, what it runs at t (t < 0: none)
+  const node = s * NPS + j, gpu = node * GPN + k, ps = t < 0 ? { f: null, b: null } : passesAt(s, t);
+  const E = D.model.experts / D.parallelism.ep, run = q => `${q.pass} of micro-batch ${q.microbatch} <span class="m">(layers ${layersOf(s, q.chunk)})</span>`;
+  const sum = !ps.f && !ps.b && t >= 0 && syncAt(s, t).some(y_ => y_.kind === 'gradient reduce-scatter');
+  const now = ps.f && ps.b ? `${run(ps.f)}<br>and the ${run(ps.b)}` : ps.f || ps.b ? run(ps.f || ps.b)
+    : t >= 0 && optAt(t) ? 'the optimizer step' : sum ? 'summing gradients with its copies' : 'waiting';
+  return `<b>GPU ${(gpu + 1).toLocaleString('en-US')}</b> <span class="m">of 1,024, node ${node + 1} of ${NS * NPS}</span><br>`
+    + `stage ${s + 1}: layers ${D.parallelism.layersPerStage[s].map(r => r.join(' to ')).join(' and ')}<br>`
+    + `<span class="m">routed experts ${k * E + 1} to ${(k + 1) * E} of each MoE layer</span>` + (t < 0 ? '' : `<br>now: ${now}`);
+}
+const layersOf = (s, chunk) => D.parallelism.layersPerStage[s][chunk - 1].join(' to ');
+// the key, on the row under the schedule, in the banner's own type: the micro-batch shades of each pass, and the overlap
+// what one GPU holds, from the build's first frame: its share of the experts as small cells, and tokens moving
+// between them; the cells give way to plain squares once the camera has pulled back too far to draw them
+// one node, large: four GPUs in a row (2 x 2 on phones), each with its share of the experts as cells and a row of
+// its tokens; a token lights up, its top-k experts light up, a copy goes to each and comes back (dispatch, combine).
+// Counts from D (the Alps run: 128 routed experts, EP 4 so 32 per GPU, top-7; the shared expert is not drawn); which
+// experts a token picks and the timing are scripted. One frame encloses the four GPUs as one node.
+// one subtitle per change: the build's four beats, then the step's phases; short phases are slowed down to be read
+// the loop names the colours as they first appear; the steady state gets its own line once stage 1 runs its first
+// backward; the gradient sum and the optimizer share the step's last line, the optimizer at the loop's own pace
+const STEADY = Math.min(...ST[0].compute.filter(c => c.pass === 'backward').map(c => c.start));
+// the first forward that wraps from stage 4 back to stage 1 (the second group of layers)
+const WRAP = Math.min(...D.pipelineSends.filter(p => p.dir === 'forward' && p.toStage < p.fromStage).map(p => p.start));
+// the first stage to run out of forwards, and the first gradient sum (one per group of layers, as its last backward ends)
+const DRAIN = Math.min(...ST.map(S => Math.max(...S.compute.filter(c => c.pass === 'forward').map(c => c.end))));
+const SYNC0 = Math.min(...ST.flatMap(S => S.sync.filter(x => x.kind === 'gradient reduce-scatter').map(x => x.start)));
+const LSUB = [[0, 'One at a time, micro-batches enter stage 1 and hand their activations down the pipeline.'],
+  [WRAP, 'Micro-batch 1 wraps back to stage 1; interleaving makes every micro-batch cross the stages twice.'],
+  [FIRST_BWD, 'At the loss, micro-batch 1 turns around and its backward runs the stages in reverse.'],
+  [STEADY, "Here is the heart of the schedule: each GPU runs one micro-batch's forward beside another's backward."],
+  [DRAIN, 'Stage 1 runs out of forwards first, then the others, leaving backwards only.'],
+  [SYNC0, 'The backwards wind down; a stage with none left sums its gradients with its copies.'],
+  [OPT.start, 'Once every stage has summed, the optimizer updates the weights on every GPU.']];
+// the end of each step holds on the full schedule, its waiting time picked out, before the next step
+const END_SUB = `Each stage spends about ${pctP(sharesP().tok)} of the step moving tokens to and from experts, and sits idle about ${pctP(sharesP().idle)} in the hatched pipeline bubble.`;
+const phaseOf = (L, u) => L.reduce((i, q, n) => u >= q[0] ? n : i, 0);
+
+// embedded in the blog's hero: report the height so the parent can fit the iframe
+if (window.parent !== window) {
+  let lastH = 0;
+  const post = () => { const h = Math.ceil(document.body.getBoundingClientRect().height); if (h !== lastH) { lastH = h; parent.postMessage({ moeheadline: 1, h }, '*'); } };
+  new ResizeObserver(post).observe(document.body);
+  post();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+import{t as e}from"./theme-CNAocXW-.js";var t=(t,n=720)=>`<p style="max-width:${n}px;margin:16px 0 0;font-size:14px;line-height:1.5;color:${e.muted}">${t}</p>`;export{t};

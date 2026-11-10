@@ -1,5 +1,17 @@
 [
   {
+    "title": "The Ultimate MoE Training Handbook (Chinese Translation)",
+    "summary": "Simplified Chinese translation of the Hugging Face handbook on training Mixture-of-Experts models, by Nouamane Tazi et al. Shared under CC BY-NC-SA 4.0.",
+    "date": "Nov. 2026",
+    "link": "blog-pages/moe-training-handbook-zh/index.html",
+    "linkText": "Read All",
+    "tags": [
+      "MoE",
+      "LLM Training",
+      "Translation"
+    ]
+  },
+  {
     "title": "SIOP: Self-Induced Outcome Potential",
     "summary": "Verifier-free turn-level credit assignment for long-horizon LLM agents.",
     "date": "May 2026",
