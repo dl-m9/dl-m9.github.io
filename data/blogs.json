@@ -1,6 +1,6 @@
 [
   {
-    "title": "The Ultimate MoE Training Handbook (Chinese Translation)",
+    "title": "The Ultimate MoE Training Handbook",
     "summary": "Simplified Chinese translation of the Hugging Face handbook on training Mixture-of-Experts models, by Nouamane Tazi et al. Shared under CC BY-NC-SA 4.0.",
     "date": "Nov. 2026",
     "link": "https://dl-m9.github.io/blog/posts/moe-training-handbook-zh/",
