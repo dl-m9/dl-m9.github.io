@@ -29,6 +29,7 @@
 
 - Update homepage biography, education, research interests, services, and similar hand-written sections in `index.html`.
 - Update news items in `data/news.json`.
+- A publication-status or CV update does not automatically require a News announcement. Add one only when explicitly requested. When removing a News item, preserve the publication status and CV entry.
 - Update publication items in `data/publications.json`.
 - Update profile metadata such as name, subtitle, social links, and avatar in `data/profile-info.json`.
 - Update project or paper-specific landing pages inside `paper-pages/<paper-name>/`.
