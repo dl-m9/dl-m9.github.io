@@ -40,7 +40,7 @@
 - Prefer small, localized edits over broad rewrites.
 - Keep wording concise and professional for academic content.
 - When editing JSON content files, preserve valid JSON formatting and chronological ordering conventions already used in the file.
-- When adding a new publication item, or changing an existing preprint to an accepted paper, move it to the front of the relevant/top publication group unless the user says otherwise.
+- When adding a new publication item, or changing an existing preprint to an accepted paper, move it to the front of the relevant/top publication group unless the user says otherwise. Preserve explicit user-defined ordering during later metadata updates. CP-Guard+ is ordered immediately after InfoReasoner (ICML 2026) and before GCP in the 2026 accepted group. Do not add extra resource tags, such as PDF or Code, as a side effect of a status update unless requested. CP-Guard+ has no PDF tag.
 - Keep the Honors & Awards items in `index.html` sorted by date in descending order, with the newest honor first.
 - When adding links to paper pages or homepage cards, reuse existing button/link patterns instead of inventing new markup.
 - When updating a paper project page venue/status, follow existing paper-page nav style: place the venue/status text in the center of the nav bar when needed. Do not add extra badge-like buttons under the title unless the user explicitly asks.

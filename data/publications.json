@@ -47,35 +47,6 @@
     ]
   },
   {
-    "title": "CP-Guard+: A New Paradigm for Malicious Agent Detection and Defense in Collaborative Perception",
-    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Zihang Fang, Guowen Xu, Yiqin Deng, Sam Kwong, Yuguang Fang",
-    "type": "accepted",
-    "venue": "IEEE Transactions on Dependable and Secure Computing.",
-    "year": "2026",
-    "isFirstAuthor": true,
-    "categories": ["trustworthiness"],
-    "tags": [
-      {
-        "text": "TDSC",
-        "class": "venue-tag"
-      },
-      {
-        "text": "Project",
-        "class": "code-tag",
-        "link": "paper-pages/cpguardp/index.html"
-      },
-      {
-        "text": "PDF",
-        "class": "code-tag",
-        "link": "https://arxiv.org/abs/2502.07807"
-      },
-      {
-        "text": "CCF-A",
-        "class": "ccf-tag"
-      }
-    ]
-  },
-  {
     "title": "Optimizing Agentic Reasoning with Retrieval via Synthetic Semantic Information Gain Reward",
     "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yong Dai, Yuzhi Zhao, Yihang Tao, Yu Guo, Zhengru Fang, Sam Tak Wu Kwong, Yuguang Fang",
     "type": "accepted",
@@ -92,6 +63,30 @@
         "text": "Project",
         "class": "code-tag",
         "link": "paper-pages/InfoReasoner/index.html"
+      },
+      {
+        "text": "CCF-A",
+        "class": "ccf-tag"
+      }
+    ]
+  },
+  {
+    "title": "CP-Guard+: A New Paradigm for Malicious Agent Detection and Defense in Collaborative Perception",
+    "authors": "<strong><u>Senkang \"Forest\" Hu</u></strong>, Yihang Tao, Zihang Fang, Guowen Xu, Yiqin Deng, Sam Kwong, Yuguang Fang",
+    "type": "accepted",
+    "venue": "IEEE Transactions on Dependable and Secure Computing.",
+    "year": "2026",
+    "isFirstAuthor": true,
+    "categories": ["trustworthiness"],
+    "tags": [
+      {
+        "text": "TDSC",
+        "class": "venue-tag"
+      },
+      {
+        "text": "Project",
+        "class": "code-tag",
+        "link": "paper-pages/cpguardp/index.html"
       },
       {
         "text": "CCF-A",
