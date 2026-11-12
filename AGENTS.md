@@ -33,6 +33,7 @@
 - Update publication items in `data/publications.json`.
 - Update profile metadata such as name, subtitle, social links, and avatar in `data/profile-info.json`.
 - Update project or paper-specific landing pages inside `paper-pages/<paper-name>/`.
+- Blog articles live in the separate `../04_blog/` repository. Homepage blog entries in `data/blogs.json` link to that site. The obsolete `blog-pages/moe-training-handbook-zh/` redirect directory was removed at the user’s request. Do not restore legacy blog-page directories or redirect stubs unless requested.
 
 ## Editing Rules
 
@@ -50,6 +51,12 @@
 - When building paper project pages from source files, use only figures that are actually referenced or used in the paper text. Do not add figures just because they exist in the source repository.
 - Preserve figure grouping from the source paper. If the paper uses one caption for a multi-panel figure, the project page should also use one group caption instead of separate captions for each subfigure.
 - Keep figure captions visually close to their figures, especially for grouped figures. Avoid large vertical gaps between a figure group and its caption.
+
+## Publishing Rule
+
+- Keep homepage changes local by default. Push only after the user explicitly says to push.
+- Do not automatically trigger remote deployment or ask for push confirmation after every edit. Report local completion and wait for the user's instruction.
+- Preserve unrelated working-tree edits when preparing any later commit or push.
 
 ## Preview Rule
 
