@@ -9,6 +9,24 @@
 }
 
 @font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 100 700;
+    font-display: swap;
+    src: url('assets/fonts/IBMPlexSans-var.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: italic;
+    font-weight: 100 700;
+    font-display: swap;
+    src: url('assets/fonts/IBMPlexSans-Italic-var.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
     font-family: 'Playfair Display';
     font-style: normal;
     font-weight: 400 900;
@@ -49,7 +67,7 @@
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: #fff;
@@ -678,7 +696,7 @@ header .contact-info i {
 }
 
 h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
     font-weight: 700;
@@ -689,7 +707,7 @@ h1 {
     font-size: 1.25rem;
     color: var(--light-text);
     margin-bottom: 1.5rem;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .contact-info {
@@ -1414,7 +1432,7 @@ nav {
 }
 
 .blog-card h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 1.08rem;
     line-height: 1.35;
     margin-bottom: 0.75rem;
@@ -1651,14 +1669,14 @@ nav {
 }
 
 .research-kicker span {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 0.98rem;
     font-weight: 700;
     color: var(--primary-color);
 }
 
 .research-area h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 1.05rem;
     margin-bottom: 1rem;
     font-weight: 700;
@@ -1681,7 +1699,7 @@ nav {
 .research-subtopics li {
     position: relative;
     padding-left: 1rem;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 0.92rem;
     font-weight: 400;
     line-height: 1.65;
@@ -1846,7 +1864,7 @@ nav {
 }
 
 .edu-school-name {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 1.3rem;
     color: var(--text-color);
     margin-bottom: 0.2rem;
@@ -2189,7 +2207,7 @@ nav {
 }
 
 .pub-content h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 1.0rem;
     font-weight: 700;
     margin-bottom: 0.4rem;
@@ -2590,7 +2608,7 @@ footer {
 }
 
 .contact-method h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
     font-weight: 600;
@@ -2851,7 +2869,7 @@ footer {
 }
 
 .service-category h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: var(--subsection-font-size);
     /* color: var(--primary-color); */
     margin-bottom: 1.5rem;
@@ -2931,7 +2949,7 @@ footer {
 }
 
 .address-info h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 1.3rem;
     color: var(--primary-color);
     margin-bottom: 1rem;
@@ -2996,7 +3014,7 @@ footer.home-footer {
 
 /* Publication section titles */
 .publication-section-title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     margin-top: 2rem;
     margin-bottom: 1.2rem;
     font-size: var(--subsection-font-size);
