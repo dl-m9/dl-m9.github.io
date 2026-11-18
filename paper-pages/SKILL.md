@@ -13,65 +13,57 @@
 - `paper-pages/cpguardp/index.html`
 - `paper-pages/cp-uniguard/index.html`
 - `paper-pages/InfoReasoner/index.html`
+- `paper-pages/SIOP/index.html`
 
-样式分层：
+样式：所有论文页与博客文章（例如 `smol-training-playbook-en`）使用同一套模板。
 
-- 全站基础：`../../styles.css`
-- 论文页公共层：`../paper-common.css`
-- 单页差异层：每个页面自己的内联 `<style>`
-
-结论：目前是“公共样式 + 单页覆盖”的混合模式，符合该仓库现状。
+- `../paper.css`：从博客 `assets/post.css` 复制，末尾加了论文页组件
+- `../paper.js`：从博客 `assets/post.js` 复制，负责主题切换、阅读进度、目录和阅读时长
+- 页面不加载 `../../styles.css`，也不写内联 `<style>`。需要新样式时加到 `paper.css`
+- 博客模板改动后，如需保持一致，把改动同步到这两个文件
 
 ---
 
 ## 2. 新建论文页的标准骨架（本仓库）
 
-新页面建议放在：
+新页面放在 `paper-pages/<paper-folder>/index.html`，复制一个现有页面再改内容最省事。
 
-- `paper-pages/<paper-folder>/index.html`
+`<head>`：IBM Plex Sans 字体、Font Awesome、favicon、`../paper.css`、`../paper.js`，有公式时再加 MathJax。
 
-`<head>` 最少应包含：
+`<body>` 结构与博客文章一致：
 
-- `../../styles.css`
-- `../paper-common.css`
-- Font Awesome
-- favicon
+1. `nav.topbar`：和博客文章一样，左边 "Senkang Forest Hu · Blog"，右边 "← All posts" 和主题切换按钮，都链接到博客首页 `../../blog/`
+2. `header.hero`：`.category` 写会议简称（如 ICML'26），`h1` 写论文标题
+3. `div.meta`：Authors 和 Affiliations 用 `dl.meta-wide` 占整行，作者备注（共同一作、通讯作者）用 `.note-line`；然后是 Venue、Links（`dd.links`，链接之间自动加点）、Length（`data-reading-time`）
+4. `div.layout`：左侧 `nav.toc` 和正文 `.post-body`。正文里的 h2、h3、h4 自动生成目录。目录默认折叠，和 Smol 一样只展开当前所在的小节，不用加属性。只有用户要求平铺时才在 `.post-body` 上加 `data-toc-flat`
+5. `footer.post-footer`
 
-正文建议顺序（与仓库主流页面一致）：
+正文建议顺序：
 
-1. Header（标题、按钮、作者、单位）
-2. Abstract
-3. Method
-4. Figures
-5. Formulas（如有）
-6. Results tables
-7. Case study（如有）
-8. Conclusion
-9. BibTeX
-10. Disclaimer（放最后）
-
----
-
-## 3. 可复用组件（优先复用，少造轮子）
-
-优先使用 `paper-common.css` 中已有类：
-
-- `.paper-header`
-- `.paper-title`
-- `.paper-buttons` / `.paper-btn`
-- `.authors` / `.affiliations`
-- `.paper-section`
-- `.paper-abstract`
-- `.highlight-box`
-- `.image-container` / `.image-caption`
-- `.contribution-list`
-
-表格建议继续使用：
-
-- `.table-container`（横向滚动）
-- `.paper-table`
+1. Abstract 或 Why This Project Exists
+2. Method
+3. Figures
+4. Formulas（如有）
+5. Results tables
+6. Case study（如有）
+7. BibTeX
+8. Related Work
+9. Disclaimer（放最后）
 
 ---
+
+## 3. 可复用组件（定义在 `paper.css`）
+
+- `.story-callout` / `.highlight-box`：浅色提示块
+- `.story-steps` / `.story-step`：带编号的步骤
+- `.case-box`、`.mono-line`：案例展示
+- `.image-container` / `.figure-panel` + `.image-caption`：图和说明
+- `.comparison-grid`、`.figure-grid`（`.source-figure-pair`、`.training-figure-grid`）：并排图
+- `.table-container` + `.paper-table` / `.result-table`：表格，横向可滚动；我们的方法行用 `.ours-row`
+- `.math-block`：公式
+- `.bibtex`：BibTeX，内容顶格写，字段缩进两个空格
+- `.paper-disclaimer`：免责声明
+- `.contribution-list`：带勾号的列表
 
 ## 4. 图、公式、表格的实战规则
 
@@ -130,17 +122,17 @@
 3. **内联 SVG 特殊字符未转义会整图失效**  
    例如 `&` 必须写成 `&amp;`。
 
-4. **单页样式重复定义较多**  
-   导航、下拉等规则在多个页面重复，改样式时要同步检查同类页面。
+4. **样式只写在 `paper.css`**  
+   不要在单页里加内联 `<style>`，改样式后检查全部论文页。
 
 5. **不要使用未定义 CSS 变量**  
-   使用 `var(--xxx)` 前先确认在 `styles.css` 已定义。
+   使用 `var(--xxx)` 前先确认在 `paper.css` 已定义。
 
 ---
 
 ## 7. 上线前检查清单（必跑）
 
-- [ ] 页面能打开，导航正常
+- [ ] 页面能打开，顶栏、目录和主题切换正常
 - [ ] PDF / Code / Project / BibTeX 链接全部可用
 - [ ] 所有图片加载正常（无破图）
 - [ ] 每张图都有详细 caption/解释（含图意+结论）

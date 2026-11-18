@@ -23,7 +23,7 @@
 - Content/behavior split: hand-written sections (Biography, Education, Research Interests, Honors, Services, Contact) are literal HTML in `index.html`; data-driven sections are rendered from JSON by `script.js`.
 - `script.js` data loaders: `loadProfileInfo()` (`data/profile-info.json`), `loadPublications()` (`data/publications.json`), `renderNewsItems()` (`data/news.json`), `loadBlogNotes()` (`data/blogs.json`). It also handles publication filtering (All/Preprints/Accepted/First Author), smooth-scroll nav, and scroll-based active-link tracking.
 - Path resolution: each loader detects whether it runs from the homepage or a `pages/` subpage and prefixes JSON paths with `../` accordingly. Reuse this pattern when adding loaders or new subpages.
-- Styling is layered: global `styles.css`; paper pages additionally load `paper-pages/paper-common.css`, then per-page inline `<style>` overrides. See `paper-pages/SKILL.md` for the paper-page skeleton and reusable classes.
+- Styling: the homepage uses `styles.css`. Paper pages use the blog post template instead: `paper-pages/paper.css` and `paper-pages/paper.js`, copied from the blog's `assets/post.css` and `assets/post.js` with paper components added. Paper pages do not load `styles.css` and have no inline `<style>`. Their contents list collapses by default (only the current section expands), the same as blog posts. Add `data-toc-flat` to `.post-body` only if the user asks for a flat list. See `paper-pages/SKILL.md` for the paper-page skeleton and reusable classes.
 
 ## Content Map
 
@@ -71,6 +71,7 @@
 
 - After editing `data/news.json`, `data/publications.json`, or `data/profile-info.json`, validate that the JSON is still parseable.
 - After editing `index.html`, `styles.css`, `script.js`, or any file under `paper-pages/`, preview locally only if the user explicitly asks.
+- Blog links on the homepage are relative (`blog/...`). Live, they resolve to the `dl-m9/blog` site at `/blog/`. Locally, `blog` is a symlink to `../04_blog`, excluded through `.git/info/exclude`, so the homepage preview also serves the blog. Never commit the symlink.
 
 ## Communication Style
 

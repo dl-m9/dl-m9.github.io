@@ -1,0 +1,903 @@
+/* Project pages share the blog post template. Copied from dl-m9/blog assets/post.css, with paper components at the end. */
+:root {
+    --page-bg: #ffffff;
+    --surface-bg: #f6f7f9;
+    --text: rgba(0, 0, 0, 0.85);
+    --muted: rgba(0, 0, 0, 0.6);
+    --line: rgba(0, 0, 0, 0.1);
+    --accent: #2457d6;
+    --accent-soft: rgba(36, 87, 214, 0.1);
+    --bar-bg: rgba(255, 255, 255, 0.9);
+
+    --frame: 948px;   /* width of the header, meta row and wide figures */
+    --measure: 680px; /* width of running text */
+    --toc: 220px;
+    --bar-h: 56px;
+    --gutter: 24px;
+}
+
+:root[data-theme="dark"] {
+    --page-bg: #0f1115;
+    --surface-bg: #171a21;
+    --text: rgba(255, 255, 255, 0.9);
+    --muted: rgba(255, 255, 255, 0.65);
+    --line: rgba(255, 255, 255, 0.15);
+    --accent: #83b6ff;
+    --accent-soft: rgba(131, 182, 255, 0.14);
+    --bar-bg: rgba(15, 17, 21, 0.9);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --page-bg: #0f1115;
+        --surface-bg: #171a21;
+        --text: rgba(255, 255, 255, 0.9);
+        --muted: rgba(255, 255, 255, 0.65);
+        --line: rgba(255, 255, 255, 0.15);
+        --accent: #83b6ff;
+        --accent-soft: rgba(131, 182, 255, 0.14);
+        --bar-bg: rgba(15, 17, 21, 0.9);
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-padding-top: calc(var(--bar-h) + 20px);
+}
+
+body {
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-text-size-adjust: 100%;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Rows whose line spans the page while the content stays in the frame */
+.frame {
+    padding-left: max(var(--gutter), calc((100% - var(--frame)) / 2));
+    padding-right: max(var(--gutter), calc((100% - var(--frame)) / 2));
+}
+
+/* Header bar */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    height: var(--bar-h);
+    background: var(--bar-bg);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.topbar a {
+    color: var(--text);
+}
+
+.topbar a:hover {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.topbar .right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.topbar .back {
+    color: var(--muted);
+}
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    color: var(--accent);
+}
+
+.theme-toggle svg {
+    width: 17px;
+    height: 17px;
+}
+
+.theme-toggle .moon,
+:root[data-theme="dark"] .theme-toggle .sun {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .moon {
+    display: block;
+}
+
+.progress {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    height: 2px;
+    width: 0;
+    background: var(--accent);
+}
+
+/* Hero */
+.hero {
+    padding-top: 64px;
+    padding-bottom: 40px;
+    text-align: center;
+}
+
+.hero .category {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.hero h1 {
+    margin: 10px auto 14px;
+    max-width: 20em;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    text-wrap: balance;
+}
+
+.hero .lede {
+    margin: 0 auto;
+    max-width: 34em;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--muted);
+    text-wrap: balance;
+}
+
+.hero .hero-figure {
+    margin: 36px auto 0;
+}
+
+.hero .hero-figure img,
+.hero .hero-figure video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+/* Meta row */
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 14px 40px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    font-size: 0.92rem;
+}
+
+.meta dl {
+    margin: 0;
+}
+
+.meta dt {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.meta dd {
+    margin: 2px 0 0;
+    font-weight: 500;
+}
+
+/* Body: table of contents beside a centred text column */
+.layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    padding: 40px var(--gutter) 16px;
+}
+
+.toc {
+    display: none;
+}
+
+.toc-inline {
+    max-width: var(--measure);
+    width: 100%;
+    margin: 0 auto 28px;
+    padding: 12px 16px;
+    background: var(--surface-bg);
+    border-radius: 8px;
+    font-size: 0.92rem;
+}
+
+.toc-inline summary {
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.toc ol,
+.toc-inline ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toc-inline ol {
+    margin-top: 10px;
+}
+
+.toc li,
+.toc-inline li {
+    margin: 0;
+}
+
+.toc a,
+.toc-inline a {
+    display: block;
+    padding: 4px 0;
+    color: var(--muted);
+    line-height: 1.4;
+}
+
+.toc a:hover,
+.toc-inline a:hover {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.toc .sub a,
+.toc-inline .sub a {
+    padding-left: 14px;
+    font-size: 0.95em;
+}
+
+.toc a[aria-current="true"] {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+
+/* Opt-in long-form TOC, matching the original playbook's hierarchy and scroll behavior. */
+.toc.toc-nested .toc-title {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+.toc-nested [data-toc-tree] {
+    border-left: 1px solid var(--line);
+    padding-left: 16px;
+    font-size: 13px;
+}
+.toc-nested [data-toc-tree] ol {
+    margin: 0 0 6px;
+    padding-left: 1em;
+}
+.toc-nested [data-toc-tree] li {
+    margin: 0.25em 0;
+}
+.toc-nested [data-toc-tree] a {
+    padding: 0;
+    color: var(--text);
+    font-weight: 400;
+}
+.toc-nested [data-toc-tree] > li > a {
+    font-weight: 700;
+}
+.toc-nested [data-toc-tree] a:hover,
+.toc-nested [data-toc-tree] a[aria-current="true"] {
+    color: var(--text);
+    text-decoration: underline;
+}
+.toc-nested [data-toc-tree] [hidden] {
+    display: none !important;
+}
+.toc-inline.toc-nested {
+    padding: 0;
+    background: none;
+}
+.toc-inline.toc-nested > summary {
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+.toc-inline.toc-nested[open] > summary {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.toc-inline.toc-nested [data-toc-tree] {
+    margin: 0;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-top: 0;
+    border-radius: 0 0 8px 8px;
+    font-size: 14px;
+}
+
+.post-body {
+    min-width: 0;
+    max-width: var(--measure);
+    width: 100%;
+    margin: 0 auto;
+    overflow-wrap: break-word;
+}
+
+@media (min-width: 1100px) {
+    .layout {
+        grid-template-columns: var(--toc) minmax(0, var(--measure));
+        justify-content: center;
+        column-gap: 40px;
+    }
+
+    .toc {
+        display: block;
+        grid-column: 1;
+        position: sticky;
+        top: calc(var(--bar-h) + 28px);
+        align-self: start;
+        max-height: calc(100vh - var(--bar-h) - 56px);
+        overflow-y: auto;
+        font-size: 0.88rem;
+    }
+
+    .toc .toc-title {
+        margin: 0 0 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .toc-inline {
+        display: none;
+    }
+
+    .post-body {
+        grid-column: 2;
+        margin: 0;
+    }
+}
+
+/* With room to spare, an empty column the width of the contents keeps the text centred. */
+@media (min-width: 1360px) {
+    .layout {
+        grid-template-columns: var(--toc) minmax(0, var(--measure)) var(--toc);
+    }
+}
+
+/* Text */
+.post-body > :first-child {
+    margin-top: 0;
+}
+
+.post-body h2 {
+    margin: 2.4em 0 0.6em;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.post-body h3 {
+    margin: 1.9em 0 0.5em;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.post-body p,
+.post-body ul,
+.post-body ol {
+    margin: 0 0 1.15em;
+}
+
+.post-body ul,
+.post-body ol {
+    padding-left: 1.4em;
+}
+
+.post-body li {
+    margin-bottom: 0.35em;
+}
+
+.post-body img,
+.post-body video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 6px;
+}
+
+.post-body figure {
+    margin: 2em 0;
+}
+
+.post-body figcaption {
+    margin-top: 0.7em;
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-align: center;
+}
+
+/* A figure or table that may grow past the text column, up to the frame width */
+@media (min-width: 1100px) {
+    .post-body .wide {
+        width: min(var(--frame), calc(100vw - var(--toc) - 4 * var(--gutter)));
+        max-width: none;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.post-body blockquote {
+    margin: 1.5em 0;
+    padding: 0.2em 0 0.2em 1em;
+    border-left: 3px solid var(--accent);
+    color: var(--muted);
+}
+
+.post-body blockquote p:last-child,
+.post-body .note p:last-child {
+    margin-bottom: 0;
+}
+
+.post-body code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.86em;
+    background: var(--surface-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+}
+
+.post-body pre {
+    margin: 1.5em 0;
+    padding: 14px 16px;
+    background: var(--surface-bg);
+    border-radius: 8px;
+    overflow-x: auto;
+    line-height: 1.55;
+}
+
+.post-body pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.84rem;
+}
+
+.post-body .table-wrap {
+    margin: 1.5em 0;
+    overflow-x: auto;
+}
+
+.post-body table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+}
+
+.post-body th,
+.post-body td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+}
+
+.post-body th {
+    font-weight: 600;
+}
+
+.post-body .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 0;
+}
+
+.post-body .note {
+    margin: 1.5em 0;
+    padding: 12px 16px;
+    background: var(--accent-soft);
+    border-radius: 8px;
+}
+
+.post-body hr {
+    margin: 2.4em 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+}
+
+/* Footer */
+.post-footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    padding-bottom: 56px;
+    border-top: 1px solid var(--line);
+    font-size: 0.92rem;
+}
+
+.post-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.post-nav a {
+    max-width: 46%;
+    color: var(--text);
+}
+
+.post-nav a:hover {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.post-nav .label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.post-nav .next {
+    margin-left: auto;
+    text-align: right;
+}
+
+.post-footer .credit {
+    margin: 24px 0 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+@media (max-width: 560px) {
+    body {
+        font-size: 16px;
+    }
+
+    .hero {
+        padding-top: 40px;
+        padding-bottom: 28px;
+    }
+
+    .topbar .brand-name {
+        display: none;
+    }
+
+    .meta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px 16px;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@media print {
+    .topbar,
+    .toc,
+    .toc-inline,
+    .post-nav {
+        display: none;
+    }
+}
+
+/* ---------- Paper project pages ---------- */
+
+/* Names used by the older page markup, mapped onto the template's tokens */
+:root {
+    --primary-color: var(--accent);
+    --accent-color: var(--accent);
+    --text-color: var(--text);
+    --light-text: var(--muted);
+    --border-color: var(--line);
+    --secondary-color: var(--surface-bg);
+}
+
+.meta .meta-wide {
+    flex: 1 1 100%;
+    max-width: 100%;
+    grid-column: 1 / -1;
+}
+
+.meta dd sup {
+    font-size: 0.7em;
+}
+
+.meta .note-line {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--muted);
+}
+
+.meta .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 18px;
+}
+
+.meta .links a {
+    white-space: nowrap;
+}
+
+.meta .links i {
+    margin-right: 4px;
+    font-size: 0.9em;
+}
+
+/* Text blocks */
+.post-body .blog-lede {
+    font-size: 1.08rem;
+}
+
+.post-body .story-callout,
+.post-body .highlight-box {
+    margin: 1.5em 0;
+    padding: 12px 16px;
+    background: var(--accent-soft);
+    border-radius: 8px;
+}
+
+.post-body .highlight-box ul {
+    margin: 0;
+}
+
+.post-body .case-box {
+    margin: 1.5em 0;
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+}
+
+.post-body .mono-line {
+    margin: 0.4em 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.86rem;
+}
+
+.post-body .story-steps {
+    counter-reset: story-step;
+    display: grid;
+    gap: 12px;
+    margin: 1.5em 0;
+}
+
+.post-body .story-step {
+    counter-increment: story-step;
+    position: relative;
+    padding: 12px 16px 12px 52px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.post-body .story-step::before {
+    content: counter(story-step);
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--page-bg);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.post-body .story-step h3 {
+    margin: 0 0 0.3em;
+    font-size: 1rem;
+}
+
+.post-body .story-step p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.post-body .contribution-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.post-body .contribution-list li {
+    position: relative;
+    padding-left: 1.6em;
+}
+
+.post-body .contribution-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* Math */
+.post-body .math-block {
+    margin: 1.5em 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.post-body mjx-container[display="true"] {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+/* Figures */
+.post-body .image-container,
+.post-body .figure-panel {
+    margin: 2em 0;
+    text-align: center;
+}
+
+.post-body .paper-figure-img {
+    width: 100%;
+}
+
+.post-body .image-caption {
+    margin-top: 0.7em;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--muted);
+    text-align: center;
+}
+
+.post-body .comparison-grid,
+.post-body .figure-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin: 2em 0;
+}
+
+.post-body .comparison-grid .image-container,
+.post-body .figure-grid .figure-panel {
+    margin: 0;
+}
+
+.post-body .source-figure-pair {
+    grid-template-columns: 36fr 60fr;
+    align-items: start;
+}
+
+.post-body .training-figure-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: start;
+}
+
+/* Tables */
+.post-body .table-container {
+    margin: 1.5em 0;
+    overflow-x: auto;
+}
+
+.post-body .paper-table,
+.post-body .result-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+}
+
+.post-body .paper-table th,
+.post-body .paper-table td,
+.post-body .result-table th,
+.post-body .result-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.post-body .paper-table th:first-child,
+.post-body .paper-table td:first-child,
+.post-body .result-table th:first-child,
+.post-body .result-table td:first-child {
+    text-align: left;
+}
+
+.post-body .paper-table thead th,
+.post-body .result-table thead th {
+    border-bottom-color: var(--text);
+}
+
+.post-body .ours-row,
+.post-body tr[style*="background"] {
+    background: var(--accent-soft) !important;
+}
+
+/* Link rows inside the text */
+.post-body .paper-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin: 1em 0;
+}
+
+.post-body .paper-btn i {
+    margin-right: 4px;
+    font-size: 0.9em;
+}
+
+/* BibTeX and disclaimer */
+.post-body .bibtex {
+    margin: 1.5em 0;
+    padding: 14px 16px;
+    background: var(--surface-bg);
+    border-radius: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+.post-body .paper-disclaimer {
+    margin: 1.5em 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+@media (max-width: 700px) {
+    .post-body .comparison-grid,
+    .post-body .figure-grid,
+    .post-body .source-figure-pair {
+        grid-template-columns: 1fr;
+    }
+
+    .post-body .training-figure-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* One affiliation per line */
+.meta .aff {
+    display: block;
+}
